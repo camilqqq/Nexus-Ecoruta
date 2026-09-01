@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoRuta Temuco</title>
+</head>
+<body>
+
+    <header>
+        <h1>EcoRuta Temuco</h1>
+        <nav aria-label="Menú principal">
+            <button type="button">☰ Menú</button>
+        </nav>
+    </header>
+
+    <nav aria-label="Navegación">
+        <a href="#inicio">Inicio</a> |
+        <a href="#explorar">Explorar</a> |
+        <a href="#emprendimientos">Emprendimientos</a>
+    </nav>
+
+    <main id="inicio">
+        <section id="emprendimientos">
+            <h2>Da a conocer tu emprendimiento</h2>
+
+            <form>
+                <div>
+                    <label for="nombre">Nombre del emprendimiento</label><br>
+                    <input type="text" id="nombre" name="nombre">
+                </div>
+
+                <br>
+
+                <div>
+                    <label for="descripcion">Descripción de la actividad</label><br>
+                    <textarea id="descripcion" name="descripcion" rows="4"></textarea>
+                </div>
+
+                <br>
+
+                <div>
+                    <label for="ubicacion">Ubicación</label><br>
+                    <input type="text" id="ubicacion" name="ubicacion">
+                </div>
+
+                <br>
+
+                <div>
+                    <label for="duracion">Duración y dificultad</label><br>
+                    <input type="text" id="duracion" name="duracion">
+                </div>
+
+                <br>
+
+                <div>
+                    <label for="recomendaciones">Recomendaciones y condiciones</label><br>
+                    <textarea id="recomendaciones" name="recomendaciones" rows="4"></textarea>
+                </div>
+
+                <br>
+
+                <fieldset>
+                    <legend>Canal principal de contacto</legend>
+
+                    <label>
+                        <input type="checkbox" name="contacto" value="whatsapp">
+                        WhatsApp
+                    </label>
+
+                    <label>
+                        <input type="checkbox" name="contacto" value="correo">
+                        Correo
+                    </label>
+
+                    <label>
+                        <input type="checkbox" name="contacto" value="instagram">
+                        Instagram
+                    </label>
+                </fieldset>
+
+                <br>
+
+                <div>
+                    <label for="accesibilidad">Información de accesibilidad</label><br>
+                    <textarea id="accesibilidad" name="accesibilidad" rows="4"></textarea>
+                </div>
+
+                <br>
+
+                <button type="submit">Enviar información</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            <a href="#contacto">Contacto</a> |
+            <a href="#accesibilidad">Accesibilidad</a> |
+            <a href="#informacion">Información</a>
+        </p>
+    </footer>
+
+</body>
+</html>
