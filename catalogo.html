@@ -4,67 +4,86 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Catálogo de rutas y actividades - EcoRuta Temuco</title>
-  <link rel="stylesheet" href="style-ficha.css">
+  <link rel="stylesheet" href="starter.css">
 </head>
 <body>
 
   <header>
-    <div class="header">
-      <div class="brand">
-        <div class="logo">ER</div>
-        <div>
-          <h2>EcoRuta Temuco</h2>
-          <p>Turismo sustentable • Temuco</p>
-        </div>
-      </div>
-
-      <nav aria-label="Navegación principal">
-        <a href="html_pagina_inicio.html">Inicio</a>
-        <a href="catalogo.html" aria-current="page">Explorar</a>
-        <a href="vista3_emprendedor.html">Emprendedores</a>
-      </nav>
-
-      <button class="menu" aria-label="Abrir menú">☰</button>
-    </div>
+    <h1>EcoRuta Temuco</h1>
+    <p>Turismo sustentable • Temuco y alrededores</p>
+    <nav aria-label="Menú rápido">
+      <button type="button" aria-label="Abrir menú de navegación">
+        <span aria-hidden="true">≡</span> Menú
+      </button>
+    </nav>
   </header>
 
+  <nav aria-label="Navegación principal">
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="catalogo.html" aria-current="page">Explorar</a></li>
+      <li><a href="vista3_emprendedor.html">Emprendimientos</a></li>
+      <li><a href="vista4_admin.html">Administración</a></li>
+    </ul>
+  </nav>
+
   <main>
-    <h1>Rutas y actividades sustentables</h1>
-    <p>Explora opciones en Temuco y alrededores, filtradas por nivel de dificultad.</p>
+    <section aria-labelledby="titulo-buscador">
+      <h2 id="titulo-buscador">Descubre experiencias sustentables en Temuco y alrededores</h2>
+      <form action="#" method="get">
+        <label for="buscar">Buscador de rutas o actividades:</label>
+        <input type="search" id="buscar" name="q" placeholder="Ej. Senderismo, Ñielol, Padre Las Casas...">
+        <button type="submit" aria-label="Buscar actividades">Buscar</button>
+      </form>
+    </section>
 
-    <section class="catalog" aria-label="Listado de actividades">
+    <section aria-labelledby="titulo-categorias">
+      <h2 id="titulo-categorias">Categorías</h2>
+      <ul>
+        <li><a href="#">Naturaleza</a></li>
+        <li><a href="#">Cultura</a></li>
+        <li><a href="#">Gastronomía</a></li>
+      </ul>
+    </section>
 
-      <article class="activity-card">
-        <div class="activity-image">Imagen de la actividad</div>
-        <h2><a href="vista2.html">Sendero Cerro Ñielol</a></h2>
-        <p class="difficulty">Dificultad: <strong>Fácil</strong></p>
-        <p>Caminata corta apta para toda la familia, con miradores naturales.</p>
+    <section aria-labelledby="titulo-actividades">
+      <h2 id="titulo-actividades">Actividades destacadas</h2>
+
+      <article>
+        <h3>Sendero Cerro Ñielol</h3>
+        <p><strong>Ubicación:</strong> Temuco centro</p>
+        <p><strong>Dificultad:</strong> Baja | <strong>Duración:</strong> 2 hrs</p>
+        <p><strong>Última actualización:</strong> <time datetime="2026-09-08">08/09/2026</time></p>
+        <a href="vista2_ficha.html" aria-label="Ver ficha completa del Sendero Cerro Ñielol">Ver Ficha</a>
       </article>
 
-      <article class="activity-card">
-        <div class="activity-image">Imagen de la actividad</div>
-        <h2><a href="vista2.html">Ruta Salto Chinay</a></h2>
-        <p class="difficulty">Dificultad: <strong>Moderada</strong></p>
-        <p>Trekking de medio día, requiere condición física básica.</p>
+      <article>
+        <h3>Ruta Gastronómica Mapuche</h3>
+        <p><strong>Ubicación:</strong> Padre Las Casas (Alrededores)</p>
+        <p><strong>Dificultad:</strong> Media | <strong>Duración:</strong> 4 hrs</p>
+        <p><strong>Última actualización:</strong> <time datetime="2026-09-08">08/09/2026</time></p>
+        <a href="vista2_ficha.html" aria-label="Ver ficha completa de la Ruta Gastronómica Mapuche">Ver Ficha</a>
       </article>
 
-      <article class="activity-card">
-        <div class="activity-image">Imagen de la actividad</div>
-        <h2><a href="vista2.html">Ascenso Cerro Conguillío</a></h2>
-        <p class="difficulty">Dificultad: <strong>Difícil</strong></p>
-        <p>Ruta de altura, recomendada para personas con experiencia en trekking.</p>
+      <article>
+        <h3>Navegación y Humedales Río Cautín</h3>
+        <p><strong>Ubicación:</strong> Alrededores de Temuco</p>
+        <p><strong>Dificultad:</strong> Baja | <strong>Duración:</strong> 3 hrs</p>
+        <p><strong>Última actualización:</strong> <time datetime="2026-09-08">08/09/2026</time></p>
+        <a href="vista2_ficha.html" aria-label="Ver ficha completa de la Navegación Río Cautín">Ver Ficha</a>
       </article>
-
     </section>
   </main>
 
   <footer>
-    <span>EcoRuta Temuco</span>
-    <div>
-      <a href="#contacto">Contacto</a>
-      <a href="#accesibilidad">Accesibilidad</a>
-      <a href="#informacion">Información</a>
-    </div>
+    <nav aria-label="Enlaces del pie de página">
+      <ul>
+        <li><a href="#">Contacto</a></li>
+        <li><a href="#">Accesibilidad</a></li>
+        <li><a href="#">Información</a></li>
+      </ul>
+    </nav>
+    <p>EcoRuta Temuco &copy; 2026</p>
   </footer>
 
 </body>
