@@ -1,0 +1,63 @@
+/* ==========================================
+   ESTILOS BASE: MOBILE-FIRST (Pantallas móviles)
+   ========================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* Catálogo en 1 sola columna usando Flexbox para móviles */
+.catalogo-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px;
+  width: 100%;
+}
+
+.tarjeta-actividad {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.tarjeta-actividad img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.tarjeta-contenido {
+  padding: 15px;
+}
+
+/* ==========================================
+   BREAKPOINT 1: TABLET (min-width: 768px)
+   ========================================== */
+@media (min-width: 768px) {
+  .catalogo-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px;
+  }
+}
+
+/* ==========================================
+   BREAKPOINT 2: ESCRITORIO (min-width: 1024px)
+   ========================================== */
+@media (min-width: 1024px) {
+  .catalogo-container {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
