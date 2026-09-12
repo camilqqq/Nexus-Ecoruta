@@ -1,0 +1,84 @@
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EcoRuta Temuco - Panel de Administración</title>
+    <link rel="stylesheet" href="vista4.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="header-top">
+        <div class="brand">
+          <img src="assets/Img/Logo.png" alt="Logo EcoRuta Temuco" class="logo" />
+          <span class="brand-name">EcoRuta Temuco</span>
+        </div>
+        <button class="menu-btn" aria-label="Abrir menú">☰ Menú</button>
+      </div>
+
+      <nav>
+        <a href="index.html">Inicio</a>
+        <a href="index.html#explorar">Explorar</a>
+        <a href="vista3_emprendedor.html">Emprendimientos</a>
+        <a href="vista4.html" class="active">Administración</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="admin-header">
+        <h1>Panel de Administración</h1>
+        <p>Gestión y actualización de datos en tiempo real de la plataforma.</p>
+      </div>
+
+      <section class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-number">3</span>
+          <span class="stat-label">Actividades publicadas</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">0</span>
+          <span class="stat-label">Solicitudes pendientes</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">100%</span>
+          <span class="stat-label">Información al día</span>
+        </div>
+      </section>
+
+      <section class="admin-section">
+        <h2>Solicitudes de Emprendedores Pendientes</h2>
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Emprendimiento</th>
+                <th>Contacto</th>
+                <th>Ubicación</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td
+                  colspan="4"
+                  style="text-align: center; color: var(--text-muted); padding: 1.5rem"
+                >
+                  No hay solicitudes pendientes en este momento.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-links">
+        <a href="#contacto">Contacto</a>
+        <a href="#accesibilidad">Accesibilidad</a>
+        <a href="#informacion">Información local</a>
+      </div>
+    </footer>
+  </body>
+</html>

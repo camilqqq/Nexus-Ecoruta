@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EcoRuta Temuco</title>
+<link rel="stylesheet" href="index.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="header">
+        <div class="brand">
+          <img src="assets/Img/Logo.png" alt="Logo EcoRuta Temuco" class="logo" />
+          <div>
+            <p class="brand-name">EcoRuta Temuco</p>
+            <p>Turismo sustentable • Temuco</p>
+          </div>
+        </div>
+
+        <nav>
+            <a href="#inicio" aria-current="page">Inicio</a>
+            <a href="#explorar">Explorar</a>
+            <a href="vista3_emprendedor.html">Emprendedores</a>
+        </nav>
+
+        <button class="menu" aria-label="Abrir menú">☰</button>
+      </div>
+    </header>
+
+    <main id="inicio">
+      <section class="hero">
+        <h1>Descubre experiencias sustentables en Temuco</h1>
+
+        <p>
+          Encuentra rutas, actividades y emprendimientos locales con información clara sobre
+          ubicación, accesibilidad, horarios y contacto.
+        </p>
+
+        <div class="search">
+          <input
+            type="search"
+            aria-label="Buscar por nombre o categoría"
+            placeholder="Buscar por nombre o categoría"
+          />
+
+          <div class="filters">
+            <button class="active" aria-pressed="true">Todas</button>
+            <button aria-pressed="false">Naturaleza</button>
+            <button aria-pressed="false">Cultura</button>
+            <button aria-pressed="false">Gastronomía</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="activities">
+        <div class="section-title">
+          <h2>Actividades destacadas</h2>
+          <span>3 resultados</span>
+        </div>
+
+        <div class="list">
+          <article class="activity">
+            <div class="image">
+              <img src="assets/Img/Sendero/Sendero_Nielol.jpg" alt="Sendero de trekking en el Parque Ñielol" />
+            </div>
+
+            <div class="info">
+              <div class="activity-header">
+                <div>
+                  <h3>Sendero Ñielol</h3>
+                  <p>Naturaleza • Parque Ñielol, Temuco</p>
+                </div>
+
+                <small>Actualizado: 2026-08-10</small>
+              </div>
+
+              <p>Duración: 2 hrs · Dificultad: Fácil</p>
+
+              <div class="buttons">
+                <!-- Enlace conectado a la ficha -->
+                <a href="actividad.html?id=sendero" class="primary">Ver ficha</a>
+                <!-- Enlace conectado al WhatsApp/contacto -->
+                <a href="https://wa.me/56912345678" target="_blank">Contactar</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="activity">
+            <div class="image">
+              <img
+                src="assets/Img/Museo/museo.jpg"
+                alt="Fachada del Museo Regional de La Araucanía"
+              />
+            </div>
+
+            <div class="info">
+              <div class="activity-header">
+                <div>
+                  <h3>Museo Regional de La Araucanía</h3>
+                  <p>Cultura • Museo Regional de La Araucanía</p>
+                </div>
+
+                <small>Actualizado: 2026-08-06</small>
+              </div>
+
+              <p>Duración: 1-2 hrs · Dificultad: Facil</p>
+
+              <div class="buttons">
+                <!-- Enlace de conecxion con la ficha -->
+                <a href="actividad.html?id=museo" class="primary">Ver ficha</a>
+                <!-- Enlace conectado al correo -->
+                <a href="mailto:contacto@museoaraucania.cl">Contactar</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="activity">
+            <div class="image">
+              <img
+                src="assets/Img/Feria/feria.jpg"
+                alt="Puestos de la Feria Agroecológica en Plaza Aníbal Pinto"
+              />
+            </div>
+
+            <div class="info">
+              <div class="activity-header">
+                <div>
+                  <h3>Feria Agroecológica</h3>
+                  <p>Gastronomía • Plaza Aníbal Pinto</p>
+                </div>
+
+                <small>Actualizado: 2026-08-12</small>
+              </div>
+
+              <p>Duración: 4 hrs · Dificultad: Muy fácil</p>
+
+              <div class="buttons">
+                <!-- Enlace conectado a la ficha -->
+                <a href="actividad.html?id=feria" class="primary">Ver ficha</a>
+                <!-- Enlace conectado al contacto -->
+                <a href="https://wa.me/56912345678" target="_blank">Contactar</a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+      <footer>
+        <span> EcoRuta Temuco • Información local y accesible </span>
+
+        <div>
+          <a href="#accesibilidad">Accesibilidad</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+      </footer>
+    </main>
+
+    <script>
+      const buttons = document.querySelectorAll('.filters button');
+
+      buttons.forEach(button => {
+        button.addEventListener('click', () => {
+          buttons.forEach(btn => {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-pressed', 'false');
+          });
+
+          button.classList.add('active');
+          button.setAttribute('aria-pressed', 'true');
+        });
+      });
+    </script>
+  </body>
+</html>
