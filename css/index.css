@@ -370,3 +370,30 @@ textarea:focus-visible {
   outline: 3px solid #ffb703;
   outline-offset: 2px;
 }
+
+.catalog-access {
+  margin: 20px 0;
+}
+
+.catalog-button {
+  display: inline-block;
+  padding: 12px 20px;
+  background-color: var(--primary);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.catalog-button:hover {
+  background-color: var(--primary-hover);
+}
+
+.catalog-access p {
+  margin-top: 8px;
+  margin-bottom: 0;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+  
