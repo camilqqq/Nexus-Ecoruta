@@ -63,6 +63,7 @@ header {
 }
 
 .menu-btn {
+  display: none;
   background: none;
   border: 1px solid var(--border-color);
   padding: 0.4rem 0.8rem;
@@ -250,4 +251,18 @@ input:focus-visible,
 textarea:focus-visible {
   outline: 3px solid #ffb703;
   outline-offset: 2px;
+}
+
+@media (max-width: 767px) {
+  .menu-btn {
+  display: block;
+}
+  #menuNav {
+    display: none;
+  }
+
+  #menuNav.menu-visible {
+    display: flex;
+    flex-direction: column;
+  }
 }
