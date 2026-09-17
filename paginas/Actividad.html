@@ -3,132 +3,128 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>Actividad - EcoRuta Temuco</title>
-
-    <link rel="stylesheet" href="../css/actividad.css" />
+    <title>EcoRuta Temuco - Detalle de Actividad</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    <header>
-      <div class="header">
-        <div class="brand">
-          <img src="../assets/Img/Logo.png" alt="Logo EcoRuta Temuco" class="logo" />
-
-          <div>
-            <p class="brand-name">EcoRuta Temuco</p>
-            <p>Turismo sustentable • Temuco</p>
-          </div>
+    <!-- Encabezado y Navegación Principal -->
+    <header class="site-header">
+      <div class="header-container">
+        <div class="logo-group">
+          <img src="Img/Logo.png" alt="Logo de EcoRuta Temuco" class="logo" />
+          <span class="site-title">EcoRuta Temuco</span>
         </div>
-
-        <nav>
-          <a href="../index.html">Inicio</a>
-          <a href="../index.html#explorar">Explorar</a>
-          <a href="vista3_emprendedor.html">Emprendedores</a>
-        </nav>
+        <button type="button" class="nav-toggle" aria-label="Abrir menú de navegación">
+          ☰ Menú
+        </button>
       </div>
+
+      <nav aria-label="Navegación principal" class="main-nav">
+        <a href="index.html">Inicio</a>
+        <a href="actividad.html" class="active" aria-current="page">Explorar</a>
+        <a href="vista3_emprendedor.html">Emprendedores</a>
+        <a href="vista4.html">Administración</a>
+      </nav>
     </header>
 
-    <main>
-      <section class="activity-detail">
-        <a href="../index.html">← Volver al catálogo</a>
-
-        <!-- banner-->
-        <div class="detail-image">
-          <img id="imagenActividad" src="" alt="Imagen de la actividad" />
-        </div>
-
-        <div class="detail-info">
-          <p id="estado"></p>
-
-          <h1 id="nombreActividad"></h1>
-
-          <p id="actualizacion"></p>
-
-          <p id="descripcion"></p>
-
-          <h2>Información principal</h2>
-
-          <p>
-            <strong>Ubicación:</strong>
-            <span id="ubicacion"></span>
-          </p>
-
-          <p>
-            <strong>Duración:</strong>
-            <span id="duracion"></span>
-          </p>
-
-          <p>
-            <strong>Dificultad:</strong>
-            <span id="dificultad"></span>
-          </p>
-
-          <p>
-            <strong>Recomendaciones:</strong>
-            <span id="recomendaciones"></span>
-          </p>
-
-          <p>
-            <strong>Condiciones de participación:</strong>
-            <span id="condiciones"></span>
-          </p>
-
-          <p>
-            <strong>Emprendimiento responsable:</strong>
-            <span id="emprendimiento"></span>
-          </p>
-
-          <aside class="useful-info">
-            <h3>💡 Información útil antes de salir</h3>
-
-            <p>
-              <strong>Clima actual:</strong>
-              <span id="climaActual">Cargando clima de Temuco...</span>
-            </p>
-
-            <p>
-              <strong id="labelEstado">Estado del lugar:</strong>
-              <span id="estadoLugar">Cargando...</span>
-            </p>
-
-            <p>
-              <strong>Aviso especial:</strong>
-              <span id="avisoEspecial">Cargando...</span>
-            </p>
-          </aside>
-
-          <section class="contact">
-            <h2>Contacto</h2>
-
-            <p>¿Tienes dudas sobre esta actividad? Escríbenos directamente:</p>
-
-            <a href="https://wa.me/56912345678" target="_blank" class="contact-button">WhatsApp</a>
-            <a href="mailto:contacto@ecorutatemuco.cl" class="contact-button">Correo</a>
-            <a href="https://instagram.com/ecorutatemuco" target="_blank" class="contact-button"
-              >Instagram</a
-            >
-          </section>
-
-          <section class="accessibility">
-            <h2>Accesibilidad</h2>
-
-            <p>Rampa de acceso disponible en la entrada principal y senderos acondicionados.</p>
-          </section>
-        </div>
+    <!-- Contenido Principal -->
+    <main class="main-container">
+      <section class="hero-section">
+        <h1 id="nombreActividad">Sendero Mirador Ñielol</h1>
+        <p class="subtitle" id="descripcionHero">
+          Caminata guiada por la selva valdiviana con vistas panorámicas de la ciudad.
+        </p>
       </section>
+
+      <div class="content-grid">
+        <!-- Columna Izquierda / Información Principal -->
+        <article class="card main-card">
+          <div class="media-wrapper">
+            <img
+              id="imagenActividad"
+              src="Img/Sendero/Sendero_Nielol.jpg"
+              alt="Sendero rodeado de vegetación nativa en Cerro Ñielol"
+              class="feature-img"
+            />
+          </div>
+
+          <h2>Descripción de la Experiencia</h2>
+          <p id="descripcion">
+            Recorrido autoguiado o acompañado por miembros de la comunidad local a través del
+            Monumento Natural Cerro Ñielol. Durante el trayecto aprenderás sobre la flora nativa,
+            especies protegidas y la historia cultural mapuche vinculada a este ecosistema protegido
+            en pleno corazón de Temuco.
+          </p>
+
+          <div class="details-box" aria-label="Detalles clave de la actividad">
+            <div class="detail-item">
+              <strong>Duración:</strong> <span id="duracion">2 Horas</span>
+            </div>
+            <div class="detail-item">
+              <strong>Dificultad:</strong> <span id="dificultad">Fácil - Media</span>
+            </div>
+            <div class="detail-item">
+              <strong>Ubicación:</strong> <span id="ubicacion">Cerro Ñielol, Temuco</span>
+            </div>
+            <div class="detail-item"><strong>Estado:</strong> <span id="estado">--</span></div>
+          </div>
+        </article>
+
+        <!-- Columna derecha / paneles secundarios -->
+        <aside class="sidebar">
+          <!-- Estado del Tiempo Local (Lo hacemos en el siguente sprint) -->
+          <section class="card weather-card" aria-live="polite">
+            <h2>Estado del Tiempo Local</h2>
+            <div id="clima-info" class="weather-box">
+              <p class="temp" id="climaActual"></p>
+              <p class="desc"></p>
+            </div>
+          </section>
+
+          <!-- Recomendaciones -->
+          <section class="card info-card">
+            <h2>Recomendaciones</h2>
+            <p id="recomendaciones"></p>
+            <p
+              id="condiciones"
+              style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted)"
+            ></p>
+          </section>
+
+          <!-- Ubicación -->
+          <section class="card map-card">
+            <h2>Cómo Llegar</h2>
+            <p id="avisoEspecial">
+              Acceso por Av. Arturo Prat s/n, a 7 cuadras de la Plaza de Armas.
+            </p>
+            <a
+              href="https://maps.google.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="map-btn"
+              aria-label="Ver ubicación en Google Maps (se abre en una nueva pestaña)"
+            >
+              Ver en Google Maps
+            </a>
+          </section>
+        </aside>
+      </div>
     </main>
 
-    <footer>
-      <span>EcoRuta Temuco • Información local y accesible</span>
-
-      <div>
+    <!-- FOOTER-->
+    <footer class="site-footer">
+      <div class="footer-content">
         <a href="#contacto">Contacto</a>
-        <a href="#accesibilidad">Accesibilidad</a>
-        <a href="#">Información</a>
+        <a href="#accesibilidad">Accesibilidad WAI-ARIA</a>
+        <a href="#info">Información Local</a>
       </div>
+      <p
+        id="actualizacion"
+        style="margin-top: 0.5rem; font-size: 0.75rem; color: var(--text-muted)"
+      ></p>
     </footer>
 
-    <script src="../js/script.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
