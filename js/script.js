@@ -4,10 +4,10 @@
       nombre: 'Sendero Ñielol',
       categoria: 'Naturaleza',
       imagenes: [
-        { url: 'Img/Sendero/Sendero_Nielol.jpg', posicion: 'center' },
-        { url: 'Img/Sendero/sendero2.jpg', posicion: 'center top' },
-        { url: 'Img/Sendero/sendero3.jpg', posicion: 'center' },
-        { url: 'Img/Sendero/sendero4.jpg', posicion: 'left top' },
+        { url: '../assets/Img/Sendero/Sendero_Nielol.jpg', posicion: 'center' },
+        { url: '../assets/Img/Sendero/sendero2.jpg', posicion: 'center top' },
+        { url: '../assets/Img/Sendero/sendero3.jpg', posicion: 'center' },
+        { url: '../assets/Img/Sendero/sendero4.jpg', posicion: 'left top' },
       ],
       actualizacion: '2026-08-10',
       descripcion:
@@ -28,10 +28,10 @@
       nombre: 'Museo Regional de La Araucanía',
       categoria: 'Cultura',
       imagenes: [
-        { url: 'Img/Museo/museo.jpg', posicion: 'center' },
-        { url: 'Img/Museo/museo2.jpg', posicion: 'center top' },
-        { url: 'Img/Museo/museo3.jpg', posicion: 'center' },
-        { url: 'Img/Museo/museo4.jpg', posicion: 'left top' },
+        { url: '../assets/Img/Museo/museo.jpg', posicion: 'center' },
+        { url: '../assets/Img/Museo/museo2.jpg', posicion: 'center top' },
+        { url: '../assets/Img/Museo/museo3.jpg', posicion: 'center' },
+        { url: '../assets/Img/Museo/museo4.jpg', posicion: 'left top' },
       ],
       actualizacion: '2026-08-06',
       descripcion:
@@ -50,10 +50,10 @@
       nombre: 'Feria Agroecológica',
       categoria: 'Gastronomía',
       imagenes: [
-        { url: 'Img/Feria/feria.jpg', posicion: 'center' },
-        { url: 'Img/Feria/feria2.jpg', posicion: 'center top' },
-        { url: 'Img/Feria/feria3.jpg', posicion: 'center' },
-        { url: 'Img/Feria/feria4.jpg', posicion: 'left top' },
+        { url: '../assets/Img/Feria/feria.jpg', posicion: 'center' },
+        { url: '../assets/Img/Feria/feria2.jpg', posicion: 'center top' },
+        { url: '../assets/Img/Feria/feria3.jpg', posicion: 'center' },
+        { url: '../assets/Img/Feria/feria4.jpg', posicion: 'left top' },
       ],
       actualizacion: '2026-08-12',
       descripcion:
@@ -83,6 +83,7 @@
   const cargarInformacion = () => {
     asignarTexto('nombreActividad', datosActividad.nombre);
     asignarTexto('descripcion', datosActividad.descripcion);
+    asignarTexto('descripcionHero', datosActividad.descripcion);
     asignarTexto('ubicacion', datosActividad.ubicacion);
     asignarTexto('duracion', datosActividad.duracion);
     asignarTexto('dificultad', datosActividad.dificultad);
