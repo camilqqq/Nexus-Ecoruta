@@ -338,3 +338,28 @@ textarea:focus-visible {
   }
 }
 
+.media-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius);
+  margin-bottom: 1.5rem;
+}
+
+.feature-img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 420px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--radius);
+  transition: opacity 0.4s ease-in-out;
+}
+
+@media (max-width: 767px) {
+  .feature-img {
+    height: 240px;
+  }
+}
+
