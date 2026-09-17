@@ -1,63 +1,269 @@
-/* ==========================================
-   ESTILOS BASE: MOBILE-FIRST (Pantallas móviles)
-   ========================================== */
-* {
+:root {
+  --primary: #1b4332;
+  --primary-hover: #2d6a4f;
+  --bg-color: #f4f6f5;
+  --surface: #ffffff;
+  --text: #1d2d24;
+  --text-muted: #5e6d64;
+  --border: #e2e8e4;
+  --focus: #ffb703;
+  --radius: 12px;
+}
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family:
+    'Segoe UI',
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text);
   line-height: 1.6;
+  padding: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
-/* Catálogo en 1 sola columna usando Flexbox para móviles */
-.catalogo-container {
+/* Indicador accesible para foco por teclado */
+:is(a, button):focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Header y navegacioh */
+.site-header {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.logo-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo {
+  height: 35px;
+  width: auto;
+}
+
+.site-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--primary);
+}
+
+.nav-toggle {
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.main-nav {
+  display: flex;
+  gap: 1rem;
+  border-top: 1px solid var(--border);
+  padding-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.main-nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+  color: var(--primary);
+}
+
+/* Encabezado Principal */
+.hero-section {
+  margin-bottom: 1.25rem;
+}
+
+.hero-section h1 {
+  color: var(--primary);
+  font-size: 1.5rem;
+}
+
+.subtitle {
+  color: var(--text-muted);
+}
+
+/* Contenido Principal*/
+.content-grid {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  padding: 15px;
-  width: 100%;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
 }
 
-.tarjeta-actividad {
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+}
+
+.card h2 {
+  color: var(--primary);
+  font-size: 1.15rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 0.3rem;
+}
+
+.media-wrapper {
   width: 100%;
-  border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
-  background-color: #fff;
+  margin-bottom: 1rem;
 }
 
-.tarjeta-actividad img {
+.feature-img {
   width: 100%;
   height: auto;
   display: block;
+  transition: opacity 0.4s ease-in-out;
 }
 
-.tarjeta-contenido {
-  padding: 15px;
+.details-box {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  background: var(--bg-color);
+  padding: 0.8rem;
+  border-radius: 8px;
 }
 
-/* ==========================================
-   BREAKPOINT 1: TABLET (min-width: 768px)
-   ========================================== */
-@media (min-width: 768px) {
-  .catalogo-container {
+.detail-item strong {
+  color: var(--primary);
+}
+
+.info-card ul {
+  padding-left: 1.2rem;
+}
+
+.info-card li {
+  margin-bottom: 0.4rem;
+}
+
+.map-btn {
+  display: block;
+  text-align: center;
+  background: var(--primary);
+  color: var(--surface);
+  text-decoration: none;
+  font-weight: 700;
+  padding: 0.6rem;
+  border-radius: 8px;
+  margin-top: 0.8rem;
+  transition: background-color 0.2s ease;
+}
+
+.map-btn:hover {
+  background: var(--primary-hover);
+}
+
+.weather-box {
+  text-align: center;
+  min-height: 48px;
+}
+
+.temp {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.desc {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Footer */
+.site-footer {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 1rem;
+  border: 1px solid var(--border);
+  text-align: center;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.footer-content a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Breakpoint 1: 600px */
+@media (min-width: 600px) {
+  body {
+    padding: 1.5rem;
+  }
+
+  .details-box {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sidebar {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    padding: 20px;
+    gap: 1.25rem;
+  }
+
+  .map-card {
+    grid-column: span 2;
   }
 }
 
-/* ==========================================
-   BREAKPOINT 2: ESCRITORIO (min-width: 1024px)
-   ========================================== */
+/* Breakpoint 2: 1024px */
 @media (min-width: 1024px) {
-  .catalogo-container {
-    grid-template-columns: repeat(3, 1fr);
-    max-width: 1200px;
-    margin: 0 auto;
+  .content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    align-items: start;
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .map-card {
+    grid-column: span 1;
   }
 }
