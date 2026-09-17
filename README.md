@@ -12,7 +12,7 @@ El proyecto busca visibilizar la oferta turística local y ecológica de la regi
 
 ## Estructura del Repositorio
 
-El proyecto sigue una estructura modular y organizada para facilitar la colaboración:
+```text
 nexus-ecoruta/
 ├── assets/                  # Imágenes, íconos y recursos multimedia
 ├── css/                     # Hojas de estilo por página (index.css, etc.)
@@ -24,6 +24,7 @@ nexus-ecoruta/
 ├── paginas/                 # Vistas adicionales (Actividad.html, etc.)
 ├── index.html               # Página principal / Catálogo
 └── README.md                # Documentación general del repositorio
+```
 
 ## Tecnologías Utilizadas
 
