@@ -8,6 +8,17 @@
   </head>
 
   <body>
+    <script>
+      (funtion () {
+         const clavecorrecta = "admin123";
+         const password = prompt("ingrese la clave de administracion");
+
+           if (password !== clavecorrecta) {
+             alert("acceso denegado");
+             window.location.href = "index.html"
+           }
+      })();
+    </script>
     <header>
       <div class="header-top">
         <div class="brand">
