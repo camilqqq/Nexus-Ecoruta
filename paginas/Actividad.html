@@ -15,12 +15,17 @@
           <img src="../assets/Img/Logo.png" alt="Logo de EcoRuta Temuco" class="logo" />
           <span class="site-title">EcoRuta Temuco</span>
         </div>
-        <button type="button" class="nav-toggle" aria-label="Abrir menú de navegación">
-          ☰ Menú
-        </button>
+        <button
+  type="button"
+  class="nav-toggle"
+  id="menuBtn"
+  aria-label="Abrir menú de navegación"
+>
+  ☰ Menú
+</button>
       </div>
 
-      <nav aria-label="Navegación principal" class="main-nav">
+      <nav aria-label="Navegación principal" class="main-nav" id="menuNav">
         <a href="../index.html">Inicio</a>
         <a href="../index.html#explorar" class="active" aria-current="page">Explorar</a>
         <a href="vista3_emprendedor.html">Emprendedores</a>
@@ -124,6 +129,15 @@
         style="margin-top: 0.5rem; font-size: 0.75rem; color: var(--text-muted)"
       ></p>
     </footer>
+
+    <script>
+  const menuBtn = document.getElementById('menuBtn');
+  const menuNav = document.getElementById('menuNav');
+
+  menuBtn.addEventListener('click', () => {
+    menuNav.classList.toggle('menu-visible');
+  });
+</script>
 
     <script src="../js/script.js"></script>
   </body>
