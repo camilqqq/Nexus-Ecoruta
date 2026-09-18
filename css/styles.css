@@ -38,7 +38,6 @@ body {
   outline-offset: 2px;
 }
 
-/* Header y navegacioh */
 .site-header {
   background: var(--surface);
   border-radius: var(--radius);
@@ -100,7 +99,7 @@ body {
   color: var(--primary);
 }
 
-/* Encabezado Principal */
+/* Encabezado principal */
 .hero-section {
   margin-bottom: 1.25rem;
 }
@@ -114,7 +113,7 @@ body {
   color: var(--text-muted);
 }
 
-/* Contenido Principal*/
+/* Contenido principal*/
 .content-grid {
   display: flex;
   flex-direction: column;
@@ -206,7 +205,6 @@ body {
   font-size: 0.9rem;
 }
 
-/* Footer */
 .site-footer {
   background: var(--surface);
   border-radius: var(--radius);
