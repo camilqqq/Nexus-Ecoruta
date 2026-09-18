@@ -32,7 +32,7 @@
         { url: '../assets/imagenes/Museo/museo2.jpg', posicion: 'center top' },
         { url: '../assets/imagenes/Museo/museo3.jpg', posicion: 'center' },
         { url: '../assets/imagenes/Museo/museo4.jpg', posicion: 'left top' },
-      ],
+  ],
       actualizacion: '2026-08-06',
       descripcion:
         'Recorrido cultural por el patrimonio histórico, arqueológico y la cosmovisión del pueblo Mapuche en una casona patrimonial declarada Monumento Histórico.',
@@ -54,7 +54,7 @@
         { url: '../assets/imagenes/Feria/feria2.jpg', posicion: 'center top' },
         { url: '../assets/imagenes/Feria/feria3.jpg', posicion: 'center' },
         { url: '../assets/imagenes/Feria/feria4.jpg', posicion: 'left top' },
-      ],
+  ],
       actualizacion: '2026-08-12',
       descripcion:
         'Espacio de intercambio directo con agricultores locales. Encuentra hortalizas orgánicas, productos del campo, artesanías regionales y gastronomía típica del sur de Chile.',
