@@ -397,3 +397,15 @@ textarea:focus-visible {
   color: var(--text-muted);
 }
   
+nav {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap; /* Permite que los enlaces pasen abajo si no caben */
+  overflow-x: auto; /* Agrega scroll horizontal limpio si supera el ancho */
+  padding-top: 0.75rem;
+}
+
+nav a {
+  white-space: nowrap; /* Evita que las palabras se rompan en dos líneas */
+  font-size: 0.9rem; /* Ajusta ligeramente el tamaño para dispositivos móviles */
+}
