@@ -4,10 +4,10 @@
       nombre: 'Sendero Ñielol',
       categoria: 'Naturaleza',
       imagenes: [
-        { url: '../assets/Img/Sendero/Sendero_Nielol.jpg', posicion: 'center' },
-        { url: '../assets/Img/Sendero/sendero2.jpg', posicion: 'center top' },
-        { url: '../assets/Img/Sendero/sendero3.jpg', posicion: 'center' },
-        { url: '../assets/Img/Sendero/sendero4.jpg', posicion: 'left top' },
+        { url: '../assets/imagenes/Sendero/Sendero_Nielol.jpg', posicion: 'center' },
+        { url: '../assets/imagenes/Sendero/sendero2.jpg', posicion: 'center top' },
+        { url: '../assets/imagenes/Sendero/sendero3.jpg', posicion: 'center' },
+        { url: '../assets/imagenes/Sendero/sendero4.jpg', posicion: 'left top' },
       ],
       actualizacion: '2026-08-10',
       descripcion:
@@ -28,10 +28,10 @@
       nombre: 'Museo Regional de La Araucanía',
       categoria: 'Cultura',
       imagenes: [
-        { url: '../assets/Img/Museo/museo.jpg', posicion: 'center' },
-        { url: '../assets/Img/Museo/museo2.jpg', posicion: 'center top' },
-        { url: '../assets/Img/Museo/museo3.jpg', posicion: 'center' },
-        { url: '../assets/Img/Museo/museo4.jpg', posicion: 'left top' },
+        { url: '../assets/imagenes/Museo/museo.jpg', posicion: 'center' },
+        { url: '../assets/imagenes/Museo/museo2.jpg', posicion: 'center top' },
+        { url: '../assets/imagenes/Museo/museo3.jpg', posicion: 'center' },
+        { url: '../assets/imagenes/Museo/museo4.jpg', posicion: 'left top' },
       ],
       actualizacion: '2026-08-06',
       descripcion:
@@ -50,10 +50,10 @@
       nombre: 'Feria Agroecológica',
       categoria: 'Gastronomía',
       imagenes: [
-        { url: '../assets/Img/Feria/feria.jpg', posicion: 'center' },
-        { url: '../assets/Img/Feria/feria2.jpg', posicion: 'center top' },
-        { url: '../assets/Img/Feria/feria3.jpg', posicion: 'center' },
-        { url: '../assets/Img/Feria/feria4.jpg', posicion: 'left top' },
+        { url: '../assets/imagenes/Feria/feria.jpg', posicion: 'center' },
+        { url: '../assets/imagenes/Feria/feria2.jpg', posicion: 'center top' },
+        { url: '../assets/imagenes/Feria/feria3.jpg', posicion: 'center' },
+        { url: '../assets/imagenes/Feria/feria4.jpg', posicion: 'left top' },
       ],
       actualizacion: '2026-08-12',
       descripcion:
