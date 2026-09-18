@@ -8,25 +8,26 @@
   </head>
 
   <body>
-    <script>
-      (funtion () {
-         const clavecorrecta = "admin123";
-         const password = prompt("ingrese la clave de administracion");
+  <script>
+    (function () {
+      const clavecorrecta = "admin123";
+      const password = prompt("Ingrese la clave de administración:");
 
-           if (password !== clavecorrecta) {
-             alert("acceso denegado");
-             window.location.href = "index.html"
-           }
-      })();
-    </script>
-    <header>
-      <div class="header-top">
-        <div class="brand">
-          <img src="../assets/imagenes/Logo.png" alt="Logo EcoRuta Temuco" class="logo" />
-          <span class="brand-name">EcoRuta Temuco</span>
-        </div>
-        <button class="menu-btn" aria-label="Abrir menú">☰ Menú</button>
+      if (password !== clavecorrecta) {
+        alert("Acceso denegado");
+        window.location.href = "../index.html";
+      }
+    })();
+  </script>
+
+  <header>
+    <div class="header-top">
+      <div class="brand">
+        <img src="../assets/imagenes/Logo.png" alt="Logo EcoRuta Temuco" class="logo" />
+        <span class="brand-name">EcoRuta Temuco</span>
       </div>
+      <button class="menu-btn" aria-label="Abrir menú">☰ Menú</button>
+    </div>
 
       <nav>
         <a href="../index.html">Inicio</a>
