@@ -22,3 +22,8 @@ Obtenidos del brief inicial del cliente y de la entrevista al cliente simulado (
 ## No funcionales
 - Accesible (WAI-ARIA: landmarks, aria-label en enlaces/botones).
 - Responsivo (mobile-first).
+## Estado de Validación (Sprint 1)
+- **Requerimientos Funcionales:** Cumplidos y desplegados en catálogo, fichas y enlaces de contacto directo.
+- **Requerimientos No Funcionales:** Validados con 100/100 en Lighthouse Accessibility, estructura semántica HTML5, atributos `alt`, etiquetas `aria-label` y diseño responsivo.
+
+Última actualización: 24-09-2026
