@@ -4,9 +4,8 @@
 **URL:** https://camilqqq.github.io/Nexus-Ecoruta/  
 **Fecha:** 17 de Septiembre de 2026  
 
-## 1. Criterios de Accesibilidad Cumplidos
-- **Navegación por teclado:** Elementos interactivos enfoquables mediante la tecla `Tab`.
-- **Texto alternativo:** Uso del atributo `alt` descriptivo en las imágenes del catálogo.
-- **Contraste de color:** Cumplimiento de relaciones de contraste adecuadas para texto principal sobre el fondo.
-- **Estructura semántica:** Uso correcto de etiquetas HTML5 (`<header>`, `<main>`, `<nav>`, `<section>`, `<footer>`).
-- **Atributos WAI-ARIA:** Implementación de `aria-pressed` y `aria-expanded` para componentes dinámicos como el menú y filtros.
+## 1. Criterios Cumplidos
+- **Navegación por teclado:** Elementos interactivos enfocables mediante la tecla `Tab`.
+- **Texto alternativo:** Mantenimiento de atributo `alt` descriptivo en las imágenes del catálogo.
+- **Contraste de color:** Cumplimiento de relaciones de contraste adecuadas para texto principal.
+- **Estructura semántica:** Uso de etiquetas `<header>`, `<main>`, `<nav>`, `<section>` y `<footer>`.
