@@ -1,12 +1,12 @@
 # Reporte de Auditoría de Accesibilidad Web (Bug Bounty)
 
-**Equipo:** Grupo 2  
+**Nexus:** Nexus 
 **Integrantes:** 
 - Baeza, Joaquín
 - Fuentes, Camila
 - Jara, Emily
 - Obando, Miguel
-- Queupimil, Matías
+- Queupumil, Matías
 - Salazar, Francisca
 
 **URL Evaluada:** https://camilqqq.github.io/Nexus-Ecoruta/  
