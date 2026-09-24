@@ -15,6 +15,7 @@ Funcionalidades importantes pero no críticas; el sitio funciona sin ellas, aunq
 
 6. Como emprendedor local, quiero que mi actividad aparezca con información clara y actualizada, para recibir más consultas de turistas interesados.
 7. Como usuario con discapacidad, quiero que el sitio sea navegable con lector de pantalla, para poder usarlo sin barreras.
+- **Criterio de aceptación:** 100/100 en Lighthouse Accessibility, atributos alt descriptivos en imágenes y etiquetas aria-label en botones interactivos. Implementado y validado en todas las vistas.
 
 ## Podría tener (Could have)
 Funcionalidades deseables que mejoran la experiencia, pero de bajo impacto si no se incluyen en esta fase.
@@ -30,4 +31,4 @@ Funcionalidades explícitamente fuera del alcance de esta primera versión, desc
 
 *Categorías priorizadas según el método MoSCoW (Must / Should / Could / Won't have), usado para ordenar el backlog según urgencia e impacto.*
 
-Última actualización: 17-09-2026
+Última actualización: 24-09-2026
