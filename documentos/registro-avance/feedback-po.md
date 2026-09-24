@@ -19,3 +19,17 @@
 - Corregida la navegación del sitio: los enlaces principales ya conectan correctamente entre el inicio (`index.html`), las actividades (`Actividad.html`) y el panel de administración.
 - Verificados los indicadores de accesibilidad (`aria-label`, foco visible en botones) y enlaces a redes sociales.
 - Se confirma el despliegue funcional del proyecto para la entrega de la fase 1.
+## 22-09-2026 (Auditoría de Accesibilidad y Bug Bounty)
+- **Ejecución Bug Bounty:** Se realizó la auditoría de accesibilidad sobre la URL de producción (GitHub Pages) aplicando WCAG 2.1 (Nivel AA) mediante Lighthouse, DevTools e inspección manual por teclado.
+- **Resultados de Auditoría:** Se logró una puntuación de **100/100 en Accesibilidad en Lighthouse**.
+- **Correcciones Realizadas:**
+  - Se incorporaron atributos `alt` descriptivos en imágenes y etiquetas `aria-label` en elementos interactivos faltantes.
+  - Se validó la navegación fluida por teclado (`Tab`, `Enter`) y el contraste visual de elementos.
+  - Se corrigió la estructura del catálogo y rutas relativas de imágenes.
+- **Documentación:** Se generó e integró el reporte oficial `reporte-bug-bounty.md` en la carpeta `documentos/reportes/`.
+
+## 24-09-2026 (Consolidación de Entregables y Cierre de Documentación)
+- **Corrección de Assets y GitHub:** Se solucionó la visualización de evidencias de auditoría (`evidencia-lighthouse.png` y `evidencia-axe.png`) en GitHub, asegurando la integridad de las imágenes.
+- **Alineación con Feedback del Profesor:** En respuesta al comunicado del docente sobre la evaluación continua del Sprint 1, se validó que todos los commits de la semana estén reflejados en el repositorio remoto.
+- **Generación de PDF Oficial:** Se exportó y validó la versión final en PDF del informe Bug Bounty (`reporte-bug-bounty.pdf`) directamente desde la estructura del repositorio, dejándolo listo para la evaluación continua y futura defensa del proyecto.
+- **Estado de Cierre:** El Sprint 1 y la fase de Accesibilidad/HTML/CSS quedan **100% concluidos, desplegados y documentados**, a la espera de las pautas para la defensa y el inicio de la materia de JavaScript.
