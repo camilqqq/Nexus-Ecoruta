@@ -8,8 +8,8 @@
 | 4 | Como turista, quiero ver la fecha en que se actualizó la información de una actividad, para saber si los datos están actualizados. | Debería tener | Done |
 | 5 | Como turista, quiero revisar el catálogo sin tener que crear una cuenta, para poder buscar información de manera más rápida. | Debe tener | Done |
 | 6 | Como turista, quiero encontrar actividades de Temuco y sus alrededores, para conocer opciones que estén cerca de la zona. | Debe tener | Done |
-| 7 | Como turista, quiero ver los horarios, precios, disponibilidad y condiciones de una actividad, para saber si me conviene realizarla. | Debe tener | In Progress |
+| 7 | Como turista, quiero ver los horarios, precios, disponibilidad y condiciones de una actividad, para saber si me conviene realizarla. | Debe tener | Done |
 | 8 | Como turista, quiero entrar al catálogo desde mi celular, para poder revisar las actividades fácilmente desde cualquier lugar. | Debería tener | Done |
 | 9 | Como persona con discapacidad visual, quiero poder utilizar el sitio de EcoRuta con un lector de pantalla, para acceder a la información de las actividades de manera independiente. | Debería tener | Done |
 
-Última actualización: 17-09-2026
+Última actualización: 24-09-2026
