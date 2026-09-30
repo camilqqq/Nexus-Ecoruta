@@ -55,7 +55,4 @@ El sitio cumple con buenas prácticas de accesibilidad web (WCAG):
 
 ---
 
-##  Sitio Web Desplegado
-
-Puedes acceder a la versión pública del proyecto en:  
- ****
+**Sitio Web Desplegado (GitHub Pages):** [https://camilqqq.github.io/Nexus-Ecoruta/](https://camilqqq.github.io/Nexus-Ecoruta/)
