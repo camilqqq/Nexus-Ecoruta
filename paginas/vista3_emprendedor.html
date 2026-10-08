@@ -29,33 +29,13 @@
     <main>
       <h1>"Da a conocer tu emprendimiento"</h1>
 
-      <form class="form-card"> id="formEmprendedor">
-          <div class="form-group">
-          <label id="canalLabel">Canal principal de contacto</label>
-          <div class="checkbox-group" role="radiogroup" aria-labelledby="canalLabel">
-            <label class="checkbox-item">
-              <input type="radio" name="contacto" value="whatsapp" required />
-              WhatsApp
-            </label>
-
-            <label class="checkbox-item">
-              <input type="radio" name="contacto" value="email" />
-              Correo
-            </label>
-
-            <label class="checkbox-item">
-              <input type="radio" name="contacto" value="instagram" />
-              Instagram
-            </label>
-          </div>
-        </div>
-
+      <form class="form-card" id="formEmprendedor">
         <div class="form-group">
-          <label for="datoContacto">Número, correo o usuario de contacto</label>
+          <label for="nombreEmprendimiento">Nombre emprendimiento</label>
           <input
             type="text"
-            id="datoContacto"
-            placeholder="Ej. +56 9 1234 5678 o @mi_emprendimiento"
+            id="nombreEmprendimiento"
+            placeholder="Ej. Guías Locales Ñielol"
             required
           />
         </div>
@@ -95,23 +75,33 @@
         </div>
 
         <div class="form-group">
-          <label>Canal principal de contacto</label>
-          <div class="checkbox-group">
+          <label id="canalLabel">Canal principal de contacto</label>
+          <div class="checkbox-group" role="radiogroup" aria-labelledby="canalLabel">
             <label class="checkbox-item">
-              <input type="checkbox" name="contacto" value="whatsapp" />
+              <input type="radio" name="contacto" value="whatsapp" required />
               WhatsApp
             </label>
 
             <label class="checkbox-item">
-              <input type="checkbox" name="contacto" value="email" />
+              <input type="radio" name="contacto" value="email" />
               Correo
             </label>
 
             <label class="checkbox-item">
-              <input type="checkbox" name="contacto" value="instagram" />
+              <input type="radio" name="contacto" value="instagram" />
               Instagram
             </label>
           </div>
+        </div>
+
+        <div class="form-group">
+          <label for="datoContacto">Número, correo o usuario de contacto</label>
+          <input
+            type="text"
+            id="datoContacto"
+            placeholder="Ej. +56 9 1234 5678 o @mi_emprendimiento"
+            required
+          />
         </div>
 
         <button type="submit" class="btn-submit">Enviar información</button>
@@ -128,21 +118,22 @@
     </footer>
 
     <script>
-  const menuBtn = document.getElementById('menuBtn');
-  const menuNav = document.getElementById('menuNav');
+      const menuBtn = document.getElementById('menuBtn');
+      const menuNav = document.getElementById('menuNav');
 
-  menuBtn.addEventListener('click', () => {
+      menuBtn.addEventListener('click', () => {
+        menuNav.classList.toggle('menu-visible');
+      });
+
       const formulario = document.getElementById('formEmprendedor');
-  const mensaje = document.getElementById('mensajeEstado');
+      const mensaje = document.getElementById('mensajeEstado');
 
-  formulario.addEventListener('submit', (e) => {
-    e.preventDefault();
-    mensaje.textContent =
-      'Información validada correctamente. (Prototipo: el guardado se conectará en el Sprint 2).';
-    formulario.reset();
-  });
-    menuNav.classList.toggle('menu-visible');
-  });
-</script>
+      formulario.addEventListener('submit', (e) => {
+        e.preventDefault();
+        mensaje.textContent =
+          'Información validada correctamente. (Prototipo: el guardado se conectará en el Sprint 2).';
+        formulario.reset();
+      });
+    </script>
   </body>
 </html>
