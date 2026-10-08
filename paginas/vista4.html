@@ -26,21 +26,21 @@
         <img src="../assets/imagenes/Logo.png" alt="Logo EcoRuta Temuco" class="logo" />
         <span class="brand-name">EcoRuta Temuco</span>
       </div>
-      <button class="menu-btn" aria-label="Abrir menú">☰ Menú</button>
+      <button class="menu-btn" aria-label="Abrir menú" id="menuBtn">☰ Menú</button>
     </div>
 
-      <nav>
+      <nav id="menuNav">
         <a href="../index.html">Inicio</a>
         <a href="../index.html#explorar">Explorar</a>
-        <a href="vista3_emprendedor.html">Emprendimientos</a>
-        <a href="vista4.html" class="active">Administración</a>
+        <a href="vista3_emprendedor.html">Emprendedores</a>
+        <a href="vista4.html" class="active" aria-current="page">Administración</a>
       </nav>
     </header>
 
     <main>
       <div class="admin-header">
         <h1>Panel de Administración</h1>
-        <p>Gestión y actualización de datos en tiempo real de la plataforma.</p>
+        <p>Revisión de solicitudes de emprendedores y estado de las actividades publicadas.</p>
       </div>
 
       <section class="stats-grid">
@@ -54,7 +54,7 @@
         </div>
         <div class="stat-card">
           <span class="stat-number">100%</span>
-          <span class="stat-label">Información al día</span>
+          <span class="stat-label">Fichas con fecha de actualización</span>
         </div>
       </section>
 
@@ -64,10 +64,10 @@
           <table class="admin-table">
             <thead>
               <tr>
-                <th>Emprendimiento</th>
-                <th>Contacto</th>
-                <th>Ubicación</th>
-                <th>Acciones</th>
+                <th scope="col">Emprendimiento</th>
+                <th scope="col">Contacto</th>
+                <th scope="col">Ubicación</th>
+                <th scope="col">Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -88,10 +88,19 @@
     <!-- Footer -->
     <footer>
       <div class="footer-links">
-        <a href="#contacto">Contacto</a>
-        <a href="#accesibilidad">Accesibilidad</a>
-        <a href="#informacion">Información local</a>
+        <a href="mailto:contacto@ecorutatemuco.cl">Contacto</a>
+        <a href="https://github.com/camilqqq/Nexus-Ecoruta/blob/main/documentos/reportes/accesibilidad.md" target="_blank">Accesibilidad</a>
+        <a href="../index.html">Información local</a>
       </div>
     </footer>
+
+    <script>
+      const menuBtn = document.getElementById('menuBtn');
+      const menuNav = document.getElementById('menuNav');
+
+      menuBtn.addEventListener('click', () => {
+        menuNav.classList.toggle('menu-visible');
+      });
+    </script>
   </body>
 </html>
