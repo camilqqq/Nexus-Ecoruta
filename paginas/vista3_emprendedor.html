@@ -21,21 +21,41 @@
       <nav id="menuNav">
         <a href="../index.html">Inicio</a>
         <a href="../index.html#explorar">Explorar</a>
-        <a href="vista3_emprendedor.html" class="active">Emprendimientos</a>
-        <a href="vista4.html" class="active">Administracion</a>
+        <a href="vista3_emprendedor.html" class="active" aria-current="page">Emprendedores</a>
+        <a href="vista4.html">Administración</a>
       </nav>
     </header>
 
     <main>
       <h1>"Da a conocer tu emprendimiento"</h1>
 
-      <form class="form-card">
+      <form class="form-card"> id="formEmprendedor">
+          <div class="form-group">
+          <label id="canalLabel">Canal principal de contacto</label>
+          <div class="checkbox-group" role="radiogroup" aria-labelledby="canalLabel">
+            <label class="checkbox-item">
+              <input type="radio" name="contacto" value="whatsapp" required />
+              WhatsApp
+            </label>
+
+            <label class="checkbox-item">
+              <input type="radio" name="contacto" value="email" />
+              Correo
+            </label>
+
+            <label class="checkbox-item">
+              <input type="radio" name="contacto" value="instagram" />
+              Instagram
+            </label>
+          </div>
+        </div>
+
         <div class="form-group">
-          <label for="nombreEmprendimiento">Nombre emprendimiento</label>
+          <label for="datoContacto">Número, correo o usuario de contacto</label>
           <input
             type="text"
-            id="nombreEmprendimiento"
-            placeholder="Ej. Guías Locales Ñielol"
+            id="datoContacto"
+            placeholder="Ej. +56 9 1234 5678 o @mi_emprendimiento"
             required
           />
         </div>
@@ -95,14 +115,15 @@
         </div>
 
         <button type="submit" class="btn-submit">Enviar información</button>
+        <p id="mensajeEstado" role="status" style="margin-top:12px;font-weight:600;color:#1a4331;"></p>
       </form>
     </main>
 
     <footer>
       <div class="footer-links">
-        <a href="#contacto">Contacto</a>
-        <a href="#accesibilidad">Accesibilidad</a>
-        <a href="#informacion">Información</a>
+        <a href="mailto:contacto@ecorutatemuco.cl">Contacto</a>
+        <a href="https://github.com/camilqqq/Nexus-Ecoruta/blob/main/documentos/reportes/accesibilidad.md" target="_blank">Accesibilidad</a>
+        <a href="../index.html">Información</a>
       </div>
     </footer>
 
@@ -111,6 +132,15 @@
   const menuNav = document.getElementById('menuNav');
 
   menuBtn.addEventListener('click', () => {
+      const formulario = document.getElementById('formEmprendedor');
+  const mensaje = document.getElementById('mensajeEstado');
+
+  formulario.addEventListener('submit', (e) => {
+    e.preventDefault();
+    mensaje.textContent =
+      'Información validada correctamente. (Prototipo: el guardado se conectará en el Sprint 2).';
+    formulario.reset();
+  });
     menuNav.classList.toggle('menu-visible');
   });
 </script>
