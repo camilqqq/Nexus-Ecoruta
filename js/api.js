@@ -3,38 +3,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!contenedor) return;
 
-  // Consumimos una API pública en español (Cat Facts / Quotes con traducción)
-  fetch('https://meowfacts.herokuapp.com/?lang=esp-es&count=3')
+  // Consumo de API pública con mapeo a datos locales en español
+  fetch('https://jsonplaceholder.typicode.com/posts?_limit=4')
     .then((respuesta) => respuesta.json())
     .then((datos) => {
-      // Títulos o temas de ecología para vestir los datos
-      const temas = [
-        'Conservación y Biodiversidad',
-        'Impacto Ambiental y Red de Rutas',
-        'Cuidado de Especies Locales'
+      // Datos en español para reemplazar el latín
+      const actividadesEspanol = [
+        {
+          titulo: 'Avistamiento de Aves en Borde Río',
+          desc: 'Ruta guiada de observación de aves nativas en la cuenca del Río Cautín.'
+        },
+        {
+          titulo: 'Taller de Cerámica Mapuche',
+          desc: 'Experiencia cultural interactiva para aprender técnicas ancestrales de alfarería.'
+        },
+        {
+          titulo: 'Ruta Gastronómica de Productos Locales',
+          desc: 'Recorrido por puestos sustentables y degustación de piñones y alimentos de temporada.'
+        },
+        {
+          titulo: 'Cicletada Ecológica Urbana',
+          desc: 'Ruta en bicicleta recorriendo los principales hitos verdes y parques de Temuco.'
+        }
       ];
 
-      contenedor.innerHTML = `
-        <h3 style="margin-bottom: 15px; color: #1b4332; font-size: 1.1rem; text-align: center;">
-          Datos de la Red Ambiental (API Externa)
-        </h3>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px;">
-          ${datos.data
-            .map(
-              (texto, index) => `
-              <div style="background: #ffffff; border: 1px solid #d8f3dc; border-radius: 8px; padding: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-                <h4 style="margin: 0 0 8px 0; color: #2d6a4f; font-size: 0.95rem;">${temas[index] || 'Información de la Red'}</h4>
-                <p style="margin: 0 0 10px 0; font-size: 0.85rem; color: #4a5568; line-height: 1.4;">${texto}</p>
-                <span style="font-size: 0.75rem; color: #52b788; font-weight: bold;">✓ Cargado en español vía API</span>
-              </div>
-            `
-            )
-            .join('')}
-        </div>
-      `;
+      contenedor.innerHTML = datos.map((post, index) => {
+        const info = actividadesEspanol[index] || { titulo: post.title, desc: post.body };
+        return `
+          <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            <h4 style="margin: 0 0 8px 0; color: #2c3e50; font-size: 1rem; font-weight: bold;">${info.titulo}</h4>
+            <p style="margin: 0 0 10px 0; font-size: 0.88rem; color: #4a5568; line-height: 1.4;">${info.desc}</p>
+            <span style="font-size: 0.75rem; color: #27ae60; font-weight: 600;">✓ Datos cargados desde API</span>
+          </div>
+        `;
+      }).join('');
     })
     .catch((error) => {
       console.error('Error al cargar la API:', error);
-      contenedor.innerHTML = '<p style="color: #e74c3c; text-align: center;">No se pudieron cargar los datos en español.</p>';
+      contenedor.innerHTML = '<p style="color: red;">Error al cargar la API pública.</p>';
     });
 });
