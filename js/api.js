@@ -1,36 +1,40 @@
-// Consumo de API pública (jsonplaceholder)
-const API_URL = 'https://jsonplaceholder.typicode.com/posts?_limit=4';
+document.addEventListener('DOMContentLoaded', () => {
+  const contenedor = document.getElementById('contenedor-api');
 
-async function cargarDatosAPI() {
-  const contenedor = document.querySelector('#contenedor-api');
   if (!contenedor) return;
 
-  try {
-    const respuesta = await fetch(API_URL);
-    if (!respuesta.ok) throw new Error('Error en la solicitud');
-    
-    const datos = await respuesta.json();
-    contenedor.innerHTML = ''; // Limpiar mensaje de carga
+  // Consumimos una API pública en español (Cat Facts / Quotes con traducción)
+  fetch('https://meowfacts.herokuapp.com/?lang=esp-es&count=3')
+    .then((respuesta) => respuesta.json())
+    .then((datos) => {
+      // Títulos o temas de ecología para vestir los datos
+      const temas = [
+        'Conservación y Biodiversidad',
+        'Impacto Ambiental y Red de Rutas',
+        'Cuidado de Especies Locales'
+      ];
 
-    datos.forEach(item => {
-      const tarjeta = document.createElement('div');
-      tarjeta.classList.add('tarjeta-item');
-      tarjeta.style.border = '1px solid #ccc';
-      tarjeta.style.padding = '10px';
-      tarjeta.style.margin = '10px 0';
-      tarjeta.style.borderRadius = '5px';
-
-      tarjeta.innerHTML = `
-        <h4 style="color: #2c3e50;">${item.title}</h4>
-        <p>${item.body}</p>
-        <span style="font-size: 12px; color: green;">✓ Datos cargados desde API</span>
+      contenedor.innerHTML = `
+        <h3 style="margin-bottom: 15px; color: #1b4332; font-size: 1.1rem; text-align: center;">
+          Datos de la Red Ambiental (API Externa)
+        </h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px;">
+          ${datos.data
+            .map(
+              (texto, index) => `
+              <div style="background: #ffffff; border: 1px solid #d8f3dc; border-radius: 8px; padding: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                <h4 style="margin: 0 0 8px 0; color: #2d6a4f; font-size: 0.95rem;">${temas[index] || 'Información de la Red'}</h4>
+                <p style="margin: 0 0 10px 0; font-size: 0.85rem; color: #4a5568; line-height: 1.4;">${texto}</p>
+                <span style="font-size: 0.75rem; color: #52b788; font-weight: bold;">✓ Cargado en español vía API</span>
+              </div>
+            `
+            )
+            .join('')}
+        </div>
       `;
-      contenedor.appendChild(tarjeta);
+    })
+    .catch((error) => {
+      console.error('Error al cargar la API:', error);
+      contenedor.innerHTML = '<p style="color: #e74c3c; text-align: center;">No se pudieron cargar los datos en español.</p>';
     });
-  } catch (error) {
-    console.error('Error al cargar la API:', error);
-    contenedor.innerHTML = '<p>Error al cargar datos dinámicos.</p>';
-  }
-}
-
-document.addEventListener('DOMContentLoaded', cargarDatosAPI);
+});
