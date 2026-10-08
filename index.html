@@ -1,220 +1,222 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EcoRuta Temuco</title>
-    <link rel="stylesheet" href="css/index.css" />
-  </head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EcoRuta Temuco</title>
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
 
-  <body>
-    <header>
-      <div class="header">
-        <div class="brand">
-          <img src="assets/imagenes/Logo.png" alt="Logo EcoRuta Temuco" class="logo" />
-          <div>
-            <p class="brand-name">EcoRuta Temuco</p>
-            <p>Turismo sustentable • Temuco</p>
-          </div>
-        </div>
+  <body>
+    <header>
+      <div class="header">
+        <div class="brand">
+          <img src="assets/imagenes/Logo.png" alt="Logo EcoRuta Temuco" class="logo" />
+          <div>
+            <p class="brand-name">EcoRuta Temuco</p>
+            <p>Turismo sustentable • Temuco</p>
+          </div>
+        </div>
 
-        <nav>
-            <a href="#inicio" aria-current="page">Inicio</a>
-            <a href="#explorar">Explorar</a>
-            <a href="paginas/vista3_emprendedor.html">Emprendedores</a>
-            <a href="paginas/vista4.html">Administración</a>
-        </nav>
+        <nav>
+            <a href="#inicio" aria-current="page">Inicio</a>
+            <a href="#explorar">Explorar</a>
+            <a href="paginas/vista3_emprendedor.html">Emprendedores</a>
+            <a href="paginas/vista4.html">Administración</a>
+        </nav>
 
-        <button class="menu" aria-label="Abrir menú">☰</button>
-      </div>
-    </header>
+        <button class="menu" aria-label="Abrir menú">☰</button>
+      </div>
+    </header>
 
-    <main id="inicio">
-      <section class="hero">
-        <h1>Descubre experiencias sustentables en Temuco</h1>
+    <main id="inicio">
+      <section class="hero">
+        <h1>Descubre experiencias sustentables en Temuco</h1>
 
-        <p>
-          Encuentra rutas, actividades y emprendimientos locales con información clara sobre
-          ubicación, accesibilidad, horarios y contacto.
-        </p>
+        <p>
+          Encuentra rutas, actividades y emprendimientos locales con información clara sobre
+          ubicación, accesibilidad, horarios y contacto.
+        </p>
 
-        <div class="catalog-access">
-          <a href="#explorar" class="catalog-button">
-            Explorar catálogo sin registrarme
-          </a>
-          <p>Acceso libre · No necesitas crear una cuenta</p>
-        </div>
+        <div class="catalog-access">
+          <a href="#explorar" class="catalog-button">
+            Explorar catálogo sin registrarme
+          </a>
+          <p>Acceso libre · No necesitas crear una cuenta</p>
+        </div>
 
-        <div class="search">
-          <input
-            type="search"
-            aria-label="Buscar por nombre o categoría"
-            placeholder="Buscar por nombre o categoría"
-          />
+        <div class="search">
+          <input
+            type="search"
+            aria-label="Buscar por nombre o categoría"
+            placeholder="Buscar por nombre o categoría"
+          />
 
-          <div class="filters">
-            <button class="active" aria-pressed="true">Todas</button>
-            <button aria-pressed="false">Naturaleza</button>
-            <button aria-pressed="false">Cultura</button>
-            <button aria-pressed="false">Gastronomía</button>
-          </div>
-        </div>
-      </section>
+          <div class="filters">
+            <button class="active" aria-pressed="true">Todas</button>
+            <button aria-pressed="false">Naturaleza</button>
+            <button aria-pressed="false">Cultura</button>
+            <button aria-pressed="false">Gastronomía</button>
+          </div>
+        </div>
+      </section>
 
-      <section class="activities" id="explorar">
-        <div class="section-title">
-          <h2>Actividades destacadas</h2>
-          <span>3 resultados</span>
-        </div>
+      <section class="activities" id="explorar">
+        <div class="section-title">
+          <h2>Actividades destacadas</h2>
+          <span>3 resultados</span>
+        </div>
 
-        <div class="list">
-          <article class="activity" data-categoria="Naturaleza">
-            <div class="image">
-              <img src="assets/imagenes/Sendero/Sendero_Nielol.jpg" alt="Sendero de trekking en el Parque Ñielol" />
-            </div>
+        <div class="list">
+          <article class="activity" data-categoria="Naturaleza">
+            <div class="image">
+              <img src="assets/imagenes/Sendero/Sendero_Nielol.jpg" alt="Sendero de trekking en el Parque Ñielol" />
+            </div>
 
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Sendero Ñielol</h3>
-                  <p>Naturaleza • Parque Ñielol, Temuco</p>
-                </div>
+            <div class="info">
+              <div class="activity-header">
+                <div>
+                  <h3>Sendero Ñielol</h3>
+                  <p>Naturaleza • Parque Ñielol, Temuco</p>
+                </div>
 
-                <small>Actualizado: 2026-08-10</small>
-              </div>
+                <small>Actualizado: 2026-08-10</small>
+              </div>
 
-              <p>Duración: 1 hr 30 min · Dificultad: Fácil</p>
+              <p>Duración: 1 hr 30 min · Dificultad: Fácil</p>
 
-              <div class="buttons">
-                <!-- Enlace conectado a la ficha -->
-                <a href="paginas/Actividad.html?id=sendero" class="primary" aria-label="Ver ficha detallada de Sendero Ñielol">Ver ficha</a>
-                <!-- Enlace conectado al WhatsApp/contacto -->
-                <a href="https://wa.me/56912345678" target="_blank">Contactar</a>
-              </div>
-            </div>
-          </article>
+              <div class="buttons">
+                <!-- Enlace conectado a la ficha -->
+                <a href="paginas/Actividad.html?id=sendero" class="primary" aria-label="Ver ficha detallada de Sendero Ñielol">Ver ficha</a>
+                <!-- Enlace conectado al WhatsApp/contacto -->
+                <a href="https://wa.me/56912345678" target="_blank">Contactar</a>
+              </div>
+            </div>
+          </article>
 
-          <article class="activity" data-categoria="Cultura">
-            <div class="image">
-              <img
-                src="assets/imagenes/Museo/museo.jpg"
-                alt="Fachada del Museo Regional de La Araucanía"
-              />
-            </div>
+          <article class="activity" data-categoria="Cultura">
+            <div class="image">
+              <img
+                src="assets/imagenes/Museo/museo.jpg"
+                alt="Fachada del Museo Regional de La Araucanía"
+              />
+            </div>
 
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Museo Regional de La Araucanía</h3>
-                  <p>Cultura • Museo Regional de La Araucanía</p>
-                </div>
+            <div class="info">
+              <div class="activity-header">
+                <div>
+                  <h3>Museo Regional de La Araucanía</h3>
+                  <p>Cultura • Museo Regional de La Araucanía</p>
+                </div>
 
-                <small>Actualizado: 2026-08-06</small>
-              </div>
+                <small>Actualizado: 2026-08-06</small>
+              </div>
 
-              <p>Duración: 1-2 hrs · Dificultad: Fácil</p>
+              <p>Duración: 1-2 hrs · Dificultad: Fácil</p>
 
-              <div class="buttons">
-                <!-- Enlace de conecxion con la ficha -->
-                <a href="paginas/Actividad.html?id=museo" class="primary" aria-label="Ver ficha detallada del Museo Regional de La Araucanía">Ver ficha</a>
-                <!-- Enlace conectado al correo -->
-                <a href="mailto:contacto@museoaraucania.cl">Contactar</a>
-              </div>
-            </div>
-          </article>
+              <div class="buttons">
+                <!-- Enlace de conecxion con la ficha -->
+                <a href="paginas/Actividad.html?id=museo" class="primary" aria-label="Ver ficha detallada del Museo Regional de La Araucanía">Ver ficha</a>
+                <!-- Enlace conectado al correo -->
+                <a href="mailto:contacto@museoaraucania.cl">Contactar</a>
+              </div>
+            </div>
+          </article>
 
-          <article class="activity" data-categoria="Gastronomía">
-            <div class="image">
-              <img
-                src="assets/imagenes/Feria/feria.jpg"
-                alt="Puestos de la Feria Agroecológica en Plaza Aníbal Pinto"
-              />
-            </div>
+          <article class="activity" data-categoria="Gastronomía">
+            <div class="image">
+              <img
+                src="assets/imagenes/Feria/feria.jpg"
+                alt="Puestos de la Feria Agroecológica en Plaza Aníbal Pinto"
+              />
+            </div>
 
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Feria Agroecológica</h3>
-                  <p>Gastronomía • Plaza Aníbal Pinto</p>
-                </div>
+            <div class="info">
+              <div class="activity-header">
+                <div>
+                  <h3>Feria Agroecológica</h3>
+                  <p>Gastronomía • Plaza Aníbal Pinto</p>
+                </div>
 
-                <small>Actualizado: 2026-08-12</small>
-              </div>
+                <small>Actualizado: 2026-08-12</small>
+              </div>
 
-              <p>Duración: 4 hrs · Dificultad: Muy fácil</p>
+              <p>Duración: 4 hrs · Dificultad: Muy fácil</p>
 
-              <div class="buttons">
-                <!-- Enlace conectado a la ficha -->
-                <a href="paginas/Actividad.html?id=feria" class="primary" aria-label="Ver ficha detallada de la Feria Agroecológica">Ver ficha</a>
-                <!-- Enlace conectado al contacto -->
-                <a href="https://wa.me/56912345678" target="_blank">Contactar</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-    </main>
+              <div class="buttons">
+                <!-- Enlace conectado a la ficha -->
+                <a href="paginas/Actividad.html?id=feria" class="primary" aria-label="Ver ficha detallada de la Feria Agroecológica">Ver ficha</a>
+                <!-- Enlace conectado al contacto -->
+                <a href="https://wa.me/56912345678" target="_blank">Contactar</a>
+              </div>
+            </div>
+          </article>
+        </div>
 
-    <footer>
-      <span> EcoRuta Temuco • Información local y accesible </span>
+        <!-- Contenedor API -->
+        <div id="contenedor-api" style="margin-top: 20px; padding: 15px; border: 1px dashed #2c3e50; border-radius: 8px;">
+          <p>Cargando información desde la API...</p>
+        </div>
+      </section>
+    </main>
 
-      <div>
-        <a href="https://github.com/camilqqq/Nexus-Ecoruta/blob/main/documentos/reportes/accesibilidad.md" target="_blank">Accesibilidad</a>
-        <a href="mailto:contacto@ecorutatemuco.cl">Contacto</a>
-      </div>
-    </footer>
-    <script>
-      const botones = document.querySelectorAll('.filters button');
-      const tarjetas = document.querySelectorAll('.activity');
-      const buscador = document.querySelector('.search input');
-      const contador = document.querySelector('.section-title span');
+    <footer>
+      <span> EcoRuta Temuco • Información local y accesible </span>
 
-      let categoriaActual = 'Todas';
+      <div>
+        <a href="https://github.com/camilqqq/Nexus-Ecoruta/blob/main/documentos/reportes/accesibilidad.md" target="_blank">Accesibilidad</a>
+        <a href="mailto:contacto@ecorutatemuco.cl">Contacto</a>
+      </div>
+    </footer>
+    <script>
+      const botones = document.querySelectorAll('.filters button');
+      const tarjetas = document.querySelectorAll('.activity');
+      const buscador = document.querySelector('.search input');
+      const contador = document.querySelector('.section-title span');
 
-      const limpiar = (texto) =>
-        texto.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      let categoriaActual = 'Todas';
 
-      contador.setAttribute('aria-live', 'polite');
+      const limpiar = (texto) =>
+        texto.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
-      function aplicarFiltros() {
-        const busqueda = limpiar(buscador.value.trim());
-        let visibles = 0;
+      contador.setAttribute('aria-live', 'polite');
 
-        tarjetas.forEach((tarjeta) => {
-          const nombre = tarjeta.querySelector('h3').textContent;
-          const categoria = tarjeta.dataset.categoria;
+      function aplicarFiltros() {
+        const busqueda = limpiar(buscador.value.trim());
+        let visibles = 0;
 
-          const coincideCategoria =
-            categoriaActual === 'Todas' || categoria === categoriaActual;
-          const coincideBusqueda = limpiar(nombre + ' ' + categoria).includes(busqueda);
+        tarjetas.forEach((tarjeta) => {
+          const nombre = tarjeta.querySelector('h3').textContent;
+          const categoria = tarjeta.dataset.categoria;
 
-          const mostrar = coincideCategoria && coincideBusqueda;
-          tarjeta.style.display = mostrar ? '' : 'none';
-          if (mostrar) visibles++;
-        });
+          const coincideCategoria =
+            categoriaActual === 'Todas' || categoria === categoriaActual;
+          const coincideBusqueda = limpiar(nombre + ' ' + categoria).includes(busqueda);
 
-        contador.textContent = visibles + (visibles === 1 ? ' resultado' : ' resultados');
-      }
+          const mostrar = coincideCategoria && coincideBusqueda;
+          tarjeta.style.display = mostrar ? '' : 'none';
+          if (mostrar) visibles++;
+        });
 
-      botones.forEach((boton) => {
-        boton.addEventListener('click', () => {
-          botones.forEach((b) => {
-            b.classList.remove('active');
-            b.setAttribute('aria-pressed', 'false');
-          });
-          boton.classList.add('active');
-          boton.setAttribute('aria-pressed', 'true');
+        contador.textContent = visibles + (visibles === 1 ? ' resultado' : ' resultados');
+      }
 
-          categoriaActual = boton.textContent.trim();
-          aplicarFiltros();
-        });
-      });
+      botones.forEach((boton) => {
+        boton.addEventListener('click', () => {
+          botones.forEach((b) => {
+            b.classList.remove('active');
+            b.setAttribute('aria-pressed', 'false');
+          });
+          boton.classList.add('active');
+          boton.setAttribute('aria-pressed', 'true');
 
-      buscador.addEventListener('input', aplicarFiltros);
-    </script>
-  </body>
+          categoriaActual = boton.textContent.trim();
+          aplicarFiltros();
+        });
+      });
+
+      buscador.addEventListener('input', aplicarFiltros);
+    </script>
+    <script src="./js/api.js"></script>
+  </body>
 </html>
-
-
-
-cambiale solo lo q se necesita no hagas mas mrd
