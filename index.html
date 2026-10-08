@@ -86,9 +86,7 @@
               <p>Duración: 1 hr 30 min · Dificultad: Fácil</p>
 
               <div class="buttons">
-                <!-- Enlace conectado a la ficha -->
                 <a href="paginas/Actividad.html?id=sendero" class="primary" aria-label="Ver ficha detallada de Sendero Ñielol">Ver ficha</a>
-                <!-- Enlace conectado al WhatsApp/contacto -->
                 <a href="https://wa.me/56912345678" target="_blank">Contactar</a>
               </div>
             </div>
@@ -115,102 +113,4 @@
               <p>Duración: 1-2 hrs · Dificultad: Fácil</p>
 
               <div class="buttons">
-                <!-- Enlace de conecxion con la ficha -->
-                <a href="paginas/Actividad.html?id=museo" class="primary" aria-label="Ver ficha detallada del Museo Regional de La Araucanía">Ver ficha</a>
-                <!-- Enlace conectado al correo -->
-                <a href="mailto:contacto@museoaraucania.cl">Contactar</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="activity" data-categoria="Gastronomía">
-            <div class="image">
-              <img
-                src="assets/imagenes/Feria/feria.jpg"
-                alt="Puestos de la Feria Agroecológica en Plaza Aníbal Pinto"
-              />
-            </div>
-
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Feria Agroecológica</h3>
-                  <p>Gastronomía • Plaza Aníbal Pinto</p>
-                </div>
-
-                <small>Actualizado: 2026-08-12</small>
-              </div>
-
-              <p>Duración: 4 hrs · Dificultad: Muy fácil</p>
-
-              <div class="buttons">
-                <!-- Enlace conectado a la ficha -->
-                <a href="paginas/Actividad.html?id=feria" class="primary" aria-label="Ver ficha detallada de la Feria Agroecológica">Ver ficha</a>
-                <!-- Enlace conectado al contacto -->
-                <a href="https://wa.me/56912345678" target="_blank">Contactar</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <span> EcoRuta Temuco • Información local y accesible </span>
-
-      <div>
-        <a href="https://github.com/camilqqq/Nexus-Ecoruta/blob/main/documentos/reportes/accesibilidad.md" target="_blank">Accesibilidad</a>
-        <a href="mailto:contacto@ecorutatemuco.cl">Contacto</a>
-      </div>
-    </footer>
-    <script>
-      const botones = document.querySelectorAll('.filters button');
-      const tarjetas = document.querySelectorAll('.activity');
-      const buscador = document.querySelector('.search input');
-      const contador = document.querySelector('.section-title span');
-
-      let categoriaActual = 'Todas';
-
-      const limpiar = (texto) =>
-        texto.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-
-      contador.setAttribute('aria-live', 'polite');
-
-      function aplicarFiltros() {
-        const busqueda = limpiar(buscador.value.trim());
-        let visibles = 0;
-
-        tarjetas.forEach((tarjeta) => {
-          const nombre = tarjeta.querySelector('h3').textContent;
-          const categoria = tarjeta.dataset.categoria;
-
-          const coincideCategoria =
-            categoriaActual === 'Todas' || categoria === categoriaActual;
-          const coincideBusqueda = limpiar(nombre + ' ' + categoria).includes(busqueda);
-
-          const mostrar = coincideCategoria && coincideBusqueda;
-          tarjeta.style.display = mostrar ? '' : 'none';
-          if (mostrar) visibles++;
-        });
-
-        contador.textContent = visibles + (visibles === 1 ? ' resultado' : ' resultados');
-      }
-
-      botones.forEach((boton) => {
-        boton.addEventListener('click', () => {
-          botones.forEach((b) => {
-            b.classList.remove('active');
-            b.setAttribute('aria-pressed', 'false');
-          });
-          boton.classList.add('active');
-          boton.setAttribute('aria-pressed', 'true');
-
-          categoriaActual = boton.textContent.trim();
-          aplicarFiltros();
-        });
-      });
-
-      buscador.addEventListener('input', aplicarFiltros);
-    </script>
-  </body>
-</html>
+                <a href="pag
