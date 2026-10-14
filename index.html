@@ -46,16 +46,40 @@
 
         <div class="search">
           <input
+            id="buscador"
             type="search"
             aria-label="Buscar por nombre o categoría"
             placeholder="Buscar por nombre o categoría"
           />
 
           <div class="filters">
-            <button class="active" aria-pressed="true">Todas</button>
-            <button aria-pressed="false">Naturaleza</button>
-            <button aria-pressed="false">Cultura</button>
-            <button aria-pressed="false">Gastronomía</button>
+            
+            <button
+            class="active"
+            aria-pressed="true"
+            data-categoria="Todas">
+            Todas
+
+          </button>
+
+          <button
+            aria-pressed="false"
+            data-categoria="Naturaleza">
+            Naturaleza
+          </button>
+
+          <button
+            aria-pressed="false"
+            data-categoria="Cultura">
+            Cultura
+          </button>
+
+          <button
+            aria-pressed="false"
+            data-categoria="Gastronomía">
+            Gastronomía
+          </button>
+
           </div>
         </div>
       </section>
@@ -66,91 +90,13 @@
           <span>3 resultados</span>
         </div>
 
-        <div class="list">
-          <article class="activity">
-            <div class="image">
-              <img src="assets/Img/Sendero/Sendero_Nielol.jpg" alt="Sendero de trekking en el Parque Ñielol" />
-            </div>
+        <div class="list" id="listaActividades">
 
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Sendero Ñielol</h3>
-                  <p>Naturaleza • Parque Ñielol, Temuco</p>
-                </div>
-
-                <small>Actualizado: 2026-08-10</small>
-              </div>
-
-              <p>Duración: 2 hrs · Dificultad: Fácil</p>
-
-              <div class="buttons">
-                <!-- Enlace conectado a la ficha -->
-                <a href="paginas/Actividad.html?id=sendero" class="primary">Ver ficha</a>
-                <!-- Enlace conectado al WhatsApp/contacto -->
-                <a href="https://wa.me/56912345678" target="_blank">Contactar</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="activity">
-            <div class="image">
-              <img
-                src="assets/Img/Museo/museo.jpg"
-                alt="Fachada del Museo Regional de La Araucanía"
-              />
-            </div>
-
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Museo Regional de La Araucanía</h3>
-                  <p>Cultura • Museo Regional de La Araucanía</p>
-                </div>
-
-                <small>Actualizado: 2026-08-06</small>
-              </div>
-
-              <p>Duración: 1-2 hrs · Dificultad: Facil</p>
-
-              <div class="buttons">
-                <!-- Enlace de conecxion con la ficha -->
-                <a href="paginas/Actividad.html?id=museo" class="primary">Ver ficha</a>
-                <!-- Enlace conectado al correo -->
-                <a href="mailto:contacto@museoaraucania.cl">Contactar</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="activity">
-            <div class="image">
-              <img
-                src="assets/Img/Feria/feria.jpg"
-                alt="Puestos de la Feria Agroecológica en Plaza Aníbal Pinto"
-              />
-            </div>
-
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Feria Agroecológica</h3>
-                  <p>Gastronomía • Plaza Aníbal Pinto</p>
-                </div>
-
-                <small>Actualizado: 2026-08-12</small>
-              </div>
-
-              <p>Duración: 4 hrs · Dificultad: Muy fácil</p>
-
-              <div class="buttons">
-                <!-- Enlace conectado a la ficha -->
-                <a href="paginas/Actividad.html?id=feria" class="primary">Ver ficha</a>
-                <!-- Enlace conectado al contacto -->
-                <a href="https://wa.me/56912345678" target="_blank">Contactar</a>
-              </div>
-            </div>
-          </article>
         </div>
+
+  
+
+          
       </section>
 
       <footer>
@@ -178,5 +124,6 @@
         });
       });
     </script>
+    <script src="js/catalogo.js"></script>
   </body>
 </html>
