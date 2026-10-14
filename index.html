@@ -173,6 +173,12 @@
       const tarjetas = document.querySelectorAll('.activity');
       const buscador = document.querySelector('.search input');
       const contador = document.querySelector('.section-title span');
+      const mensajeSinResultados = document.createElement('p');
+mensajeSinResultados.textContent = 'No se encontraron actividades con esos criterios.';
+mensajeSinResultados.style.display = 'none';
+mensajeSinResultados.className = 'mensaje-vacio';
+
+document.querySelector('.list').appendChild(mensajeSinResultados);
 
       let categoriaActual = 'Todas';
 
@@ -199,6 +205,8 @@
         });
 
         contador.textContent = visibles + (visibles === 1 ? ' resultado' : ' resultados');
+        mensajeSinResultados.style.display =
+  visibles === 0 ? 'block' : 'none';
       }
 
       botones.forEach((boton) => {
