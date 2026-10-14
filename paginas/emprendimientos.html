@@ -54,6 +54,13 @@
           <span id="contador">6 emprendimientos</span>
         </div>
 
+                <div class="filtros" role="group" aria-label="Filtrar emprendimientos por rubro">
+          <button type="button" class="filtro active" aria-pressed="true">Todos</button>
+          <button type="button" class="filtro" aria-pressed="false">Guías locales</button>
+          <button type="button" class="filtro" aria-pressed="false">Productos locales</button>
+          <button type="button" class="filtro" aria-pressed="false">Gastronomía típica</button>
+          <button type="button" class="filtro" aria-pressed="false">Hospedaje sustentable</button>
+        </div>
         <div class="emprendimientos-grid" id="listaEmprendimientos">
           <article class="emprendimiento" data-rubro="Guías locales">
             <div class="emprendimiento-top">
@@ -295,6 +302,36 @@
       menuBtn.addEventListener('click', () => {
         const abierto = menuNav.classList.toggle('menu-visible');
         menuBtn.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+      });
+    
+      // ----- Filtro por rubro -----
+      const botonesFiltro = document.querySelectorAll('.filtro');
+      const fichas = document.querySelectorAll('.emprendimiento');
+      const contador = document.getElementById('contador');
+
+      contador.setAttribute('aria-live', 'polite');
+
+      botonesFiltro.forEach((boton) => {
+        boton.addEventListener('click', () => {
+          botonesFiltro.forEach((b) => {
+            b.classList.remove('active');
+            b.setAttribute('aria-pressed', 'false');
+          });
+          boton.classList.add('active');
+          boton.setAttribute('aria-pressed', 'true');
+
+          const rubro = boton.textContent.trim();
+          let visibles = 0;
+
+          fichas.forEach((ficha) => {
+            const mostrar = rubro === 'Todos' || ficha.dataset.rubro === rubro;
+            ficha.style.display = mostrar ? '' : 'none';
+            if (mostrar) visibles++;
+          });
+
+          contador.textContent =
+            visibles + (visibles === 1 ? ' emprendimiento' : ' emprendimientos');
+        });
       });
     </script>
   </body>

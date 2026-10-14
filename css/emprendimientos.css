@@ -396,3 +396,33 @@ footer {
     animation: none !important;
   }
 }
+
+
+/* ---------- Filtros por rubro ---------- */
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 18px;
+}
+
+.filtro {
+  padding: 9px 16px;
+  border: 2px solid var(--verde-medio);
+  border-radius: 999px;
+  background: var(--blanco);
+  color: var(--verde-oscuro);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.filtro:hover {
+  background: var(--verde-claro);
+}
+
+.filtro.active {
+  background: var(--verde-oscuro);
+  border-color: var(--verde-oscuro);
+  color: var(--blanco);
+}
