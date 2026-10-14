@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Emprendimientos sustentables de La Araucanía: guías, artesanos, gastronomía y hospedaje local con su impacto ecológico y distintivos."
+    />
+    <title>EcoRuta Temuco - Emprendimientos sustentables</title>
+    <link rel="stylesheet" href="../css/emprendimientos.css" />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <header>
+      <div class="header-top">
+        <div class="brand">
+          <img src="../assets/imagenes/Logo.png" alt="Logo EcoRuta Temuco" class="logo" />
+          <span class="brand-name">EcoRuta Temuco</span>
+        </div>
+        <button class="menu-btn" aria-label="Abrir menú" aria-expanded="false" id="menuBtn">☰ Menú</button>
+      </div>
+
+      <nav id="menuNav" aria-label="Menú principal">
+        <a href="../index.html">Inicio</a>
+        <a href="../index.html#explorar">Explorar</a>
+        <a href="emprendimientos.html" aria-current="page">Emprendedores</a>
+        <a href="vista4.html">Administración</a>
+      </nav>
+    </header>
+
+    <main id="contenido">
+      <div class="intro">
+        <h1>Emprendimientos sustentables</h1>
+        <p>
+          Conoce a los guías, artesanos y negocios locales de La Araucanía, qué hacen por el
+          entorno y cómo contactarlos directamente.
+        </p>
+        <p class="nota-ejemplo">
+          Los emprendimientos de esta página son ejemplos del prototipo.
+        </p>
+      </div>
+
+      <div class="leyenda">
+        <p><strong>Comercio Justo:</strong> precios y condiciones equitativas para quienes producen.</p>
+        <p><strong>Sello Verde:</strong> prácticas que reducen el impacto en el medio ambiente.</p>
+      </div>
+
+      <section aria-labelledby="titulo-lista">
+        <div class="section-title">
+          <h2 id="titulo-lista">Locales, guías y artesanos de La Araucanía</h2>
+          <span id="contador">6 emprendimientos</span>
+        </div>
+
+                <div class="filtros" role="group" aria-label="Filtrar emprendimientos por rubro">
+          <button type="button" class="filtro active" aria-pressed="true">Todos</button>
+          <button type="button" class="filtro" aria-pressed="false">Guías locales</button>
+          <button type="button" class="filtro" aria-pressed="false">Productos locales</button>
+          <button type="button" class="filtro" aria-pressed="false">Gastronomía típica</button>
+          <button type="button" class="filtro" aria-pressed="false">Hospedaje sustentable</button>
+        </div>
+        <div class="emprendimientos-grid" id="listaEmprendimientos">
+          <article class="emprendimiento" data-rubro="Guías locales">
+            <div class="emprendimiento-top">
+              <span class="inicial" aria-hidden="true">G</span>
+              <div>
+                <h3>Guías Locales Ñielol</h3>
+                <p class="rubro">Guías locales</p>
+              </div>
+            </div>
+            <p class="ubicacion">Cerro Ñielol, Temuco</p>
+            <p class="descripcion">
+              Caminatas guiadas por el Monumento Natural Cerro Ñielol, con foco en la flora nativa
+              y las aves de la zona.
+            </p>
+            <div class="impacto">
+              <h4>Impacto ecológico</h4>
+              <ul>
+                <li>Grupos de máximo 10 personas</li>
+                <li>Recorridos solo por senderos habilitados</li>
+                <li>Retiro de todos los residuos al terminar</li>
+              </ul>
+            </div>
+            <ul class="distintivos" aria-label="Distintivos">
+              <li class="distintivo">Sello Verde</li>
+            </ul>
+            <div class="emprendimiento-pie">
+              <small>Actualizado: 2026-10-12</small>
+              <a
+                class="btn-contacto"
+                href="mailto:contacto@example.com"
+                aria-label="Contactar a Guías Locales Ñielol por correo"
+                >Contactar</a
+              >
+            </div>
+          </article>
+
+          <article class="emprendimiento" data-rubro="Productos locales">
+            <div class="emprendimiento-top">
+              <span class="inicial" aria-hidden="true">T</span>
+              <div>
+                <h3>Taller Artesanal Raíces</h3>
+                <p class="rubro">Productos locales</p>
+              </div>
+            </div>
+            <p class="ubicacion">Padre Las Casas</p>
+            <p class="descripcion">
+              Tejidos y cestería hechos a mano por artesanas de la comunidad, con técnicas
+              tradicionales de la región.
+            </p>
+            <div class="impacto">
+              <h4>Impacto ecológico</h4>
+              <ul>
+                <li>Lana de ovejas criadas en la zona</li>
+                <li>Tintes de origen vegetal</li>
+                <li>Empaque de papel reciclado</li>
+              </ul>
+            </div>
+            <ul class="distintivos" aria-label="Distintivos">
+              <li class="distintivo">Comercio Justo</li>
+              <li class="distintivo">Sello Verde</li>
+            </ul>
+            <div class="emprendimiento-pie">
+              <small>Actualizado: 2026-10-10</small>
+              <a
+                class="btn-contacto"
+                href="mailto:contacto@example.com"
+                aria-label="Contactar a Taller Artesanal Raíces por correo"
+                >Contactar</a
+              >
+            </div>
+          </article>
+
+          <article class="emprendimiento" data-rubro="Gastronomía típica">
+            <div class="emprendimiento-top">
+              <span class="inicial" aria-hidden="true">F</span>
+              <div>
+                <h3>Fogón Araucano</h3>
+                <p class="rubro">Gastronomía típica</p>
+              </div>
+            </div>
+            <p class="ubicacion">Centro de Temuco</p>
+            <p class="descripcion">
+              Cocina tradicional de La Araucanía preparada con ingredientes de productores de la
+              región.
+            </p>
+            <div class="impacto">
+              <h4>Impacto ecológico</h4>
+              <ul>
+                <li>Compra directa a productores locales</li>
+                <li>Menú según la temporada</li>
+                <li>Separación y reciclaje de residuos</li>
+              </ul>
+            </div>
+            <ul class="distintivos" aria-label="Distintivos">
+              <li class="distintivo">Comercio Justo</li>
+            </ul>
+            <div class="emprendimiento-pie">
+              <small>Actualizado: 2026-10-09</small>
+              <a
+                class="btn-contacto"
+                href="mailto:contacto@example.com"
+                aria-label="Contactar a Fogón Araucano por correo"
+                >Contactar</a
+              >
+            </div>
+          </article>
+
+          <article class="emprendimiento" data-rubro="Productos locales">
+            <div class="emprendimiento-top">
+              <span class="inicial" aria-hidden="true">M</span>
+              <div>
+                <h3>Miel y Hierbas del Valle</h3>
+                <p class="rubro">Productos locales</p>
+              </div>
+            </div>
+            <p class="ubicacion">Lautaro</p>
+            <p class="descripcion">
+              Miel, mermeladas y hierbas medicinales producidas por una familia apicultora de la
+              zona.
+            </p>
+            <div class="impacto">
+              <h4>Impacto ecológico</h4>
+              <ul>
+                <li>Apicultura sin químicos</li>
+                <li>Frascos de vidrio retornables</li>
+                <li>Cultivo sin pesticidas</li>
+              </ul>
+            </div>
+            <ul class="distintivos" aria-label="Distintivos">
+              <li class="distintivo">Sello Verde</li>
+            </ul>
+            <div class="emprendimiento-pie">
+              <small>Actualizado: 2026-10-08</small>
+              <a
+                class="btn-contacto"
+                href="mailto:contacto@example.com"
+                aria-label="Contactar a Miel y Hierbas del Valle por correo"
+                >Contactar</a
+              >
+            </div>
+          </article>
+
+          <article class="emprendimiento" data-rubro="Hospedaje sustentable">
+            <div class="emprendimiento-top">
+              <span class="inicial" aria-hidden="true">C</span>
+              <div>
+                <h3>Cabañas Bosque Nativo</h3>
+                <p class="rubro">Hospedaje sustentable</p>
+              </div>
+            </div>
+            <p class="ubicacion">Camino a Cunco</p>
+            <p class="descripcion">
+              Cabañas rodeadas de bosque nativo, pensadas para descansar con el menor impacto
+              posible en el entorno.
+            </p>
+            <div class="impacto">
+              <h4>Impacto ecológico</h4>
+              <ul>
+                <li>Energía solar para agua caliente</li>
+                <li>Reutilización de aguas grises</li>
+                <li>Construcción con madera local</li>
+              </ul>
+            </div>
+            <ul class="distintivos" aria-label="Distintivos">
+              <li class="distintivo">Sello Verde</li>
+            </ul>
+            <div class="emprendimiento-pie">
+              <small>Actualizado: 2026-10-11</small>
+              <a
+                class="btn-contacto"
+                href="mailto:contacto@example.com"
+                aria-label="Contactar a Cabañas Bosque Nativo por correo"
+                >Contactar</a
+              >
+            </div>
+          </article>
+
+          <article class="emprendimiento" data-rubro="Gastronomía típica">
+            <div class="emprendimiento-top">
+              <span class="inicial" aria-hidden="true">H</span>
+              <div>
+                <h3>Horno de Barro Don Sergio</h3>
+                <p class="rubro">Gastronomía típica</p>
+              </div>
+            </div>
+            <p class="ubicacion">Freire</p>
+            <p class="descripcion">
+              Pan amasado y empanadas horneadas en horno de barro, con harina de molinos de la
+              región.
+            </p>
+            <div class="impacto">
+              <h4>Impacto ecológico</h4>
+              <ul>
+                <li>Horno de leña con madera de poda</li>
+                <li>Harina de molinos cercanos</li>
+                <li>Bolsas de tela en vez de plástico</li>
+              </ul>
+            </div>
+            <ul class="distintivos" aria-label="Distintivos">
+              <li class="distintivo">Comercio Justo</li>
+            </ul>
+            <div class="emprendimiento-pie">
+              <small>Actualizado: 2026-10-07</small>
+              <a
+                class="btn-contacto"
+                href="mailto:contacto@example.com"
+                aria-label="Contactar a Horno de Barro Don Sergio por correo"
+                >Contactar</a
+              >
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="sumate" aria-labelledby="titulo-sumate">
+        <h2 id="titulo-sumate">¿Tienes un emprendimiento sustentable?</h2>
+        <p>Cuéntanos qué haces y aparece en el catálogo para que más turistas te encuentren.</p>
+        <a href="vista3_emprendedor.html">Registrar mi emprendimiento</a>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-links">
+        <a href="mailto:contacto@ecorutatemuco.cl">Contacto</a>
+        <a
+          href="https://github.com/camilqqq/Nexus-Ecoruta/blob/main/documentos/reportes/accesibilidad.md"
+          target="_blank"
+          rel="noopener"
+          >Accesibilidad</a
+        >
+        <a href="../index.html">Información local</a>
+      </div>
+    </footer>
+
+    <script>
+      const menuBtn = document.getElementById('menuBtn');
+      const menuNav = document.getElementById('menuNav');
+
+      menuBtn.addEventListener('click', () => {
+        const abierto = menuNav.classList.toggle('menu-visible');
+        menuBtn.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+      });
+    
+      // ----- Filtro por rubro -----
+      const botonesFiltro = document.querySelectorAll('.filtro');
+      const fichas = document.querySelectorAll('.emprendimiento');
+      const contador = document.getElementById('contador');
+
+      contador.setAttribute('aria-live', 'polite');
+
+      botonesFiltro.forEach((boton) => {
+        boton.addEventListener('click', () => {
+          botonesFiltro.forEach((b) => {
+            b.classList.remove('active');
+            b.setAttribute('aria-pressed', 'false');
+          });
+          boton.classList.add('active');
+          boton.setAttribute('aria-pressed', 'true');
+
+          const rubro = boton.textContent.trim();
+          let visibles = 0;
+
+          fichas.forEach((ficha) => {
+            const mostrar = rubro === 'Todos' || ficha.dataset.rubro === rubro;
+            ficha.style.display = mostrar ? '' : 'none';
+            if (mostrar) visibles++;
+          });
+
+          contador.textContent =
+            visibles + (visibles === 1 ? ' emprendimiento' : ' emprendimientos');
+        });
+      });
+    </script>
+  </body>
+</html>
