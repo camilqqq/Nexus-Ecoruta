@@ -6,7 +6,7 @@ Funcionalidades imprescindibles para la primera versión del sitio; sin ellas el
 1. Como turista, quiero ver un catálogo de rutas y actividades sustentables en Temuco y alrededores, para decidir cuál quiero realizar.
 2. Como turista, quiero entrar a la ficha de detalle de una actividad, para conocer su información completa antes de decidir.
 3. Como turista, quiero ver los datos de contacto (WhatsApp, correo o redes) de cada emprendimiento, para poder coordinar directamente con ellos.
-   - **Criterio de aceptación:** la ficha de actividad muestra enlaces funcionales de WhatsApp, correo e Instagram, con aria-label accesible.  Implementado en vista2.html
+    - **Criterio de aceptación:** la ficha de actividad muestra enlaces funcionales de WhatsApp, correo e Instagram, con aria-label accesible.  Implementado en paginas/Actividad.html
 4. Como turista, quiero consultar el catálogo y las fichas sin crear una cuenta, para acceder rápido desde mi celular.
 5. Como turista, quiero ver la fecha de última actualización en cada ficha, para saber si la información sigue vigente.
 
@@ -15,6 +15,7 @@ Funcionalidades importantes pero no críticas; el sitio funciona sin ellas, aunq
 
 6. Como emprendedor local, quiero que mi actividad aparezca con información clara y actualizada, para recibir más consultas de turistas interesados.
 7. Como usuario con discapacidad, quiero que el sitio sea navegable con lector de pantalla, para poder usarlo sin barreras.
+- **Criterio de aceptación:** 100/100 en Lighthouse Accessibility, atributos alt descriptivos en imágenes y etiquetas aria-label en botones interactivos. Implementado y validado en todas las vistas.
 
 ## Podría tener (Could have)
 Funcionalidades deseables que mejoran la experiencia, pero de bajo impacto si no se incluyen en esta fase.
@@ -30,4 +31,4 @@ Funcionalidades explícitamente fuera del alcance de esta primera versión, desc
 
 *Categorías priorizadas según el método MoSCoW (Must / Should / Could / Won't have), usado para ordenar el backlog según urgencia e impacto.*
 
-Última actualización: 09-09-2026
+Última actualización: 24-09-2026
