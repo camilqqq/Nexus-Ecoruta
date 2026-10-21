@@ -7,12 +7,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const urlApi = 'https://api.open-meteo.com/v1/forecast?latitude=-38.7392&longitude=-72.5984&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&timezone=America%2FSantiago';
 
   fetch(urlApi)
-    .then((respuesta) => respuesta.json())
-    .then((datos) => {
+    .then((respuesta) => {
+    if (!respuesta.ok) {
+      throw new Error(`Error HTTP: ${respuesta.status}`);
+    }
+
+    return respuesta.json();
+  })
+  .then((datos) => {
       const clima = datos.current;
-      const temp = clima.temperature_2m;
-      const humedad = clima.relative_humidity_2m;
-      const viento = clima.wind_speed_10m;
+      if (
+  !clima ||
+  !Number.isFinite(clima.temperature_2m) ||
+  !Number.isFinite(clima.relative_humidity_2m) ||
+  !Number.isFinite(clima.wind_speed_10m)
+) {
+  throw new Error('La API no devolvió datos meteorológicos válidos.');
+}
+
+const temp = clima.temperature_2m;
+const humedad = clima.relative_humidity_2m;
+const viento = clima.wind_speed_10m;
 
       // Estado de las rutas según la temperatura
       let estadoRuta = 'Condiciones óptimas para senderismo y recorridos al aire libre.';
