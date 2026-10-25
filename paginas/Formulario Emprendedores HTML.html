@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Postula tu Emprendimiento - EcoRuta Temuco</title>
+  
+  <!-- Tipografías de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  
+  <!-- Íconos de FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    /* Reset Básico */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background-color: #FFFFFF; 
+      color: #333; 
+      height: 100vh; 
+      display: flex; 
+      flex-direction: column; 
+      overflow: hidden; 
+    }
+
+    /* NAVEGACIÓN (HEADER) */
+    header { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      padding: 0.8rem 4rem; 
+      background: #FFFFFF; 
+      border-bottom: 1px solid #EAEAEA; 
+    }
+    
+    .logo-container { 
+      display: flex; 
+      align-items: center; 
+      gap: 12px; 
+      text-decoration: none;
+    }
+    
+    .logo-container img { 
+      height: 48px; 
+      width: 48px;
+      border-radius: 50%;
+      object-fit: contain; 
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .logo-text .ecoruta {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #163A24;
+    }
+
+    .logo-text .temuco {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: #555;
+    }
+    
+    nav { display: flex; gap: 2rem; align-items: center; }
+    nav a { text-decoration: none; color: #163A24; font-weight: 500; font-size: 0.95rem; }
+    nav a.active { background: #CFDEC6; padding: 0.5rem 1.1rem; border-radius: 8px; font-weight: 600; }
+
+    /* DISEÑO DE DOS COLUMNAS */
+    main { 
+      display: flex; 
+      flex: 1; 
+      height: calc(100vh - 65px); 
+    }
+
+    .col-left {
+      flex: 1;
+      background-color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem;
+      border-right: 1px solid #F2F2F2;
+    }
+
+    .info-block {
+      max-width: 440px; 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center; 
+    }
+
+    .info-block h1 { 
+      font-family: 'Playfair Display', serif; 
+      font-size: 2.6rem; 
+      color: #1a1a1a; 
+      margin-bottom: 1.2rem;
+      line-height: 1.15; 
+      font-weight: 700;
+    }
+    
+    .info-block > p {
+      font-size: 1.05rem; 
+      color: #4A5D4E;
+      line-height: 1.5;
+      margin-bottom: 1.8rem;
+      max-width: 90%; 
+    }
+    
+    .divider { height: 1px; background: #E5E9E5; margin: 0 0 1.8rem 0; width: 60%; }
+    
+    .benefits-list { 
+      list-style: none; 
+      display: flex; 
+      flex-direction: column; 
+      gap: 1rem; 
+      align-items: flex-start; 
+    }
+
+    .benefits-list li { 
+      display: flex; 
+      align-items: center; 
+      gap: 12px; 
+      font-size: 1rem; 
+      font-weight: 500; 
+      color: #1a1a1a; 
+    }
+
+    .benefits-list i { 
+      font-size: 1.1rem; 
+      width: 20px; 
+      text-align: center; 
+      color: #2E7D32; 
+    }
+
+    .contacto-info {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      background: #F9FBF9;
+      padding: 1.2rem;
+      border-radius: 12px;
+      width: 100%;
+      border: 1px solid #EAEAEA;
+    }
+
+    .contacto-info h3 {
+      font-size: 0.9rem;
+      color: #1a1a1a;
+      margin-bottom: 0.3rem;
+    }
+
+    .contacto-info a {
+      color: #2E7D32;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+
+    .contacto-info a:hover {
+      color: #163A24;
+      text-decoration: underline;
+    }
+
+    .col-right {
+      flex: 1;
+      display: flex;
+      padding: 1.5rem 3rem; 
+      align-items: center;
+      justify-content: center;
+    }
+
+    .form-card {
+      background: #FFFFFF;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      border: 1px solid #EAEAEA;
+      width: 100%;
+      max-width: 490px; 
+      overflow: hidden; 
+    }
+
+    .form-pattern {
+      height: 35px; 
+      background-color: #f2f5f0;
+      background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23e4ebd9' fill-opacity='0.8' fill-rule='evenodd'%3E%3Cpath d='M0 40L20 20 40 40zM0 0l20 20L40 0z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .form-content { 
+      padding: 2rem 2.8rem; 
+      text-align: center; 
+    }
+    .form-content h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #163A24; margin-bottom: 0.3rem; }
+    .form-content > p { font-size: 0.85rem; color: #666; margin-bottom: 1.2rem; line-height: 1.4; }
+
+    .input-group { margin-bottom: 0.8rem; text-align: left; }
+    .input-group label { display: block; font-size: 0.8rem; font-weight: 600; color: #333; margin-bottom: 0.3rem; }
+
+    input, select {
+      width: 100%;
+      padding: 0.75rem 1rem; 
+      border-radius: 12px; 
+      font-family: inherit;
+      font-size: 0.88rem;
+      outline: none;
+      transition: all 0.2s;
+      appearance: none; 
+    }
+
+    .input-valido { 
+      background: #F4F8F3; 
+      border: 2px solid #A4C1AB; 
+      color: #333; 
+    }
+    .input-valido::placeholder { color: #5B7A63; }
+
+    .input-error { 
+      background: #FDECEC; 
+      border: 2px solid #E6A0A0; 
+      color: #C62828; 
+    }
+    .input-error::placeholder { color: #C62828; }
+
+    .select-wrapper { position: relative; }
+    .select-wrapper::after {
+      content: '\f107'; 
+      font-family: 'Font Awesome 6 Free'; 
+      font-weight: 900;
+      position: absolute; right: 18px; top: 50%; transform: translateY(-50%);
+      pointer-events: none; color: #666;
+    }
+    select { background: #F6F8F5; border: 1.5px solid #D1DBD3; padding-right: 35px; color: #333; }
+
+    .alerta-requisitos {
+      background: #EAF3EC;
+      border: 1px solid #B0CEB9;
+      border-radius: 8px;
+      padding: 0.75rem; 
+      margin: 1rem 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-align: left;
+    }
+    .alerta-requisitos i { color: #163A24; font-size: 1rem; }
+    .alerta-requisitos span { font-size: 0.8rem; color: #163A24; }
+    .alerta-requisitos a { color: #163A24; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+
+    .btn-enviar {
+      width: 100%;
+      background: #163A24;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 0.9rem; 
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn-enviar:hover { opacity: 0.9; }
+
+    @media (max-width: 960px) {
+      body { height: auto; overflow: auto; }
+      main { flex-direction: column; height: auto; }
+      .col-left { border-right: none; border-bottom: 1px solid #EAEAEA; padding: 3rem 1.5rem; }
+      .col-right { padding: 2rem 1.5rem; }
+      header { padding: 1rem 2rem; }
+      nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVEGACIÓN SUPERIOR -->
+  <header>
+  <!-- Logo redirige al sitio en vivo -->
+  <a href="https://camilqqq.github.io/Nexus-Ecoruta/" class="logo-container">
+    <img src="https://camilqqq.github.io/Nexus-Ecoruta/assets/imagenes/Logo.png" alt="Logo de Nexus" onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/2922/2922037.png';">
+    <div class="logo-text">
+      <span class="ecoruta">EcoRuta</span>
+      <span class="temuco">Temuco</span>
+    </div>
+  </a>
+  <nav>
+    <a href="https://camilqqq.github.io/Nexus-Ecoruta/index.html">Inicio</a>
+    <a href="https://camilqqq.github.io/Nexus-Ecoruta/index.html#explorar">Explorar</a>
+    <a href="#" class="active">Emprendedores</a>
+    <a href="https://camilqqq.github.io/Nexus-Ecoruta/index.html#contacto">Contacto</a>
+  </nav>
+</header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main>
+    
+    <!-- COLUMNA IZQUIERDA -->
+    <div class="col-left">
+      <div class="info-block">
+        <h1>Impulsa tu vida en armonía con la naturaleza</h1>
+        <p>Únete a la red EcoRuta y conecta con viajeros que buscan experiencias auténticas.</p>
+        <div class="divider"></div>
+        <ul class="benefits-list">
+          <li><i class="fa-solid fa-leaf"></i> Fomento al turismo local</li>
+          <li><i class="fa-solid fa-globe"></i> Mayor visibilidad digital</li>
+          <li><i class="fa-solid fa-wheelchair"></i> Enfoque en accesibilidad</li>
+        </ul>
+
+        <div class="contacto-info">
+          <h3>¿Necesitas ayuda? Contáctanos:</h3>
+          <a href="tel:+56912345678"><i class="fa-solid fa-phone"></i> +56 9 1234 5678</a>
+          <a href="mailto:contacto@ecorutatemuco.cl"><i class="fa-solid fa-envelope"></i> contacto@ecorutatemuco.cl</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- COLUMNA DERECHA: FORMULARIO -->
+    <div class="col-right">
+      <div class="form-card">
+        <div class="form-pattern"></div>
+        <div class="form-content">
+          <h2>Postula tu Emprendimiento</h2>
+          <p>Comparte tu servicio de alojamiento, gastronomía, o cultura local</p>
+
+          <form id="form-emprendedor" novalidate>
+            <div class="input-group">
+              <label for="nombre-negocio">Nombre del Emprendimiento</label>
+              <input type="text" id="nombre-negocio" class="input-valido" placeholder="Ej: Cabañas Ruca Lemu" required>
+            </div>
+
+            <div class="input-group">
+              <label for="email-contacto">Correo Electrónico</label>
+              <input type="email" id="email-contacto" class="input-error" placeholder="contacto@ejemplo.cl" required>
+            </div>
+
+            <div class="input-group">
+              <label for="tipo-servicio">Categoría</label>
+              <div class="select-wrapper">
+                <select id="tipo-servicio" required>
+                  <option value="tours">Tours y Senderos</option>
+                  <option value="alojamiento">Alojamiento</option>
+                  <option value="gastronomia">Gastronomía</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="alerta-requisitos" id="contenedor-requisitos">
+              <i class="fa-regular fa-file-lines"></i>
+              <span>Ver requisitos de normativas para <a href="#" id="link-requisitos">Tours y Senderos</a></span>
+            </div>
+
+            <button type="submit" class="btn-enviar">Enviar Postulación</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/formulario.js"></script>
+</body>
+</html>
