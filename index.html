@@ -9,49 +9,57 @@
 <body>
 
   <!-- Encabezado y Navegación Principal -->
-  <header class="header-principal">
-    <div class="logo-container">
-      <img src="assets/imagenes/Logo.png" alt="Logo EcoRuta Temuco" class="logo">
-      <h1>EcoRuta Temuco</h1>
-      <p>Turismo sustentable • Temuco</p>
+  <header>
+    <div class="header">
+      <div class="brand">
+        <img src="assets/imagenes/Logo.png" alt="Logo EcoRuta Temuco" class="logo" style="max-height: 50px; width: auto;" />
+        <div>
+          <p class="brand-name">EcoRuta Temuco</p>
+          <p>Turismo sustentable • Temuco</p>
+        </div>
+      </div>
+      <nav>
+        <a href="#inicio" aria-current="page">Inicio</a>
+        <a href="#explorar">Explorar</a>
+        <a href="paginas/emprendimientos.html">Emprendedores</a>
+        <a href="paginas/admin.html">Administración</a>
+      </nav>
+      <button class="menu" aria-label="Abrir menú">☰</button>
     </div>
-    <nav class="nav-principal">
-      <a href="index.html" class="active">Inicio</a>
-      <a href="#actividades">Explorar</a>
-      <a href="paginas/emprendimientos.html">Emprendedores</a>
-      <a href="paginas/admin.html">Administración</a>
-    </nav>
   </header>
 
-  <!-- Hero Section -->
-  <main>
-    <section class="hero">
-      <h2>Descubre experiencias sustentables en Temuco</h2>
-      <p>Encuentra rutas, actividades y emprendimientos locales con información clara sobre ubicación, accesibilidad, horarios y contacto.</p>
-      <a href="#actividades" class="btn-principal">Explorar catálogo sin registrarme</a>
-      <small>Acceso libre · No necesitas crear una cuenta</small>
-    </section>
+  <main id="inicio">
 
-    <!-- Sección de Búsqueda y Filtros -->
-    <section class="busqueda-filtros">
-      <input type="text" id="input-busqueda" placeholder="Buscar por nombre o categoría...">
-      <div class="filtros-categoria">
-        <button class="btn-filtro active" data-categoria="todas">Todas</button>
-        <button class="btn-filtro" data-categoria="Naturaleza">Naturaleza</button>
-        <button class="btn-filtro" data-categoria="Cultura">Cultura</button>
-        <button class="btn-filtro" data-categoria="Gastronomía">Gastronomía</button>
+    <!-- Sección Hero -->
+    <section class="hero">
+      <h1>Descubre experiencias sustentables en Temuco</h1>
+      <p>Encuentra rutas, actividades y emprendimientos locales con información clara sobre ubicación, accesibilidad, horarios y contacto.</p>
+      
+      <div class="catalog-access">
+        <a href="#explorar" class="catalog-button">Explorar catálogo sin registrarme</a>
+        <p>Acceso libre · No necesitas crear una cuenta</p>
+      </div>
+
+      <div class="search">
+        <input type="search" aria-label="Buscar por nombre o categoría" placeholder="Buscar por nombre o categoría..." />
+        <div class="filters">
+          <button class="active" aria-pressed="true">Todas</button>
+          <button aria-pressed="false">Naturaleza</button>
+          <button aria-pressed="false">Cultura</button>
+          <button aria-pressed="false">Gastronomía</button>
+        </div>
       </div>
     </section>
 
     <!-- Catálogo de Actividades Destacadas -->
-    <section id="actividades" class="seccion-actividades">
+    <section id="explorar" class="seccion-actividades">
       <h2>Actividades destacadas</h2>
       <p id="contador-resultados">3 resultados</p>
 
       <div class="grid-actividades">
         <!-- Tarjeta 1 -->
         <article class="tarjeta-actividad">
-          <img src="assets/imagenes/Sendero/Sendero_Nielol.jpg" alt="Sendero de trekking en el Parque Ñielol">
+          <img src="assets/imagenes/Sendero/Sendero_Nielol.jpg" alt="Sendero de trekking en el Parque Ñielol" />
           <div class="contenido-tarjeta">
             <h3>Sendero Ñielol</h3>
             <p class="categoria">Naturaleza • Parque Ñielol, Temuco</p>
@@ -66,7 +74,7 @@
 
         <!-- Tarjeta 2 -->
         <article class="tarjeta-actividad">
-          <img src="assets/imagenes/Museo/museo.jpg" alt="Fachada del Museo Regional de La Araucanía">
+          <img src="assets/imagenes/Museo/museo.jpg" alt="Fachada del Museo Regional de La Araucanía" />
           <div class="contenido-tarjeta">
             <h3>Museo Regional de La Araucanía</h3>
             <p class="categoria">Cultura • Museo Regional de La Araucanía</p>
@@ -81,7 +89,7 @@
 
         <!-- Tarjeta 3 -->
         <article class="tarjeta-actividad">
-          <img src="assets/imagenes/Feria/feria.jpg" alt="Puestos de la Feria Agroecológica en Plaza Aníbal Pinto">
+          <img src="assets/imagenes/Feria/feria.jpg" alt="Puestos de la Feria Agroecológica en Plaza Aníbal Pinto" />
           <div class="contenido-tarjeta">
             <h3>Feria Agroecológica</h3>
             <p class="categoria">Gastronomía • Plaza Aníbal Pinto</p>
@@ -102,6 +110,7 @@
         <p style="color: #666; font-style: italic;">Cargando información desde la API...</p>
       </div>
     </section>
+
   </main>
 
   <!-- Pie de Página -->
