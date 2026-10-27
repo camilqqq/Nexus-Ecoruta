@@ -54,6 +54,15 @@
           <span id="contador">6 emprendimientos</span>
         </div>
 
+        <div class="buscador-container" style="margin-bottom: 1rem;">
+          <input 
+            type="text" 
+            id="buscadorInput" 
+            placeholder="Buscar emprendimiento por nombre o descripción..." 
+            aria-label="Buscar emprendimiento por texto"
+            style="width: 100%; padding: 0.6rem 1rem; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem;"
+          />
+        </div>
                 <div class="filtros" role="group" aria-label="Filtrar emprendimientos por rubro">
           <button type="button" class="filtro active" aria-pressed="true">Todos</button>
           <button type="button" class="filtro" aria-pressed="false">Guías locales</button>
@@ -273,6 +282,10 @@
             </div>
           </article>
         </div>
+
+        <div id="mensajeVacio" style="display: none; text-align: center; padding: 2rem; color: #666;" role="alert">
+          <p>No se encontraron emprendimientos que coincidan con la búsqueda.</p>
+        </div>
       </section>
 
       <section class="sumate" aria-labelledby="titulo-sumate">
@@ -295,7 +308,7 @@
       </div>
     </footer>
 
-    <script>
+   <script>
       const menuBtn = document.getElementById('menuBtn');
       const menuNav = document.getElementById('menuNav');
 
@@ -303,14 +316,48 @@
         const abierto = menuNav.classList.toggle('menu-visible');
         menuBtn.setAttribute('aria-expanded', abierto ? 'true' : 'false');
       });
-    
-      // ----- Filtro por rubro -----
+
+      // ----- Filtro combinado (Rubro + Buscador) y Estado Vacío -----
       const botonesFiltro = document.querySelectorAll('.filtro');
       const fichas = document.querySelectorAll('.emprendimiento');
       const contador = document.getElementById('contador');
+      const buscadorInput = document.getElementById('buscadorInput');
+      const mensajeVacio = document.getElementById('mensajeVacio');
 
       contador.setAttribute('aria-live', 'polite');
 
+      let rubroSeleccionado = 'Todos';
+
+      function aplicarFiltros() {
+        const textoBusqueda = buscadorInput.value.toLowerCase().trim();
+        let visibles = 0;
+
+        fichas.forEach((ficha) => {
+          const coincideRubro = rubroSeleccionado === 'Todos' || ficha.dataset.rubro === rubroSeleccionado;
+          const contenidoTexto = ficha.textContent.toLowerCase();
+          const coincideTexto = contenidoTexto.includes(textoBusqueda);
+
+          if (coincideRubro && coincideTexto) {
+            ficha.style.display = '';
+            visibles++;
+          } else {
+            ficha.style.display = 'none';
+          }
+        });
+
+        // Actualizar el contador dinámico
+        contador.textContent =
+          visibles + (visibles === 1 ? ' emprendimiento' : ' emprendimientos');
+
+        // Mostrar u ocultar mensaje vacío
+        if (visibles === 0) {
+          mensajeVacio.style.display = 'block';
+        } else {
+          mensajeVacio.style.display = 'none';
+        }
+      }
+
+      // Evento para los botones de rubro
       botonesFiltro.forEach((boton) => {
         boton.addEventListener('click', () => {
           botonesFiltro.forEach((b) => {
@@ -320,19 +367,13 @@
           boton.classList.add('active');
           boton.setAttribute('aria-pressed', 'true');
 
-          const rubro = boton.textContent.trim();
-          let visibles = 0;
-
-          fichas.forEach((ficha) => {
-            const mostrar = rubro === 'Todos' || ficha.dataset.rubro === rubro;
-            ficha.style.display = mostrar ? '' : 'none';
-            if (mostrar) visibles++;
-          });
-
-          contador.textContent =
-            visibles + (visibles === 1 ? ' emprendimiento' : ' emprendimientos');
+          rubroSeleccionado = boton.textContent.trim();
+          aplicarFiltros();
         });
       });
+
+      // Evento para el buscador por texto
+      buscadorInput.addEventListener('input', aplicarFiltros);
     </script>
   </body>
 </html>
