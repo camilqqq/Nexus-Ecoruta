@@ -122,7 +122,8 @@
       const menuNav = document.getElementById('menuNav');
 
       menuBtn.addEventListener('click', () => {
-        menuNav.classList.toggle('menu-visible');
+        const abierto = menuNav.classList.toggle('menu-visible');
+        menuBtn.setAttribute('aria-expanded', abierto ? 'true' : 'false');
       });
 
       const formulario = document.getElementById('formEmprendedor');
@@ -130,8 +131,38 @@
 
       formulario.addEventListener('submit', (e) => {
         e.preventDefault();
-        mensaje.textContent =
-          'Información validada correctamente. (Prototipo: el guardado se conectará en el Sprint 2).';
+
+        // 1. Obtener datos ingresados en el formulario
+        const nombre = document.getElementById('nombreEmprendimiento').value.trim();
+        const descripcion = document.getElementById('descripcionActividad').value.trim();
+        const ubicacion = document.getElementById('ubicacion').value.trim();
+        const duracionDificultad = document.getElementById('duracionDificultad').value.trim();
+        const recomendaciones = document.getElementById('recomendacionesCondiciones').value.trim();
+        const datoContacto = document.getElementById('datoContacto').value.trim();
+        const radioContacto = formulario.querySelector('input[name="contacto"]:checked');
+
+        // 2. Crear objeto con los datos de la solicitud
+        const nuevaSolicitud = {
+          id: Date.now(),
+          nombre,
+          descripcion,
+          ubicacion,
+          duracionDificultad,
+          recomendaciones,
+          canalContacto: radioContacto ? radioContacto.value : '',
+          datoContacto,
+          fecha: new Date().toLocaleDateString('es-CL'),
+          estado: 'Pendiente'
+        };
+
+        // 3. Guardar en localStorage para que la vista de administración (vista4.html) la lea
+        const solicitudesGuardadas = JSON.parse(localStorage.getItem('solicitudesEmprendedores')) || [];
+        solicitudesGuardadas.push(nuevaSolicitud);
+        localStorage.setItem('solicitudesEmprendedores', JSON.stringify(solicitudesGuardadas));
+
+        // 4. Feedback visual y reiniciar formulario
+        mensaje.style.color = '#1a4331';
+        mensaje.textContent = '¡Solicitud enviada con éxito! Ya está disponible en la vista de administración.';
         formulario.reset();
       });
     </script>
