@@ -1,65 +1,57 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EcoRuta Temuco</title>
-  <link rel="stylesheet" href="css/index.css" />
+  <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
 
   <!-- Encabezado y Navegación Principal -->
-  <header>
-    <div class="header">
-      <div class="brand">
-        <img src="assets/imagenes/Logo.png" alt="Logo EcoRuta Temuco" class="logo" />
-        <div>
-          <p class="brand-name">EcoRuta Temuco</p>
-          <p>Turismo sustentable • Temuco</p>
-        </div>
-      </div>
-      <nav>
-        <a href="#inicio" aria-current="page">Inicio</a>
-        <a href="#explorar">Explorar</a>
-        <a href="paginas/emprendimientos.html">Emprendedores</a>
-        <a href="paginas/vista4.html">Administración</a>
-      </nav>
-      <button class="menu" aria-label="Abrir menú">☰</button>
+  <header class="header-principal">
+    <div class="logo-container">
+      <img src="assets/imagenes/Logo.png" alt="Logo EcoRuta Temuco" class="logo">
+      <h1>EcoRuta Temuco</h1>
+      <p>Turismo sustentable • Temuco</p>
     </div>
+    <nav class="nav-principal">
+      <a href="index.html" class="active">Inicio</a>
+      <a href="#actividades">Explorar</a>
+      <a href="paginas/emprendimientos.html">Emprendedores</a>
+      <a href="paginas/admin.html">Administración</a>
+    </nav>
   </header>
 
-  <main id="inicio">
-
-    <!-- Sección Hero -->
+  <!-- Hero Section -->
+  <main>
     <section class="hero">
-      <h1>Descubre experiencias sustentables en Temuco</h1>
+      <h2>Descubre experiencias sustentables en Temuco</h2>
       <p>Encuentra rutas, actividades y emprendimientos locales con información clara sobre ubicación, accesibilidad, horarios y contacto.</p>
-      
-      <div class="catalog-access">
-        <a href="#explorar" class="catalog-button">Explorar catálogo sin registrarme</a>
-        <p>Acceso libre · No necesitas crear una cuenta</p>
-      </div>
+      <a href="#actividades" class="btn-principal">Explorar catálogo sin registrarme</a>
+      <small>Acceso libre · No necesitas crear una cuenta</small>
+    </section>
 
-      <div class="search">
-        <input type="search" aria-label="Buscar por nombre o categoría" placeholder="Buscar por nombre o categoría" />
-        <div class="filters">
-          <button class="active" aria-pressed="true">Todas</button>
-          <button aria-pressed="false">Naturaleza</button>
-          <button aria-pressed="false">Cultura</button>
-          <button aria-pressed="false">Gastronomía</button>
-        </div>
+    <!-- Sección de Búsqueda y Filtros -->
+    <section class="busqueda-filtros">
+      <input type="text" id="input-busqueda" placeholder="Buscar por nombre o categoría...">
+      <div class="filtros-categoria">
+        <button class="btn-filtro active" data-categoria="todas">Todas</button>
+        <button class="btn-filtro" data-categoria="Naturaleza">Naturaleza</button>
+        <button class="btn-filtro" data-categoria="Cultura">Cultura</button>
+        <button class="btn-filtro" data-categoria="Gastronomía">Gastronomía</button>
       </div>
     </section>
 
-    <!-- Sección Catálogo / Explorar -->
-    <section id="explorar" class="seccion-actividades">
+    <!-- Catálogo de Actividades Destacadas -->
+    <section id="actividades" class="seccion-actividades">
       <h2>Actividades destacadas</h2>
       <p id="contador-resultados">3 resultados</p>
 
       <div class="grid-actividades">
         <!-- Tarjeta 1 -->
         <article class="tarjeta-actividad">
-          <img src="assets/imagenes/Sendero/Sendero_Nielol.jpg" alt="Sendero de trekking en el Parque Ñielol" />
+          <img src="assets/imagenes/Sendero/Sendero_Nielol.jpg" alt="Sendero de trekking en el Parque Ñielol">
           <div class="contenido-tarjeta">
             <h3>Sendero Ñielol</h3>
             <p class="categoria">Naturaleza • Parque Ñielol, Temuco</p>
@@ -74,7 +66,7 @@
 
         <!-- Tarjeta 2 -->
         <article class="tarjeta-actividad">
-          <img src="assets/imagenes/Museo/museo.jpg" alt="Fachada del Museo Regional de La Araucanía" />
+          <img src="assets/imagenes/Museo/museo.jpg" alt="Fachada del Museo Regional de La Araucanía">
           <div class="contenido-tarjeta">
             <h3>Museo Regional de La Araucanía</h3>
             <p class="categoria">Cultura • Museo Regional de La Araucanía</p>
@@ -89,7 +81,7 @@
 
         <!-- Tarjeta 3 -->
         <article class="tarjeta-actividad">
-          <img src="assets/imagenes/Feria/feria.jpg" alt="Puestos de la Feria Agroecológica en Plaza Aníbal Pinto" />
+          <img src="assets/imagenes/Feria/feria.jpg" alt="Puestos de la Feria Agroecológica en Plaza Aníbal Pinto">
           <div class="contenido-tarjeta">
             <h3>Feria Agroecológica</h3>
             <p class="categoria">Gastronomía • Plaza Aníbal Pinto</p>
@@ -104,13 +96,12 @@
       </div>
     </section>
 
-    <!-- Contenedor Receptivo para la API de MockAPI -->
+    <!-- Contenedor API -->
     <section class="seccion-api" style="margin: 20px auto; max-width: 1200px; padding: 0 15px;">
       <div id="contenedor-api" class="api-container">
         <p style="color: #666; font-style: italic;">Cargando información desde la API...</p>
       </div>
     </section>
-
   </main>
 
   <!-- Pie de Página -->
@@ -122,7 +113,6 @@
     </nav>
   </footer>
 
-  <!-- Scripts JavaScript del Proyecto -->
   <script src="js/script.js"></script>
   <script src="js/api.js"></script>
 </body>
