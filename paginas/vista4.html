@@ -70,16 +70,13 @@
                 <th scope="col">Acciones</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td
-                  colspan="4"
-                  style="text-align: center; color: var(--text-muted); padding: 1.5rem"
-                >
-                  No hay solicitudes pendientes en este momento.
-                </td>
-              </tr>
-            </tbody>
+          <tbody id="tablaSolicitudes">
+          <tr>
+            <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 1.5rem">
+              No hay solicitudes pendientes en este momento.
+            </td>
+          </tr>
+        </tbody>
           </table>
         </div>
       </section>
@@ -98,8 +95,37 @@
       const menuBtn = document.getElementById('menuBtn');
       const menuNav = document.getElementById('menuNav');
 
-      menuBtn.addEventListener('click', () => {
-        menuNav.classList.toggle('menu-visible');
+      if (menuBtn && menuNav) {
+        menuBtn.addEventListener('click', () => {
+          const abierto = menuNav.classList.toggle('menu-visible');
+          menuBtn.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+        });
+      }
+
+      // Leer las solicitudes guardadas en localStorage por la vista 3 y mostrarlas en la tabla
+      document.addEventListener('DOMContentLoaded', () => {
+        const tbody = document.getElementById('tablaSolicitudes');
+        const statSolicitudes = document.querySelectorAll('.stat-number')[1]; // Contador visual de solicitudes
+        const solicitudes = JSON.parse(localStorage.getItem('solicitudesEmprendedores')) || [];
+
+        if (solicitudes.length > 0) {
+          // Actualizar contador visual del panel
+          if (statSolicitudes) {
+            statSolicitudes.textContent = solicitudes.length;
+          }
+
+          // Rellenar las filas de la tabla con las solicitudes registradas
+          tbody.innerHTML = solicitudes.map(sol => `
+            <tr>
+              <td><strong>${sol.nombre}</strong></td>
+              <td>${sol.datoContacto} (${sol.canalContacto})</td>
+              <td>${sol.ubicacion}</td>
+              <td>
+                <button style="background-color: #2e7d32; color: white; border: none; padding: 0.3rem 0.6rem; border-radius: 4px; cursor: pointer; font-size: 0.85rem;">Aprobar</button>
+              </td>
+            </tr>
+          `).join('');
+        }
       });
     </script>
   </body>
