@@ -24,10 +24,16 @@ document.addEventListener('DOMContentLoaded', () => {
 ) {
   throw new Error('La API no devolvió datos meteorológicos válidos.');
 }
+contenedor.style.border = 'none';
+      contenedor.style.background = 'transparent';
+      contenedor.style.padding = '0';
+      contenedor.style.boxShadow = 'none';
 
-const temp = clima.temperature_2m;
-const humedad = clima.relative_humidity_2m;
-const viento = clima.wind_speed_10m;
+      const temp = clima.temperature_2m;
+      const humedad = clima.relative_humidity_2m;
+      const viento = clima.wind_speed_10m;
+      
+
 
       // Estado de las rutas según la temperatura
       let estadoRuta = 'Condiciones óptimas para senderismo y recorridos al aire libre.';
