@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // URL exacta fijada a tu endpoint de MockAPI (terminada en ad2)
+  // URL exacta de tu proyecto MockAPI
   const API_URL = "https://6ae0eeb2be3bc8fead981ad2.mockapi.io/api/v1/emprendimientos";
   
   const contenedorAPI = document.querySelector("#contenedor-api") || document.querySelector("#api-container") || document.querySelector(".api-container");
