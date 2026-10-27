@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // URL exacta de tu proyecto MockAPI
-  const API_URL = "https://6ae0eeb2be3bc8fead981ad2.mockapi.io/api/v1/emprendimientos";
+  // URL exacta fijada a tu endpoint real de MockAPI
+  const API_URL = "https://6ae0eeb2be3bc8fead981ad1.mockapi.io/api/v1/emprendimientos";
   
-  const contenedorAPI = document.querySelector("#contenedor-api") || document.querySelector("#api-container") || document.querySelector(".api-container");
+  const contenedorAPI = document.querySelector("#contenedor-api") || document.querySelector(".api-container");
 
   if (!contenedorAPI) return;
 
@@ -14,8 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return response.json();
     })
     .then((data) => {
-      console.log("Datos cargados correctamente desde MockAPI:", data);
-
       contenedorAPI.innerHTML = `
         <div style="padding: 15px; background-color: #e8f5e9; border: 1px solid #c8e6c9; border-radius: 8px; margin-top: 15px; text-align: center;">
           <p style="color: #2e7d32; font-weight: bold; margin: 0 0 5px 0;">
@@ -28,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     })
     .catch((error) => {
-      console.error("Error al consumir MockAPI:", error);
       contenedorAPI.innerHTML = `
         <div style="padding: 15px; background-color: #ffebee; border: 1px solid #ffcdd2; border-radius: 8px; margin-top: 15px; text-align: center;">
           <p style="color: #c62828; font-weight: bold; margin: 0;">
