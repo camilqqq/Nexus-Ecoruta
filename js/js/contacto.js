@@ -10,21 +10,27 @@ document.addEventListener("DOMContentLoaded", () => {
       const mensaje = document.querySelector("#mensaje").value.trim();
       const respuesta = document.querySelector("#mensaje-respuesta");
 
-      // Validar campos vacíos
-      if (nombre === "" || email === "" || mensaje === "") {
-        respuesta.innerHTML = "<p style='color: red;'>Por favor, completa todos los campos obligatorios.</p>";
+      // 1. Evitar strings de solo espacios en blanco
+      if (!nombre || !email || !mensaje) {
+        respuesta.innerHTML = "<p style='color: red;'>Por favor, ingresa texto válido (no solo espacios).</p>";
         return;
       }
 
-      // Validar formato de correo
-      const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      // 2. Validar que el nombre tenga al menos 3 caracteres
+      if (nombre.length < 3) {
+        respuesta.innerHTML = "<p style='color: red;'>El nombre debe contener al menos 3 caracteres.</p>";
+        return;
+      }
+
+      // 3. Regex estricta para correo electrónico
+      const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       if (!regexEmail.test(email)) {
-        respuesta.innerHTML = "<p style='color: red;'>Ingresa un correo electrónico válido.</p>";
+        respuesta.innerHTML = "<p style='color: red;'>Ingresa un correo electrónico con formato válido (ejemplo@dominio.com).</p>";
         return;
       }
 
-      // Mensaje de éxito
-      respuesta.innerHTML = "<p style='color: green;'>¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.</p>";
+      // Éxito
+      respuesta.innerHTML = "<p style='color: green;'>¡Mensaje enviado con éxito!</p>";
       formulario.reset();
     });
   }
