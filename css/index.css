@@ -426,3 +426,12 @@ nav a {
   white-space: nowrap; /* Evita que las palabras se rompan en dos líneas */
   font-size: 0.9rem; /* Ajusta ligeramente el tamaño para dispositivos móviles */
 }
+
+/* Contenedor de información de la API */
+.api-container {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px dashed #2c3e50;
+    border-radius: 8px;
+}
+

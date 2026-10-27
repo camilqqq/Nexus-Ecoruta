@@ -154,7 +154,9 @@
         </div>
 
         <!-- Contenedor API -->
-        <div id="contenedor-api" style="margin-top: 20px; padding: 15px; border: 1px dashed #2c3e50; border-radius: 8px;">
+        
+<div id="contenedor-api" class="api-container">
+
           <p>Cargando información desde la API...</p>
         </div>
       </section>
@@ -175,7 +177,7 @@
       const contador = document.querySelector('.section-title span');
       const mensajeSinResultados = document.createElement('p');
 mensajeSinResultados.textContent = 'No se encontraron actividades con esos criterios.';
-mensajeSinResultados.style.display = 'none';
+mensajeSinResultados.hidden = true;
 mensajeSinResultados.className = 'mensaje-vacio';
 
 document.querySelector('.list').appendChild(mensajeSinResultados);
@@ -195,37 +197,49 @@ document.querySelector('.list').appendChild(mensajeSinResultados);
           const nombre = tarjeta.querySelector('h3').textContent;
           const categoria = tarjeta.dataset.categoria;
 
-          const coincideCategoria =
-            categoriaActual === 'Todas' || categoria === categoriaActual;
-          const coincideBusqueda = limpiar(nombre + ' ' + categoria).includes(busqueda);
+          
+const coincideCategoria =
+  categoriaActual === 'Todas' || categoria === categoriaActual;
 
-          const mostrar = coincideCategoria && coincideBusqueda;
-          tarjeta.style.display = mostrar ? '' : 'none';
-          if (mostrar) visibles++;
-        });
+const coincideBusqueda =
+  limpiar(nombre + ' ' + categoria).includes(busqueda);
 
-        contador.textContent = visibles + (visibles === 1 ? ' resultado' : ' resultados');
-        mensajeSinResultados.style.display =
-  visibles === 0 ? 'block' : 'none';
-      }
+const mostrar = coincideCategoria && coincideBusqueda;
 
-      botones.forEach((boton) => {
-        boton.addEventListener('click', () => {
-          botones.forEach((b) => {
-            b.classList.remove('active');
-            b.setAttribute('aria-pressed', 'false');
-          });
-          boton.classList.add('active');
-          boton.setAttribute('aria-pressed', 'true');
+if (mostrar) {
+  tarjeta.style.removeProperty('display');
+  visibles++;
+} else {
+  tarjeta.style.setProperty('display', 'none');
+}
+}); // Cierra el forEach de las tarjetas
 
-          categoriaActual = boton.textContent.trim();
-          aplicarFiltros();
-        });
-      });
+contador.textContent =
+  visibles + (visibles === 1 ? ' resultado' : ' resultados');
 
-      buscador.addEventListener('input', aplicarFiltros);
-    </script>
-    <script src="./js/api.js"></script>
-  </body>
+mensajeSinResultados.hidden = visibles !== 0;
+
+} // Cierra la función aplicarFiltros
+
+
+botones.forEach((boton) => {
+  boton.addEventListener('click', () => {
+    botones.forEach((b) => {
+      b.classList.remove('active');
+      b.setAttribute('aria-pressed', 'false');
+    });
+
+    boton.classList.add('active');
+    boton.setAttribute('aria-pressed', 'true');
+
+    categoriaActual = boton.textContent.trim();
+    aplicarFiltros();
+  });
+});
+buscador.addEventListener('input', aplicarFiltros);
+</script>
+
+</body>
 </html>
+
 
