@@ -317,9 +317,57 @@
         menuBtn.setAttribute('aria-expanded', abierto ? 'true' : 'false');
       });
 
-      // ----- Filtro combinado (Rubro + Buscador) y Estado Vacío -----
+      // Cargar emprendimientos aprobados desde localStorage
+      function cargarAprobados() {
+        const contenedor = document.getElementById('listaEmprendimientos');
+        const aprobados = JSON.parse(localStorage.getItem('emprendimientosAprobados')) || [];
+
+        if (contenedor && aprobados.length > 0) {
+          aprobados.forEach(emp => {
+            // Evitar renderizar si ya existe en el DOM
+            if (document.getElementById(`emp-${emp.nombre.replace(/\s+/g, '-')}`)) return;
+
+            const articulo = document.createElement('article');
+            articulo.className = 'emprendimiento';
+            articulo.id = `emp-${emp.nombre.replace(/\s+/g, '-')}`;
+            articulo.dataset.rubro = emp.rubro || 'Guías locales'; // Rubro por defecto o el ingresado
+
+            const inicial = emp.nombre.charAt(0).toUpperCase();
+            const fechaHoy = new Date().toISOString().split('T')[0];
+
+            articulo.innerHTML = `
+              <div class="emprendimiento-top">
+                <span class="inicial" aria-hidden="true">${inicial}</span>
+                <div>
+                  <h3>${emp.nombre}</h3>
+                  <p class="rubro">${emp.rubro || 'Emprendimiento'}</p>
+                </div>
+              </div>
+              <p class="ubicacion">${emp.ubicacion || 'La Araucanía'}</p>
+              <p class="descripcion">${emp.descripcion || 'Sin descripción disponible.'}</p>
+              <div class="impacto">
+                <h4>Impacto ecológico</h4>
+                <ul>
+                  <li>Práctica agroecológica / sustentable local</li>
+                  <li>Contacto directo con el productor</li>
+                </ul>
+              </div>
+              <ul class="distintivos" aria-label="Distintivos">
+                <li class="distintivo">Nuevo Aprobado</li>
+              </ul>
+              <div class="emprendimiento-pie">
+                <small>Actualizado: ${fechaHoy}</small>
+                <a class="btn-contacto" href="mailto:${emp.datoContacto}" aria-label="Contactar a ${emp.nombre}">Contactar</a>
+              </div>
+            `;
+
+            contenedor.appendChild(articulo);
+          });
+        }
+      }
+
+      // Filtro combinado (Rubro + Buscador) y Estado Vacío 
       const botonesFiltro = document.querySelectorAll('.filtro');
-      const fichas = document.querySelectorAll('.emprendimiento');
       const contador = document.getElementById('contador');
       const buscadorInput = document.getElementById('buscadorInput');
       const mensajeVacio = document.getElementById('mensajeVacio');
@@ -329,6 +377,7 @@
       let rubroSeleccionado = 'Todos';
 
       function aplicarFiltros() {
+        const fichas = document.querySelectorAll('.emprendimiento');
         const textoBusqueda = buscadorInput.value.toLowerCase().trim();
         let visibles = 0;
 
@@ -374,6 +423,12 @@
 
       // Evento para el buscador por texto
       buscadorInput.addEventListener('input', aplicarFiltros);
+
+      // Cargar los aprobados al iniciar la página
+      document.addEventListener('DOMContentLoaded', () => {
+        cargarAprobados();
+        aplicarFiltros();
+      });
     </script>
   </body>
 </html>

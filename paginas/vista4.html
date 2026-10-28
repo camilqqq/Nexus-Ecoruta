@@ -82,7 +82,6 @@
       </section>
     </main>
 
-    <!-- Footer -->
     <footer>
       <div class="footer-links">
         <a href="mailto:contacto@ecorutatemuco.cl">Contacto</a>
@@ -102,7 +101,6 @@
         });
       }
 
-      // Cargar y procesar las solicitudes con botones de Aprobar y Rechazar
       function cargarSolicitudes() {
         const tbody = document.getElementById('tablaSolicitudes');
         const statPendientes = document.querySelectorAll('.stat-number')[1];
@@ -110,7 +108,6 @@
 
         const solicitudes = JSON.parse(localStorage.getItem('solicitudesEmprendedores')) || [];
         
-        // Actualizar contador de pendientes
         const pendientesCount = solicitudes.filter(s => !s.estado || s.estado === 'Pendiente').length;
         if (statPendientes) {
           statPendientes.textContent = pendientesCount;
@@ -152,11 +149,22 @@
         }).join('');
       }
 
-      // Cambiar estado al hacer clic en Aprobar o Rechazar
       window.cambiarEstado = function(index, nuevoEstado) {
         let solicitudes = JSON.parse(localStorage.getItem('solicitudesEmprendedores')) || [];
         solicitudes[index].estado = nuevoEstado;
         localStorage.setItem('solicitudesEmprendedores', JSON.stringify(solicitudes));
+
+        // Si se aprueba, guardarlo también en el listado de emprendimientos aprobados
+        if (nuevoEstado === 'Aprobado') {
+          let aprobados = JSON.parse(localStorage.getItem('emprendimientosAprobados')) || [];
+          // Evitar duplicados
+          const existe = aprobados.some(e => e.nombre === solicitudes[index].nombre);
+          if (!existe) {
+            aprobados.push(solicitudes[index]);
+            localStorage.setItem('emprendimientosAprobados', JSON.stringify(aprobados));
+          }
+        }
+
         cargarSolicitudes();
       };
 
