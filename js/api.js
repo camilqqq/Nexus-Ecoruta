@@ -35,3 +35,36 @@ const API_URL = "https://6ae0eeb2be3bc8fead981ad1.mockapi.io/api/v1/emprendimien
       `;
     });
 });
+// --- IMPLEMENTACIÓN API DE CLIMA ---
+const URL_CLIMA = 'https://6ae14017be3bc8fead98544c.mockapi.io/Clima';
+
+async function obtenerClima() {
+    try {
+        const respuesta = await fetch(URL_CLIMA);
+        if (!respuesta.ok) throw new Error(`Error HTTP: ${respuesta.status}`);
+        
+        const datos = await respuesta.json();
+        const climaTemuco = datos[0]; 
+        
+        mostrarClimaEnHTML(climaTemuco);
+    } catch (error) {
+        console.error('Error al obtener el clima:', error);
+    }
+}
+
+function mostrarClimaEnHTML(clima) {
+    const contenedor = document.getElementById('widget-clima');
+    
+    if (contenedor) {
+        contenedor.innerHTML = `
+            <div class="clima-info" style="padding: 15px; background-color: #e8f5e9; border: 1px solid #c8e6c9; border-radius: 8px; margin-top: 15px; text-align: center;">
+                <p style="margin: 0; font-weight: bold; color: #2e7d32;">📍 ${clima.Ciudad}</p>
+                <p style="margin: 5px 0;">🌡️ Temperatura: ${clima.Temperatura}°C</p>
+                <p style="margin: 5px 0;">💧 Humedad: ${clima.Humedad}%</p>
+                <p style="margin: 0;">🌤️ Condición: ${clima.Condicion}</p>
+            </div>
+        `;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', obtenerClima);
