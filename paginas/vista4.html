@@ -102,31 +102,65 @@
         });
       }
 
-      // Leer las solicitudes guardadas en localStorage por la vista 3 y mostrarlas en la tabla
-      document.addEventListener('DOMContentLoaded', () => {
+      // Cargar y procesar las solicitudes con botones de Aprobar y Rechazar
+      function cargarSolicitudes() {
         const tbody = document.getElementById('tablaSolicitudes');
-        const statSolicitudes = document.querySelectorAll('.stat-number')[1]; // Contador visual de solicitudes
-        const solicitudes = JSON.parse(localStorage.getItem('solicitudesEmprendedores')) || [];
+        const statPendientes = document.querySelectorAll('.stat-number')[1];
+        if (!tbody) return;
 
-        if (solicitudes.length > 0) {
-          // Actualizar contador visual del panel
-          if (statSolicitudes) {
-            statSolicitudes.textContent = solicitudes.length;
+        const solicitudes = JSON.parse(localStorage.getItem('solicitudesEmprendedores')) || [];
+        
+        // Actualizar contador de pendientes
+        const pendientesCount = solicitudes.filter(s => !s.estado || s.estado === 'Pendiente').length;
+        if (statPendientes) {
+          statPendientes.textContent = pendientesCount;
+        }
+
+        if (solicitudes.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 1.5rem">
+                No hay solicitudes pendientes en este momento.
+              </td>
+            </tr>`;
+          return;
+        }
+
+        tbody.innerHTML = solicitudes.map((sol, index) => {
+          const estado = sol.estado || 'Pendiente';
+          let accionesHTML = '';
+
+          if (estado === 'Pendiente') {
+            accionesHTML = `
+              <button onclick="cambiarEstado(${index}, 'Aprobado')" style="background-color: #2e7d32; color: white; border: none; padding: 0.35rem 0.6rem; border-radius: 4px; cursor: pointer; font-size: 0.85rem; margin-right: 0.3rem;">Aprobar</button>
+              <button onclick="cambiarEstado(${index}, 'Rechazado')" style="background-color: #c62828; color: white; border: none; padding: 0.35rem 0.6rem; border-radius: 4px; cursor: pointer; font-size: 0.85rem;">Rechazar</button>
+            `;
+          } else if (estado === 'Aprobado') {
+            accionesHTML = `<span style="background: #e8f5e9; color: #2e7d32; padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: bold; font-size: 0.85rem;">✓ Aprobado</span>`;
+          } else {
+            accionesHTML = `<span style="background: #ffebee; color: #c62828; padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: bold; font-size: 0.85rem;">✕ Rechazado</span>`;
           }
 
-          // Rellenar las filas de la tabla con las solicitudes registradas
-          tbody.innerHTML = solicitudes.map(sol => `
+          return `
             <tr>
               <td><strong>${sol.nombre}</strong></td>
               <td>${sol.datoContacto} (${sol.canalContacto})</td>
-              <td>${sol.ubicacion}</td>
-              <td>
-                <button style="background-color: #2e7d32; color: white; border: none; padding: 0.3rem 0.6rem; border-radius: 4px; cursor: pointer; font-size: 0.85rem;">Aprobar</button>
-              </td>
+              <td>${sol.ubicacion || 'No especificada'}</td>
+              <td>${accionesHTML}</td>
             </tr>
-          `).join('');
-        }
-      });
+          `;
+        }).join('');
+      }
+
+      // Cambiar estado al hacer clic en Aprobar o Rechazar
+      window.cambiarEstado = function(index, nuevoEstado) {
+        let solicitudes = JSON.parse(localStorage.getItem('solicitudesEmprendedores')) || [];
+        solicitudes[index].estado = nuevoEstado;
+        localStorage.setItem('solicitudesEmprendedores', JSON.stringify(solicitudes));
+        cargarSolicitudes();
+      };
+
+      document.addEventListener('DOMContentLoaded', cargarSolicitudes);
     </script>
   </body>
 </html>
