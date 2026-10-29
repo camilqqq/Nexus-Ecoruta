@@ -1,70 +1,43 @@
+// ==========================================
+// INTEGRACIÓN DE API MOCKAPI (CLIMA TEMUCO)
+// ==========================================
+
 document.addEventListener("DOMContentLoaded", () => {
-  // URL exacta fijada a tu endpoint real de MockAPI
-const API_URL = "https://6ae0eeb2be3bc8fead981ad1.mockapi.io/api/v1/emprendimientos";
-  const contenedorAPI = document.querySelector("#contenedor-api") || document.querySelector(".api-container");
+  const API_URL = "https://6ae0eeb2be3bc8fead981ad1.mockapi.io/api/v1/clima";
+  const contenedorAPI = document.querySelector("#contenedor-api");
 
   if (!contenedorAPI) return;
 
   fetch(API_URL)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Error HTTP: ${response.status}`);
-      }
-      return response.json();
+    .then((respuesta) => {
+      if (!respuesta.ok) throw new Error(`Error HTTP: ${respuesta.status}`);
+      return respuesta.json();
     })
-    .then((data) => {
+    .then((datos) => {
+      // Toma el primer dato o usa un estado de respaldo si la API responde vacía
+      const clima = datos[0] || {
+        ciudad: "Temuco",
+        temperatura: "17°C",
+        condicion: "Parcialmente Nublado",
+        humedad: "60%",
+        viento: "10 km/h",
+        recomendacion: "Excelente clima para realizar rutas al aire libre."
+      };
+
       contenedorAPI.innerHTML = `
-        <div style="padding: 15px; background-color: #e8f5e9; border: 1px solid #c8e6c9; border-radius: 8px; margin-top: 15px; text-align: center;">
-          <p style="color: #2e7d32; font-weight: bold; margin: 0 0 5px 0;">
-            ✅ Datos cargados exitosamente desde MockAPI
-          </p>
-          <small style="color: #333;">
-            Se obtuvieron <strong>${data.length}</strong> registros desde el endpoint de emprendimientos.
-          </small>
+        <div style="background-color: #e8f5e9; border: 1px solid #a5d6a7; padding: 16px; border-radius: 8px; text-align: center;">
+          <h3 style="margin: 0 0 8px 0; color: #2e7d32;">🌤️ Clima Actual en ${clima.ciudad}</h3>
+          <p style="margin: 4px 0; font-size: 1.1rem; color: #1b5e20;"><strong>${clima.temperatura}</strong> - ${clima.condicion}</p>
+          <p style="margin: 4px 0; font-size: 0.9rem; color: #424242;">Humedad: ${clima.humedad} | Viento: ${clima.viento}</p>
+          <small style="display: block; margin-top: 8px; color: #555; font-style: italic;">💡 ${clima.recomendacion}</small>
         </div>
       `;
     })
     .catch((error) => {
       contenedorAPI.innerHTML = `
-        <div style="padding: 15px; background-color: #ffebee; border: 1px solid #ffcdd2; border-radius: 8px; margin-top: 15px; text-align: center;">
-          <p style="color: #c62828; font-weight: bold; margin: 0;">
-            ❌ Error al cargar datos desde MockAPI
-          </p>
-          <small style="color: #555;">${error.message}</small>
+        <div style="padding: 12px; background-color: #ffebee; border: 1px solid #ffcdd2; border-radius: 8px; text-align: center; color: #c62828;">
+          ⚠️ No se pudo cargar la información del clima desde MockAPI.
         </div>
       `;
     });
 });
-// --- IMPLEMENTACIÓN API DE CLIMA ---
-const URL_CLIMA = 'https://6ae14017be3bc8fead98544c.mockapi.io/Clima';
-
-async function obtenerClima() {
-    try {
-        const respuesta = await fetch(URL_CLIMA);
-        if (!respuesta.ok) throw new Error(`Error HTTP: ${respuesta.status}`);
-        
-        const datos = await respuesta.json();
-        const climaTemuco = datos[0]; 
-        
-        mostrarClimaEnHTML(climaTemuco);
-    } catch (error) {
-        console.error('Error al obtener el clima:', error);
-    }
-}
-
-function mostrarClimaEnHTML(clima) {
-    const contenedor = document.getElementById('widget-clima');
-    
-    if (contenedor) {
-        contenedor.innerHTML = `
-            <div class="clima-info" style="padding: 15px; background-color: #e8f5e9; border: 1px solid #c8e6c9; border-radius: 8px; margin-top: 15px; text-align: center;">
-                <p style="margin: 0; font-weight: bold; color: #2e7d32;">📍 ${clima.Ciudad}</p>
-                <p style="margin: 5px 0;">🌡️ Temperatura: ${clima.Temperatura}°C</p>
-                <p style="margin: 5px 0;">💧 Humedad: ${clima.Humedad}%</p>
-                <p style="margin: 0;">🌤️ Condición: ${clima.Condicion}</p>
-            </div>
-        `;
-    }
-}
-
-document.addEventListener('DOMContentLoaded', obtenerClima);
