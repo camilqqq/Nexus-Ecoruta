@@ -1,47 +1,51 @@
-// 1. Interface de Ruta Personalizable
+// 1. Interface con la estructura detallada de cada ruta (Punto 1 de la pauta)
 export interface Ruta {
   id: number;
   nombre: string;
-  categoria: 'Naturaleza' | 'Cultura' | 'Gastronomía';
+  categoria: 'Naturaleza' | 'Cultura' | 'Gastronomía' | 'Sustentable';
   ubicacion: string;
   duracionMinutos: number;
   dificultad: 'Fácil' | 'Moderada' | 'Difícil';
-  climaIdeal: string;
-  personalizada: boolean; // Indica si fue creada por el usuario
+  climaRecomendado: string;
+  descripcion: string;
+  personalizada: boolean; // Permite saber si fue agregada manualmente por el usuario
 }
 
-// Lista base de rutas
-export const rutasEcoRuta: Ruta[] = [
+// Registro manual de rutas locales (precisas y modificables)
+export const rutasBase: Ruta[] = [
   {
     id: 1,
-    nombre: "Sendero Ñielol",
+    nombre: "Sendero Monumento Natural Cerro Ñielol",
     categoria: "Naturaleza",
-    ubicacion: "Parque Ñielol, Temuco",
+    ubicacion: "Prat 01, Temuco",
     duracionMinutos: 90,
     dificultad: "Fácil",
-    climaIdeal: "Soleado / Nublado",
+    climaRecomendado: "Parcialmente Nublado / Soleado",
+    descripcion: "Caminata por el bosque nativo valdiviano dentro de la zona urbana de Temuco.",
     personalizada: false
   },
   {
     id: 2,
-    nombre: "Museo Regional de La Araucanía",
+    nombre: "Ruta Cultural Mercado Municipal y Feria Pinto",
     categoria: "Cultura",
-    ubicacion: "Av. Alemania 084, Temuco",
+    ubicacion: "Av. Barros Arana, Temuco",
     duracionMinutos: 120,
     dificultad: "Fácil",
-    climaIdeal: "Cualquiera",
+    climaRecomendado: "Cualquiera",
+    descripcion: "Recorrido por la gastronomía local, hortalizas de temporada y artesanía mapuche.",
     personalizada: false
   }
 ];
 
-// 2. Función TS 1: Permitir al usuario crear/personalizar su propia ruta (Cumple Pauta)
-export function agregarRutaPersonalizada(
-  lista: Ruta[],
+// 2. Función TS 1: Agregar manualmente una nueva ruta personalizada (Punto 2 y 3)
+export function agregarRutaManual(
+  listaActual: Ruta[],
   nombre: string,
-  categoria: 'Naturaleza' | 'Cultura' | 'Gastronomía',
+  categoria: 'Naturaleza' | 'Cultura' | 'Gastronomía' | 'Sustentable',
   ubicacion: string,
   duracionMinutos: number,
-  dificultad: 'Fácil' | 'Moderada' | 'Difícil'
+  dificultad: 'Fácil' | 'Moderada' | 'Difícil',
+  descripcion: string
 ): Ruta[] {
   const nuevaRuta: Ruta = {
     id: Date.now(),
@@ -50,16 +54,19 @@ export function agregarRutaPersonalizada(
     ubicacion,
     duracionMinutos,
     dificultad,
-    climaIdeal: "A elección",
+    climaRecomendado: "Variable",
+    descripcion,
     personalizada: true
   };
-  
-  return [...lista, nuevaRuta];
+
+  return [...listaActual, nuevaRuta];
 }
 
-// 3. Función TS 2: Filtrar rutas (personalizadas o por categoría) usando la Interface
-export function obtenerRutasFiltradas(lista: Ruta[], categoria: string): Ruta[] {
-  if (categoria.toLowerCase() === 'todas') return lista;
-  if (categoria.toLowerCase() === 'personalizadas') return lista.filter(r => r.personalizada);
-  return lista.filter(r => r.categoria.toLowerCase() === categoria.toLowerCase());
+// 3. Función TS 2: Obtener un resumen técnico del tiempo y nivel de la ruta (Punto 2 y 3)
+export function formatearDetalleRuta(ruta: Ruta): string {
+  const horas = Math.floor(ruta.duracionMinutos / 60);
+  const minutos = ruta.duracionMinutos % 60;
+  const tiempoTxt = horas > 0 ? `${horas}h ${minutos}m` : `${minutos} min`;
+
+  return `📍 ${ruta.nombre} (${ruta.categoria}) - Duración: ${tiempoTxt} | Dificultad: ${ruta.dificultad}`;
 }
