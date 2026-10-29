@@ -1,4 +1,4 @@
-// 1. Interface con la estructura detallada de cada ruta (Punto 1 de la pauta)
+// Interface que define los datos de una ruta
 export interface Ruta {
   id: number;
   nombre: string;
@@ -8,10 +8,10 @@ export interface Ruta {
   dificultad: 'Fácil' | 'Moderada' | 'Difícil';
   climaRecomendado: string;
   descripcion: string;
-  personalizada: boolean; // Permite saber si fue agregada manualmente por el usuario
+  personalizada: boolean;
 }
 
-// Registro manual de rutas locales (precisas y modificables)
+// Lista base de rutas
 export const rutasBase: Ruta[] = [
   {
     id: 1,
@@ -21,23 +21,12 @@ export const rutasBase: Ruta[] = [
     duracionMinutos: 90,
     dificultad: "Fácil",
     climaRecomendado: "Parcialmente Nublado / Soleado",
-    descripcion: "Caminata por el bosque nativo valdiviano dentro de la zona urbana de Temuco.",
-    personalizada: false
-  },
-  {
-    id: 2,
-    nombre: "Ruta Cultural Mercado Municipal y Feria Pinto",
-    categoria: "Cultura",
-    ubicacion: "Av. Barros Arana, Temuco",
-    duracionMinutos: 120,
-    dificultad: "Fácil",
-    climaRecomendado: "Cualquiera",
-    descripcion: "Recorrido por la gastronomía local, hortalizas de temporada y artesanía mapuche.",
+    descripcion: "Caminata por el bosque nativo dentro de Temuco.",
     personalizada: false
   }
 ];
 
-// 2. Función TS 1: Agregar manualmente una nueva ruta personalizada (Punto 2 y 3)
+// Función 1: Agregar ruta manual
 export function agregarRutaManual(
   listaActual: Ruta[],
   nombre: string,
@@ -58,15 +47,13 @@ export function agregarRutaManual(
     descripcion,
     personalizada: true
   };
-
   return [...listaActual, nuevaRuta];
 }
 
-// 3. Función TS 2: Obtener un resumen técnico del tiempo y nivel de la ruta (Punto 2 y 3)
+// Función 2: Formatear detalle
 export function formatearDetalleRuta(ruta: Ruta): string {
   const horas = Math.floor(ruta.duracionMinutos / 60);
   const minutos = ruta.duracionMinutos % 60;
   const tiempoTxt = horas > 0 ? `${horas}h ${minutos}m` : `${minutos} min`;
-
   return `📍 ${ruta.nombre} (${ruta.categoria}) - Duración: ${tiempoTxt} | Dificultad: ${ruta.dificultad}`;
 }
