@@ -1,33 +1,20 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.rutasEcoRuta = void 0;
-exports.agregarRutaPersonalizada = agregarRutaPersonalizada;
-exports.obtenerRutasFiltradas = obtenerRutasFiltradas;
 
-exports.rutasEcoRuta = [
+var rutasBase = [
   {
     id: 1,
-    nombre: "Sendero Ñielol",
+    nombre: "Sendero Monumento Natural Cerro Ñielol",
     categoria: "Naturaleza",
-    ubicacion: "Parque Ñielol, Temuco",
+    ubicacion: "Prat 01, Temuco",
     duracionMinutos: 90,
     dificultad: "Fácil",
-    climaIdeal: "Soleado / Nublado",
-    personalizada: false
-  },
-  {
-    id: 2,
-    nombre: "Museo Regional de La Araucanía",
-    categoria: "Cultura",
-    ubicacion: "Av. Alemania 084, Temuco",
-    duracionMinutos: 120,
-    dificultad: "Fácil",
-    climaIdeal: "Cualquiera",
+    climaRecomendado: "Parcialmente Nublado / Soleado",
+    descripcion: "Caminata por el bosque nativo dentro de Temuco.",
     personalizada: false
   }
 ];
 
-function agregarRutaPersonalizada(lista, nombre, categoria, ubicacion, duracionMinutos, dificultad) {
+function agregarRutaManual(listaActual, nombre, categoria, ubicacion, duracionMinutos, dificultad, descripcion) {
   var nuevaRuta = {
     id: Date.now(),
     nombre: nombre,
@@ -35,14 +22,16 @@ function agregarRutaPersonalizada(lista, nombre, categoria, ubicacion, duracionM
     ubicacion: ubicacion,
     duracionMinutos: duracionMinutos,
     dificultad: dificultad,
-    climaIdeal: "A elección",
+    climaRecomendado: "Variable",
+    descripcion: descripcion,
     personalizada: true
   };
-  return lista.concat([nuevaRuta]);
+  return listaActual.concat([nuevaRuta]);
 }
 
-function obtenerRutasFiltradas(lista, categoria) {
-  if (categoria.toLowerCase() === 'todas') return lista;
-  if (categoria.toLowerCase() === 'personalizadas') return lista.filter(function (r) { return r.personalizada; });
-  return lista.filter(function (r) { return r.categoria.toLowerCase() === categoria.toLowerCase(); });
+function formatearDetalleRuta(ruta) {
+  var horas = Math.floor(ruta.duracionMinutos / 60);
+  var minutos = ruta.duracionMinutos % 60;
+  var tiempoTxt = horas > 0 ? horas + "h " + minutos + "m" : minutos + " min";
+  return "📍 " + ruta.nombre + " (" + ruta.categoria + ") - Duración: " + tiempoTxt + " | Dificultad: " + ruta.dificultad;
 }
