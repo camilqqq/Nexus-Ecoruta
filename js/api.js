@@ -8,8 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!contenedorAPI) return;
 
-  // Datos meteorológicos de respaldo (Temuco)
-  const datosClimaDefault = {
+  // Datos meteorológicos de respaldo
+  const climaBackup = {
     ciudad: "Temuco",
     temperatura: "18°C",
     condicion: "Parcialmente Nublado",
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     recomendacion: "Condiciones ideales para recorridos al aire libre y visitas a senderos naturales."
   };
 
-  const renderizarTarjetaClima = (clima) => {
+  const pintarTarjeta = (clima) => {
     contenedorAPI.innerHTML = `
       <div style="
         background: #ffffff;
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
         max-width: 650px;
         margin: 25px auto;
         box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-family: system-ui, -apple-system, sans-serif;
         color: #2c3e50;
       ">
         <div style="
@@ -40,28 +40,28 @@ document.addEventListener("DOMContentLoaded", () => {
           margin-bottom: 16px;
         ">
           <div>
-            <span style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; tracking-spacing: 0.5px; color: #2e7d32;">Pronóstico del Tiempo</span>
-            <h3 style="margin: 2px 0 0 0; font-size: 1.35rem; color: #1a252f; font-weight: 600;">${clima.ciudad || 'Temuco'}</h3>
+            <span style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: #2e7d32;">Pronóstico del Tiempo</span>
+            <h3 style="margin: 2px 0 0 0; font-size: 1.35rem; color: #1a252f; font-weight: 600;">${clima.ciudad || climaBackup.ciudad}</h3>
           </div>
-          <div style="font-size: 2rem; font-weight: 700; color: #2e7d32; line-height: 1;">
-            ${clima.temperatura || '18°C'}
+          <div style="font-size: 2rem; font-weight: 700; color: #2e7d32;">
+            ${clima.temperatura || climaBackup.temperatura}
           </div>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 16px;">
           <div style="background: #f8fafc; padding: 10px 14px; border-radius: 6px; border-left: 3px solid #2e7d32;">
             <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Estado</span>
-            <span style="font-size: 0.95rem; font-weight: 600; color: #334155;">${clima.condicion || 'Parcialmente Nublado'}</span>
+            <span style="font-size: 0.95rem; font-weight: 600; color: #334155;">${clima.condicion || climaBackup.condicion}</span>
           </div>
 
           <div style="background: #f8fafc; padding: 10px 14px; border-radius: 6px; border-left: 3px solid #2e7d32;">
             <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Humedad</span>
-            <span style="font-size: 0.95rem; font-weight: 600; color: #334155;">${clima.humedad || '65%'}</span>
+            <span style="font-size: 0.95rem; font-weight: 600; color: #334155;">${clima.humedad || climaBackup.humedad}</span>
           </div>
 
           <div style="background: #f8fafc; padding: 10px 14px; border-radius: 6px; border-left: 3px solid #2e7d32;">
             <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Viento</span>
-            <span style="font-size: 0.95rem; font-weight: 600; color: #334155;">${clima.viento || '12 km/h'}</span>
+            <span style="font-size: 0.95rem; font-weight: 600; color: #334155;">${clima.viento || climaBackup.viento}</span>
           </div>
         </div>
 
@@ -72,26 +72,20 @@ document.addEventListener("DOMContentLoaded", () => {
           padding: 12px 16px;
           font-size: 0.9rem;
           color: #166534;
-          line-height: 1.4;
         ">
-          <strong>Recomendación EcoRuta:</strong> ${clima.recomendacion || datosClimaDefault.recomendacion}
+          <strong>Recomendación EcoRuta:</strong> ${clima.recomendacion || climaBackup.recomendacion}
         </div>
       </div>
     `;
   };
 
-  // Intentar cargar de la API; si falla o viene vacío, renderiza los datos bien presentados
   fetch(API_URL)
-    .then((res) => {
-      if (!res.ok) throw new Error("Error en la respuesta de la red");
-      return res.json();
-    })
+    .then((res) => res.json())
     .then((datos) => {
-      const objetoClima = Array.isArray(datos) && datos.length > 0 ? datos[0] : datosClimaDefault;
-      renderizarTarjetaClima(objetoClima);
+      const objetoClima = (Array.isArray(datos) && datos.length > 0) ? datos[0] : climaBackup;
+      pintarTarjeta(objetoClima);
     })
     .catch(() => {
-      // Si la API falla, carga la tarjeta elegante directamente
-      renderizarTarjetaClima(datosClimaDefault);
+      pintarTarjeta(climaBackup);
     });
 });
