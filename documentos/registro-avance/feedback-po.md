@@ -33,3 +33,35 @@
 - **Alineación con Feedback del Profesor:** En respuesta al comunicado del docente sobre la evaluación continua del Sprint 1, se validó que todos los commits de la semana estén reflejados en el repositorio remoto.
 - **Generación de PDF Oficial:** Se exportó y validó la versión final en PDF del informe Bug Bounty (`reporte-bug-bounty.pdf`) directamente desde la estructura del repositorio, dejándolo listo para la evaluación continua y futura defensa del proyecto.
 - **Estado de Cierre:** El Sprint 1 y la fase de Accesibilidad/HTML/CSS quedan **100% concluidos, desplegados y documentados**, a la espera de las pautas para la defensa y el inicio de la materia de JavaScript.
+
+- **Product Owner:** Camila Fuentes
+- **Sprint:** 2
+- ##Registro de Comentarios y Revisiones del PO
+
+### 08 y 09-10-2026 (Inicio del desarrollo de funcionalidades)
+
+- Se incorpora el consumo de una API externa mediante `fetch()` para mostrar información climática de Temuco.
+- Se implementan filtros dinámicos, búsqueda en tiempo real y manipulación del DOM para mejorar la interacción de los usuarios.
+- Se desarrollan formularios interactivos con validaciones, mensajes de error y confirmaciones de envío.
+- Se crea el módulo de emprendedores locales, incorporando catálogo, categorías, fichas informativas y distintivos ecológicos.
+- Se mejora la navegación entre las diferentes páginas y se establecen criterios de aceptación para las nuevas funcionalidades.
+
+### 21-10-2026 (Pruebas, integración y mejoras)
+
+- Se realizan pruebas funcionales del consumo de API, navegación, formularios y filtros dinámicos.
+- Se incorporan mejoras en la validación de formularios, incluyendo restricciones para campos vacíos, validación de correo electrónico y mensajes dinámicos de error y éxito.
+- Se implementa la carga de información de actividades mediante parámetros URL, permitiendo acceder a fichas específicas.
+- Se desarrollan funcionalidades para filtrar emprendimientos por rubro, mostrar distintivos ecológicos y gestionar estados sin resultados.
+- Se realizan pruebas de responsividad en dispositivos móviles, tabletas y computadores.
+- Se revisa la configuración de CI/CD y el despliegue en GitHub Pages.
+- Se mantiene el seguimiento del trabajo mediante Trello, registrando avances, responsables y actividades del equipo.
+
+### 27 al 29-10-2026 (Nuevos entregables y reorganización del backlog)
+
+- Se implementa MockAPI para el manejo de información climática y su consumo desde `js/api.js`.
+- Se incorporan funcionalidades de administración de solicitudes de emprendedores, permitiendo aprobar o rechazar postulaciones y actualizar la información publicada.
+- Se desarrolla una vista independiente de contacto con formulario y almacenamiento de mensajes mediante `localStorage`. Su revisión funcional permanece en proceso.
+- Se incorpora TypeScript mediante los archivos `js/rutas.ts` y `js/rutas.js`, definiendo una interfaz para representar rutas turísticas y dos funciones para personalizarlas y filtrarlas.
+- Se registra la necesidad de verificar el funcionamiento de la API climática y los enlaces de navegación hacia la vista de contacto.
+- Se inicia la reorganización del backlog tras el ajuste de integrantes del equipo, priorizando las historias relacionadas con TypeScript, el consumo de API de clima y los criterios de aceptación para el despliegue en GitHub Pages.
+- La tarea de reorganización del backlog y aprobación del Sprint 2 (tarjeta #70) queda en proceso, pendiente de revisión y confirmación por parte del equipo y del Product Owner.
