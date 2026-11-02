@@ -1,114 +1,76 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EcoRuta Temuco - Contacto Directo</title>
-    <link rel="stylesheet" href="../css/emprendimientos.css" />
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto Directo - Nexus EcoRuta Temuco</title>
+  <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
 
-  <body>
-    <header>
-      <div class="header-top">
-        <div class="brand">
-          <img src="../assets/imagenes/Logo.png" alt="Logo EcoRuta Temuco" class="logo" />
-          <span class="brand-name">EcoRuta Temuco</span>
-        </div>
-        <button class="menu-btn" aria-label="Abrir menú" id="menuBtn">☰ Menú</button>
-      </div>
-
-    <nav id="menuNav" aria-label="Menú principal">
-        <a href="contacto.html" class="active" aria-current="page">Contacto</a>
-        <a href="../index.html">Inicio</a>
-        <a href="../index.html#explorar">Explorar</a>
-        <a href="emprendimientos.html">Emprendedores</a>
-        <a href="contacto.html">Contacto</a>
-        <a href="vista4.html">Administración</a>
+  <!-- Encabezado / Navegación Principal -->
+  <header>
+    <div class="header-container" style="max-width: 1100px; margin: 0 auto; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;">
+      <h1 style="margin: 0; font-size: 1.5rem; color: #1b5e20;">🌱 EcoRuta Temuco</h1>
+      <nav>
+        <a href="../index.html" style="margin-right: 15px; text-decoration: none; color: #2e7d32; font-weight: 600;">Inicio</a>
+        <a href="../index.html#rutas" style="margin-right: 15px; text-decoration: none; color: #2e7d32; font-weight: 600;">Rutas</a>
+        <a href="contacto.html" style="text-decoration: none; color: #1b5e20; font-weight: 700; border-bottom: 2px solid #1b5e20;">Contacto</a>
       </nav>
-    </header>
+    </div>
+  </header>
 
-    <main id="contenido" style="max-width: 800px; margin: 2rem auto; padding: 0 1rem;">
-      <div class="intro">
-        <h1>Contacto Directo con Nexus-Ecoruta</h1>
-        <p>
-          ¿Tienes dudas, sugerencias o comentarios sobre la ruta? Envíanos un mensaje directo y te responderemos a la brevedad.
-        </p>
-      </div>
+  <main style="max-width: 700px; margin: 40px auto; padding: 0 20px; font-family: system-ui, -apple-system, sans-serif;">
+    <section style="background: #ffffff; border: 1px solid #e0e6ed; border-radius: 12px; padding: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+      <h2 style="color: #1b5e20; margin-top: 0;">Contacto Directo Nexus-EcoRuta</h2>
+      <p style="color: #555; font-size: 0.95rem; margin-bottom: 25px;">
+        ¿Tienes dudas sobre las rutas turísticas o deseas postular tu emprendimiento sustentable? Completa el siguiente formulario y nos pondremos en contacto contigo.
+      </p>
 
-      <form id="formContacto" style="background: #fff; padding: 2rem; border-radius: 8px; border: 1px solid #e0e0e0; margin-top: 1.5rem;">
-        <div style="margin-bottom: 1.2rem;">
-          <label for="nombre" style="display: block; font-weight: bold; margin-bottom: 0.5rem;">Nombre completo (*)</label>
-          <input type="text" id="nombre" required placeholder="Tu nombre" style="width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px;" />
+      <form id="form-contacto" style="display: flex; flex-direction: column; gap: 18px;">
+        <div>
+          <label for="nombre" style="display: block; font-weight: 600; color: #2c3e50; margin-bottom: 6px;">Nombre Completo *</label>
+          <input type="text" id="nombre" name="nombre" required placeholder="Ej: Emily Jara" style="width: 100%; padding: 10px 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;">
         </div>
 
-        <div style="margin-bottom: 1.2rem;">
-          <label for="email" style="display: block; font-weight: bold; margin-bottom: 0.5rem;">Correo electrónico (*)</label>
-          <input type="email" id="email" required placeholder="tu@correo.com" style="width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px;" />
+        <div>
+          <label for="email" style="display: block; font-weight: 600; color: #2c3e50; margin-bottom: 6px;">Correo Electrónico *</label>
+          <input type="email" id="email" name="email" required placeholder="ejemplo@correo.com" style="width: 100%; padding: 10px 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;">
         </div>
 
-        <div style="margin-bottom: 1.2rem;">
-          <label for="asunto" style="display: block; font-weight: bold; margin-bottom: 0.5rem;">Asunto (*)</label>
-          <input type="text" id="asunto" required placeholder="Ej: Consulta sobre recorridos" style="width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px;" />
+        <div>
+          <label for="motivo" style="display: block; font-weight: 600; color: #2c3e50; margin-bottom: 6px;">Motivo de Consulta</label>
+          <select id="motivo" name="motivo" style="width: 100%; padding: 10px 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;">
+            <option value="informacion">Consulta General sobre Rutas</option>
+            <option value="emprendimiento">Postulación de Emprendimiento</option>
+            <option value="sugerencia">Sugerencia o Retroalimentación</option>
+          </select>
         </div>
 
-        <div style="margin-bottom: 1.5rem;">
-          <label for="mensaje" style="display: block; font-weight: bold; margin-bottom: 0.5rem;">Mensaje (*)</label>
-          <textarea id="mensaje" rows="5" required placeholder="Escribe tu mensaje aquí..." style="width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px; resize: vertical;"></textarea>
+        <div>
+          <label for="mensaje" style="display: block; font-weight: 600; color: #2c3e50; margin-bottom: 6px;">Mensaje *</label>
+          <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Escribe tu mensaje aquí..." style="width: 100%; padding: 10px 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;"></textarea>
         </div>
 
-        <button type="submit" style="background-color: #2e7d32; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 1rem;">
+        <button type="submit" style="background-color: #2e7d32; color: white; font-weight: 600; border: none; padding: 12px 20px; border-radius: 6px; cursor: pointer; font-size: 1rem; transition: background 0.2s;">
           Enviar Mensaje
         </button>
       </form>
 
-      <div id="mensajeExito" style="display: none; background: #e8f5e9; color: #2e7d32; padding: 1.5rem; border-radius: 8px; border: 1px solid #a5d6a7; margin-top: 1.5rem; text-align: center;">
-        <h3>¡Mensaje enviado con éxito!</h3>
-        <p>Gracias por contactarte con el equipo de Nexus-Ecoruta. Te responderemos pronto.</p>
+      <!-- Mensaje de confirmación dinámico -->
+      <div id="mensaje-exito" style="display: none; margin-top: 20px; padding: 12px; background-color: #f0fdf4; border: 1px solid #dcfce7; color: #166534; border-radius: 6px; text-align: center;">
+        ✅ ¡Mensaje enviado con éxito! Nos contactaremos a la brevedad.
       </div>
-    </main>
+    </section>
+  </main>
 
-    <footer>
-      <div class="footer-links">
-        <a href="contacto.html">Contacto</a>
-        <a href="https://github.com/camilqqq/Nexus-Ecoruta/blob/main/documentos/reportes/accesibilidad.md" target="_blank">Accesibilidad</a>
-        <a href="../index.html">Información local</a>
-      </div>
-    </footer>
-
-    <script>
-      const menuBtn = document.getElementById('menuBtn');
-      const menuNav = document.getElementById('menuNav');
-
-      if (menuBtn && menuNav) {
-        menuBtn.addEventListener('click', () => {
-          const abierto = menuNav.classList.toggle('menu-visible');
-          menuBtn.setAttribute('aria-expanded', abierto ? 'true' : 'false');
-        });
-      }
-
-      // Guardar mensaje de contacto en localStorage
-      const formContacto = document.getElementById('formContacto');
-      const mensajeExito = document.getElementById('mensajeExito');
-
-      formContacto.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        const nuevoMensaje = {
-          nombre: document.getElementById('nombre').value.trim(),
-          email: document.getElementById('email').value.trim(),
-          asunto: document.getElementById('asunto').value.trim(),
-          mensaje: document.getElementById('mensaje').value.trim(),
-          fecha: new Date().toLocaleString()
-        };
-
-        let mensajes = JSON.parse(localStorage.getItem('mensajesContacto')) || [];
-        mensajes.push(nuevoMensaje);
-        localStorage.setItem('mensajesContacto', JSON.stringify(mensajes));
-
-        formContacto.reset();
-        formContacto.style.display = 'none';
-        mensajeExito.style.display = 'block';
-      });
-    </script>
-  </body>
+  <script>
+    // Validación interactiva y respuesta del formulario
+    document.getElementById('form-contacto').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('mensaje-exito').style.display = 'block';
+      this.reset();
+    });
+  </script>
+</body>
 </html>
