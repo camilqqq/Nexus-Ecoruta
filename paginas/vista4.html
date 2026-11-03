@@ -8,26 +8,26 @@
   </head>
 
   <body>
-  <script>
-    (function () {
-      const clavecorrecta = "admin123";
-      const password = prompt("Ingrese la clave de administración:");
+    <script>
+      (function () {
+        const clavecorrecta = "admin123";
+        const password = prompt("Ingrese la clave de administración:");
 
-      if (password !== clavecorrecta) {
-        alert("Acceso denegado");
-        window.location.href = "../index.html";
-      }
-    })();
-  </script>
+        if (password !== clavecorrecta) {
+          alert("Acceso denegado");
+          window.location.href = "../index.html";
+        }
+      })();
+    </script>
 
-  <header>
-    <div class="header-top">
-      <div class="brand">
-        <img src="../assets/imagenes/Logo.png" alt="Logo EcoRuta Temuco" class="logo" />
-        <span class="brand-name">EcoRuta Temuco</span>
+    <header>
+      <div class="header-top">
+        <div class="brand">
+          <img src="../assets/imagenes/Logo.png" alt="Logo EcoRuta Temuco" class="logo" />
+          <span class="brand-name">EcoRuta Temuco</span>
+        </div>
+        <button class="menu-btn" aria-label="Abrir menú" id="menuBtn">☰ Menú</button>
       </div>
-      <button class="menu-btn" aria-label="Abrir menú" id="menuBtn">☰ Menú</button>
-    </div>
 
       <nav id="menuNav" aria-label="Menú principal">
         <a href="vista4.html" class="active" aria-current="page">Administración</a>
@@ -35,14 +35,13 @@
         <a href="../index.html#explorar">Explorar</a>
         <a href="emprendimientos.html">Emprendedores</a>
         <a href="contacto.html">Contacto</a>
-        <a href="vista4.html">Administración</a>
       </nav>
     </header>
 
     <main>
       <div class="admin-header">
         <h1>Panel de Administración</h1>
-        <p>Revisión de solicitudes de emprendedores y estado de las actividades publicadas.</p>
+        <p>Revisión de solicitudes de emprendedores y mensajes de contacto recibidos.</p>
       </div>
 
       <section class="stats-grid">
@@ -60,6 +59,7 @@
         </div>
       </section>
 
+      <!-- Sección 1: Solicitudes de Emprendedores -->
       <section class="admin-section">
         <h2>Solicitudes de Emprendedores Pendientes</h2>
         <div class="table-responsive">
@@ -72,13 +72,38 @@
                 <th scope="col">Acciones</th>
               </tr>
             </thead>
-          <tbody id="tablaSolicitudes">
-          <tr>
-            <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 1.5rem">
-              No hay solicitudes pendientes en este momento.
-            </td>
-          </tr>
-        </tbody>
+            <tbody id="tablaSolicitudes">
+              <tr>
+                <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 1.5rem">
+                  No hay solicitudes pendientes en este momento.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Sección 2: Mensajes de Contacto Recibidos -->
+      <section class="admin-section" style="margin-top: 2.5rem;">
+        <h2>Mensajes de Contacto Recibidos</h2>
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th scope="col">Fecha</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Asunto</th>
+                <th scope="col">Mensaje</th>
+              </tr>
+            </thead>
+            <tbody id="tablaMensajesContacto">
+              <tr>
+                <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 1.5rem">
+                  No hay mensajes de contacto recibidos.
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </section>
@@ -151,15 +176,40 @@
         }).join('');
       }
 
+      function cargarMensajesContacto() {
+        const tbodyContacto = document.getElementById('tablaMensajesContacto');
+        if (!tbodyContacto) return;
+
+        const mensajes = JSON.parse(localStorage.getItem('mensajesContacto')) || [];
+
+        if (mensajes.length === 0) {
+          tbodyContacto.innerHTML = `
+            <tr>
+              <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 1.5rem">
+                No hay mensajes de contacto recibidos.
+              </td>
+            </tr>`;
+          return;
+        }
+
+        tbodyContacto.innerHTML = mensajes.map(m => `
+          <tr>
+            <td style="font-size: 0.85rem; color: #666;">${m.fecha || 'Sin fecha'}</td>
+            <td><strong>${m.nombre}</strong></td>
+            <td><a href="mailto:${m.email}" style="color: #2e7d32; font-weight: bold;">${m.email}</a></td>
+            <td>${m.asunto}</td>
+            <td>${m.mensaje}</td>
+          </tr>
+        `).join('');
+      }
+
       window.cambiarEstado = function(index, nuevoEstado) {
         let solicitudes = JSON.parse(localStorage.getItem('solicitudesEmprendedores')) || [];
         solicitudes[index].estado = nuevoEstado;
         localStorage.setItem('solicitudesEmprendedores', JSON.stringify(solicitudes));
 
-        // Si se aprueba, guardarlo también en el listado de emprendimientos aprobados
         if (nuevoEstado === 'Aprobado') {
           let aprobados = JSON.parse(localStorage.getItem('emprendimientosAprobados')) || [];
-          // Evitar duplicados
           const existe = aprobados.some(e => e.nombre === solicitudes[index].nombre);
           if (!existe) {
             aprobados.push(solicitudes[index]);
@@ -170,7 +220,10 @@
         cargarSolicitudes();
       };
 
-      document.addEventListener('DOMContentLoaded', cargarSolicitudes);
+      document.addEventListener('DOMContentLoaded', () => {
+        cargarSolicitudes();
+        cargarMensajesContacto();
+      });
     </script>
   </body>
 </html>
