@@ -1,21 +1,22 @@
 // ==========================================
-// INTEGRACIÓN Y MAQUETACIÓN DEL CLIMA
+// INTEGRACIÓN Y MAQUETACIÓN DEL CLIMA REAL
 // ==========================================
-
 document.addEventListener("DOMContentLoaded", () => {
-  const API_URL = "https://6ae0eeb2be3bc8fead981ad1.mockapi.io/api/v1/clima";
   const contenedorAPI = document.querySelector("#contenedor-api");
-
   if (!contenedorAPI) return;
 
-  // Datos meteorológicos de respaldo
-  const climaBackup = {
-    ciudad: "Temuco",
-    temperatura: "18°C",
-    condicion: "Parcialmente Nublado",
-    humedad: "65%",
-    viento: "12 km/h",
-    recomendacion: "Condiciones ideales para recorridos al aire libre y visitas a senderos naturales."
+  // API real y gratuita de Open-Meteo para Temuco, Chile
+  const API_URL = "https://api.open-meteo.com/v1/forecast?latitude=-38.7397&longitude=-72.5984&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&timezone=America%2FSantiago";
+
+  // Función para traducir los códigos de clima de la API a texto en español
+  const obtenerCondicion = (code) => {
+    if (code === 0) return "Despejado";
+    if (code >= 1 && code <= 3) return "Parcialmente Nublado";
+    if (code >= 45 && code <= 48) return "Niebla / Neblina";
+    if (code >= 51 && code <= 67) return "Lluvia Ligera";
+    if (code >= 80 && code <= 82) return "Chubascos";
+    if (code >= 95) return "Tormenta Eléctrica";
+    return "Nublado";
   };
 
   const pintarTarjeta = (clima) => {
@@ -41,27 +42,25 @@ document.addEventListener("DOMContentLoaded", () => {
         ">
           <div>
             <span style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: #2e7d32;">Pronóstico del Tiempo</span>
-            <h3 style="margin: 2px 0 0 0; font-size: 1.35rem; color: #1a252f; font-weight: 600;">${clima.ciudad || climaBackup.ciudad}</h3>
+            <h3 style="margin: 2px 0 0 0; font-size: 1.35rem; color: #1a252f; font-weight: 600;">Temuco</h3>
           </div>
           <div style="font-size: 2rem; font-weight: 700; color: #2e7d32;">
-            ${clima.temperatura || climaBackup.temperatura}
+            ${clima.temperatura}
           </div>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 16px;">
           <div style="background: #f8fafc; padding: 10px 14px; border-radius: 6px; border-left: 3px solid #2e7d32;">
             <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Estado</span>
-            <span style="font-size: 0.95rem; font-weight: 600; color: #334155;">${clima.condicion || climaBackup.condicion}</span>
+            <span style="font-size: 0.95rem; font-weight: 600; color: #334155;">${clima.condicion}</span>
           </div>
-
           <div style="background: #f8fafc; padding: 10px 14px; border-radius: 6px; border-left: 3px solid #2e7d32;">
             <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Humedad</span>
-            <span style="font-size: 0.95rem; font-weight: 600; color: #334155;">${clima.humedad || climaBackup.humedad}</span>
+            <span style="font-size: 0.95rem; font-weight: 600; color: #334155;">${clima.humedad}</span>
           </div>
-
           <div style="background: #f8fafc; padding: 10px 14px; border-radius: 6px; border-left: 3px solid #2e7d32;">
             <span style="display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Viento</span>
-            <span style="font-size: 0.95rem; font-weight: 600; color: #334155;">${clima.viento || climaBackup.viento}</span>
+            <span style="font-size: 0.95rem; font-weight: 600; color: #334155;">${clima.viento}</span>
           </div>
         </div>
 
@@ -73,19 +72,26 @@ document.addEventListener("DOMContentLoaded", () => {
           font-size: 0.9rem;
           color: #166534;
         ">
-          <strong>Recomendación EcoRuta:</strong> ${clima.recomendacion || climaBackup.recomendacion}
+          <strong>Recomendación EcoRuta:</strong> ${clima.recomendacion}
         </div>
       </div>
     `;
   };
 
+  // Petición asíncrona a la API pública
   fetch(API_URL)
     .then((res) => res.json())
-    .then((datos) => {
-      const objetoClima = (Array.isArray(datos) && datos.length > 0) ? datos[0] : climaBackup;
-      pintarTarjeta(objetoClima);
-    })
-    .catch(() => {
-      pintarTarjeta(climaBackup);
+    .then((data) => {
+      const actual = data.current;
+      const datosClimaReales = {
+        temperatura: `${Math.round(actual.temperature_2m)}°C`,
+        condicion: obtenerCondicion(actual.weather_code),
+        humedad: `${actual.relative_humidity_2m}%`,
+        viento: `${Math.round(actual.wind_speed_10m)} km/h`,
+        recomendacion: actual.weather_code <= 3 
+          ? "Condiciones ideales para recorridos al aire libre y visitas a senderos naturales."
+          : "Se sugiere llevar equipamiento adecuado para clima variable."
+      };
+      pintarTarjeta(datosClimaReales);
     });
 });
