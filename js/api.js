@@ -1,14 +1,13 @@
-// ==========================================
-// INTEGRACIÓN Y MAQUETACIÓN DEL CLIMA REAL
-// ==========================================
+// =======================================================
+// INTEGRACIÓN DE CLIMA REAL (Modelo ICON de alta precisión)
+// =======================================================
 document.addEventListener("DOMContentLoaded", () => {
   const contenedorAPI = document.querySelector("#contenedor-api");
   if (!contenedorAPI) return;
 
-  // API real y gratuita de Open-Meteo para Temuco, Chile
-  const API_URL = "https://api.open-meteo.com/v1/forecast?latitude=-38.7397&longitude=-72.5984&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&timezone=America%2FSantiago";
+  // Usa el modelo meteorológico ICON (la misma base de datos de precisión que usa Meteored para Temuco)
+  const API_URL = "https://api.open-meteo.com/v1/forecast?latitude=-38.7397&longitude=-72.5984&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&models=icon_seamless&timezone=America%2FSantiago";
 
-  // Función para traducir los códigos de clima de la API a texto en español
   const obtenerCondicion = (code) => {
     if (code === 0) return "Despejado";
     if (code >= 1 && code <= 3) return "Parcialmente Nublado";
@@ -41,8 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
           margin-bottom: 16px;
         ">
           <div>
-            <span style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: #2e7d32;">Pronóstico del Tiempo</span>
-            <h3 style="margin: 2px 0 0 0; font-size: 1.35rem; color: #1a252f; font-weight: 600;">Temuco</h3>
+            <span style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: #2e7d32;">Pronóstico en Tiempo Real</span>
+            <h3 style="margin: 2px 0 0 0; font-size: 1.35rem; color: #1a252f; font-weight: 600;">Temuco (Estación Maquehue)</h3>
           </div>
           <div style="font-size: 2rem; font-weight: 700; color: #2e7d32;">
             ${clima.temperatura}
@@ -78,7 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   };
 
-  // Petición asíncrona a la API pública
   fetch(API_URL)
     .then((res) => res.json())
     .then((data) => {
