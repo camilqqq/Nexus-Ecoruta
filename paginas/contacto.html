@@ -17,53 +17,67 @@
         <button class="menu-btn" aria-label="Abrir menú" id="menuBtn">☰ Menú</button>
       </div>
 
-    <nav id="menuNav" aria-label="Menú principal">
-        <a href="contacto.html" class="active" aria-current="page">Contacto</a>
+      <nav id="menuNav" aria-label="Menú principal">
         <a href="../index.html">Inicio</a>
         <a href="../index.html#explorar">Explorar</a>
         <a href="emprendimientos.html">Emprendedores</a>
-        <a href="contacto.html">Contacto</a>
+        <a href="contacto.html" class="active" aria-current="page">Contacto</a>
         <a href="vista4.html">Administración</a>
       </nav>
     </header>
 
-    <main id="contenido" style="max-width: 800px; margin: 2rem auto; padding: 0 1rem;">
-      <div class="intro">
+    <main id="contenido" style="max-width: 1000px; margin: 2rem auto; padding: 0 1rem;">
+      <div class="intro" style="text-align: center; margin-bottom: 2rem;">
         <h1>Contacto Directo con Nexus-Ecoruta</h1>
-        <p>
-          ¿Tienes dudas, sugerencias o comentarios sobre la ruta? Envíanos un mensaje directo y te responderemos a la brevedad.
-        </p>
+        <p>¿Tienes dudas, sugerencias o quieres coordinar un recorrido? Ponte en contacto con nosotros.</p>
       </div>
 
-      <form id="formContacto" style="background: #fff; padding: 2rem; border-radius: 8px; border: 1px solid #e0e0e0; margin-top: 1.5rem;">
-        <div style="margin-bottom: 1.2rem;">
-          <label for="nombre" style="display: block; font-weight: bold; margin-bottom: 0.5rem;">Nombre completo (*)</label>
-          <input type="text" id="nombre" required placeholder="Tu nombre" style="width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px;" />
-        </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+        <!-- Información de contacto -->
+        <section style="background: #f9f9f9; padding: 1.5rem; border-radius: 8px; border: 1px solid #e0e0e0;">
+          <h2 style="color: #2e7d32; margin-top: 0;">Información de Atención</h2>
+          <p><strong>Ubicación:</strong> Temuco, Región de La Araucanía, Chile</p>
+          <p><strong>Correo electrónico:</strong> <a href="mailto:contacto@ecorutatemuco.cl">contacto@ecorutatemuco.cl</a></p>
+          <p><strong>Horarios de Atención:</strong> Lunes a Viernes de 09:00 a 18:00 hrs.</p>
+          <hr style="margin: 1.5rem 0; border: 0; border-top: 1px solid #ddd;" />
+          <p style="font-size: 0.9rem; color: #555;">
+            Si eres emprendedor sustentable y quieres postular para aparecer en la plataforma, utiliza el formulario de la sección <a href="vista3_emprendedor.html" style="color: #2e7d32; font-weight: bold;">Emprendedores</a>.
+          </p>
+        </section>
 
-        <div style="margin-bottom: 1.2rem;">
-          <label for="email" style="display: block; font-weight: bold; margin-bottom: 0.5rem;">Correo electrónico (*)</label>
-          <input type="email" id="email" required placeholder="tu@correo.com" style="width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px;" />
-        </div>
+        <!-- Formulario -->
+        <section>
+          <form id="formContacto" style="background: #fff; padding: 1.5rem; border-radius: 8px; border: 1px solid #e0e0e0;">
+            <div style="margin-bottom: 1rem;">
+              <label for="nombre" style="display: block; font-weight: bold; margin-bottom: 0.3rem;">Nombre completo (*)</label>
+              <input type="text" id="nombre" required placeholder="Tu nombre" style="width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px;" />
+            </div>
 
-        <div style="margin-bottom: 1.2rem;">
-          <label for="asunto" style="display: block; font-weight: bold; margin-bottom: 0.5rem;">Asunto (*)</label>
-          <input type="text" id="asunto" required placeholder="Ej: Consulta sobre recorridos" style="width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px;" />
-        </div>
+            <div style="margin-bottom: 1rem;">
+              <label for="email" style="display: block; font-weight: bold; margin-bottom: 0.3rem;">Correo electrónico (*)</label>
+              <input type="email" id="email" required placeholder="tu@correo.com" style="width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px;" />
+            </div>
 
-        <div style="margin-bottom: 1.5rem;">
-          <label for="mensaje" style="display: block; font-weight: bold; margin-bottom: 0.5rem;">Mensaje (*)</label>
-          <textarea id="mensaje" rows="5" required placeholder="Escribe tu mensaje aquí..." style="width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px; resize: vertical;"></textarea>
-        </div>
+            <div style="margin-bottom: 1rem;">
+              <label for="asunto" style="display: block; font-weight: bold; margin-bottom: 0.3rem;">Asunto (*)</label>
+              <input type="text" id="asunto" required placeholder="Ej: Consulta de rutas" style="width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px;" />
+            </div>
 
-        <button type="submit" style="background-color: #2e7d32; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 1rem;">
-          Enviar Mensaje
-        </button>
-      </form>
+            <div style="margin-bottom: 1rem;">
+              <label for="mensaje" style="display: block; font-weight: bold; margin-bottom: 0.3rem;">Mensaje (*)</label>
+              <textarea id="mensaje" rows="4" required placeholder="Escribe tu mensaje aquí..." style="width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px; resize: vertical;"></textarea>
+            </div>
 
-      <div id="mensajeExito" style="display: none; background: #e8f5e9; color: #2e7d32; padding: 1.5rem; border-radius: 8px; border: 1px solid #a5d6a7; margin-top: 1.5rem; text-align: center;">
-        <h3>¡Mensaje enviado con éxito!</h3>
-        <p>Gracias por contactarte con el equipo de Nexus-Ecoruta. Te responderemos pronto.</p>
+            <button type="submit" style="background-color: #2e7d32; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 6px; font-weight: bold; cursor: pointer; width: 100%;">
+              Enviar Mensaje
+            </button>
+          </form>
+
+          <div id="mensajeExito" style="display: none; background: #e8f5e9; color: #2e7d32; padding: 1.5rem; border-radius: 8px; border: 1px solid #a5d6a7; text-align: center;">
+            <h3 style="margin-top:0;">¡Mensaje enviado con éxito!</h3>
+            <p>Gracias por contactarte con Nexus-Ecoruta. Responderemos a la brevedad.</p>
+          </div>
+        </section>
       </div>
     </main>
 
@@ -86,7 +100,6 @@
         });
       }
 
-      // Guardar mensaje de contacto en localStorage
       const formContacto = document.getElementById('formContacto');
       const mensajeExito = document.getElementById('mensajeExito');
 
@@ -98,7 +111,7 @@
           email: document.getElementById('email').value.trim(),
           asunto: document.getElementById('asunto').value.trim(),
           mensaje: document.getElementById('mensaje').value.trim(),
-          fecha: new Date().toLocaleString()
+          fecha: new Date().toLocaleString('es-CL')
         };
 
         let mensajes = JSON.parse(localStorage.getItem('mensajesContacto')) || [];
