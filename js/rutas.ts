@@ -1,59 +1,73 @@
-// Interface que define los datos de una ruta
+// Interface que define la estructura de una Ruta
 export interface Ruta {
-  id: number;
+  id?: string | number;
   nombre: string;
-  categoria: 'Naturaleza' | 'Cultura' | 'Gastronomía' | 'Sustentable';
-  ubicacion: string;
-  duracionMinutos: number;
-  dificultad: 'Fácil' | 'Moderada' | 'Difícil';
-  climaRecomendado: string;
+  dificultad: "Fácil" | "Media" | "Alta" | string;
+  distancia: string;
+  tiempoEstimado: string;
   descripcion: string;
-  personalizada: boolean;
+  imagen?: string;
+  ubicacion?: string;
 }
 
-// Lista base de rutas
-export const rutasBase: Ruta[] = [
+// Endpoint de la API para obtener las rutas
+const RUTAS_API_URL = "https://6724eb29c39fedae05b33100.mockapi.io/api/v1/rutas";
+
+// Rutas base de respaldo en caso de que la API falle
+const rutasBase: Ruta[] = [
   {
     id: 1,
-    nombre: "Sendero Monumento Natural Cerro Ñielol",
-    categoria: "Naturaleza",
-    ubicacion: "Prat 01, Temuco",
-    duracionMinutos: 90,
+    nombre: "Sendero Cerro Ñielol",
     dificultad: "Fácil",
-    climaRecomendado: "Parcialmente Nublado / Soleado",
-    descripcion: "Caminata por el bosque nativo dentro de Temuco.",
-    personalizada: false
+    distancia: "2.5 km",
+    tiempoEstimado: "1h 30min",
+    descripcion: "Caminata entre bosque nativo con vista panorámica a Temuco.",
+    ubicacion: "Monumento Natural Cerro Ñielol"
+  },
+  {
+    id: 2,
+    nombre: "Ruta Eco-Etnia Ruka Mapuche",
+    dificultad: "Media",
+    distancia: "5.0 km",
+    tiempoEstimado: "2h 45min",
+    descripcion: "Recorrido cultural y gastronómico por rukas y senderos locales.",
+    ubicacion: "Padre Las Casas"
   }
 ];
 
-// Función 1: Agregar ruta manual
-export function agregarRutaManual(
-  listaActual: Ruta[],
-  nombre: string,
-  categoria: 'Naturaleza' | 'Cultura' | 'Gastronomía' | 'Sustentable',
-  ubicacion: string,
-  duracionMinutos: number,
-  dificultad: 'Fácil' | 'Moderada' | 'Difícil',
-  descripcion: string
-): Ruta[] {
-  const nuevaRuta: Ruta = {
-    id: Date.now(),
-    nombre,
-    categoria,
-    ubicacion,
-    duracionMinutos,
-    dificultad,
-    climaRecomendado: "Variable",
-    descripcion,
-    personalizada: true
-  };
-  return [...listaActual, nuevaRuta];
+// Función para obtener las rutas desde la API
+async function cargarRutas(): Promise<Ruta[]> {
+  try {
+    const response = await fetch(RUTAS_API_URL);
+    if (!response.ok) {
+      throw new Error(`Error HTTP: ${response.status}`);
+    }
+    const data: Ruta[] = await response.json();
+    return data && data.length > 0 ? data : rutasBase;
+  } catch (error) {
+    console.warn("No se pudo conectar con la API de rutas. Cargando datos locales de respaldo:", error);
+    return rutasBase;
+  }
 }
 
-// Función 2: Formatear detalle
-export function formatearDetalleRuta(ruta: Ruta): string {
-  const horas = Math.floor(ruta.duracionMinutos / 60);
-  const minutos = ruta.duracionMinutos % 60;
-  const tiempoTxt = horas > 0 ? `${horas}h ${minutos}m` : `${minutos} min`;
-  return `📍 ${ruta.nombre} (${ruta.categoria}) - Duración: ${tiempoTxt} | Dificultad: ${ruta.dificultad}`;
+// Función para renderizar las rutas en el DOM
+async function renderizarRutas(): Promise<void> {
+  const contenedor = document.getElementById("contenedor-rutas");
+  if (!contenedor) return;
+
+  const rutas = await cargarRutas();
+
+  contenedor.innerHTML = rutas.map((ruta) => `
+    <article class="ruta-card" style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; background: #fff;">
+      <h3 style="color: #2e7d32; margin-top: 0;">${ruta.nombre}</h3>
+      <p style="margin: 0.4rem 0;"><strong>Dificultad:</strong> <span class="badge-dificultad">${ruta.dificultad}</span></p>
+      <p style="margin: 0.4rem 0;"><strong>Distancia:</strong> ${ruta.distancia} | <strong>Tiempo:</strong> ${ruta.tiempoEstimado}</p>
+      <p style="color: #555; margin-top: 0.5rem;">${ruta.descripcion}</p>
+      ${ruta.ubicacion ? `<small style="color: #777;">📍 ${ruta.ubicacion}</small>` : ''}
+    </article>
+  `).join('');
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderizarRutas();
+});
