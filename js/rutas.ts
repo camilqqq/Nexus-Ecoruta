@@ -1,4 +1,4 @@
-// Interface que define la estructura de una Ruta
+// 1. Interface que define la estructura de una Ruta
 export interface Ruta {
   id?: string | number;
   nombre: string;
@@ -10,10 +10,10 @@ export interface Ruta {
   ubicacion?: string;
 }
 
-// Endpoint de la API para obtener las rutas
+// Endpoint de la API
 const RUTAS_API_URL = "https://6724eb29c39fedae05b33100.mockapi.io/api/v1/rutas";
 
-// Rutas base de respaldo en caso de que la API falle
+// Datos de respaldo
 const rutasBase: Ruta[] = [
   {
     id: 1,
@@ -35,22 +35,28 @@ const rutasBase: Ruta[] = [
   }
 ];
 
-// Función para obtener las rutas desde la API
+// FUNCIÓN 1: Obtener rutas desde la API (Retorna Promise<Ruta[]>)
 async function cargarRutas(): Promise<Ruta[]> {
   try {
     const response = await fetch(RUTAS_API_URL);
-    if (!response.ok) {
-      throw new Error(`Error HTTP: ${response.status}`);
-    }
+    if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
     const data: Ruta[] = await response.json();
     return data && data.length > 0 ? data : rutasBase;
   } catch (error) {
-    console.warn("No se pudo conectar con la API de rutas. Cargando datos locales de respaldo:", error);
+    console.warn("No se pudo conectar con la API de rutas. Cargando datos de respaldo:", error);
     return rutasBase;
   }
 }
 
-// Función para renderizar las rutas en el DOM
+// FUNCIÓN 2: Filtrar lista de rutas según nivel de dificultad (Trabaja con Ruta[])
+export function filtrarRutasPorDificultad(listaRutas: Ruta[], dificultad: string): Ruta[] {
+  if (!dificultad || dificultad === "Todas") return listaRutas;
+  return listaRutas.filter(
+    (ruta) => ruta.dificultad.toLowerCase() === dificultad.toLowerCase()
+  );
+}
+
+// FUNCIÓN 3: Renderizar las rutas en el DOM
 async function renderizarRutas(): Promise<void> {
   const contenedor = document.getElementById("contenedor-rutas");
   if (!contenedor) return;
