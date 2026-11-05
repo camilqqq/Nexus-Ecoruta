@@ -27,7 +27,7 @@
       <nav aria-label="Navegación principal" class="main-nav" id="menuNav">
         <a href="../index.html">Inicio</a>
         <a href="../index.html#explorar" class="active" aria-current="page">Explorar</a>
-        <a href="vista3_emprendedor.html">Emprendedores</a>
+        <a href="emprendimientos.html">Emprendedores</a>
         <a href="vista4.html">Administración</a>
       </nav>
     </header>
@@ -41,15 +41,14 @@
       </section>
 
       <div class="content-grid">
-        <!-- Contenedor dinámico de rutas de TypeScript -->
+        <!-- Contenedor dinámico donde TypeScript inyectará las fichas y los mapas -->
         <article class="card main-card">
-          <h2>Rutas Disponibles en la Zona</h2>
+          <h2>Ficha Técnica y Trazado de la Ruta</h2>
           <p>
-            Senderos y recorridos con sus respectivos trayectos (inicio y fin), 
-            distancias en kilómetros, imágenes y nivel de dificultad.
+            Información detallada sobre distancia, duración, inicio, término y trazado visual del recorrido.
           </p>
 
-          <!-- Aquí js/rutas.js inyectará dinámicamente cada ficha de ruta -->
+          <!-- Aquí js/rutas.js inyectará dinámicamente las fichas -->
           <div id="contenedor-rutas" style="margin-top: 1.5rem;"></div>
         </article>
 
@@ -104,7 +103,7 @@
       });
     </script>
 
-    <!-- Vinculación de los scripts JS compilados -->
+    <!-- Scripts dinámicos para inyectar la información -->
     <script src="../js/api.js"></script>
     <script src="../js/rutas.js"></script>
   </body>
