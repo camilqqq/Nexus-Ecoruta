@@ -41,14 +41,13 @@
       </section>
 
       <div class="content-grid">
-        <!-- Contenedor dinámico donde TypeScript inyectará las fichas y los mapas -->
+        <!-- Contenedor dinámico de TypeScript -->
         <article class="card main-card">
           <h2>Ficha Técnica y Trazado de la Ruta</h2>
           <p>
             Información detallada sobre distancia, duración, inicio, término y trazado visual del recorrido.
           </p>
 
-          <!-- Contenedor inyectado dinámicamente -->
           <div id="contenedor-rutas" style="margin-top: 1.5rem;"></div>
         </article>
 
@@ -103,9 +102,8 @@
       });
     </script>
 
-    <!-- Vinculación de los tres scripts de la app -->
+    <!-- Eliminada la referencia invalida a actividad.js -->
     <script src="../js/api.js"></script>
     <script src="../js/rutas.js"></script>
-    <script src="../js/actividad.js"></script>
   </body>
 </html>
