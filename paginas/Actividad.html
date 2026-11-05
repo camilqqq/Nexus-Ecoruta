@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EcoRuta Temuco - Detalle de Actividad</title>
+    <title>EcoRuta Temuco - Detalle de Actividad y Rutas</title>
     <link rel="stylesheet" href="../css/styles.css" />
   </head>
 
@@ -34,45 +34,26 @@
 
     <main class="main-container">
       <section class="hero-section">
-        <h1 id="nombreActividad">Sendero Mirador Ñielol</h1>
+        <h1 id="nombreActividad">Catálogo de Ecorutas y Senderos</h1>
         <p class="subtitle" id="descripcionHero">
-          Caminata guiada por la selva valdiviana con vistas panorámicas de la ciudad.
+          Explora los senderos, recorridos patrimoniales y circuitos históricos de Temuco.
         </p>
       </section>
 
       <div class="content-grid">
+        <!-- Columna Principal: Contenedor Dinámico para las Rutas de TypeScript -->
         <article class="card main-card">
-          <div class="media-wrapper">
-            <img
-              id="imagenActividad"
-              src="../assets/imagenes/Sendero/Sendero_Nielol.jpg"
-              alt="Sendero rodeado de vegetación nativa en Cerro Ñielol"
-              class="feature-img"
-            />
-          </div>
-
-          <h2>Descripción de la Experiencia</h2>
-          <p id="descripcion">
-            Recorrido autoguiado o acompañado por miembros de la comunidad local a través del
-            Monumento Natural Cerro Ñielol. Durante el trayecto aprenderás sobre la flora nativa,
-            especies protegidas y la historia cultural mapuche vinculada a este ecosistema protegido
-            en pleno corazón de Temuco.
+          <h2>Rutas Disponibles en la Zona</h2>
+          <p>
+            A continuación se presentan los senderos y recorridos con sus respectivos trayectos
+            (inicio y fin), distancias en kilómetros, imágenes y nivel de dificultad.
           </p>
 
-          <div class="details-box" aria-label="Detalles clave de la actividad">
-            <div class="detail-item">
-              <strong>Duración:</strong> <span id="duracion">2 Horas</span>
-            </div>
-            <div class="detail-item">
-              <strong>Dificultad:</strong> <span id="dificultad">Fácil - Media</span>
-            </div>
-            <div class="detail-item">
-              <strong>Ubicación:</strong> <span id="ubicacion">Cerro Ñielol, Temuco</span>
-            </div>
-            <div class="detail-item"><strong>Estado:</strong> <span id="estado">--</span></div>
-          </div>
+          <!-- AQUÍ js/rutas.js inyectará las tarjetas de rutas con renderizarRutas() -->
+          <div id="contenedor-rutas" style="margin-top: 1.5rem;"></div>
         </article>
 
+        <!-- Columna Lateral Mantenida al 100% (Clima, Recomendaciones y Mapa) -->
         <aside class="sidebar">
           <section class="card weather-card" aria-live="polite">
             <h2>Estado del Tiempo Local</h2>
@@ -84,7 +65,9 @@
 
           <section class="card info-card">
             <h2>Recomendaciones</h2>
-            <p id="recomendaciones"></p>
+            <p id="recomendaciones">
+              Llevar ropa cómoda, calzado de trekking, hidratación y respetar la señalización de los senderos protegidos.
+            </p>
             <p
               id="condiciones"
               style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted)"
@@ -94,7 +77,7 @@
           <section class="card map-card">
             <h2>Cómo Llegar</h2>
             <p id="avisoEspecial">
-              Acceso por Av. Arturo Prat s/n, a 7 cuadras de la Plaza de Armas.
+              Acceso a principales senderos por Av. Arturo Prat s/n y puntos céntricos de Temuco.
             </p>
             <a
               href="https://maps.google.com"
@@ -122,6 +105,7 @@
       ></p>
     </footer>
 
+    <!-- Lógica de navegación móvil -->
     <script>
       const menuBtn = document.getElementById('menuBtn');
       const menuNav = document.getElementById('menuNav');
@@ -131,6 +115,8 @@
       });
     </script>
 
-    <script src="../js/script.js"></script>
+    <!-- Inclusión de los scripts TypeScript compilados -->
+    <script src="../js/api.js"></script>
+    <script src="../js/rutas.js"></script>
   </body>
 </html>
