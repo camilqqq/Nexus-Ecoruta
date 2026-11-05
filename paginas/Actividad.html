@@ -41,19 +41,19 @@
       </section>
 
       <div class="content-grid">
-        <!-- Columna Principal: Contenedor Dinámico para las Rutas de TypeScript -->
+        <!-- Contenedor dinámico de rutas de TypeScript -->
         <article class="card main-card">
           <h2>Rutas Disponibles en la Zona</h2>
           <p>
-            A continuación se presentan los senderos y recorridos con sus respectivos trayectos
-            (inicio y fin), distancias en kilómetros, imágenes y nivel de dificultad.
+            Senderos y recorridos con sus respectivos trayectos (inicio y fin), 
+            distancias en kilómetros, imágenes y nivel de dificultad.
           </p>
 
-          <!-- AQUÍ js/rutas.js inyectará las tarjetas de rutas con renderizarRutas() -->
+          <!-- Aquí js/rutas.js inyectará dinámicamente cada ficha de ruta -->
           <div id="contenedor-rutas" style="margin-top: 1.5rem;"></div>
         </article>
 
-        <!-- Columna Lateral Mantenida al 100% (Clima, Recomendaciones y Mapa) -->
+        <!-- Barra lateral -->
         <aside class="sidebar">
           <section class="card weather-card" aria-live="polite">
             <h2>Estado del Tiempo Local</h2>
@@ -68,10 +68,6 @@
             <p id="recomendaciones">
               Llevar ropa cómoda, calzado de trekking, hidratación y respetar la señalización de los senderos protegidos.
             </p>
-            <p
-              id="condiciones"
-              style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted)"
-            ></p>
           </section>
 
           <section class="card map-card">
@@ -84,7 +80,6 @@
               target="_blank"
               rel="noopener noreferrer"
               class="map-btn"
-              aria-label="Ver ubicación en Google Maps (se abre en una nueva pestaña)"
             >
               Ver en Google Maps
             </a>
@@ -95,17 +90,11 @@
 
     <footer class="site-footer">
       <div class="footer-content">
-        <a href="mailto:contacto@ecorutatemuco.cl">Contacto</a>
-        <a href="https://github.com/camilqqq/Nexus-Ecoruta/blob/main/documentos/reportes/reporte-bug-bounty.pdf" target="_blank" rel="noopener">Bug Bounty</a>
-        <a href="#info">Información Local</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="https://github.com/camilqqq/Nexus-Ecoruta" target="_blank" rel="noopener">GitHub</a>
       </div>
-      <p
-        id="actualizacion"
-        style="margin-top: 0.5rem; font-size: 0.75rem; color: var(--text-muted)"
-      ></p>
     </footer>
 
-    <!-- Lógica de navegación móvil -->
     <script>
       const menuBtn = document.getElementById('menuBtn');
       const menuNav = document.getElementById('menuNav');
@@ -115,7 +104,7 @@
       });
     </script>
 
-    <!-- Inclusión de los scripts TypeScript compilados -->
+    <!-- Vinculación de los scripts JS compilados -->
     <script src="../js/api.js"></script>
     <script src="../js/rutas.js"></script>
   </body>
