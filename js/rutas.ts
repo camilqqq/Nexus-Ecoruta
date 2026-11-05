@@ -9,7 +9,7 @@ export interface Ruta {
   inicio: string;
   fin: string;
   imagen?: string;
-  mapaEmbedUrl?: string; // URL del mapa interactivo
+  mapaRutaImg?: string; // Imagen directa del trazado/mapa tipo Wikiloc
   ubicacion?: string;
   desnivel?: string;
 }
@@ -28,7 +28,7 @@ const rutasBase: Ruta[] = [
     ubicacion: "Monumento Natural Cerro Ñielol, Temuco",
     desnivel: "~162 m a 204 m",
     imagen: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80",
-    mapaEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12448.272195393437!2d-72.5898851!3d-38.7291114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9614d3f545a0ed33%3A0x6b77626922e37937!2sMonumento%20Natural%20Cerro%20%C3%91ielol!5e0!3m2!1ses!2scl!4v1700000000000!5m2!1ses!2scl"
+    mapaRutaImg: "https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=700&q=80"
   },
   {
     id: 2,
@@ -43,7 +43,7 @@ const rutasBase: Ruta[] = [
     ubicacion: "Parque Nacional Conguillío, Melipeuco",
     desnivel: "450 m a 1.250 m",
     imagen: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
-    mapaEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24888.123!2d-71.63!3d-38.64!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9613524b07137f8f%3A0x8e87dbefc76d2a45!2sParque%20Nacional%20Conguill%C3%ADo!5e0!3m2!1ses!2scl!4v1700000000000!5m2!1ses!2scl"
+    mapaRutaImg: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=700&q=80"
   },
   {
     id: 3,
@@ -110,15 +110,15 @@ async function renderizarRutas(): Promise<void> {
       ${ruta.desnivel ? `<p style="color: #555;"><strong>⛰️ Desnivel:</strong> ${ruta.desnivel}</p>` : ''}
       <p style="color: #444; margin-top: 0.6rem; line-height: 1.5;">${ruta.descripcion}</p>
       
-      <!-- Visualizador del Mapa estilo Wikiloc/Google Maps -->
-      ${ruta.mapaEmbedUrl ? `
-        <div style="margin-top: 1rem;">
-          <h4 style="margin-bottom: 0.5rem; color: #333;">🗺️ Mapa del Recorrido:</h4>
-          <iframe src="${ruta.mapaEmbedUrl}" width="100%" height="280" style="border:0; border-radius:6px;" allowfullscreen="" loading="lazy"></iframe>
+      <!-- Visualizador de Mapa de Trazado de la Ruta sin bloqueos de iframe -->
+      ${ruta.mapaRutaImg ? `
+        <div style="margin-top: 1.2rem; background: #f9f9f9; padding: 10px; border-radius: 6px; border: 1px dashed #ccc;">
+          <h4 style="margin: 0 0 0.5rem 0; color: #2e7d32;">🗺️ Trazado y Mapa del Recorrido (Estilo Wikiloc):</h4>
+          <img src="${ruta.mapaRutaImg}" alt="Mapa de la ruta ${ruta.nombre}" style="width: 100%; height: 240px; object-fit: cover; border-radius: 6px;" />
         </div>
       ` : ''}
       
-      <small style="color: #666; display: block; margin-top: 0.5rem;">📍 ${ruta.ubicacion}</small>
+      <small style="color: #666; display: block; margin-top: 0.8rem;">📍 ${ruta.ubicacion}</small>
     </article>
   `).join('');
 }
