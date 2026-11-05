@@ -9,7 +9,7 @@ export interface Ruta {
   inicio: string;
   fin: string;
   imagen?: string;
-  mapaRutaImg?: string; // Imagen directa del trazado/mapa tipo Wikiloc
+  mapaRutaImg?: string;
   ubicacion?: string;
   desnivel?: string;
 }
@@ -81,9 +81,10 @@ function obtenerRutaPorParametro(): Ruta | null {
   const busqueda = idParam.toLowerCase();
 
   return rutasBase.find(r => {
-    if (busqueda === 'sendero' && r.id === 1) return true;
-    if (busqueda === 'feria' && r.id === 3) return true;
-    if (busqueda === 'museo' && r.id === 4) return true;
+    if ((busqueda === 'sendero' || busqueda === '1') && r.id === 1) return true;
+    if ((busqueda === 'conguillio' || busqueda === '2') && r.id === 2) return true;
+    if ((busqueda === 'feria' || busqueda === '3') && r.id === 3) return true;
+    if ((busqueda === 'museo' || busqueda === '4') && r.id === 4) return true;
     return r.id.toString() === busqueda;
   }) || null;
 }
@@ -110,7 +111,6 @@ async function renderizarRutas(): Promise<void> {
       ${ruta.desnivel ? `<p style="color: #555;"><strong>⛰️ Desnivel:</strong> ${ruta.desnivel}</p>` : ''}
       <p style="color: #444; margin-top: 0.6rem; line-height: 1.5;">${ruta.descripcion}</p>
       
-      <!-- Visualizador de Mapa de Trazado de la Ruta sin bloqueos de iframe -->
       ${ruta.mapaRutaImg ? `
         <div style="margin-top: 1.2rem; background: #f9f9f9; padding: 10px; border-radius: 6px; border: 1px dashed #ccc;">
           <h4 style="margin: 0 0 0.5rem 0; color: #2e7d32;">🗺️ Trazado y Mapa del Recorrido (Estilo Wikiloc):</h4>
