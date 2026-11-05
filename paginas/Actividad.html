@@ -41,13 +41,13 @@
       </section>
 
       <div class="content-grid">
-        <!-- Contenedor dinámico de TypeScript -->
         <article class="card main-card">
           <h2>Ficha Técnica y Trazado de la Ruta</h2>
           <p>
             Información detallada sobre distancia, duración, inicio, término y trazado visual del recorrido.
           </p>
 
+          <!-- Contenedor dinámico de TypeScript -->
           <div id="contenedor-rutas" style="margin-top: 1.5rem;"></div>
         </article>
 
@@ -93,16 +93,19 @@
       </div>
     </footer>
 
+    <!-- Menú desplegable móvil -->
     <script>
       const menuBtn = document.getElementById('menuBtn');
       const menuNav = document.getElementById('menuNav');
 
-      menuBtn.addEventListener('click', () => {
-        menuNav.classList.toggle('menu-visible');
-      });
+      if (menuBtn && menuNav) {
+        menuBtn.addEventListener('click', function() {
+          menuNav.classList.toggle('menu-visible');
+        });
+      }
     </script>
 
-    <!-- Eliminada la referencia invalida a actividad.js -->
+    <!-- Inyección dinámica de las fichas de rutas -->
     <script src="../js/api.js"></script>
     <script src="../js/rutas.js"></script>
   </body>
