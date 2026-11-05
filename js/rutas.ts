@@ -1,28 +1,23 @@
-// 1. Interfaz Ruta con campos técnicos (Diferencia Ruta de Actividad)
 export interface Ruta {
-  id?: string | number;
+  id: number;
   nombre: string;
-  dificultad?: "Fácil" | "Moderada" | "Media" | "Alta" | string;
+  dificultad?: string;
   distancia: string;
-  kilometros: number;     // Distancia exacta en km
+  kilometros: number;
   tiempoEstimado: string;
   descripcion: string;
-  inicio: string;         // Punto de inicio del trayecto
-  fin: string;            // Punto de término
-  imagen?: string;        // URL de la imagen/mapa tipo Wikiloc
+  inicio: string;
+  fin: string;
+  imagen?: string;
   ubicacion?: string;
   desnivel?: string;
 }
 
-// Endpoint de la API de rutas
-const RUTAS_API_URL = "https://6724eb29c39fedae05b33100.mockapi.io/api/v1/rutas";
-
-// 2. Catálogo Actualizado y Curado según indicaciones
 const rutasBase: Ruta[] = [
   {
     id: 1,
-    nombre: "Sendero Cerro Ñielol (Ruta Principal)",
-    dificultad: "Moderada (apta para familias y niños)",
+    nombre: "Sendero Cerro Ñielol",
+    dificultad: "Moderada",
     distancia: "4.2 km",
     kilometros: 4.2,
     tiempoEstimado: "1 a 1,5 horas",
@@ -50,6 +45,7 @@ const rutasBase: Ruta[] = [
   {
     id: 3,
     nombre: "Recorrido Patrimonial Feria Pinto",
+    dificultad: "Fácil",
     distancia: "1.5 km",
     kilometros: 1.5,
     tiempoEstimado: "45 min",
@@ -74,44 +70,41 @@ const rutasBase: Ruta[] = [
   }
 ];
 
-// FUNCIÓN 1: Cargar rutas desde la API
-async function cargarRutas(): Promise<Ruta[]> {
-  try {
-    const response = await fetch(RUTAS_API_URL);
-    if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
-    const data: Ruta[] = await response.json();
-    return data && data.length > 0 ? data : rutasBase;
-  } catch (error) {
-    console.warn("No se pudo conectar con la API de rutas. Cargando datos curados de respaldo:", error);
-    return rutasBase;
-  }
+function obtenerIdParametro(): number | null {
+  const urlParams = new URLSearchParams(window.location.search);
+  const idStr = urlParams.get('id');
+  return idStr ? parseInt(idStr, 10) : null;
 }
 
-// FUNCIÓN 2: Filtrar rutas por dificultad
-export function filtrarRutasPorDificultad(listaRutas: Ruta[], dificultad: string): Ruta[] {
-  if (!dificultad || dificultad === "Todas") return listaRutas;
-  return listaRutas.filter(
-    (ruta) => ruta.dificultad && ruta.dificultad.toLowerCase().includes(dificultad.toLowerCase())
-  );
-}
-
-// FUNCIÓN 3: Renderizar nuevos atributos en el DOM
 async function renderizarRutas(): Promise<void> {
   const contenedor = document.getElementById("contenedor-rutas");
   if (!contenedor) return;
 
-  const rutas = await cargarRutas();
+  const idSeleccionado = obtenerIdParametro();
+  let listaMostrar = rutasBase;
 
-  contenedor.innerHTML = rutas.map((ruta) => `
+  // Si viene un ID en la URL, se filtra esa ficha específica
+  if (idSeleccionado) {
+    const encontrada = rutasBase.find(r => r.id === idSeleccionado);
+    if (encontrada) listaMostrar = [encontrada];
+  }
+
+  // Actualizar el título dinámicamente si es una ficha individual
+  const tituloEl = document.getElementById("nombreActividad");
+  if (tituloEl && idSeleccionado && listaMostrar.length === 1) {
+    tituloEl.textContent = listaMostrar[0].nombre;
+  }
+
+  contenedor.innerHTML = listaMostrar.map((ruta) => `
     <article class="ruta-card" style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 1.2rem; margin-bottom: 1.5rem; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.06);">
-      ${ruta.imagen ? `<img src="${ruta.imagen}" alt="${ruta.nombre}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 6px; margin-bottom: 1rem;" />` : ''}
-      <h3 style="color: #2e7d32; margin-top: 0; font-size: 1.3rem;">${ruta.nombre}</h3>
-      ${ruta.dificultad ? `<p style="margin: 0.4rem 0;"><strong>Dificultad:</strong> <span style="background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-weight: 500;">${ruta.dificultad}</span></p>` : ''}
-      <p style="margin: 0.4rem 0;"><strong>Distancia:</strong> ${ruta.distancia} (${ruta.kilometros} km) | <strong>Duración:</strong> ${ruta.tiempoEstimado}</p>
-      <p style="margin: 0.4rem 0; color: #222;"><strong>📍 Inicio:</strong> ${ruta.inicio} ➡️ <strong>🏁 Fin:</strong> ${ruta.fin}</p>
-      ${ruta.desnivel ? `<p style="margin: 0.4rem 0; color: #555;"><strong>⛰️ Desnivel:</strong> ${ruta.desnivel}</p>` : ''}
-      <p style="color: #444; margin-top: 0.6rem; line-height: 1.4;">${ruta.descripcion}</p>
-      ${ruta.ubicacion ? `<small style="color: #666; display: block; margin-top: 0.5rem;">📍 ${ruta.ubicacion}</small>` : ''}
+      ${ruta.imagen ? `<img src="${ruta.imagen}" alt="${ruta.nombre}" style="width: 100%; height: 220px; object-fit: cover; border-radius: 6px; margin-bottom: 1rem;" />` : ''}
+      <h2 style="color: #2e7d32; margin-top: 0;">${ruta.nombre}</h2>
+      <p><strong>Dificultad:</strong> <span style="background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px;">${ruta.dificultad || 'General'}</span></p>
+      <p><strong>Distancia:</strong> ${ruta.distancia} (${ruta.kilometros} km) | <strong>Duración:</strong> ${ruta.tiempoEstimado}</p>
+      <p style="color: #222;"><strong>📍 Inicio:</strong> ${ruta.inicio} ➡️ <strong>🏁 Fin:</strong> ${ruta.fin}</p>
+      ${ruta.desnivel ? `<p style="color: #555;"><strong>⛰️ Desnivel:</strong> ${ruta.desnivel}</p>` : ''}
+      <p style="color: #444; margin-top: 0.6rem; line-height: 1.5;">${ruta.descripcion}</p>
+      <small style="color: #666; display: block; margin-top: 0.5rem;">📍 ${ruta.ubicacion}</small>
     </article>
   `).join('');
 }
