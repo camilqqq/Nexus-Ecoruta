@@ -19,12 +19,12 @@
         </div>
 
         <nav>
-            <a href="#inicio" aria-current="page">Inicio</a>
-            <a href="#explorar">Explorar</a>
-            <a href="paginas/emprendimientos.html">Emprendedores</a>
-            <a href="paginas/contacto.html">Contacto</a>
-            <a href="paginas/vista4.html">Administración</a>
-       </nav>
+          <a href="#inicio" aria-current="page">Inicio</a>
+          <a href="#explorar">Explorar</a>
+          <a href="paginas/emprendimientos.html">Emprendedores</a>
+          <a href="paginas/contacto.html">Contacto</a>
+          <a href="paginas/vista4.html">Administración</a>
+        </nav>
 
         <button class="menu" aria-label="Abrir menú">☰</button>
       </div>
@@ -84,13 +84,12 @@
                 <small>Actualizado: 2026-08-10</small>
               </div>
 
-              <p>Duración: 1 hr 30 min · Dificultad: Fácil</p>
+              <p>Duración: 1 hr 30 min · Dificultad: Moderada</p>
 
               <div class="buttons">
-                <!-- Enlace conectado a la ficha -->
-                <a href="paginas/Actividad.html?id=sendero" class="primary" aria-label="Ver ficha detallada de Sendero Ñielol">Ver ficha</a>
-                <!-- Enlace conectado al WhatsApp/contacto -->
-                <a href="https://wa.me/56912345678" target="_blank">Contactar</a>
+                <!-- ID numérico sincronizado con la interfaz TypeScript -->
+                <a href="paginas/Actividad.html?id=1" class="primary" aria-label="Ver ficha detallada de Sendero Ñielol">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
               </div>
             </div>
           </article>
@@ -116,9 +115,8 @@
               <p>Duración: 1-2 hrs · Dificultad: Fácil</p>
 
               <div class="buttons">
-                <!-- Enlace de conecxion con la ficha -->
-                <a href="paginas/Actividad.html?id=museo" class="primary" aria-label="Ver ficha detallada del Museo Regional de La Araucanía">Ver ficha</a>
-                <!-- Enlace conectado al correo -->
+                <!-- ID numérico sincronizado con la interfaz TypeScript -->
+                <a href="paginas/Actividad.html?id=4" class="primary" aria-label="Ver ficha detallada del Museo Regional de La Araucanía">Ver ficha</a>
                 <a href="mailto:contacto@museoaraucania.cl">Contactar</a>
               </div>
             </div>
@@ -142,47 +140,47 @@
                 <small>Actualizado: 2026-08-12</small>
               </div>
 
-              <p>Duración: 4 hrs · Dificultad: Muy fácil</p>
+              <p>Duración: 45 min · Dificultad: Muy fácil</p>
 
               <div class="buttons">
-                <!-- Enlace conectado a la ficha -->
-                <a href="paginas/Actividad.html?id=feria" class="primary" aria-label="Ver ficha detallada de la Feria Agroecológica">Ver ficha</a>
-                <!-- Enlace conectado al contacto -->
-                <a href="https://wa.me/56912345678" target="_blank">Contactar</a>
+                <!-- ID numérico sincronizado con la interfaz TypeScript -->
+                <a href="paginas/Actividad.html?id=3" class="primary" aria-label="Ver ficha detallada de la Feria Agroecológica">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
               </div>
             </div>
           </article>
         </div>
 
-        <!-- Contenedor API -->
-        
-<div id="contenedor-api" class="api-container">
-
+        <!-- Contenedor inyectado dinámicamente desde la API -->
+        <div id="contenedor-api" class="api-container">
           <p>Cargando información desde la API...</p>
         </div>
       </section>
     </main>
-<div id="widget-clima"></div>
-    
+
+    <div id="widget-clima"></div>
+
     <footer>
-      <span> EcoRuta Temuco • Información local y accesible </span>
+      <span>EcoRuta Temuco • Información local y accesible</span>
 
       <div>
-        <<a href="https://github.com/camilqqq/Nexus-Ecoruta/blob/main/documentos/reportes/reporte-bug-bounty.pdf" target="_blank" rel="noopener">Bug Bounty</a>
+        <a href="https://github.com/camilqqq/Nexus-Ecoruta/blob/main/documentos/reportes/reporte-bug-bounty.pdf" target="_blank" rel="noopener">Bug Bounty</a>
         <a href="paginas/contacto.html">Contacto</a>      
       </div>
     </footer>
+
+    <!-- Lógica de filtros del frontend -->
     <script>
       const botones = document.querySelectorAll('.filters button');
       const tarjetas = document.querySelectorAll('.activity');
       const buscador = document.querySelector('.search input');
       const contador = document.querySelector('.section-title span');
       const mensajeSinResultados = document.createElement('p');
-mensajeSinResultados.textContent = 'No se encontraron actividades con esos criterios.';
-mensajeSinResultados.hidden = true;
-mensajeSinResultados.className = 'mensaje-vacio';
+      mensajeSinResultados.textContent = 'No se encontraron actividades con esos criterios.';
+      mensajeSinResultados.hidden = true;
+      mensajeSinResultados.className = 'mensaje-vacio';
 
-document.querySelector('.list').appendChild(mensajeSinResultados);
+      document.querySelector('.list').appendChild(mensajeSinResultados);
 
       let categoriaActual = 'Todas';
 
@@ -199,49 +197,48 @@ document.querySelector('.list').appendChild(mensajeSinResultados);
           const nombre = tarjeta.querySelector('h3').textContent;
           const categoria = tarjeta.dataset.categoria;
 
-          
-const coincideCategoria =
-  categoriaActual === 'Todas' || categoria === categoriaActual;
+          const coincideCategoria =
+            categoriaActual === 'Todas' || categoria === categoriaActual;
 
-const coincideBusqueda =
-  limpiar(nombre + ' ' + categoria).includes(busqueda);
+          const coincideBusqueda =
+            limpiar(nombre + ' ' + categoria).includes(busqueda);
 
-const mostrar = coincideCategoria && coincideBusqueda;
+          const mostrar = coincideCategoria && coincideBusqueda;
 
-if (mostrar) {
-  tarjeta.style.removeProperty('display');
-  visibles++;
-} else {
-  tarjeta.style.setProperty('display', 'none');
-}
-}); // Cierra el forEach de las tarjetas
+          if (mostrar) {
+            tarjeta.style.removeProperty('display');
+            visibles++;
+          } else {
+            tarjeta.style.setProperty('display', 'none');
+          }
+        });
 
-contador.textContent =
-  visibles + (visibles === 1 ? ' resultado' : ' resultados');
+        contador.textContent =
+          visibles + (visibles === 1 ? ' resultado' : ' resultados');
 
-mensajeSinResultados.hidden = visibles !== 0;
+        mensajeSinResultados.hidden = visibles !== 0;
+      }
 
-} // Cierra la función aplicarFiltros
+      botones.forEach((boton) => {
+        boton.addEventListener('click', () => {
+          botones.forEach((b) => {
+            b.classList.remove('active');
+            b.setAttribute('aria-pressed', 'false');
+          });
 
+          boton.classList.add('active');
+          boton.setAttribute('aria-pressed', 'true');
 
-botones.forEach((boton) => {
-  boton.addEventListener('click', () => {
-    botones.forEach((b) => {
-      b.classList.remove('active');
-      b.setAttribute('aria-pressed', 'false');
-    });
+          categoriaActual = boton.textContent.trim();
+          aplicarFiltros();
+        });
+      });
 
-    boton.classList.add('active');
-    boton.setAttribute('aria-pressed', 'true');
+      buscador.addEventListener('input', aplicarFiltros);
+    </script>
 
-    categoriaActual = boton.textContent.trim();
-    aplicarFiltros();
-  });
-});
-buscador.addEventListener('input', aplicarFiltros);
-</script>
-<script src="js/api.js"></script>
+    <!-- Vinculación de scripts de la aplicación -->
+    <script src="js/api.js"></script>
     <script src="js/rutas.js"></script>
-    
-</body>
+  </body>
 </html>
