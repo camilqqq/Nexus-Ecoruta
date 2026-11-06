@@ -36,7 +36,7 @@ var rutasBase = [
     ]
   },
   {
-    id: "museo",
+    id: "4",
     nombre: "Museo Regional de La Araucanía",
     categoria: "Cultura",
     tipoActividad: "cultural", // Identificador para visitas culturales
@@ -62,12 +62,11 @@ var rutasBase = [
     ]
   },
   {
-    id: "feria",
+    id: "3",
     nombre: "Feria Agroecológica",
     categoria: "Gastronomía",
     tipoActividad: "mercado", // Identificador para ferias o mercados
     ubicacion: "Plaza Aníbal Pinto, Temuco",
-    duracionMinutos: 240,
     dificultad: "Muy fácil",
     descripcion: "Mercado local enfocado en la venta de productos agrícolas orgánicos, artesanías locales, plantas y gastronomía típica de productores de la zona.",
     elementosIncluidos: [
@@ -75,7 +74,7 @@ var rutasBase = [
       "Stands de artesanía en madera y greda",
       "Comida tradicional y repostería local"
     ],
-    horarios: "Miércoles y sábados de 09:00 a 14:00 hrs",
+    horarios: "Lunea a Domingo de 08:00 a 19:00 hrs.",
     tarifas: {
       adultos: "Acceso gratuito al recinto",
       jovenes: "Acceso gratuito al recinto",
@@ -90,11 +89,19 @@ var rutasBase = [
 ];
 
 function formatearDetalleRuta(ruta) {
-  var horas = Math.floor(ruta.duracionMinutos / 60);
-  var minutos = ruta.duracionMinutos % 60;
-  var tiempoTxt = horas > 0 ? horas + "h " + minutos + "m" : minutos + " min";
+  var duracionTxt = "";
+
+  // Solo si tiene minutos asignados muestra el texto de duración
+  if (ruta.duracionMinutos && ruta.duracionMinutos > 0) {
+    var horas = Math.floor(ruta.duracionMinutos / 60);
+    var minutos = ruta.duracionMinutos % 60;
+    var tiempo = horas > 0 ? horas + "h " + minutos + "m" : minutos + " min";
+    duracionTxt = " - Duración: " + tiempo;
+  }
+
   var distanciaTxt = ruta.distanciaKm ? " | " + ruta.distanciaKm + " km" : "";
-  return ruta.nombre + " (" + ruta.categoria + ") - Duración: " + tiempoTxt + " | Dificultad: " + ruta.dificultad + distanciaTxt;
+
+  return ruta.nombre + " (" + ruta.categoria + ")" + duracionTxt + " | Dificultad: " + ruta.dificultad + distanciaTxt;
 }
 
 // =======================================================
