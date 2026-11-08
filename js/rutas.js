@@ -4,8 +4,14 @@ var rutasBase = [
   {
     id: 1,
     nombre: "Ruta Senderos Cerro Ñielol",
+    imagenes: [
+      "../assets/imagenes/Sendero/Sendero_Nielol.jpg",
+      "../assets/imagenes/Sendero/sendero2.jpg",
+      "../assets/imagenes/Sendero/sendero3.jpg",
+      "../assets/imagenes/Sendero/sendero4.jpg"
+    ],
     categoria: "Naturaleza",
-    tipoActividad: "trekking", // Identificador para mostrar datos de senderismo
+    tipoActividad: "trekking",
     ubicacion: "Caseta de acceso CONAF (Calle Arturo Prat, Gral. Carrera 267), Temuco",
     duracionMinutos: 90,
     dificultad: "Moderada (apta para familias y niños)",
@@ -38,8 +44,14 @@ var rutasBase = [
   {
     id: "4",
     nombre: "Museo Regional de La Araucanía",
+    imagenes: [
+      "../assets/imagenes/Museo/museo.jpg",
+      "../assets/imagenes/Museo/museo2.jpg",
+      "../assets/imagenes/Museo/museo3.jpg",
+      "../assets/imagenes/Museo/museo4.jpg"
+    ],
     categoria: "Cultura",
-    tipoActividad: "cultural", // Identificador para visitas culturales
+    tipoActividad: "cultural",
     ubicacion: "Av. Alemania 084, Temuco",
     duracionMinutos: 90,
     dificultad: "Fácil",
@@ -64,8 +76,14 @@ var rutasBase = [
   {
     id: "3",
     nombre: "Feria Agroecológica",
+    imagenes: [
+      "../assets/imagenes/Feria/feria.jpg",
+      "../assets/imagenes/Feria/feria2.jpg",
+      "../assets/imagenes/Feria/feria3.jpg",
+      "../assets/imagenes/Feria/feria4.jpg"
+    ],
     categoria: "Gastronomía",
-    tipoActividad: "mercado", // Identificador para ferias o mercados
+    tipoActividad: "mercado",
     ubicacion: "Plaza Aníbal Pinto, Temuco",
     dificultad: "Muy fácil",
     descripcion: "Mercado local enfocado en la venta de productos agrícolas orgánicos, artesanías locales, plantas y gastronomía típica de productores de la zona.",
@@ -74,7 +92,7 @@ var rutasBase = [
       "Stands de artesanía en madera y greda",
       "Comida tradicional y repostería local"
     ],
-    horarios: "Lunea a Domingo de 08:00 a 19:00 hrs.",
+    horarios: "Lunes a Domingo de 08:00 a 19:00 hrs.",
     tarifas: {
       adultos: "Acceso gratuito al recinto",
       jovenes: "Acceso gratuito al recinto",
@@ -90,23 +108,16 @@ var rutasBase = [
 
 function formatearDetalleRuta(ruta) {
   var duracionTxt = "";
-
-  // Solo si tiene minutos asignados muestra el texto de duración
   if (ruta.duracionMinutos && ruta.duracionMinutos > 0) {
     var horas = Math.floor(ruta.duracionMinutos / 60);
     var minutos = ruta.duracionMinutos % 60;
     var tiempo = horas > 0 ? horas + "h " + minutos + "m" : minutos + " min";
     duracionTxt = " - Duración: " + tiempo;
   }
-
   var distanciaTxt = ruta.distanciaKm ? " | " + ruta.distanciaKm + " km" : "";
-
   return ruta.nombre + " (" + ruta.categoria + ")" + duracionTxt + " | Dificultad: " + ruta.dificultad + distanciaTxt;
 }
 
-// =======================================================
-// INTERACCIÓN DINÁMICA SEGÚN EL TIPO DE ACTIVIDAD
-// =======================================================
 document.addEventListener('DOMContentLoaded', () => {
   const contenedorRutas = document.getElementById('contenedor-rutas');
   if (!contenedorRutas) return;
@@ -146,11 +157,27 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   let htmlContenido = '<div style="background: #ffffff; border: 1px solid #e2e8f0; border-left: 5px solid #2e7d32; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">';
+  
+  // Carrusel de Imágenes
+  if (rutaAMostrar.imagenes && rutaAMostrar.imagenes.length > 0) {
+    htmlContenido += `
+      <div id="carrusel-container" style="position: relative; margin-bottom: 20px; text-align: center;">
+        <div style="overflow: hidden; border-radius: 6px; background: #000;">
+          <img id="imagen-actual" src="${rutaAMostrar.imagenes[0]}" alt="${rutaAMostrar.nombre}" style="width: 100%; height: 380px; object-fit: cover; display: block;">
+        </div>
+        ${rutaAMostrar.imagenes.length > 1 ? `
+          <button id="btn-anterior" style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 4px; font-weight: bold;">❮</button>
+          <button id="btn-siguiente" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 4px; font-weight: bold;">❯</button>
+          <div id="contador-imagenes" style="margin-top: 8px; font-size: 0.85rem; color: #64748b; font-weight: 500;">Imagen 1 de ${rutaAMostrar.imagenes.length}</div>
+        ` : ''}
+      </div>
+    `;
+  }
+
   htmlContenido += '<h3 style="margin: 0 0 8px 0; color: #1e293b;">' + rutaAMostrar.nombre + '</h3>';
   htmlContenido += '<p style="margin: 0 0 10px 0; font-weight: 500; color: #0f766e;">' + detalle + '</p>';
   htmlContenido += '<p style="margin: 0 0 10px 0; color: #475569; line-height: 1.5;">' + rutaAMostrar.descripcion + '</p>';
 
-  // Solo si es trekking muestra la caja con datos técnicos de cerro
   if (rutaAMostrar.tipoActividad === 'trekking') {
     htmlContenido += '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; background: #f8fafc; padding: 12px; border-radius: 6px; margin-bottom: 12px; font-size: 0.9rem;">';
     htmlContenido += '<div><strong>Tipo de ruta:</strong> ' + rutaAMostrar.tipoCircuito + '</div>';
@@ -161,7 +188,6 @@ document.addEventListener('DOMContentLoaded', () => {
     htmlContenido += '<div><strong>Horarios:</strong> ' + rutaAMostrar.horarios + '</div>';
     htmlContenido += '</div>';
   } else {
-    // Si es museo o feria, muestra una caja más simple solo con ubicación y horarios
     htmlContenido += '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; background: #f8fafc; padding: 12px; border-radius: 6px; margin-bottom: 12px; font-size: 0.9rem;">';
     htmlContenido += '<div><strong>Ubicación:</strong> ' + rutaAMostrar.ubicacion + '</div>';
     htmlContenido += '<div><strong>Horarios:</strong> ' + rutaAMostrar.horarios + '</div>';
@@ -182,4 +208,29 @@ document.addEventListener('DOMContentLoaded', () => {
   htmlContenido += htmlRequisitos;
   htmlContenido += '</div>';
   contenedorRutas.innerHTML = htmlContenido;
+
+  // Lógica del Carrusel de Imágenes
+  if (rutaAMostrar.imagenes && rutaAMostrar.imagenes.length > 1) {
+    let indiceActual = 0;
+    const imagenesArr = rutaAMostrar.imagenes;
+    const imgElemento = document.getElementById('imagen-actual');
+    const contadorElemento = document.getElementById('contador-imagenes');
+    const btnAnterior = document.getElementById('btn-anterior');
+    const btnSiguiente = document.getElementById('btn-siguiente');
+
+    function actualizarImagen() {
+      imgElemento.src = imagenesArr[indiceActual];
+      contadorElemento.textContent = `Imagen ${indiceActual + 1} de ${imagenesArr.length}`;
+    }
+
+    btnSiguiente.addEventListener('click', () => {
+      indiceActual = (indiceActual + 1) % imagenesArr.length;
+      actualizarImagen();
+    });
+
+    btnAnterior.addEventListener('click', () => {
+      indiceActual = (indiceActual - 1 + imagenesArr.length) % imagenesArr.length;
+      actualizarImagen();
+    });
+  }
 });
