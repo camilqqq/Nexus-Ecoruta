@@ -204,6 +204,17 @@ document.addEventListener('DOMContentLoaded', () => {
     htmlContenido += '<li><strong>Preferencial:</strong> ' + rutaAMostrar.tarifas.preferencial + '</li>';
     htmlContenido += '</ul>';
   }
+ if (rutaAMostrar.id === 1 || rutaAMostrar.id === "1") {
+    htmlContenido += `
+      <div style="margin: 20px 0; padding: 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-align: center;">
+        <h4 style="margin-bottom: 8px; color: #1e293b; font-size: 1.1rem;"> Mapa de Rutas y Accesos - Cerro Ñielol</h4>
+        <p style="margin-bottom: 15px; color: #475569; font-size: 0.9rem;">Explora senderos, miradores y puntos de interés interactivos.</p>
+        <a href="https://www.google.com/maps/d/u/0/embed?mid=1_V34G2jycQVduIN1hsLN_wdnFvSbsqs&ehbc=2E312F&noprof=1" target="_blank" style="display: inline-block; background: #0f766e; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.95rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          Abrir Mapa Interactivo en Google Maps ↗
+        </a>
+      </div>
+    `;
+  }
 
   htmlContenido += htmlRequisitos;
   htmlContenido += '</div>';
