@@ -6,9 +6,11 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./js"
+    "outDir": "./js",
+    "rootDir": "./js"
   },
   "include": [
     "js/**/*.ts"
-  ]
+  ],
+  "exclude": []
 }
