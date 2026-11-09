@@ -4,10 +4,15 @@ export interface Ruta {
   nombre: string;
   dificultad: "Fácil" | "Media" | "Alta" | string;
   distancia: string;
+  kilometros?: number;
   tiempoEstimado: string;
   descripcion: string;
+  inicio?: string;
+  fin?: string;
   imagen?: string;
+  mapaRutaImg?: string;
   ubicacion?: string;
+  desnivel?: string;
 }
 
 // Endpoint de la API
@@ -35,7 +40,7 @@ const rutasBase: Ruta[] = [
   }
 ];
 
-// FUNCIÓN 1: Obtener rutas desde la API (EXPORTADA para que Actividad.html pueda usarla)
+// FUNCIÓN 1: Obtener rutas desde la API
 export async function cargarRutas(): Promise<Ruta[]> {
   try {
     const response = await fetch(RUTAS_API_URL);
@@ -56,7 +61,7 @@ export function filtrarRutasPorDificultad(listaRutas: Ruta[], dificultad: string
   );
 }
 
-// FUNCIÓN 3: Renderizar las rutas en el DOM (para la página principal)
+// FUNCIÓN 3: Renderizar las rutas en el DOM
 async function renderizarRutas(): Promise<void> {
   const contenedor = document.getElementById("contenedor-rutas");
   if (!contenedor) return;
@@ -64,16 +69,19 @@ async function renderizarRutas(): Promise<void> {
   const rutas = await cargarRutas();
 
   contenedor.innerHTML = rutas.map((ruta) => `
-    <article class="ruta-card" style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; background: #fff;">
+    <article class="ruta-card" style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 1.2rem; margin-bottom: 1.5rem; background: #fff;">
+      ${ruta.imagen ? `<img src="${ruta.imagen}" alt="${ruta.nombre}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 6px; margin-bottom: 0.8rem;" />` : ''}
       <h3 style="color: #2e7d32; margin-top: 0;">${ruta.nombre}</h3>
       <p style="margin: 0.4rem 0;"><strong>Dificultad:</strong> <span class="badge-dificultad">${ruta.dificultad}</span></p>
-      <p style="margin: 0.4rem 0;"><strong>Distancia:</strong> ${ruta.distancia} | <strong>Tiempo:</strong> ${ruta.tiempoEstimado}</p>
+      <p style="margin: 0.4rem 0;"><strong>Distancia:</strong> ${ruta.distancia} | <strong>Duración:</strong> ${ruta.tiempoEstimado}</p>
+      ${ruta.inicio ? `<p style="margin: 0.4rem 0;"><strong>📍 Inicio:</strong> ${ruta.inicio} ➡️ <strong>🏁 Fin:</strong> ${ruta.fin}</p>` : ''}
       <p style="color: #555; margin-top: 0.5rem;">${ruta.descripcion}</p>
       ${ruta.ubicacion ? `<small style="color: #777;">📍 ${ruta.ubicacion}</small>` : ''}
     </article>
   `).join('');
 }
 
+// Escuchar el evento DOMContentLoaded de manera independiente
 document.addEventListener("DOMContentLoaded", () => {
   renderizarRutas();
 
@@ -87,9 +95,11 @@ document.addEventListener("DOMContentLoaded", () => {
       if (contenedor) {
         contenedor.innerHTML = rutasFiltradas.map((ruta) => `
           <article class="ruta-card" style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; background: #fff;">
+            ${ruta.imagen ? `<img src="${ruta.imagen}" alt="${ruta.nombre}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 6px; margin-bottom: 0.8rem;" />` : ''}
             <h3 style="color: #2e7d32; margin-top: 0;">${ruta.nombre}</h3>
             <p style="margin: 0.4rem 0;"><strong>Dificultad:</strong> <span class="badge-dificultad">${ruta.dificultad}</span></p>
             <p style="margin: 0.4rem 0;"><strong>Distancia:</strong> ${ruta.distancia} | <strong>Tiempo:</strong> ${ruta.tiempoEstimado}</p>
+            ${ruta.inicio ? `<p style="margin: 0.4rem 0;"><strong>📍 Inicio:</strong> ${ruta.inicio} ➡️ <strong>🏁 Fin:</strong> ${ruta.fin}</p>` : ''}
             <p style="color: #555; margin-top: 0.5rem;">${ruta.descripcion}</p>
             ${ruta.ubicacion ? `<small style="color: #777;">📍 ${ruta.ubicacion}</small>` : ''}
           </article>
