@@ -1,7 +1,7 @@
-// Endpoint de la API
+// Endpoint de la API de rutas
 const RUTAS_API_URL = "https://6724eb29c39fedae05b33100.mockapi.io/api/v1/rutas";
 
-// Datos de respaldo por si falla la red
+// Datos de respaldo local
 const rutasBase = [
   {
     id: "1",
@@ -32,7 +32,7 @@ const rutasBase = [
   }
 ];
 
-// Obtener el ID de la URL (?id=1)
+// Función para obtener el ID de la URL (?id=1)
 function obtenerIdURL() {
   const params = new URLSearchParams(window.location.search);
   return params.get("id") || "1";
@@ -54,7 +54,7 @@ async function cargarDetalleActividad() {
     rutas = rutasBase;
   }
 
-  // Buscar coincidencia por ID (o cargar la primera por defecto)
+  // Buscar coincidencia por ID
   const actividad = rutas.find((r) => String(r.id) === String(idURL)) || 
                     rutasBase.find((r) => String(r.id) === String(idURL)) || 
                     rutasBase[0];
