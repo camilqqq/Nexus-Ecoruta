@@ -10,6 +10,7 @@
     "rootDir": "./js"
   },
   "include": [
-    "**/*.ts"
-  ]
+    "js/**/*.ts"
+  ],
+  "exclude": []
 }
