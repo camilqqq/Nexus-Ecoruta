@@ -63,7 +63,7 @@ export function filtrarRutasPorDificultad(listaRutas: Ruta[], dificultad: string
 
 // FUNCIÓN 3: Renderizar las rutas en el DOM
 async function renderizarRutas(): Promise<void> {
-  const contenedor = document.getElementById("contenedor-rutas");
+  const contenedor = document.getElementById("contenedor-rutas") || document.getElementById("contenedor-api");
   if (!contenedor) return;
 
   const rutas = await cargarRutas();
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
     filtroDificultad.addEventListener("change", async () => {
       const rutas = await cargarRutas();
       const rutasFiltradas = filtrarRutasPorDificultad(rutas, filtroDificultad.value);
-      const contenedor = document.getElementById("contenedor-rutas");
+      const contenedor = document.getElementById("contenedor-rutas") || document.getElementById("contenedor-api");
       if (contenedor) {
         contenedor.innerHTML = rutasFiltradas.map((ruta) => `
           <article class="ruta-card" style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; background: #fff;">
