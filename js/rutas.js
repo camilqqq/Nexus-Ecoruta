@@ -1,247 +1,87 @@
-"use strict";
-
-var rutasBase = [
-  {
-    id: 1,
-    nombre: "Ruta Senderos Cerro Ñielol",
-    imagenes: [
-      "../assets/imagenes/Sendero/Sendero_Nielol.jpg",
-      "../assets/imagenes/Sendero/sendero2.jpg",
-      "../assets/imagenes/Sendero/sendero3.jpg",
-      "../assets/imagenes/Sendero/sendero4.jpg"
-    ],
-    categoria: "Naturaleza",
-    tipoActividad: "trekking",
-    ubicacion: "Caseta de acceso CONAF (Calle Arturo Prat, Gral. Carrera 267), Temuco",
-    duracionMinutos: 90,
-    dificultad: "Moderada (apta para familias y niños)",
-    tipoCircuito: "Circular o Solo ida / Punto a punto",
-    terreno: "Tierra, pasarelas de madera y escalones de piedra",
-    altitudMaxima: "~330 m s.n.m. (Mirador Principal)",
-    distanciaKm: 4.2,
-    desnivelPositivoM: 180,
-    descripcion: "Caminata guiada por la selva valdiviana dentro del Monumento Natural Cerro Ñielol. Un recorrido rodeado de flora nativa, aves locales y vistas panorámicas de Temuco desde sus miradores.",
-    elementosIncluidos: [
-      "Sendero Agua Santa: 648 m",
-      "Sendero Despierta Tus Sentidos: 188 m (sendero inclusivo)",
-      "Sendero Laguna Huepil: 194 m",
-      "Sendero Los Copihues: 450 m",
-      "Sendero Los Lingues: 370 m"
-    ],
-    horarios: "Martes a domingo de 08:30 a 17:30 hrs (último ingreso a las 17:00 hrs)",
-    tarifas: {
-      adultos: "$2.500 CLP",
-      jovenes: "$2.000 CLP (13 a 17 años)",
-      preferencial: "Gratis (Niños 12 años o menos, adultos mayores 60 años o más y personas con discapacidad)"
+// Endpoint de la API
+const RUTAS_API_URL = "https://6724eb29c39fedae05b33100.mockapi.io/api/v1/rutas";
+// Datos de respaldo
+const rutasBase = [
+    {
+        id: 1,
+        nombre: "Sendero Cerro Ñielol",
+        dificultad: "Fácil",
+        distancia: "2.5 km",
+        tiempoEstimado: "1h 30min",
+        descripcion: "Caminata entre bosque nativo con vista panorámica a Temuco.",
+        ubicacion: "Monumento Natural Cerro Ñielol"
     },
-    requisitos: [
-      "Reserva y compra previa de entradas en pases.parquesnacionales.cl",
-      "Prohibido el ingreso con mascotas",
-      "Prohibido fumar, encender fuego y dejar residuos en el parque",
-      "Llevar zapatillas con buen agarre, botella de agua reutilizable y cortaviento"
-    ]
-  },
-  {
-    id: "4",
-    nombre: "Museo Regional de La Araucanía",
-    imagenes: [
-      "../assets/imagenes/Museo/museo.jpg",
-      "../assets/imagenes/Museo/museo2.jpg",
-      "../assets/imagenes/Museo/museo3.jpg",
-      "../assets/imagenes/Museo/museo4.jpg"
-    ],
-    categoria: "Cultura",
-    tipoActividad: "cultural",
-    ubicacion: "Av. Alemania 084, Temuco",
-    duracionMinutos: 90,
-    dificultad: "Fácil",
-    descripcion: "Espacio cultural enfocado en la historia, el patrimonio y las tradiciones de los pueblos originarios y la colonización de la Región de La Araucanía.",
-    elementosIncluidos: [
-      "Sala de exposición histórica regional",
-      "Colección de platería mapuche",
-      "Patio central y muestras temporales"
-    ],
-    horarios: "Martes a sábado de 10:00 a 17:00 hrs",
-    tarifas: {
-      adultos: "Entrada liberada / Gratuita",
-      jovenes: "Entrada liberada / Gratuita",
-      preferencial: "Entrada liberada para todo público"
-    },
-    requisitos: [
-      "Respetar el silencio en las salas de exhibición",
-      "Prohibido el uso de flash en las fotografías",
-      "No ingresar con alimentos ni bebidas"
-    ]
-  },
-  {
-    id: "3",
-    nombre: "Feria Agroecológica",
-    imagenes: [
-      "../assets/imagenes/Feria/feria.jpg",
-      "../assets/imagenes/Feria/feria2.jpg",
-      "../assets/imagenes/Feria/feria3.jpg",
-      "../assets/imagenes/Feria/feria4.jpg"
-    ],
-    categoria: "Gastronomía",
-    tipoActividad: "mercado",
-    ubicacion: "Plaza Aníbal Pinto, Temuco",
-    dificultad: "Muy fácil",
-    descripcion: "Mercado local enfocado en la venta de productos agrícolas orgánicos, artesanías locales, plantas y gastronomía típica de productores de la zona.",
-    elementosIncluidos: [
-      "Puestos de verduras y frutas orgánicas",
-      "Stands de artesanía en madera y greda",
-      "Comida tradicional y repostería local"
-    ],
-    horarios: "Lunes a Domingo de 08:00 a 19:00 hrs.",
-    tarifas: {
-      adultos: "Acceso gratuito al recinto",
-      jovenes: "Acceso gratuito al recinto",
-      preferencial: "Acceso gratuito"
-    },
-    requisitos: [
-      "Llevar bolsa reutilizable para compras",
-      "Moneda local o efectivo sugerido para los puestos",
-      "Respetar el distanciamiento en horarios de alta afluencia"
-    ]
-  }
+    {
+        id: 2,
+        nombre: "Ruta Eco-Etnia Ruka Mapuche",
+        dificultad: "Media",
+        distancia: "5.0 km",
+        tiempoEstimado: "2h 45min",
+        descripcion: "Recorrido cultural y gastronómico por rukas y senderos locales.",
+        ubicacion: "Padre Las Casas"
+    }
 ];
-
-function formatearDetalleRuta(ruta) {
-  var duracionTxt = "";
-  if (ruta.duracionMinutos && ruta.duracionMinutos > 0) {
-    var horas = Math.floor(ruta.duracionMinutos / 60);
-    var minutos = ruta.duracionMinutos % 60;
-    var tiempo = horas > 0 ? horas + "h " + minutos + "m" : minutos + " min";
-    duracionTxt = " - Duración: " + tiempo;
-  }
-  var distanciaTxt = ruta.distanciaKm ? " | " + ruta.distanciaKm + " km" : "";
-  return ruta.nombre + " (" + ruta.categoria + ")" + duracionTxt + " | Dificultad: " + ruta.dificultad + distanciaTxt;
+// FUNCIÓN 1: Obtener rutas desde la API
+export async function cargarRutas() {
+    try {
+        const response = await fetch(RUTAS_API_URL);
+        if (!response.ok)
+            throw new Error(`Error HTTP: ${response.status}`);
+        const data = await response.json();
+        return data && data.length > 0 ? data : rutasBase;
+    }
+    catch (error) {
+        console.warn("No se pudo conectar con la API de rutas. Cargando datos de respaldo:", error);
+        return rutasBase;
+    }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  const contenedorRutas = document.getElementById('contenedor-rutas');
-  if (!contenedorRutas) return;
-
-  const params = new URLSearchParams(window.location.search);
-  const idRuta = params.get('id');
-
-  let rutaAMostrar = rutasBase[0]; 
-  if (idRuta) {
-    const encontrada = rutasBase.find(r => r.id.toString() === idRuta.toString());
-    if (encontrada) {
-      rutaAMostrar = encontrada;
+// FUNCIÓN 2: Filtrar lista de rutas según nivel de dificultad
+export function filtrarRutasPorDificultad(listaRutas, dificultad) {
+    if (!dificultad || dificultad === "Todas")
+        return listaRutas;
+    return listaRutas.filter((ruta) => ruta.dificultad.toLowerCase() === dificultad.toLowerCase());
+}
+// FUNCIÓN 3: Renderizar las rutas en el DOM
+async function renderizarRutas() {
+    const contenedor = document.getElementById("contenedor-rutas");
+    if (!contenedor)
+        return;
+    const rutas = await cargarRutas();
+    contenedor.innerHTML = rutas.map((ruta) => `
+    <article class="ruta-card" style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 1.2rem; margin-bottom: 1.5rem; background: #fff;">
+      ${ruta.imagen ? `<img src="${ruta.imagen}" alt="${ruta.nombre}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 6px; margin-bottom: 0.8rem;" />` : ''}
+      <h3 style="color: #2e7d32; margin-top: 0;">${ruta.nombre}</h3>
+      <p style="margin: 0.4rem 0;"><strong>Dificultad:</strong> <span class="badge-dificultad">${ruta.dificultad}</span></p>
+      <p style="margin: 0.4rem 0;"><strong>Distancia:</strong> ${ruta.distancia} | <strong>Duración:</strong> ${ruta.tiempoEstimado}</p>
+      ${ruta.inicio ? `<p style="margin: 0.4rem 0;"><strong>📍 Inicio:</strong> ${ruta.inicio} ➡️ <strong>🏁 Fin:</strong> ${ruta.fin}</p>` : ''}
+      <p style="color: #555; margin-top: 0.5rem;">${ruta.descripcion}</p>
+      ${ruta.ubicacion ? `<small style="color: #777;">📍 ${ruta.ubicacion}</small>` : ''}
+    </article>
+  `).join('');
+}
+// Escuchar el evento DOMContentLoaded de manera independiente
+document.addEventListener("DOMContentLoaded", () => {
+    renderizarRutas();
+    // Filtrado por dificultad
+    const filtroDificultad = document.getElementById("filtro-dificultad");
+    if (filtroDificultad) {
+        filtroDificultad.addEventListener("change", async () => {
+            const rutas = await cargarRutas();
+            const rutasFiltradas = filtrarRutasPorDificultad(rutas, filtroDificultad.value);
+            const contenedor = document.getElementById("contenedor-rutas");
+            if (contenedor) {
+                contenedor.innerHTML = rutasFiltradas.map((ruta) => `
+          <article class="ruta-card" style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; background: #fff;">
+            ${ruta.imagen ? `<img src="${ruta.imagen}" alt="${ruta.nombre}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 6px; margin-bottom: 0.8rem;" />` : ''}
+            <h3 style="color: #2e7d32; margin-top: 0;">${ruta.nombre}</h3>
+            <p style="margin: 0.4rem 0;"><strong>Dificultad:</strong> <span class="badge-dificultad">${ruta.dificultad}</span></p>
+            <p style="margin: 0.4rem 0;"><strong>Distancia:</strong> ${ruta.distancia} | <strong>Tiempo:</strong> ${ruta.tiempoEstimado}</p>
+            ${ruta.inicio ? `<p style="margin: 0.4rem 0;"><strong>📍 Inicio:</strong> ${ruta.inicio} ➡️ <strong>🏁 Fin:</strong> ${ruta.fin}</p>` : ''}
+            <p style="color: #555; margin-top: 0.5rem;">${ruta.descripcion}</p>
+            ${ruta.ubicacion ? `<small style="color: #777;">📍 ${ruta.ubicacion}</small>` : ''}
+          </article>
+        `).join('');
+            }
+        });
     }
-  }
-
-  const detalle = formatearDetalleRuta(rutaAMostrar);
-
-  let htmlElementos = '';
-  if (rutaAMostrar.elementosIncluidos && rutaAMostrar.elementosIncluidos.length > 0) {
-    let tituloSeccion = rutaAMostrar.tipoActividad === 'trekking' ? "Senderos y atractivos del parque:" : "Zonas o espacios de la visita:";
-    htmlElementos += '<h4 style="margin: 15px 0 5px 0; font-size: 1rem; color: #1e293b;">' + tituloSeccion + '</h4>';
-    htmlElementos += '<ul style="margin: 5px 0 10px 20px; font-size: 0.9rem; color: #334155;">';
-    rutaAMostrar.elementosIncluidos.forEach(el => {
-      htmlElementos += '<li>' + el + '</li>';
-    });
-    htmlElementos += '</ul>';
-  }
-
-  let htmlRequisitos = '';
-  if (rutaAMostrar.requisitos && rutaAMostrar.requisitos.length > 0) {
-    htmlRequisitos = '<h4 style="margin: 15px 0 5px 0; font-size: 1rem; color: #1e293b;">Recomendaciones y requisitos:</h4>';
-    htmlRequisitos += '<ul style="margin: 5px 0 10px 20px; font-size: 0.9rem; color: #334155;">';
-    rutaAMostrar.requisitos.forEach(req => {
-      htmlRequisitos += '<li>' + req + '</li>';
-    });
-    htmlRequisitos += '</ul>';
-  }
-
-  let htmlContenido = '<div style="background: #ffffff; border: 1px solid #e2e8f0; border-left: 5px solid #2e7d32; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">';
-  
-  // Carrusel de Imágenes
-  if (rutaAMostrar.imagenes && rutaAMostrar.imagenes.length > 0) {
-    htmlContenido += `
-      <div id="carrusel-container" style="position: relative; margin-bottom: 20px; text-align: center;">
-        <div style="overflow: hidden; border-radius: 6px; background: #000;">
-          <img id="imagen-actual" src="${rutaAMostrar.imagenes[0]}" alt="${rutaAMostrar.nombre}" style="width: 100%; height: 380px; object-fit: cover; display: block;">
-        </div>
-        ${rutaAMostrar.imagenes.length > 1 ? `
-          <button id="btn-anterior" style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 4px; font-weight: bold;">❮</button>
-          <button id="btn-siguiente" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 4px; font-weight: bold;">❯</button>
-          <div id="contador-imagenes" style="margin-top: 8px; font-size: 0.85rem; color: #64748b; font-weight: 500;">Imagen 1 de ${rutaAMostrar.imagenes.length}</div>
-        ` : ''}
-      </div>
-    `;
-  }
-
-  htmlContenido += '<h3 style="margin: 0 0 8px 0; color: #1e293b;">' + rutaAMostrar.nombre + '</h3>';
-  htmlContenido += '<p style="margin: 0 0 10px 0; font-weight: 500; color: #0f766e;">' + detalle + '</p>';
-  htmlContenido += '<p style="margin: 0 0 10px 0; color: #475569; line-height: 1.5;">' + rutaAMostrar.descripcion + '</p>';
-
-  if (rutaAMostrar.tipoActividad === 'trekking') {
-    htmlContenido += '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; background: #f8fafc; padding: 12px; border-radius: 6px; margin-bottom: 12px; font-size: 0.9rem;">';
-    htmlContenido += '<div><strong>Tipo de ruta:</strong> ' + rutaAMostrar.tipoCircuito + '</div>';
-    htmlContenido += '<div><strong>Terreno:</strong> ' + rutaAMostrar.terreno + '</div>';
-    htmlContenido += '<div><strong>Altitud máx.:</strong> ' + rutaAMostrar.altitudMaxima + '</div>';
-    htmlContenido += '<div><strong>Desnivel:</strong> +' + rutaAMostrar.desnivelPositivoM + ' m</div>';
-    htmlContenido += '<div><strong>Ubicación:</strong> ' + rutaAMostrar.ubicacion + '</div>';
-    htmlContenido += '<div><strong>Horarios:</strong> ' + rutaAMostrar.horarios + '</div>';
-    htmlContenido += '</div>';
-  } else {
-    htmlContenido += '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; background: #f8fafc; padding: 12px; border-radius: 6px; margin-bottom: 12px; font-size: 0.9rem;">';
-    htmlContenido += '<div><strong>Ubicación:</strong> ' + rutaAMostrar.ubicacion + '</div>';
-    htmlContenido += '<div><strong>Horarios:</strong> ' + rutaAMostrar.horarios + '</div>';
-    htmlContenido += '</div>';
-  }
-
-  htmlContenido += htmlElementos;
-
-  if (rutaAMostrar.tarifas) {
-    htmlContenido += '<h4 style="margin: 15px 0 5px 0; font-size: 1rem; color: #1e293b;">Tarifas y accesos:</h4>';
-    htmlContenido += '<ul style="margin: 5px 0 10px 20px; font-size: 0.9rem; color: #334155;">';
-    htmlContenido += '<li><strong>Adultos:</strong> ' + rutaAMostrar.tarifas.adultos + '</li>';
-    htmlContenido += '<li><strong>Jóvenes:</strong> ' + rutaAMostrar.tarifas.jovenes + '</li>';
-    htmlContenido += '<li><strong>Preferencial:</strong> ' + rutaAMostrar.tarifas.preferencial + '</li>';
-    htmlContenido += '</ul>';
-  }
- if (rutaAMostrar.id === 1 || rutaAMostrar.id === "1") {
-    htmlContenido += `
-      <div style="margin: 20px 0; padding: 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-align: center;">
-        <h4 style="margin-bottom: 8px; color: #1e293b; font-size: 1.1rem;"> Mapa de Rutas y Accesos - Cerro Ñielol</h4>
-        <p style="margin-bottom: 15px; color: #475569; font-size: 0.9rem;">Explora senderos, miradores y puntos de interés interactivos.</p>
-        <a href="https://www.google.com/maps/d/u/0/embed?mid=1_V34G2jycQVduIN1hsLN_wdnFvSbsqs&ehbc=2E312F&noprof=1" target="_blank" style="display: inline-block; background: #0f766e; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.95rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-          Abrir Mapa Interactivo en Google Maps ↗
-        </a>
-      </div>
-    `;
-  }
-
-  htmlContenido += htmlRequisitos;
-  htmlContenido += '</div>';
-  contenedorRutas.innerHTML = htmlContenido;
-
-  // Lógica del Carrusel de Imágenes
-  if (rutaAMostrar.imagenes && rutaAMostrar.imagenes.length > 1) {
-    let indiceActual = 0;
-    const imagenesArr = rutaAMostrar.imagenes;
-    const imgElemento = document.getElementById('imagen-actual');
-    const contadorElemento = document.getElementById('contador-imagenes');
-    const btnAnterior = document.getElementById('btn-anterior');
-    const btnSiguiente = document.getElementById('btn-siguiente');
-
-    function actualizarImagen() {
-      imgElemento.src = imagenesArr[indiceActual];
-      contadorElemento.textContent = `Imagen ${indiceActual + 1} de ${imagenesArr.length}`;
-    }
-
-    btnSiguiente.addEventListener('click', () => {
-      indiceActual = (indiceActual + 1) % imagenesArr.length;
-      actualizarImagen();
-    });
-
-    btnAnterior.addEventListener('click', () => {
-      indiceActual = (indiceActual - 1 + imagenesArr.length) % imagenesArr.length;
-      actualizarImagen();
-    });
-  }
 });
