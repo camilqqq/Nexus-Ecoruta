@@ -2,12 +2,14 @@
   "compilerOptions": {
     "target": "ES2020",
     "module": "ESNext",
-    "strict": true,
+    "strict": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./js",
     "rootDir": "./js"
   },
-  "include": ["js/**/*.ts"]
+  "include": [
+    "**/*.ts"
+  ]
 }
