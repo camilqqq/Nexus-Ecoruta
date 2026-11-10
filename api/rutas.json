@@ -1,0 +1,79 @@
+[
+  {
+    "id": "1",
+    "nombre": "Ruta Senderos Cerro Ñielol",
+    "categoria": "Naturaleza",
+    "duracion": "1h 30m",
+    "dificultad": "Moderada (apta para familias y niños)",
+    "distancia": "4.2 km",
+    "descripcion": "Caminata guiada por la selva valdiviana dentro del Monumento Natural Cerro Ñielol. Un recorrido rodeado de flora nativa, aves locales y vistas panorámicas de Temuco desde sus miradores.",
+    "imagen": "https://images.unsplash.com/photo-1596328546171-77e37b5f28b0?q=80&w=800&auto=format&fit=crop",
+    "tipoRuta": "Circular o Solo ida / Punto a punto",
+    "terreno": "Tierra, pasarelas de madera y escalones de piedra",
+    "altitudMax": "~330 m s.n.m (Mirador Principal)",
+    "desnivel": "+180 m",
+    "ubicacion": "Caseta de acceso CONAF (Calle Arturo Prat, Gral. Carrera 267), Temuco",
+    "horarios": "Martes a domingo de 08:30 a 17:30 hrs (último ingreso a las 17:00 hrs)",
+    "senderos": [
+      "Sendero Agua Santa: 648 m",
+      "Sendero Despierta Tus Sentidos: 188 m (sendero inclusivo)",
+      "Sendero Laguna Huepil: 194 m",
+      "Sendero Los Copihues: 450 m",
+      "Sendero Los Lingues: 370 m"
+    ],
+    "tarifas": [
+      "Adultos: $2.500 CLP",
+      "Jóvenes: $2.000 CLP (13 a 17 años)",
+      "Preferencial: Gratis (Niños 12 años o menos, adultos mayores 60 años o más y personas con discapacidad)"
+    ]
+  },
+  {
+    "id": "2",
+    "nombre": "Ruta Patrimonial Museo Regional de La Araucanía",
+    "categoria": "Cultura",
+    "duracion": "1h 45m",
+    "dificultad": "Fácil (apta para todo público)",
+    "distancia": "1.0 km",
+    "descripcion": "Recorrido histórico y patrimonial por las salas del Palacio Thiers y los jardines del Museo Regional, rescatando la arqueología, etnografía y memoria cultural Mapuche.",
+    "imagen": "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?q=80&w=800&auto=format&fit=crop",
+    "tipoRuta": "Recorrido guiado / Salón y parque urbano",
+    "terreno": "Piso cerámico, parqué y senderos adosados de piedra",
+    "altitudMax": "~120 m s.n.m",
+    "desnivel": "0 m",
+    "ubicacion": "Av. Alemania 0842, Temuco",
+    "horarios": "Martes a viernes de 09:30 a 17:00 hrs. Sábados y domingos de 10:00 a 17:00 hrs.",
+    "senderos": [
+      "Galería Principal de Historia Regional: 200 m",
+      "Sala de Arqueología y Cosmovisión Mapuche: 150 m",
+      "Recorrido por Jardín Botánico Palacio Thiers: 350 m"
+    ],
+    "tarifas": [
+      "Público General: Entrada liberada / Gratuita",
+      "Delegaciones Escolares: Gratuito previa reserva previa"
+    ]
+  },
+  {
+    "id": "3",
+    "nombre": "Ruta Gastronómica Feria Agroecológica",
+    "categoria": "Gastronomía",
+    "duracion": "45m",
+    "dificultad": "Muy fácil (paseo libre)",
+    "distancia": "1.0 km",
+    "descripcion": "Muestra de productos orgánicos, artesanía tradicional y hortalizas locales producidas en la cuenca del Cautín, atendida directamente por pequeños emprendedores regionales.",
+    "imagen": "https://images.unsplash.com/photo-1488459716781-31db52582fe9?q=80&w=800&auto=format&fit=crop",
+    "tipoRuta": "Paseo peatonal urbano",
+    "terreno": "Baldosa cívica, adoquines y pasajes techados",
+    "altitudMax": "~115 m s.n.m",
+    "desnivel": "0 m",
+    "ubicacion": "Plaza Aníbal Pinto (Centro Cívico), Temuco",
+    "horarios": "Lunes a sábado de 09:00 a 18:00 hrs.",
+    "senderos": [
+      "Paseo de Productores Agroecológicos: 300 m",
+      "Sector Muestra de Artesanía en Madera y Llama: 250 m",
+      "Patio de Comidas Tradicionales: 200 m"
+    ],
+    "tarifas": [
+      "Acceso libre y gratuito para todo espectador"
+    ]
+  }
+]
