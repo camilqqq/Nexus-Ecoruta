@@ -10,7 +10,6 @@ const detalleBackup = {
     tiempoEstimado: "1 a 1.5 h",
     descripcion: "Caminata por senderos principales (Agua Santa, Despierta Tus Sentidos, Laguna Huepil, Los Copihues y Los Lingues) rodeados de bosque nativo con vista panorámica a Temuco. Altitud máxima ~330 m s.n.m. (Mirador Principal).",
     ubicacion: "Monumento Natural Cerro Ñielol, Temuco",
-    // Mapa personalizado My Maps oficial
     mapaWikiloc: "https://www.google.com/maps/d/u/0/embed?mid=1_V34G2jycQVduIN1hsLN_wdnFvSbsqs&ehbc=2E312F",
     imagenes: [
       "https://raw.githubusercontent.com/camilqqq/Nexus-Ecoruta/main/assets/imagenes/Sendero/Sendero_Nielol.jpg",
@@ -23,7 +22,9 @@ const detalleBackup = {
     id: "2",
     nombre: "Museo Regional de La Araucanía",
     distancia: "1.0 km",
-    descripcion: "Emblemático espacio patrimonial ubicado en la histórica Casona Thiers. Ofrece exposiciones sobre la historia prehispánica, patrimonio e historia de la región de La Araucanía.",
+    tarifa: "Entrada liberada / Gratuita",
+    horario: "Mar a Vie: 09:30 a 17:00 hrs | Sáb y Dom: 10:00 a 17:00 hrs",
+    descripcion: "Emblemático espacio patrimonial ubicado en la histórica Casona Thiers. Recorrido que incluye la Galería Principal de Historia Regional, la Sala de Arqueología y Cosmovisión Mapuche, y el Jardín Botánico Palacio Thiers. Tipo de ruta: Recorrido guiado / Salón y parque urbano.",
     ubicacion: "Av. Alemania 0842, Temuco",
     mapaWikiloc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3113.12345!2d-72.6025!3d-38.7368!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9614d3e6d8a3b1a1%3A0x123456789abcdef!2sMuseo%20Regional%20de%20La%20Araucan%C3%ADa!5e0!3m2!1ses!2scl!4v1700000000000!5m2!1ses!2scl",
     imagenes: [
@@ -123,6 +124,8 @@ async function cargarFicha() {
           ${actividad.tiempoEstimado ? `<p style="margin: 0; color: #333;"><strong>Duración:</strong> ${actividad.tiempoEstimado}</p>` : ''}
           ${actividad.distancia ? `<p style="margin: 0; color: #333;"><strong>Distancia:</strong> ${actividad.distancia}</p>` : ''}
           ${actividad.desnivel ? `<p style="margin: 0; color: #333;"><strong>Desnivel:</strong> ${actividad.desnivel}</p>` : ''}
+          ${actividad.tarifa ? `<p style="margin: 0; color: #333;"><strong>Entrada:</strong> <span style="color: #2e7d32; font-weight: 600;">${actividad.tarifa}</span></p>` : ''}
+          ${actividad.horario ? `<p style="margin: 0; color: #333; grid-column: 1 / -1;"><strong>Horario:</strong> ${actividad.horario}</p>` : ''}
           <p style="margin: 0; color: #333; grid-column: 1 / -1;"><strong>Ubicación:</strong> 📍 ${actividad.ubicacion}</p>
         </div>
 
