@@ -1,6 +1,5 @@
 const API_URL = "https://6724eb29c39fedae05b33100.mockapi.io/api/v1/rutas";
 
-// Base de datos de respaldo con estructura para texto organizado
 const detalleBackup = {
   "1": {
     id: "1",
