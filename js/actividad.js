@@ -1,6 +1,6 @@
 const API_URL = "https://6724eb29c39fedae05b33100.mockapi.io/api/v1/rutas";
 
-// Base de datos local con las FOTOS REALES de cada lugar en Temuco
+// Base de datos de respaldo con enlaces a imágenes 100% públicas y compatibles con GitHub Pages
 const detalleBackup = {
   "1": {
     id: "1",
@@ -10,7 +10,7 @@ const detalleBackup = {
     tiempoEstimado: "1h 30min",
     descripcion: "Caminata entre bosque nativo con vista panorámica a Temuco y senderos rodeados de flora silvestre. Ideal para observar la biodiversidad de la Araucanía y conectarse con la naturaleza a minutos del centro de la ciudad.",
     ubicacion: "Monumento Natural Cerro Ñielol, Temuco",
-    imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Cerro_%C3%91ielol_Temuco.jpg/1280px-Cerro_%C3%91ielol_Temuco.jpg"
+    imagen: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&auto=format&fit=crop"
   },
   "2": {
     id: "2",
@@ -20,7 +20,7 @@ const detalleBackup = {
     tiempoEstimado: "1-2 hrs",
     descripcion: "Exhibición de historia cultural, artefactos ancestrales y patrimonio regional de La Araucanía. Recorrido apto para toda la familia con guías locales e historia viva de la zona.",
     ubicacion: "Av. Alemania 0842, Temuco",
-    imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Museo_Regional_de_la_Araucan%C3%ADa_01.jpg/1280px-Museo_Regional_de_la_Araucan%C3%ADa_01.jpg"
+    imagen: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?w=800&auto=format&fit=crop"
   },
   "3": {
     id: "3",
@@ -30,41 +30,37 @@ const detalleBackup = {
     tiempoEstimado: "45 min",
     descripcion: "Encuentro de productores locales con frutas, verduras orgánicas y artesanía regional sustentable. Una experiencia ideal para degustar productos frescos directos del campo a la ciudad.",
     ubicacion: "Plaza Aníbal Pinto, Temuco",
-    imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Plaza_Anibal_Pinto_Temuco_Chile.jpg/1280px-Plaza_Anibal_Pinto_Temuco_Chile.jpg"
+    imagen: "https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=800&auto=format&fit=crop"
   }
 };
 
-// Obtener el ID dinámico de la URL (?id=1, ?id=2, ?id=3)
 function obtenerIdURL() {
   const params = new URLSearchParams(window.location.search);
-  return params.get("id");
+  return params.get("id") || "1";
 }
 
 async function cargarFicha() {
-  const idURL = obtenerIdURL() || "1";
+  const idURL = obtenerIdURL();
   let actividad = null;
 
-  // 1. Consultar API si existe
   try {
     const res = await fetch(`${API_URL}/${idURL}`);
     if (res.ok) {
       actividad = await res.json();
     }
   } catch (e) {
-    console.log("Usando datos de respaldo con fotos reales");
+    console.log("Usando datos de respaldo");
   }
 
-  // 2. Si no hay datos de la API o viene sin nombre, usar respaldo por ID exacta
   if (!actividad || !actividad.nombre) {
     actividad = detalleBackup[idURL] || detalleBackup["1"];
   }
 
-  // Asegurar siempre la foto real del lugar
+  // Sobrescribir siempre con una URL que no se bloquee
   if (detalleBackup[idURL]) {
     actividad.imagen = detalleBackup[idURL].imagen;
   }
 
-  // Contenedor principal de renderizado
   const contenedor = document.querySelector(".actividad-detalle") || 
                      document.querySelector("main") || 
                      document.body;
