@@ -1,6 +1,4 @@
 // APIs
-const RUTAS_API_URL = "https://6724eb29c39fedae05b33100.mockapi.io/api/v1/rutas";
-// API gratuita de Clima para Temuco (Lat: -38.7397, Lon: -72.5984)
 const CLIMA_API_URL = "https://api.open-meteo.com/v1/forecast?latitude=-38.7397&longitude=-72.5984&current_weather=true&relativehumidity_2m=true";
 
 // Datos de respaldo para el clima
@@ -10,7 +8,35 @@ const climaRespaldo = {
   condicion: "📍 Temuco · Lluvia moderada 🌧️"
 };
 
-// Cargar Clima de Temuco desde API
+// Datos de respaldo para las tarjetas del catálogo
+const rutasBackup = [
+  {
+    id: "1",
+    nombre: "Sendero Ñielol",
+    categoria: "Naturaleza",
+    ubicacion: "Parque Ñielol, Temuco",
+    duracion: "1 hr 30 min",
+    dificultad: "Moderada"
+  },
+  {
+    id: "2",
+    nombre: "Museo Regional de La Araucanía",
+    categoria: "Cultura",
+    ubicacion: "Av. Alemania 0842, Temuco",
+    duracion: "1-2 hrs",
+    dificultad: "Fácil"
+  },
+  {
+    id: "3",
+    nombre: "Feria Agroecológica",
+    categoria: "Gastronomía",
+    ubicacion: "Plaza Aníbal Pinto, Temuco",
+    duracion: "45 min",
+    dificultad: "Muy fácil"
+  }
+];
+
+// Cargar Clima de Temuco desde API con Respaldo
 async function cargarClimaTemuco() {
   const contenedor = document.getElementById("contenedor-api");
   if (!contenedor) return;
@@ -29,10 +55,9 @@ async function cargarClimaTemuco() {
       }
     }
   } catch (error) {
-    console.log("Usando clima de respaldo");
+    console.log("Usando datos de clima de respaldo");
   }
 
-  // Renderizar widget moderno del clima
   contenedor.innerHTML = `
     <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border: 1px solid #a5d6a7; border-radius: 12px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; box-shadow: 0 4px 12px rgba(46, 125, 50, 0.08); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
       <div>
@@ -58,7 +83,6 @@ async function cargarClimaTemuco() {
   `;
 }
 
-// Función auxiliar para códigos de clima WMO
 function interpretarCodigoClima(code) {
   if (code === 0) return "Cielo despejado ☀️";
   if (code >= 1 && code <= 3) return "Parcialmente nublado ⛅";
