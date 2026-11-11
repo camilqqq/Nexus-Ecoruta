@@ -36,7 +36,7 @@ const rutasBackup = [
   }
 ];
 
-// Cargar Clima de Temuco desde API 
+// Cargar Clima de Temuco 
 async function cargarClimaTemuco() {
   const contenedor = document.getElementById("contenedor-api");
   if (!contenedor) return;
@@ -58,15 +58,15 @@ async function cargarClimaTemuco() {
     console.log("Usando datos de clima de respaldo");
   }
 
-  // Renderizado con diseño 
+  // Renderizado Minimalista 
   contenedor.innerHTML = `
     <div style="
-      background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 60%, #388e3c 100%);
-      color: #ffffff;
+      background: linear-gradient(135deg, #f4f9f4 0%, #e8f5e9 100%);
+      border: 1px solid #c8e6c9;
       border-radius: 16px;
       padding: 1.5rem 2rem;
       margin: 2rem 0;
-      box-shadow: 0 8px 24px rgba(27, 94, 32, 0.2);
+      box-shadow: 0 4px 20px rgba(46, 125, 50, 0.05);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -75,47 +75,47 @@ async function cargarClimaTemuco() {
       font-family: system-ui, -apple-system, sans-serif;
     ">
       <div>
-        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.4rem;">
+        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem;">
           <span style="
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(8px);
-            color: #ffffff;
-            font-size: 0.7rem;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+            font-size: 0.72rem;
             font-weight: 700;
-            padding: 0.25rem 0.75rem;
+            padding: 0.2rem 0.7rem;
             border-radius: 20px;
             text-transform: uppercase;
             letter-spacing: 0.8px;
           ">API Clima en Vivo</span>
-          <span style="font-size: 0.85rem; opacity: 0.9;">• Open-Meteo</span>
+          <span style="font-size: 0.85rem; color: #666; font-weight: 500;">• Open-Meteo</span>
         </div>
         
-        <h3 style="margin: 0.2rem 0; font-size: 1.4rem; font-weight: 700; color: #ffffff;">
+        <h3 style="margin: 0.3rem 0 0.1rem 0; font-size: 1.35rem; font-weight: 700; color: #1b5e20;">
           Estado del Tiempo en Temuco
         </h3>
-        <p style="margin: 0; font-size: 1.05rem; opacity: 0.95; font-weight: 500;">
+        <p style="margin: 0; font-size: 1rem; color: #2e7d32; font-weight: 500;">
           ${condicion}
         </p>
       </div>
       
       <div style="
         display: flex;
-        gap: 1.8rem;
+        gap: 1.5rem;
         align-items: center;
-        background: rgba(255, 255, 255, 0.15);
-        padding: 0.85rem 1.5rem;
-        border-radius: 12px;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: #ffffff;
+        padding: 0.85rem 1.4rem;
+        border-radius: 14px;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.03);
       ">
         <div style="text-align: center;">
-          <span style="font-size: 0.75rem; text-transform: uppercase; opacity: 0.85; display: block; letter-spacing: 0.5px; font-weight: 600;">Temperatura</span>
-          <span style="font-size: 1.8rem; font-weight: 800; color: #ffffff;">🌡️ ${temp}</span>
+          <span style="font-size: 0.7rem; text-transform: uppercase; color: #777; display: block; letter-spacing: 0.5px; font-weight: 700;">Temperatura</span>
+          <span style="font-size: 1.6rem; font-weight: 800; color: #1b5e20;">🌡️ ${temp}</span>
         </div>
-        <div style="width: 1px; height: 40px; background: rgba(255, 255, 255, 0.25);"></div>
+        <div style="width: 1px; height: 35px; background: #e0e0e0;"></div>
         <div style="text-align: center;">
-          <span style="font-size: 0.75rem; text-transform: uppercase; opacity: 0.85; display: block; letter-spacing: 0.5px; font-weight: 600;">Humedad</span>
-          <span style="font-size: 1.8rem; font-weight: 800; color: #e0f7fa;">💧 ${humedad}</span>
+          <span style="font-size: 0.7rem; text-transform: uppercase; color: #777; display: block; letter-spacing: 0.5px; font-weight: 700;">Humedad</span>
+          <span style="font-size: 1.6rem; font-weight: 800; color: #0288d1;">💧 ${humedad}</span>
         </div>
       </div>
     </div>
