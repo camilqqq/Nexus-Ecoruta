@@ -1,87 +1,66 @@
-// Endpoint de la API
-const RUTAS_API_URL = "https://6724eb29c39fedae05b33100.mockapi.io/api/v1/rutas";
-// Datos de respaldo
-const rutasBase = [
-    {
-        id: 1,
-        nombre: "Sendero Cerro Ñielol",
-        dificultad: "Fácil",
-        distancia: "2.5 km",
-        tiempoEstimado: "1h 30min",
-        descripcion: "Caminata entre bosque nativo con vista panorámica a Temuco.",
-        ubicacion: "Monumento Natural Cerro Ñielol"
-    },
-    {
-        id: 2,
-        nombre: "Ruta Eco-Etnia Ruka Mapuche",
-        dificultad: "Media",
-        distancia: "5.0 km",
-        tiempoEstimado: "2h 45min",
-        descripcion: "Recorrido cultural y gastronómico por rukas y senderos locales.",
-        ubicacion: "Padre Las Casas"
-    }
+const API_URL = "https://6724eb29c39fedae05b33100.mockapi.io/api/v1/rutas";
+
+const rutasBackup = [
+  {
+    id: "1",
+    nombre: "Sendero Ñielol",
+    categoria: "Naturaleza",
+    ubicacion: "Parque Ñielol, Temuco",
+    duracion: "1 hr 30 min",
+    dificultad: "Moderada",
+    imagen: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=500"
+  },
+  {
+    id: "2",
+    nombre: "Museo Regional de La Araucanía",
+    categoria: "Cultura",
+    ubicacion: "Museo Regional de La Araucanía",
+    duracion: "1-2 hrs",
+    dificultad: "Fácil",
+    imagen: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?w=500"
+  },
+  {
+    id: "3",
+    nombre: "Feria Agroecológica",
+    categoria: "Gastronomía",
+    ubicacion: "Plaza Aníbal Pinto",
+    duracion: "45 min",
+    dificultad: "Muy fácil",
+    imagen: "https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=500"
+  }
 ];
-// FUNCIÓN 1: Obtener rutas desde la API
-export async function cargarRutas() {
-    try {
-        const response = await fetch(RUTAS_API_URL);
-        if (!response.ok)
-            throw new Error(`Error HTTP: ${response.status}`);
-        const data = await response.json();
-        return data && data.length > 0 ? data : rutasBase;
-    }
-    catch (error) {
-        console.warn("No se pudo conectar con la API de rutas. Cargando datos de respaldo:", error);
-        return rutasBase;
-    }
+
+async function obtenerRutas() {
+  try {
+    const res = await fetch(API_URL);
+    if (!res.ok) throw new Error("Error API");
+    const datos = await res.json();
+    mostrarRutas(datos);
+  } catch (err) {
+    mostrarRutas(rutasBackup);
+  }
 }
-// FUNCIÓN 2: Filtrar lista de rutas según nivel de dificultad
-export function filtrarRutasPorDificultad(listaRutas, dificultad) {
-    if (!dificultad || dificultad === "Todas")
-        return listaRutas;
-    return listaRutas.filter((ruta) => ruta.dificultad.toLowerCase() === dificultad.toLowerCase());
+
+function mostrarRutas(rutas) {
+  const contenedor = document.getElementById("contenedor-api") || document.getElementById("contenedor-rutas");
+  if (!contenedor) return;
+
+  // Limpia el mensaje "Cargando información desde la API..."
+  contenedor.innerHTML = "";
+
+  rutas.forEach((ruta) => {
+    const tarjeta = document.createElement("article");
+    tarjeta.className = "ruta-card";
+    tarjeta.innerHTML = `
+      <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; background: #fff;">
+        <h3>${ruta.nombre}</h3>
+        <p><strong>Categoría:</strong> ${ruta.categoria || 'Naturaleza'} · <strong>Dificultad:</strong> ${ruta.dificultad}</p>
+        <p>📍 ${ruta.ubicacion || 'Temuco'}</p>
+        <a href="paginas/Actividad.html?id=${ruta.id}" style="display: inline-block; padding: 0.5rem 1rem; background: #2e7d32; color: white; text-decoration: none; border-radius: 4px;">Ver ficha</a>
+      </div>
+    `;
+    contenedor.appendChild(tarjeta);
+  });
 }
-// FUNCIÓN 3: Renderizar las rutas en el DOM
-async function renderizarRutas() {
-    const contenedor = document.getElementById("contenedor-rutas") || document.getElementById("contenedor-api");
-    if (!contenedor)
-        return;
-    const rutas = await cargarRutas();
-    contenedor.innerHTML = rutas.map((ruta) => `
-    <article class="ruta-card" style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 1.2rem; margin-bottom: 1.5rem; background: #fff;">
-      ${ruta.imagen ? `<img src="${ruta.imagen}" alt="${ruta.nombre}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 6px; margin-bottom: 0.8rem;" />` : ''}
-      <h3 style="color: #2e7d32; margin-top: 0;">${ruta.nombre}</h3>
-      <p style="margin: 0.4rem 0;"><strong>Dificultad:</strong> <span class="badge-dificultad">${ruta.dificultad}</span></p>
-      <p style="margin: 0.4rem 0;"><strong>Distancia:</strong> ${ruta.distancia} | <strong>Duración:</strong> ${ruta.tiempoEstimado}</p>
-      ${ruta.inicio ? `<p style="margin: 0.4rem 0;"><strong>📍 Inicio:</strong> ${ruta.inicio} ➡️ <strong>🏁 Fin:</strong> ${ruta.fin}</p>` : ''}
-      <p style="color: #555; margin-top: 0.5rem;">${ruta.descripcion}</p>
-      ${ruta.ubicacion ? `<small style="color: #777;">📍 ${ruta.ubicacion}</small>` : ''}
-    </article>
-  `).join('');
-}
-// Escuchar el evento DOMContentLoaded de manera independiente
-document.addEventListener("DOMContentLoaded", () => {
-    renderizarRutas();
-    // Filtrado por dificultad
-    const filtroDificultad = document.getElementById("filtro-dificultad");
-    if (filtroDificultad) {
-        filtroDificultad.addEventListener("change", async () => {
-            const rutas = await cargarRutas();
-            const rutasFiltradas = filtrarRutasPorDificultad(rutas, filtroDificultad.value);
-            const contenedor = document.getElementById("contenedor-rutas") || document.getElementById("contenedor-api");
-            if (contenedor) {
-                contenedor.innerHTML = rutasFiltradas.map((ruta) => `
-          <article class="ruta-card" style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; background: #fff;">
-            ${ruta.imagen ? `<img src="${ruta.imagen}" alt="${ruta.nombre}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 6px; margin-bottom: 0.8rem;" />` : ''}
-            <h3 style="color: #2e7d32; margin-top: 0;">${ruta.nombre}</h3>
-            <p style="margin: 0.4rem 0;"><strong>Dificultad:</strong> <span class="badge-dificultad">${ruta.dificultad}</span></p>
-            <p style="margin: 0.4rem 0;"><strong>Distancia:</strong> ${ruta.distancia} | <strong>Tiempo:</strong> ${ruta.tiempoEstimado}</p>
-            ${ruta.inicio ? `<p style="margin: 0.4rem 0;"><strong>📍 Inicio:</strong> ${ruta.inicio} ➡️ <strong>🏁 Fin:</strong> ${ruta.fin}</p>` : ''}
-            <p style="color: #555; margin-top: 0.5rem;">${ruta.descripcion}</p>
-            ${ruta.ubicacion ? `<small style="color: #777;">📍 ${ruta.ubicacion}</small>` : ''}
-          </article>
-        `).join('');
-            }
-        });
-    }
-});
+
+document.addEventListener("DOMContentLoaded", obtenerRutas);
