@@ -8,14 +8,14 @@ const climaRespaldo = {
   condicion: "📍 Temuco · Lluvia moderada 🌧️"
 };
 
-// Datos de respaldo para las tarjetas del catálogo
+// Datos de respaldo para las tarjetas del catálogo 
 const rutasBackup = [
   {
     id: "1",
     nombre: "Sendero Ñielol",
     categoria: "Naturaleza",
     ubicacion: "Parque Ñielol, Temuco",
-    duracion: "1 hr 30 min",
+    duracion: "1 a 1.5 h",
     dificultad: "Moderada"
   },
   {
@@ -23,16 +23,15 @@ const rutasBackup = [
     nombre: "Museo Regional de La Araucanía",
     categoria: "Cultura",
     ubicacion: "Av. Alemania 0842, Temuco",
-    duracion: "1-2 hrs",
+    duracion: "1 a 2 h",
     dificultad: "Fácil"
   },
   {
     id: "3",
-    nombre: "Feria Agroecológica",
+    nombre: "Feria Pinto",
     categoria: "Gastronomía",
-    ubicacion: "Plaza Aníbal Pinto, Temuco",
-    duracion: "45 min",
-    dificultad: "Muy fácil"
+    ubicacion: "Plaza Aníbal Pinto / Mercado, Temuco",
+    duracion: "45 min"
   }
 ];
 
@@ -58,7 +57,6 @@ async function cargarClimaTemuco() {
     console.log("Usando datos de clima de respaldo");
   }
 
-  // Renderizado Minimalista 
   contenedor.innerHTML = `
     <div style="
       background: linear-gradient(135deg, #f4f9f4 0%, #e8f5e9 100%);
@@ -121,6 +119,7 @@ async function cargarClimaTemuco() {
     </div>
   `;
 }
+
 function interpretarCodigoClima(code) {
   if (code === 0) return "Cielo despejado ☀️";
   if (code >= 1 && code <= 3) return "Parcialmente nublado ⛅";
