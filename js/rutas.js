@@ -8,7 +8,7 @@ const climaRespaldo = {
   condicion: "📍 Temuco · Lluvia moderada 🌧️"
 };
 
-// Datos de respaldo para las tarjetas del catálogo 
+// Datos de respaldo para el catálogo
 const rutasBackup = [
   {
     id: "1",
@@ -22,20 +22,27 @@ const rutasBackup = [
     id: "2",
     nombre: "Museo Regional de La Araucanía",
     categoria: "Cultura",
-    ubicacion: "Av. Alemania 0842, Temuco",
-    duracion: "1 a 2 h",
-    dificultad: "Fácil"
+    ubicacion: "Av. Alemania 0842, Temuco"
+    // Sin duración ni dificultad
   },
   {
     id: "3",
     nombre: "Feria Pinto",
     categoria: "Gastronomía",
-    ubicacion: "Plaza Aníbal Pinto / Mercado, Temuco",
-    duracion: "45 min"
+    ubicacion: "Plaza Aníbal Pinto / Mercado, Temuco"
+    // Sin duración ni dificultad
+  },
+  {
+    id: "4",
+    nombre: "Parque Isla Cautín",
+    categoria: "Naturaleza",
+    ubicacion: "Av. los Poetas, Temuco",
+    duracion: "1 a 2 h",
+    dificultad: "Fácil"
   }
 ];
 
-// Cargar Clima de Temuco 
+// Cargar Clima de Temuco
 async function cargarClimaTemuco() {
   const contenedor = document.getElementById("contenedor-api");
   if (!contenedor) return;
