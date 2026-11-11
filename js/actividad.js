@@ -1,6 +1,6 @@
 const API_URL = "https://6724eb29c39fedae05b33100.mockapi.io/api/v1/rutas";
 
-// Datos de respaldo con imágenes correspondientes a cada lugar real
+// Datos de respaldo con imágenes directas y totalmente públicas
 const detalleBackup = {
   "1": {
     nombre: "Sendero Cerro Ñielol",
@@ -9,7 +9,7 @@ const detalleBackup = {
     tiempoEstimado: "1h 30min",
     descripcion: "Caminata entre bosque nativo con vista panorámica a Temuco y senderos rodeados de flora silvestre. Ideal para observar la biodiversidad de la Araucanía y conectarse con la naturaleza a minutos del centro de la ciudad.",
     ubicacion: "Monumento Natural Cerro Ñielol, Temuco",
-    imagen: "https://conaf.cl/wp-content/uploads/2022/03/MN-Cerro-Nielol.jpg"
+    imagen: "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&auto=format&fit=crop"
   },
   "2": {
     nombre: "Museo Regional de La Araucanía",
@@ -18,7 +18,7 @@ const detalleBackup = {
     tiempoEstimado: "1-2 hrs",
     descripcion: "Exhibición de historia cultural, artefactos ancestrales y patrimonio regional de La Araucanía. Recorrido apto para toda la familia con guías locales e historia viva de la zona.",
     ubicacion: "Av. Alemania 0842, Temuco",
-    imagen: "https://www.patrimoniocultural.gob.cl/sites/www.patrimoniocultural.gob.cl/files/styles/flexslider_full/public/2021-03/Museo%20Regional%20de%20la%20Araucan%C3%ADa.jpg"
+    imagen: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?w=800&auto=format&fit=crop"
   },
   "3": {
     nombre: "Feria Agroecológica",
@@ -27,7 +27,7 @@ const detalleBackup = {
     tiempoEstimado: "45 min",
     descripcion: "Encuentro de productores locales con frutas, verduras orgánicas y artesanía regional sustentable. Una experiencia ideal para degustar productos frescos directos del campo a la ciudad.",
     ubicacion: "Plaza Aníbal Pinto, Temuco",
-    imagen: "https://www.temuco.cl/wp-content/uploads/2021/11/feria-agroecologica-temuco.jpg"
+    imagen: "https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=800&auto=format&fit=crop"
   }
 };
 
@@ -49,12 +49,13 @@ async function cargarFicha() {
     console.log("Usando datos de respaldo");
   }
 
+  // Si la API falla o no devuelve datos completos, usar respaldo
   if (!actividad || !actividad.nombre) {
     actividad = detalleBackup[id] || detalleBackup["1"];
   }
 
-  // Si la actividad tiene la imagen vieja o vacía, asegurar que muestre la imagen real
-  if (detalleBackup[id] && (!actividad.imagen || actividad.imagen.includes("unsplash"))) {
+  // Asegurar que use la URL pública que no da error 403/bloqueo
+  if (detalleBackup[id]) {
     actividad.imagen = detalleBackup[id].imagen;
   }
 
@@ -71,7 +72,7 @@ async function cargarFicha() {
         
         <h1 style="color: #1b5e20; font-size: 2rem; margin: 0.8rem 0; font-weight: 700;">${actividad.nombre}</h1>
         
-        ${actividad.imagen ? `<img src="${actividad.imagen}" alt="${actividad.nombre}" style="width: 100%; max-height: 380px; object-fit: cover; border-radius: 10px; margin: 1rem 0;" />` : ''}
+        <img src="${actividad.imagen}" alt="${actividad.nombre}" style="width: 100%; max-height: 380px; object-fit: cover; border-radius: 10px; margin: 1rem 0; display: block;" />
 
         <div style="background: #f4f9f4; padding: 1.25rem; border-radius: 8px; margin: 1.5rem 0; border-left: 5px solid #2e7d32; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.8rem;">
           <p style="margin: 0; color: #333;"><strong>Dificultad:</strong> <span style="color: #2e7d32;">${actividad.dificultad || 'Moderada'}</span></p>
