@@ -5,13 +5,13 @@ const detalleBackup = {
     id: "1",
     nombre: "Sendero Cerro Ñielol",
     dificultad: "Moderada",
-    distancia: "8.73 km",
-    desnivel: "234 m",
+    distancia: "1.85 km (Total senderos)",
+    desnivel: "+180 m",
     tiempoEstimado: "1 a 1.5 h",
-    descripcion: "Caminata por sendero principal rodeado de bosque nativo con vista panorámica a la ciudad de Temuco. Ruta registrada en Wikiloc ideal para el avistamiento de flora y fauna silvestre de la Araucanía.",
+    descripcion: "Caminata por senderos principales (Agua Santa, Despierta Tus Sentidos, Laguna Huepil, Los Copihues y Los Lingues) rodeados de bosque nativo con vista panorámica a Temuco. Altitud máxima ~330 m s.n.m. (Mirador Principal).",
     ubicacion: "Monumento Natural Cerro Ñielol, Temuco",
-    // Visor embebido oficial de Wikiloc del Cerro Ñielol (ID 93523955)
-    mapaWikiloc: "https://es.wikiloc.com/wikiloc/embedv2.do?id=93523955&elevation=off&images=off&maptype=H",
+    // Mapa personalizado My Maps oficial
+    mapaWikiloc: "https://www.google.com/maps/d/u/0/embed?mid=1_V34G2jycQVduIN1hsLN_wdnFvSbsqs&ehbc=2E312F",
     imagenes: [
       "https://raw.githubusercontent.com/camilqqq/Nexus-Ecoruta/main/assets/imagenes/Sendero/Sendero_Nielol.jpg",
       "https://raw.githubusercontent.com/camilqqq/Nexus-Ecoruta/main/assets/imagenes/Sendero/sendero2.jpg",
@@ -22,7 +22,6 @@ const detalleBackup = {
   "2": {
     id: "2",
     nombre: "Museo Regional de La Araucanía",
-    // Sin dificultad ni duración según requerimiento
     distancia: "1.0 km",
     descripcion: "Emblemático espacio patrimonial ubicado en la histórica Casona Thiers. Ofrece exposiciones sobre la historia prehispánica, patrimonio e historia de la región de La Araucanía.",
     ubicacion: "Av. Alemania 0842, Temuco",
@@ -37,7 +36,6 @@ const detalleBackup = {
   "3": {
     id: "3",
     nombre: "Feria Pinto",
-    // Sin dificultad ni duración según requerimiento
     descripcion: "Punto de encuentro de productores y agricultores locales en Temuco. Ofrece hortalizas frescas, productos orgánicos, gastronomía típica y artesanías locales de la Araucanía.",
     ubicacion: "Plaza Aníbal Pinto / Mercado, Temuco",
     mapaWikiloc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3113.5!2d-72.5900!3d-38.7400!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9614d3e000000000%3A0x0!2sFeria%20Pinto!5e0!3m2!1ses!2scl!4v1700000000000!5m2!1ses!2scl",
@@ -48,7 +46,7 @@ const detalleBackup = {
       "https://raw.githubusercontent.com/camilqqq/Nexus-Ecoruta/main/assets/imagenes/Feria/feria4.jpg"
     ]
   },
-"4": {
+  "4": {
     id: "4",
     nombre: "Parque Isla Cautín",
     dificultad: "Fácil",
@@ -56,7 +54,6 @@ const detalleBackup = {
     tiempoEstimado: "1 a 2 h",
     descripcion: "Gran parque urbano a orillas del río Cautín. Cuenta con amplias áreas verdes, plazas temáticas, juegos infantiles, ciclovías y espacios ideales para el esparcimiento familiar y la conexión con la naturaleza.",
     ubicacion: "Av. los Poetas, Temuco",
-    // Google Maps directo en la Isla Cautín para evitar fallos
     mapaWikiloc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3113.9!2d-72.5950!3d-38.7480!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9614d3f000000000%3A0x0!2sParque%20Isla%20Caut%C3%ADn!5e0!3m2!1ses!2scl!4v1700000000000!5m2!1ses!2scl",
     imagenes: [
       "https://raw.githubusercontent.com/camilqqq/Nexus-Ecoruta/main/assets/imagenes/Isla_Cautin/Isla1.jpg",
@@ -91,7 +88,6 @@ function cambiarImagen(direccion) {
 async function cargarFicha() {
   let idURL = obtenerIdURL();
 
-  // Mapeo estricto por ID exacta
   let actividad = detalleBackup[idURL];
   if (!actividad) {
     actividad = detalleBackup["1"];
@@ -121,7 +117,7 @@ async function cargarFicha() {
           </span>
         </div>
 
-        <!-- Ficha de datos dinámicos (Oculta campos vacíos) -->
+        <!-- Ficha de datos dinámicos -->
         <div style="background: #f4f9f4; padding: 1.25rem; border-radius: 8px; margin: 1.5rem 0; border-left: 5px solid #2e7d32; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.8rem;">
           ${actividad.dificultad ? `<p style="margin: 0; color: #333;"><strong>Dificultad:</strong> <span style="color: #2e7d32;">${actividad.dificultad}</span></p>` : ''}
           ${actividad.tiempoEstimado ? `<p style="margin: 0; color: #333;"><strong>Duración:</strong> ${actividad.tiempoEstimado}</p>` : ''}
