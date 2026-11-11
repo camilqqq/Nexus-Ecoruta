@@ -48,7 +48,7 @@ const detalleBackup = {
       "https://raw.githubusercontent.com/camilqqq/Nexus-Ecoruta/main/assets/imagenes/Feria/feria4.jpg"
     ]
   },
-  "4": {
+"4": {
     id: "4",
     nombre: "Parque Isla Cautín",
     dificultad: "Fácil",
@@ -56,8 +56,8 @@ const detalleBackup = {
     tiempoEstimado: "1 a 2 h",
     descripcion: "Gran parque urbano a orillas del río Cautín. Cuenta con amplias áreas verdes, plazas temáticas, juegos infantiles, ciclovías y espacios ideales para el esparcimiento familiar y la conexión con la naturaleza.",
     ubicacion: "Av. los Poetas, Temuco",
-    // Mapa interactivo GPS de Wikiloc del circuito Parque Isla Cautín
-    mapaWikiloc: "https://es.wikiloc.com/wikiloc/embedv2.do?id=125430883&elevation=off&images=off&maptype=H",
+    // Google Maps directo en la Isla Cautín para evitar fallos
+    mapaWikiloc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3113.9!2d-72.5950!3d-38.7480!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9614d3f000000000%3A0x0!2sParque%20Isla%20Caut%C3%ADn!5e0!3m2!1ses!2scl!4v1700000000000!5m2!1ses!2scl",
     imagenes: [
       "https://raw.githubusercontent.com/camilqqq/Nexus-Ecoruta/main/assets/imagenes/Isla_Cautin/Isla1.jpg",
       "https://raw.githubusercontent.com/camilqqq/Nexus-Ecoruta/main/assets/imagenes/Isla_Cautin/Isla2.jpg",
