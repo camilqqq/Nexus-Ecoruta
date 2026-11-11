@@ -76,7 +76,7 @@ async function renderizarRutas(): Promise<void> {
       <p style="margin: 0.4rem 0;"><strong>Distancia:</strong> ${ruta.distancia} | <strong>Duración:</strong> ${ruta.tiempoEstimado}</p>
       ${ruta.inicio ? `<p style="margin: 0.4rem 0;"><strong>📍 Inicio:</strong> ${ruta.inicio} ➡️ <strong>🏁 Fin:</strong> ${ruta.fin}</p>` : ''}
       <p style="color: #555; margin-top: 0.5rem;">${ruta.descripcion}</p>
-      ${ruta.ubicacion ? `<small style="color: #777;">📍 ${ruta.ubicacion}</small>` : ''}
+      ${ruta.ubicacion ? `<small style="color: #2d3748;">📍 ${ruta.ubicacion}</small>` : ''}
     </article>
   `).join('');
 }
