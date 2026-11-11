@@ -5,11 +5,12 @@ const detalleBackup = {
     id: "1",
     nombre: "Sendero Cerro Ñielol",
     dificultad: "Moderada",
-    distancia: "6.2 km",
-    desnivel: "62 m a 204 m",
+    distancia: "8.73 km",
+    desnivel: "234 m",
     tiempoEstimado: "1 a 1.5 h",
-    descripcion: "Caminata por sendero principal rodeado de bosque nativo con vista panorámica a la ciudad de Temuco. Ideal para el avistamiento de flora y fauna silvestre de la Araucanía.",
+    descripcion: "Caminata por sendero principal rodeado de bosque nativo con vista panorámica a la ciudad de Temuco. Ruta registrada en Wikiloc ideal para el avistamiento de flora y fauna silvestre de la Araucanía.",
     ubicacion: "Monumento Natural Cerro Ñielol, Temuco",
+    // Visor embebido oficial de Wikiloc del Cerro Ñielol (ID 93523955)
     mapaWikiloc: "https://es.wikiloc.com/wikiloc/embedv2.do?id=93523955&elevation=off&images=off&maptype=H",
     imagenes: [
       "https://raw.githubusercontent.com/camilqqq/Nexus-Ecoruta/main/assets/imagenes/Sendero/Sendero_Nielol.jpg",
@@ -21,6 +22,7 @@ const detalleBackup = {
   "2": {
     id: "2",
     nombre: "Museo Regional de La Araucanía",
+    // Sin dificultad ni duración según requerimiento
     distancia: "1.0 km",
     descripcion: "Emblemático espacio patrimonial ubicado en la histórica Casona Thiers. Ofrece exposiciones sobre la historia prehispánica, patrimonio e historia de la región de La Araucanía.",
     ubicacion: "Av. Alemania 0842, Temuco",
@@ -35,6 +37,7 @@ const detalleBackup = {
   "3": {
     id: "3",
     nombre: "Feria Pinto",
+    // Sin dificultad ni duración según requerimiento
     descripcion: "Punto de encuentro de productores y agricultores locales en Temuco. Ofrece hortalizas frescas, productos orgánicos, gastronomía típica y artesanías locales de la Araucanía.",
     ubicacion: "Plaza Aníbal Pinto / Mercado, Temuco",
     mapaWikiloc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3113.5!2d-72.5900!3d-38.7400!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9614d3e000000000%3A0x0!2sFeria%20Pinto!5e0!3m2!1ses!2scl!4v1700000000000!5m2!1ses!2scl",
@@ -81,12 +84,18 @@ function cambiarImagen(direccion) {
   const imgElem = document.getElementById("img-carrusel");
   const contadorElem = document.getElementById("contador-carrusel");
   if (imgElem) imgElem.src = listaImagenesGlobal[indiceImagenActual];
-  if (contadorElem) contadorElem.textContent = `${indiceImagenActual + 1} /${listaImagenesGlobal.length}`;
+  if (contadorElem) contadorElem.textContent = `${indiceImagenActual + 1} / ${listaImagenesGlobal.length}`;
 }
 
 async function cargarFicha() {
   let idURL = obtenerIdURL();
-  let actividad = detalleBackup[idURL] || detalleBackup["1"];
+
+  // Mapeo estricto por ID exacta
+  let actividad = detalleBackup[idURL];
+  if (!actividad) {
+    actividad = detalleBackup["1"];
+  }
+
   listaImagenesGlobal = actividad.imagenes || [];
   indiceImagenActual = 0;
 
@@ -101,6 +110,7 @@ async function cargarFicha() {
         
         <h1 style="color: #1b5e20; font-size: 2rem; margin: 0.8rem 0; font-weight: 700;">${actividad.nombre}</h1>
         
+        <!-- Carrusel de imágenes -->
         <div style="position: relative; width: 100%; max-height: 420px; border-radius: 10px; overflow: hidden; margin: 1rem 0; background: #000;">
           <img id="img-carrusel" src="${listaImagenesGlobal[0]}" alt="${actividad.nombre}" style="width: 100%; height: 420px; object-fit: cover; display: block;" />
           <button onclick="cambiarImagen(-1)" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: white; border: none; padding: 0.8rem 1.1rem; border-radius: 50%; cursor: pointer; font-size: 1.2rem; font-weight: bold;">❮</button>
@@ -110,6 +120,7 @@ async function cargarFicha() {
           </span>
         </div>
 
+        <!-- Ficha de datos dinámicos (Oculta campos vacíos) -->
         <div style="background: #f4f9f4; padding: 1.25rem; border-radius: 8px; margin: 1.5rem 0; border-left: 5px solid #2e7d32; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.8rem;">
           ${actividad.dificultad ? `<p style="margin: 0; color: #333;"><strong>Dificultad:</strong> <span style="color: #2e7d32;">${actividad.dificultad}</span></p>` : ''}
           ${actividad.tiempoEstimado ? `<p style="margin: 0; color: #333;"><strong>Duración:</strong> ${actividad.tiempoEstimado}</p>` : ''}
@@ -118,4 +129,19 @@ async function cargarFicha() {
           <p style="margin: 0; color: #333; grid-column: 1 / -1;"><strong>Ubicación:</strong> 📍 ${actividad.ubicacion}</p>
         </div>
 
-        <h3 style="color: #2e7d32; margin
+        <h3 style="color: #2e7d32; margin-top: 1.5rem; font-size: 1.25rem; border-bottom: 2px solid #e8f5e9; padding-bottom: 0.5rem;">Descripción de la Experiencia</h3>
+        <p style="color: #444; line-height: 1.7; font-size: 1.05rem; margin-top: 0.8rem;">${actividad.descripcion}</p>
+
+        ${actividad.mapaWikiloc ? `
+          <h3 style="color: #2e7d32; margin-top: 1.8rem; font-size: 1.25rem; border-bottom: 2px solid #e8f5e9; padding-bottom: 0.5rem;">Ruta y Mapa GPS</h3>
+          <div style="width: 100%; height: 380px; border-radius: 10px; overflow: hidden; margin-top: 1rem; border: 1px solid #e0e0e0;">
+            <iframe src="${actividad.mapaWikiloc}" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+        ` : ''}
+      </section>
+    `;
+  }
+}
+
+window.cambiarImagen = cambiarImagen;
+document.addEventListener("DOMContentLoaded", cargarFicha);
