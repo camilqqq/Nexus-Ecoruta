@@ -21,7 +21,6 @@ const detalleBackup = {
   "2": {
     id: "2",
     nombre: "Museo Regional de La Araucanía",
-    distancia: "1.0 km",
     tarifa: "Entrada liberada / Gratuita",
     horario: "Mar a Vie: 09:30 a 17:00 hrs | Sáb y Dom: 10:00 a 17:00 hrs",
     descripcion: "Emblemático espacio patrimonial ubicado en la histórica Casona Thiers. Recorrido que incluye la Galería Principal de Historia Regional, la Sala de Arqueología y Cosmovisión Mapuche, y el Jardín Botánico Palacio Thiers. Tipo de ruta: Recorrido guiado / Salón y parque urbano.",
@@ -37,7 +36,9 @@ const detalleBackup = {
   "3": {
     id: "3",
     nombre: "Feria Pinto",
-    descripcion: "Punto de encuentro de productores y agricultores locales en Temuco. Ofrece hortalizas frescas, productos orgánicos, gastronomía típica y artesanías locales de la Araucanía.",
+    tarifa: "Acceso libre y gratuito para todo espectador",
+    horario: "Lunes a domingo de 08:00 a 19:00 hrs.",
+    descripcion: "Descubre un espacio lleno de sabores, colores y tradiciones de La Araucanía. Encuentra productos frescos de la tierra, hortalizas locales, alimentos orgánicos y artesanías con identidad regional, ofrecidos directamente por pequeños productores y emprendedores de la zona. Incluye el Paseo de Productores Agroecológicos, Sector Muestra de Artesanía en Madera y Llama, y el Patio de Comidas Tradicionales. Tipo de ruta: Paseo peatonal urbano.",
     ubicacion: "Plaza Aníbal Pinto / Mercado, Temuco",
     mapaWikiloc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3113.5!2d-72.5900!3d-38.7400!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9614d3e000000000%3A0x0!2sFeria%20Pinto!5e0!3m2!1ses!2scl!4v1700000000000!5m2!1ses!2scl",
     imagenes: [
@@ -124,7 +125,7 @@ async function cargarFicha() {
           ${actividad.tiempoEstimado ? `<p style="margin: 0; color: #333;"><strong>Duración:</strong> ${actividad.tiempoEstimado}</p>` : ''}
           ${actividad.distancia ? `<p style="margin: 0; color: #333;"><strong>Distancia:</strong> ${actividad.distancia}</p>` : ''}
           ${actividad.desnivel ? `<p style="margin: 0; color: #333;"><strong>Desnivel:</strong> ${actividad.desnivel}</p>` : ''}
-          ${actividad.tarifa ? `<p style="margin: 0; color: #333;"><strong>Entrada:</strong> <span style="color: #2e7d32; font-weight: 600;">${actividad.tarifa}</span></p>` : ''}
+          ${actividad.tarifa ? `<p style="margin: 0; color: #333; grid-column: 1 / -1;"><strong>Entrada:</strong> <span style="color: #2e7d32; font-weight: 600;">${actividad.tarifa}</span></p>` : ''}
           ${actividad.horario ? `<p style="margin: 0; color: #333; grid-column: 1 / -1;"><strong>Horario:</strong> ${actividad.horario}</p>` : ''}
           <p style="margin: 0; color: #333; grid-column: 1 / -1;"><strong>Ubicación:</strong> 📍 ${actividad.ubicacion}</p>
         </div>
