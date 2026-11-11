@@ -73,10 +73,22 @@ function cambiarImagen(direccion) {
 }
 
 async function cargarFicha() {
-  const idURL = obtenerIdURL();
-  
-  // Seleccionar la actividad correcta por ID
-  let actividad = detalleBackup[idURL] || detalleBackup["1"];
+  let idURL = obtenerIdURL();
+
+  // Si la URL recibe id=4, id desfasada o no encontrada, corregir automáticamente la ID
+  if (!detalleBackup[idURL] || idURL === "4") {
+    // Si la URL o la página previa dice museo o es 4, asignar ID 2 (Museo)
+    if (idURL === "4" || document.referrer.toLowerCase().includes("museo")) {
+      idURL = "2";
+    } else if (document.referrer.toLowerCase().includes("feria")) {
+      idURL = "3";
+    } else {
+      idURL = "1";
+    }
+  }
+
+  // Cargar la actividad correspondiente
+  let actividad = detalleBackup[idURL] || detalleBackup["2"];
   listaImagenesGlobal = actividad.imagenes || [];
   indiceImagenActual = 0;
 
@@ -93,7 +105,7 @@ async function cargarFicha() {
         
         <h1 style="color: #1b5e20; font-size: 2rem; margin: 0.8rem 0; font-weight: 700;">${actividad.nombre}</h1>
         
-        <!-- Carrusel con tus imágenes de la carpeta assets -->
+        <!-- Carrusel de imágenes -->
         <div style="position: relative; width: 100%; max-height: 420px; border-radius: 10px; overflow: hidden; margin: 1rem 0; background: #000;">
           <img id="img-carrusel" src="${listaImagenesGlobal[0]}" alt="${actividad.nombre}" style="width: 100%; height: 420px; object-fit: cover; display: block;" />
           
@@ -118,7 +130,6 @@ async function cargarFicha() {
     `;
   }
 }
-
 // Hacer la función accesible globalmente para las flechas
 window.cambiarImagen = cambiarImagen;
 
