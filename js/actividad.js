@@ -137,16 +137,13 @@ async function cargarFicha() {
     const tieneMetricas = actividad.dificultad || actividad.tiempoEstimado || actividad.distancia;
 
     contenedor.innerHTML = `
-      <section style="max-width: 800px; margin: 2rem auto; padding: 2rem; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); font-family: system-ui, -apple-system, sans-serif; color: #222;">
-        <a href="../index.html" style="display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none; color: #2e7d32; font-weight: 600; font-size: 1rem; margin-bottom: 1rem; padding: 0.4rem 0.8rem; background: #f4f9f4; border-radius: 6px;">
-          ← Volver al catálogo
-        </a>
+      <section style="max-width: 1100px; width: 92%; margin: 1.5rem auto; padding: 2rem; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); font-family: system-ui, -apple-system, sans-serif; color: #222;">
         
-        <h1 style="color: #1b5e20; font-size: 2rem; margin: 0.8rem 0; font-weight: 700;">${actividad.nombre}</h1>
+        <h1 style="color: #1b5e20; font-size: 2.2rem; margin: 0.5rem 0 1rem 0; font-weight: 700;">${actividad.nombre}</h1>
         
         <!-- Carrusel de imágenes -->
-        <div style="position: relative; width: 100%; max-height: 420px; border-radius: 10px; overflow: hidden; margin: 1rem 0; background: #000;">
-          <img id="img-carrusel" src="${listaImagenesGlobal[0]}" alt="${actividad.nombre}" style="width: 100%; height: 420px; object-fit: cover; display: block;" />
+        <div style="position: relative; width: 100%; max-height: 480px; border-radius: 10px; overflow: hidden; margin: 1rem 0; background: #000;">
+          <img id="img-carrusel" src="${listaImagenesGlobal[0]}" alt="${actividad.nombre}" style="width: 100%; height: 480px; object-fit: cover; display: block;" />
           <button onclick="cambiarImagen(-1)" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: white; border: none; padding: 0.8rem 1.1rem; border-radius: 50%; cursor: pointer; font-size: 1.2rem; font-weight: bold;">❮</button>
           <button onclick="cambiarImagen(1)" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: white; border: none; padding: 0.8rem 1.1rem; border-radius: 50%; cursor: pointer; font-size: 1.2rem; font-weight: bold;">❯</button>
           <span id="contador-carrusel" style="position: absolute; bottom: 12px; right: 15px; background: rgba(0,0,0,0.7); color: white; padding: 0.3rem 0.7rem; border-radius: 12px; font-size: 0.85rem;">
@@ -155,7 +152,7 @@ async function cargarFicha() {
         </div>
 
         ${tieneMetricas ? `
-        <div style="background: #f4f9f4; padding: 1.25rem; border-radius: 8px; margin: 1.5rem 0; border-left: 5px solid #2e7d32; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.8rem;">
+        <div style="background: #f4f9f4; padding: 1.25rem; border-radius: 8px; margin: 1.5rem 0; border-left: 5px solid #2e7d32; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem;">
           ${actividad.dificultad ? `<p style="margin: 0;"><strong>Dificultad:</strong> <span style="color: #2e7d32;">${actividad.dificultad}</span></p>` : ''}
           ${actividad.tiempoEstimado ? `<p style="margin: 0;"><strong>Duración:</strong> ${actividad.tiempoEstimado}</p>` : ''}
           ${actividad.distancia ? `<p style="margin: 0;"><strong>Distancia:</strong> ${actividad.distancia}</p>` : ''}
@@ -196,7 +193,7 @@ async function cargarFicha() {
 
         ${actividad.mapaWikiloc ? `
           <h3 style="color: #2e7d32; margin-top: 2rem; font-size: 1.25rem; border-bottom: 2px solid #e8f5e9; padding-bottom: 0.5rem;">Ruta y Mapa GPS</h3>
-          <div style="width: 100%; height: 380px; border-radius: 10px; overflow: hidden; margin-top: 1rem; border: 1px solid #e0e0e0;">
+          <div style="width: 100%; height: 420px; border-radius: 10px; overflow: hidden; margin-top: 1rem; border: 1px solid #e0e0e0;">
             <iframe src="${actividad.mapaWikiloc}" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
           </div>
         ` : ''}
