@@ -158,7 +158,7 @@ export async function cargarFicha(): Promise<void> {
         
         <!-- Carrusel de imágenes -->
         <div style="position: relative; width: 100%; max-height: 480px; border-radius: 10px; overflow: hidden; margin: 1rem 0; background: #000;">
-          <img id="img-carrusel" src="${listaImagenesGlobal[0]}" alt="${actividad.nombre}" style="width: 100%; height: 480px; object-fit: cover; display: block;" />
+          <img id="img-carrusel" src="${listaImagenesGlobal[0]}" alt="${actividad.nombre}" width="1100" height="480" fetchpriority="high" style="width: 100%; height: 480px; object-fit: cover; display: block;" />
           <button onclick="cambiarImagen(-1)" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: white; border: none; padding: 0.8rem 1.1rem; border-radius: 50%; cursor: pointer; font-size: 1.2rem; font-weight: bold;">❮</button>
           <button onclick="cambiarImagen(1)" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: white; border: none; padding: 0.8rem 1.1rem; border-radius: 50%; cursor: pointer; font-size: 1.2rem; font-weight: bold;">❯</button>
           <span id="contador-carrusel" style="position: absolute; bottom: 12px; right: 15px; background: rgba(0,0,0,0.7); color: white; padding: 0.3rem 0.7rem; border-radius: 12px; font-size: 0.85rem;">
