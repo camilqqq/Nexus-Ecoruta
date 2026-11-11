@@ -1,66 +1,74 @@
-const API_URL = "https://6724eb29c39fedae05b33100.mockapi.io/api/v1/rutas";
+// APIs
+const RUTAS_API_URL = "https://6724eb29c39fedae05b33100.mockapi.io/api/v1/rutas";
+// API gratuita de Clima para Temuco (Lat: -38.7397, Lon: -72.5984)
+const CLIMA_API_URL = "https://api.open-meteo.com/v1/forecast?latitude=-38.7397&longitude=-72.5984&current_weather=true&relativehumidity_2m=true";
 
-const rutasBackup = [
-  {
-    id: "1",
-    nombre: "Sendero Ñielol",
-    categoria: "Naturaleza",
-    ubicacion: "Parque Ñielol, Temuco",
-    duracion: "1 hr 30 min",
-    dificultad: "Moderada",
-    imagen: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=500"
-  },
-  {
-    id: "2",
-    nombre: "Museo Regional de La Araucanía",
-    categoria: "Cultura",
-    ubicacion: "Museo Regional de La Araucanía",
-    duracion: "1-2 hrs",
-    dificultad: "Fácil",
-    imagen: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?w=500"
-  },
-  {
-    id: "3",
-    nombre: "Feria Agroecológica",
-    categoria: "Gastronomía",
-    ubicacion: "Plaza Aníbal Pinto",
-    duracion: "45 min",
-    dificultad: "Muy fácil",
-    imagen: "https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=500"
-  }
-];
+// Datos de respaldo para el clima
+const climaRespaldo = {
+  temperatura: "14°C",
+  humedad: "85%",
+  condicion: "📍 Temuco · Lluvia moderada 🌧️"
+};
 
-async function obtenerRutas() {
-  try {
-    const res = await fetch(API_URL);
-    if (!res.ok) throw new Error("Error API");
-    const datos = await res.json();
-    mostrarRutas(datos);
-  } catch (err) {
-    mostrarRutas(rutasBackup);
-  }
-}
-
-function mostrarRutas(rutas) {
-  const contenedor = document.getElementById("contenedor-api") || document.getElementById("contenedor-rutas");
+// Cargar Clima de Temuco desde API
+async function cargarClimaTemuco() {
+  const contenedor = document.getElementById("contenedor-api");
   if (!contenedor) return;
 
-  // Limpia el mensaje "Cargando información desde la API..."
-  contenedor.innerHTML = "";
+  let temp = climaRespaldo.temperatura;
+  let humedad = climaRespaldo.humedad;
+  let condicion = climaRespaldo.condicion;
 
-  rutas.forEach((ruta) => {
-    const tarjeta = document.createElement("article");
-    tarjeta.className = "ruta-card";
-    tarjeta.innerHTML = `
-      <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; background: #fff;">
-        <h3>${ruta.nombre}</h3>
-        <p><strong>Categoría:</strong> ${ruta.categoria || 'Naturaleza'} · <strong>Dificultad:</strong> ${ruta.dificultad}</p>
-        <p>📍 ${ruta.ubicacion || 'Temuco'}</p>
-        <a href="paginas/Actividad.html?id=${ruta.id}" style="display: inline-block; padding: 0.5rem 1rem; background: #2e7d32; color: white; text-decoration: none; border-radius: 4px;">Ver ficha</a>
+  try {
+    const res = await fetch(CLIMA_API_URL);
+    if (res.ok) {
+      const data = await res.json();
+      if (data.current_weather) {
+        temp = `${Math.round(data.current_weather.temperature)}°C`;
+        condicion = `📍 Temuco · ${interpretarCodigoClima(data.current_weather.weathercode)}`;
+      }
+    }
+  } catch (error) {
+    console.log("Usando clima de respaldo");
+  }
+
+  // Renderizar widget moderno del clima
+  contenedor.innerHTML = `
+    <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border: 1px solid #a5d6a7; border-radius: 12px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; box-shadow: 0 4px 12px rgba(46, 125, 50, 0.08); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <span style="background: #2e7d32; color: white; font-size: 0.75rem; font-weight: bold; padding: 0.25rem 0.6rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px;">API Clima en Vivo</span>
+        <h3 style="color: #1b5e20; margin: 0.5rem 0 0.2rem 0; font-size: 1.2rem; display: flex; align-items: center; gap: 0.4rem;">
+          📍 Estado del Tiempo en Temuco
+        </h3>
+        <p style="color: #388e3c; margin: 0; font-size: 0.95rem; font-weight: 500;">${condicion}</p>
       </div>
-    `;
-    contenedor.appendChild(tarjeta);
-  });
+      
+      <div style="display: flex; gap: 1.5rem; align-items: center; background: rgba(255, 255, 255, 0.7); padding: 0.75rem 1.25rem; border-radius: 10px; backdrop-filter: blur(4px);">
+        <div style="text-align: center;">
+          <span style="font-size: 0.8rem; color: #555; display: block; font-weight: 600;">Temperatura</span>
+          <span style="font-size: 1.5rem; font-weight: bold; color: #2e7d32;">🌡️ ${temp}</span>
+        </div>
+        <div style="width: 1px; height: 35px; background: #c8e6c9;"></div>
+        <div style="text-align: center;">
+          <span style="font-size: 0.8rem; color: #555; display: block; font-weight: 600;">Humedad</span>
+          <span style="font-size: 1.5rem; font-weight: bold; color: #0288d1;">💧 ${humedad}</span>
+        </div>
+      </div>
+    </div>
+  `;
 }
 
-document.addEventListener("DOMContentLoaded", obtenerRutas);
+// Función auxiliar para códigos de clima WMO
+function interpretarCodigoClima(code) {
+  if (code === 0) return "Cielo despejado ☀️";
+  if (code >= 1 && code <= 3) return "Parcialmente nublado ⛅";
+  if (code >= 45 && code <= 48) return "Neblina 🌫️";
+  if (code >= 51 && code <= 67) return "Lluvia moderada 🌧️";
+  if (code >= 71 && code <= 77) return "Nieve ❄️";
+  if (code >= 80 && code <= 82) return "Chubascos 🌦️";
+  return "Tiempo variable 🌤️";
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  cargarClimaTemuco();
+});
