@@ -37,7 +37,6 @@ const detalleBackup = {
   "2": {
     id: "2",
     nombre: "Museo Regional de La Araucanía",
-    // Sin distancia, duración ni dificultad
     introduccion: "Emblemático espacio patrimonial ubicado en la histórica Casona Thiers. Ofrece exposiciones sobre la historia prehispánica, patrimonio e historia de la región de La Araucanía.",
     horarioAtencion: "Martes a viernes de 09:30 a 17:00 hrs. Sábados y domingos de 10:00 a 17:00 hrs.",
     sectores: [
@@ -63,7 +62,6 @@ const detalleBackup = {
   "3": {
     id: "3",
     nombre: "Feria Pinto",
-    // Sin distancia, duración ni dificultad
     introduccion: "Descubre un espacio lleno de sabores, colores y tradiciones de La Araucanía. Encuentra productos frescos de la tierra, hortalizas locales, alimentos orgánicos y artesanías con identidad regional, ofrecidos directamente por pequeños productores y emprendedores de la zona. Una experiencia para disfrutar, conocer y valorar lo nuestro.",
     horarioAtencion: "Lunes a domingo de 08:00 a 19:00 hrs.",
     sectores: [
@@ -136,7 +134,6 @@ async function cargarFicha() {
   const contenedor = document.querySelector(".actividad-detalle") || document.querySelector("main") || document.body;
 
   if (contenedor) {
-    // Determinar si es una actividad con barra de métricas (Trekking/Senderismo)
     const tieneMetricas = actividad.dificultad || actividad.tiempoEstimado || actividad.distancia;
 
     contenedor.innerHTML = `
@@ -157,7 +154,6 @@ async function cargarFicha() {
           </span>
         </div>
 
-        <!-- Muestra métricas solo para Senderos o Isla Cautín -->
         ${tieneMetricas ? `
         <div style="background: #f4f9f4; padding: 1.25rem; border-radius: 8px; margin: 1.5rem 0; border-left: 5px solid #2e7d32; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.8rem;">
           ${actividad.dificultad ? `<p style="margin: 0;"><strong>Dificultad:</strong> <span style="color: #2e7d32;">${actividad.dificultad}</span></p>` : ''}
@@ -168,7 +164,6 @@ async function cargarFicha() {
         </div>
         ` : ''}
 
-        <!-- Detalle con diseño idéntico a las capturas -->
         <div style="line-height: 1.6; font-size: 1.05rem; margin-top: 1.5rem;">
           ${actividad.introduccion ? `<p style="margin-bottom: 1.5rem; color: #444;">${actividad.introduccion}</p>` : ''}
 
@@ -201,4 +196,14 @@ async function cargarFicha() {
 
         ${actividad.mapaWikiloc ? `
           <h3 style="color: #2e7d32; margin-top: 2rem; font-size: 1.25rem; border-bottom: 2px solid #e8f5e9; padding-bottom: 0.5rem;">Ruta y Mapa GPS</h3>
-          <div style="width: 100%; height: 380px; border-radius: 10px; overflow: hidden; margin-top: 1rem; border: 1px solid #e0e0e0
+          <div style="width: 100%; height: 380px; border-radius: 10px; overflow: hidden; margin-top: 1rem; border: 1px solid #e0e0e0;">
+            <iframe src="${actividad.mapaWikiloc}" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+        ` : ''}
+      </section>
+    `;
+  }
+}
+
+window.cambiarImagen = cambiarImagen;
+document.addEventListener("DOMContentLoaded", cargarFicha);
