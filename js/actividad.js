@@ -1,6 +1,6 @@
 const API_URL = "https://6724eb29c39fedae05b33100.mockapi.io/api/v1/rutas";
 
-// Datos de respaldo con todas las actividades
+// Datos de respaldo con imágenes correspondientes a cada lugar real
 const detalleBackup = {
   "1": {
     nombre: "Sendero Cerro Ñielol",
@@ -9,7 +9,7 @@ const detalleBackup = {
     tiempoEstimado: "1h 30min",
     descripcion: "Caminata entre bosque nativo con vista panorámica a Temuco y senderos rodeados de flora silvestre. Ideal para observar la biodiversidad de la Araucanía y conectarse con la naturaleza a minutos del centro de la ciudad.",
     ubicacion: "Monumento Natural Cerro Ñielol, Temuco",
-    imagen: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800"
+    imagen: "https://conaf.cl/wp-content/uploads/2022/03/MN-Cerro-Nielol.jpg"
   },
   "2": {
     nombre: "Museo Regional de La Araucanía",
@@ -18,7 +18,7 @@ const detalleBackup = {
     tiempoEstimado: "1-2 hrs",
     descripcion: "Exhibición de historia cultural, artefactos ancestrales y patrimonio regional de La Araucanía. Recorrido apto para toda la familia con guías locales e historia viva de la zona.",
     ubicacion: "Av. Alemania 0842, Temuco",
-    imagen: "https://images.unsplash.com/photo-1566127444979-b3d2b654e3d7?w=800"
+    imagen: "https://www.patrimoniocultural.gob.cl/sites/www.patrimoniocultural.gob.cl/files/styles/flexslider_full/public/2021-03/Museo%20Regional%20de%20la%20Araucan%C3%ADa.jpg"
   },
   "3": {
     nombre: "Feria Agroecológica",
@@ -27,7 +27,7 @@ const detalleBackup = {
     tiempoEstimado: "45 min",
     descripcion: "Encuentro de productores locales con frutas, verduras orgánicas y artesanía regional sustentable. Una experiencia ideal para degustar productos frescos directos del campo a la ciudad.",
     ubicacion: "Plaza Aníbal Pinto, Temuco",
-    imagen: "https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=800"
+    imagen: "https://www.temuco.cl/wp-content/uploads/2021/11/feria-agroecologica-temuco.jpg"
   }
 };
 
@@ -46,15 +46,18 @@ async function cargarFicha() {
       actividad = await res.json();
     }
   } catch (e) {
-    console.log("Usando datos de respaldo para la ficha");
+    console.log("Usando datos de respaldo");
   }
 
-  // Si la API falla o no encuentra la ID, toma el respaldo
   if (!actividad || !actividad.nombre) {
     actividad = detalleBackup[id] || detalleBackup["1"];
   }
 
-  // Buscar el contenedor de la ficha o el body principal
+  // Si la actividad tiene la imagen vieja o vacía, asegurar que muestre la imagen real
+  if (detalleBackup[id] && (!actividad.imagen || actividad.imagen.includes("unsplash"))) {
+    actividad.imagen = detalleBackup[id].imagen;
+  }
+
   const contenedor = document.querySelector(".actividad-detalle") || 
                      document.querySelector("main") || 
                      document.body;
