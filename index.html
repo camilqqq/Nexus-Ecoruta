@@ -68,7 +68,8 @@
           <span>3 resultados</span>
         </div>
 
-        <div class="list">
+       <div class="list">
+          <!-- 1. Sendero Ñielol -->
           <article class="activity" data-categoria="Naturaleza">
             <div class="image">
               <img src="assets/imagenes/Sendero/Sendero_Nielol.jpg" alt="Sendero de trekking en el Parque Ñielol" />
@@ -87,13 +88,13 @@
               <p>Duración: 1 hr 30 min · Dificultad: Moderada</p>
 
               <div class="buttons">
-                <!-- ID numérico sincronizado con la interfaz TypeScript -->
                 <a href="paginas/Actividad.html?id=1" class="primary" aria-label="Ver ficha detallada de Sendero Ñielol">Ver ficha</a>
                 <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
               </div>
             </div>
           </article>
 
+          <!-- 2. Museo Regional de La Araucanía (ID 2 corregida + sin duración ni dificultad) -->
           <article class="activity" data-categoria="Cultura">
             <div class="image">
               <img
@@ -106,22 +107,20 @@
               <div class="activity-header">
                 <div>
                   <h3>Museo Regional de La Araucanía</h3>
-                  <p>Cultura • Museo Regional de La Araucanía</p>
+                  <p>Cultura • Av. Alemania 0842, Temuco</p>
                 </div>
 
                 <small>Actualizado: 2026-08-06</small>
               </div>
 
-              <p>Duración: 1-2 hrs · Dificultad: Fácil</p>
-
               <div class="buttons">
-                <!-- ID numérico sincronizado con la interfaz TypeScript -->
-                <a href="paginas/Actividad.html?id=4" class="primary" aria-label="Ver ficha detallada del Museo Regional de La Araucanía">Ver ficha</a>
+                <a href="paginas/Actividad.html?id=2" class="primary" aria-label="Ver ficha detallada del Museo Regional de La Araucanía">Ver ficha</a>
                 <a href="mailto:contacto@museoaraucania.cl">Contactar</a>
               </div>
             </div>
           </article>
 
+          <!-- 3. Feria Agroecológica (Sin duración ni dificultad) -->
           <article class="activity" data-categoria="Gastronomía">
             <div class="image">
               <img
@@ -140,17 +139,41 @@
                 <small>Actualizado: 2026-08-12</small>
               </div>
 
-              <p>Duración: 45 min · Dificultad: Muy fácil</p>
-
               <div class="buttons">
-                <!-- ID numérico sincronizado con la interfaz TypeScript -->
                 <a href="paginas/Actividad.html?id=3" class="primary" aria-label="Ver ficha detallada de la Feria Agroecológica">Ver ficha</a>
                 <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
               </div>
             </div>
           </article>
-        </div>
 
+          <!-- 4. Parque Isla Cautín (NUEVO) -->
+          <article class="activity" data-categoria="Naturaleza">
+            <div class="image">
+              <img
+                src="assets/imagenes/Isla_Cautin/Isla1.jpg"
+                alt="Vista del Parque Isla Cautín"
+              />
+            </div>
+
+            <div class="info">
+              <div class="activity-header">
+                <div>
+                  <h3>Parque Isla Cautín</h3>
+                  <p>Naturaleza • Av. los Poetas, Temuco</p>
+                </div>
+
+                <small>Actualizado: 2026-08-15</small>
+              </div>
+
+              <p>Duración: 1-2 hrs · Dificultad: Fácil</p>
+
+              <div class="buttons">
+                <a href="paginas/Actividad.html?id=4" class="primary" aria-label="Ver ficha detallada del Parque Isla Cautín">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+              </div>
+            </div>
+          </article>
+        </div>
         <!-- Contenedor inyectado dinámicamente desde la API -->
         <div id="contenedor-api" class="api-container">
           <p>Cargando información desde la API...</p>
