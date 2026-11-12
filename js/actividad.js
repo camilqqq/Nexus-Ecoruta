@@ -1,4 +1,3 @@
-// Objeto de respaldo local con los datos y mapas corregidos de todas las actividades (1 a 5)
 const detalleBackup = {
   "1": {
     id: "1",
@@ -17,14 +16,9 @@ const detalleBackup = {
       distancia: "2.5 km",
       desnivel: "+120 m",
       accesibilidad: "Apto para personas con movilidad reducida en tramos iniciales.",
-      horarios: "Martes a Domingo: 08:30 - 17:30 hrs",
-      contacto: {
-        telefono: "+56 45 229 8210",
-        email: "contacto@nielol.cl",
-        web: "https://www.conaf.cl"
-      }
+      horarios: "Martes a Domingo: 08:30 - 17:30 hrs"
     },
-    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Monumento+Natural+Cerro+Nielol+Temuco&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    mapaIframe: '<iframe src="https://www.google.com/maps/d/embed?mid=1vX88s9-9Zg6-x4Z-58xZ-58xZ-58" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
     itinerario: [
       { hora: "08:30", actividad: "Registro en portería e inicio de caminata." },
       { hora: "09:15", actividad: "Llegada al Mirador Agua Santa." },
@@ -43,43 +37,50 @@ const detalleBackup = {
       "../assets/imagenes/Museo/museo3.jpg"
     ],
     detalles: {
-      duracion: "1 hr",
-      dificultad: "Fácil",
-      distancia: "N/A",
       accesibilidad: "Rampas y ascensores totalmente habilitados.",
-      horarios: "Martes a Viernes: 09:30 - 17:30 hrs",
-      contacto: {
-        telefono: "+56 45 274 0577",
-        email: "museo.araucania@museospatrimonio.gob.cl",
-        web: "https://www.museoregionalaraucania.gob.cl"
-      }
+      horarios: "Martes a viernes de 09:30 a 17:30 hrs. Sábados y domingos de 10:00 a 17:00 hrs.",
+      tipoTerreno: "Piso cerámico, parqué y senderos adosados de piedra",
+      tipoRuta: "Recorrido guiado / Salón y parque urbano"
     },
-    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Museo+Regional+de+La+Araucania+Temuco&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
+    sectores: [
+      "Galería Principal de Historia Regional",
+      "Sala de Arqueología y Cosmovisión Mapuche",
+      "Jardín Botánico Palacio Thiers"
+    ],
+    tarifas: [
+      { tipo: "Público General", precio: "Entrada liberada / Gratuita" },
+      { tipo: "Delegaciones Escolares", precio: "Gratuito previa reserva previa" }
+    ],
+    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Museo+Regional+de+La+Araucania+Av+Alemania+0842+Temuco&t=&z=16&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
   },
   "3": {
     id: "3",
     nombre: "Feria Agroecológica",
     categoria: "Gastronomía",
-    ubicacion: "Plaza Aníbal Pinto, Temuco",
-    descripcion: "Encuentro de hortaliceras y productores locales que ofrecen alimentos orgánicos, mermeladas artesanales y hierbas medicinales.",
+    ubicacion: "Feria Pinto, Av. Balmaceda, Temuco",
+    descripcion: "Descubre un espacio lleno de sabores, colores y tradiciones de La Araucanía. Encuentra productos frescos de la tierra, hortalizas locales, alimentos orgánicos y artesanías con identidad regional, ofrecidos directamente por pequeños productores y emprendedores de la zona. Una experiencia para disfrutar, conocer y valorar lo nuestro.",
     imagenes: [
       "../assets/imagenes/Feria/feria.jpg",
       "../assets/imagenes/Feria/feria2.jpg",
       "../assets/imagenes/Feria/feria3.jpg"
     ],
     detalles: {
-      duracion: "45 min",
-      dificultad: "Fácil",
-      distancia: "N/A",
       accesibilidad: "Acceso a nivel de calle totalmente accesible.",
-      horarios: "Viernes: 09:00 - 14:00 hrs",
-      contacto: {
-        telefono: "+56 9 1234 5678",
-        email: "contacto@feriaagroecologica.cl",
-        web: "https://www.temuco.cl"
-      }
+      horarios: "Lunes a domingo de 08:00 a 19:00 hrs.",
+      tipoTerreno: "Baldosa cívica, adoquines y pasajes techados",
+      tipoRuta: "Paseo peatonal urbano",
+      desnivelExtra: "0 m",
+      altitudMaxima: "~115 m s.n.m"
     },
-    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Plaza+Anibal+Pinto+Temuco&t=&z=16&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
+    sectores: [
+      "Paseo de Productores Agroecológicos",
+      "Sector Muestra de Artesanía en Madera y Llama",
+      "Patio de Comidas Tradicionales"
+    ],
+    tarifas: [
+      { tipo: "Acceso", precio: "Acceso libre y gratuito para todo espectador" }
+    ],
+    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Feria+Pinto+Balmaceda+Temuco&t=&z=16&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
   },
   "4": {
     id: "4",
@@ -98,12 +99,7 @@ const detalleBackup = {
       dificultad: "Fácil",
       distancia: "3.0 km",
       accesibilidad: "Rutas pavimentadas y baños adaptados.",
-      horarios: "Lunes a Domingo: 08:30 - 20:00 hrs",
-      contacto: {
-        telefono: "+56 45 297 3000",
-        email: "parqueislacautin@temuco.cl",
-        web: "https://www.temuco.cl"
-      }
+      horarios: "Lunes a Domingo: 08:30 - 20:00 hrs"
     },
     mapaIframe: '<iframe src="https://maps.google.com/maps?q=Parque+Isla+Cautin+Temuco&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
   },
@@ -125,12 +121,7 @@ const detalleBackup = {
       distancia: "10 km (Sendero Sierra Nevada)",
       desnivel: "+450 m",
       accesibilidad: "Sendero inclusivo adaptado en sector Laguna Captrén.",
-      horarios: "Ingreso: 08:30 a 14:00 hrs. Salida: hasta las 18:00 hrs.",
-      contacto: {
-        telefono: "+56 45 229 8210",
-        email: "parque.conguillio@conaf.cl",
-        web: "https://www.aspticket.cl"
-      }
+      horarios: "Ingreso: 08:30 a 14:00 hrs. Salida: hasta las 18:00 hrs."
     },
     tarifas: [
       { tipo: "Niños/as (-11 años) y Adulto Mayor (+60 años)", precio: "Gratis" },
@@ -138,7 +129,7 @@ const detalleBackup = {
       { tipo: "Adulto chileno (18 a 59 años)", precio: "$4.700" },
       { tipo: "Extranjeros", precio: "$9.300" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Parque+Nacional+Conguillio&t=&z=12&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    mapaIframe: '<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1J9507tFzl7qB0ZLBeSsNB4FFUjDWfGk&ehbc=2E312F" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
     itinerario: [
       { hora: "08:30", actividad: "Ingreso por Caseta de Control CONAF." },
       { hora: "09:30", actividad: "Caminata por Sendero Sierra Nevada entre araucarias." },
@@ -176,7 +167,7 @@ async function cargarFicha() {
         ${actividad.categoria}
       </span>
 
-      <!-- Galería de imágenes con respaldo de seguridad automático -->
+      <!-- Galería de imágenes -->
       <div>
         <img id="imagen-principal" src="${actividad.imagenes[0]}" alt="${actividad.nombre}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800';" style="width: 100%; height: 400px; object-fit: cover; border-radius: 8px;" />
         <div style="display: flex; gap: 0.5rem; margin-top: 0.8rem; overflow-x: auto;">
@@ -186,10 +177,10 @@ async function cargarFicha() {
         </div>
       </div>
 
-      <!-- Cuadro de métricas -->
+      <!-- Cuadro de métricas (no muestra dificultad, duración ni distancia si no existen) -->
       <div style="background: #f4f9f4; padding: 1.25rem; border-radius: 8px; margin: 1.5rem 0; border-left: 5px solid #2e7d32; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem;">
-        <p style="margin: 0;"><strong>Dificultad:</strong> <span style="color: #2e7d32;">${actividad.detalles.dificultad}</span></p>
-        <p style="margin: 0;"><strong>Duración:</strong> ${actividad.detalles.duracion}</p>
+        ${actividad.detalles.dificultad ? `<p style="margin: 0;"><strong>Dificultad:</strong> <span style="color: #2e7d32;">${actividad.detalles.dificultad}</span></p>` : ''}
+        ${actividad.detalles.duracion ? `<p style="margin: 0;"><strong>Duración:</strong> ${actividad.detalles.duracion}</p>` : ''}
         ${actividad.detalles.distancia ? `<p style="margin: 0;"><strong>Distancia:</strong> ${actividad.detalles.distancia}</p>` : ''}
         ${actividad.detalles.desnivel ? `<p style="margin: 0;"><strong>Desnivel:</strong> ${actividad.detalles.desnivel}</p>` : ''}
         <p style="margin: 0; grid-column: 1 / -1;"><strong>Ubicación:</strong> 📍 ${actividad.ubicacion}</p>
@@ -202,8 +193,12 @@ async function cargarFicha() {
         <h3 style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: #111;">Horarios de atención</h3>
         <p style="margin-bottom: 1.5rem; color: #333;">${actividad.detalles.horarios}</p>
 
-        <h3 style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: #111;">Accesibilidad</h3>
-        <p style="margin-bottom: 1.5rem; color: #333;">${actividad.detalles.accesibilidad}</p>
+        ${actividad.sectores ? `
+          <h3 style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: #111;">Sectores y recorridos</h3>
+          <ul style="margin-top: 0.4rem; margin-bottom: 1.5rem; padding-left: 1.5rem; color: #333;">
+            ${actividad.sectores.map(s => `<li style="margin-bottom: 0.4rem;">${s}</li>`).join('')}
+          </ul>
+        ` : ''}
 
         ${actividad.tarifas ? `
           <h3 style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: #111;">Tarifas de acceso</h3>
@@ -211,6 +206,25 @@ async function cargarFicha() {
             ${actividad.tarifas.map(t => `<li style="margin-bottom: 0.4rem;"><strong>${t.tipo}:</strong> ${t.precio}</li>`).join('')}
           </ul>
         ` : ''}
+
+        ${actividad.detalles.tipoTerreno ? `
+          <p style="margin-bottom: 0.8rem; color: #333;"><strong>Tipo de terreno:</strong> ${actividad.detalles.tipoTerreno}</p>
+        ` : ''}
+
+        ${actividad.detalles.tipoRuta ? `
+          <p style="margin-bottom: 0.8rem; color: #333;"><strong>Tipo de ruta:</strong> ${actividad.detalles.tipoRuta}</p>
+        ` : ''}
+
+        ${actividad.detalles.desnivelExtra ? `
+          <p style="margin-bottom: 0.8rem; color: #333;"><strong>Desnivel:</strong> ${actividad.detalles.desnivelExtra}</p>
+        ` : ''}
+
+        ${actividad.detalles.altitudMaxima ? `
+          <p style="margin-bottom: 1.5rem; color: #333;"><strong>Altitud máxima:</strong> ${actividad.detalles.altitudMaxima}</p>
+        ` : ''}
+
+        <h3 style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: #111;">Accesibilidad</h3>
+        <p style="margin-bottom: 1.5rem; color: #333;">${actividad.detalles.accesibilidad}</p>
 
         ${actividad.itinerario ? `
           <h3 style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: #111;">Itinerario sugerido</h3>
@@ -220,7 +234,7 @@ async function cargarFicha() {
         ` : ''}
       </div>
 
-      <!-- Mapa GPS Interactivo -->
+      <!-- Mapa GPS -->
       ${actividad.mapaIframe ? `
         <h3 style="color: #2e7d32; margin-top: 2rem; font-size: 1.25rem; border-bottom: 2px solid #e8f5e9; padding-bottom: 0.5rem;">Ruta y Mapa GPS</h3>
         <div style="width: 100%; height: 450px; border-radius: 10px; overflow: hidden; margin-top: 1rem; border: 1px solid #e0e0e0;">
