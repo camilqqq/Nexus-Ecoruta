@@ -1,4 +1,4 @@
-// Objeto de respaldo local con los datos de todas las actividades (1 a 5)
+// Objeto de respaldo local con los datos y mapas corregidos de todas las actividades (1 a 5)
 const detalleBackup = {
   "1": {
     id: "1",
@@ -24,7 +24,7 @@ const detalleBackup = {
         web: "https://www.conaf.cl"
       }
     },
-    mapaIframe: '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3112.55!2d-72.59!3d-38.73" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Monumento+Natural+Cerro+Nielol+Temuco&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
     itinerario: [
       { hora: "08:30", actividad: "Registro en portería e inicio de caminata." },
       { hora: "09:15", actividad: "Llegada al Mirador Agua Santa." },
@@ -54,7 +54,7 @@ const detalleBackup = {
         web: "https://www.museoregionalaraucania.gob.cl"
       }
     },
-    mapaIframe: '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3112.55!2d-72.60!3d-38.74" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
+    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Museo+Regional+de+La+Araucania+Temuco&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
   },
   "3": {
     id: "3",
@@ -78,7 +78,8 @@ const detalleBackup = {
         email: "contacto@feriaagroecologica.cl",
         web: "https://www.temuco.cl"
       }
-    }
+    },
+    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Plaza+Anibal+Pinto+Temuco&t=&z=16&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
   },
   "4": {
     id: "4",
@@ -103,7 +104,8 @@ const detalleBackup = {
         email: "parqueislacautin@temuco.cl",
         web: "https://www.temuco.cl"
       }
-    }
+    },
+    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Parque+Isla+Cautin+Temuco&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
   },
   "5": {
     id: "5",
@@ -136,7 +138,7 @@ const detalleBackup = {
       { tipo: "Adulto chileno (18 a 59 años)", precio: "$4.700" },
       { tipo: "Extranjeros", precio: "$9.300" }
     ],
-    mapaIframe: '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d198850.12345!2d-71.75!3d-38.65" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Parque+Nacional+Conguillio&t=&z=12&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
     itinerario: [
       { hora: "08:30", actividad: "Ingreso por Caseta de Control CONAF." },
       { hora: "09:30", actividad: "Caminata por Sendero Sierra Nevada entre araucarias." },
@@ -165,7 +167,6 @@ async function cargarFicha() {
 
   if (!contenedor) return;
 
-  // Cargar directamente del respaldo local asegurando la respuesta instantánea
   const actividad = detalleBackup[id] || detalleBackup["1"];
 
   contenedor.innerHTML = `
@@ -175,12 +176,12 @@ async function cargarFicha() {
         ${actividad.categoria}
       </span>
 
-      <!-- Galería de imágenes -->
+      <!-- Galería de imágenes con respaldo de seguridad automático -->
       <div>
-        <img id="imagen-principal" src="${actividad.imagenes[0]}" alt="${actividad.nombre}" style="width: 100%; height: 400px; object-fit: cover; border-radius: 8px;" />
+        <img id="imagen-principal" src="${actividad.imagenes[0]}" alt="${actividad.nombre}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800';" style="width: 100%; height: 400px; object-fit: cover; border-radius: 8px;" />
         <div style="display: flex; gap: 0.5rem; margin-top: 0.8rem; overflow-x: auto;">
           ${actividad.imagenes.map(img => `
-            <img src="${img}" alt="Miniatura" onclick="cambiarImagen('${img}')" style="width: 80px; height: 60px; object-fit: cover; border-radius: 4px; cursor: pointer; border: 2px solid #ddd;" />
+            <img src="${img}" alt="Miniatura" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=200';" onclick="cambiarImagen('${img}')" style="width: 80px; height: 60px; object-fit: cover; border-radius: 4px; cursor: pointer; border: 2px solid #ddd;" />
           `).join('')}
         </div>
       </div>
@@ -219,7 +220,7 @@ async function cargarFicha() {
         ` : ''}
       </div>
 
-      <!-- Mapa interactivo -->
+      <!-- Mapa GPS Interactivo -->
       ${actividad.mapaIframe ? `
         <h3 style="color: #2e7d32; margin-top: 2rem; font-size: 1.25rem; border-bottom: 2px solid #e8f5e9; padding-bottom: 0.5rem;">Ruta y Mapa GPS</h3>
         <div style="width: 100%; height: 450px; border-radius: 10px; overflow: hidden; margin-top: 1rem; border: 1px solid #e0e0e0;">
