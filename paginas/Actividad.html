@@ -1,24 +1,51 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EcoRuta Temuco - Detalle de Actividad</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detalle de Actividad - Nexus Ecoruta</title>
+  <link rel="stylesheet" href="../css/index.css" />
 </head>
-<body style="background-color: #f4f6f8; font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 0;">
+<body>
 
-  <header style="background: #ffffff; padding: 15px 40px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-    <nav>
-      <a href="../index.html" style="color: #2e7d32; text-decoration: none; font-weight: bold; font-size: 1rem;">← Volver al inicio</a>
-    </nav>
+  <!-- Encabezado / Header -->
+  <header>
+    <div class="header">
+      <div class="brand">
+        <img src="../assets/imagenes/Logo.png" alt="Logo Nexus Ecoruta" class="logo" width="120" height="45" />
+        <div>
+          <h1 class="brand-name">Nexus Ecoruta</h1>
+          <p>Turismo Sustentable en La Araucanía</p>
+        </div>
+      </div>
+      <nav>
+        <a href="../index.html">Inicio</a>
+        <a href="emprendimientos.html">Emprendimientos</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+    </div>
   </header>
 
-  <main style="max-width: 800px; margin: 30px auto; padding: 0 20px;">
-    <div id="contenedor-rutas">
-      <!-- actividad.js inyectará la tarjeta completa aquí -->
+  <main style="max-width: 1100px; margin: 2rem auto; padding: 0 1rem;">
+    <div style="margin-bottom: 1.5rem;">
+      <a href="../index.html" style="color: #2e7d32; text-decoration: none; font-weight: bold;">← Volver al catálogo</a>
+    </div>
+
+    <!-- Contenedor principal donde se inyecta la ficha -->
+    <div id="detalle-actividad">
+      <p style="text-align: center; font-size: 1.2rem; color: #666; padding: 3rem 0;">Cargando información de la actividad...</p>
     </div>
   </main>
 
+  <footer>
+    <span>EcoRuta Temuco • Información local y accesible</span>
+    <div>
+      <a href="../documentos/reportes/reporte-bug-bounty.pdf" target="_blank" rel="noopener">Bug Bounty</a>
+      <a href="contacto.html">Contacto</a>
+    </div>
+  </footer>
+
+  <!-- Script que carga la lógica de la ficha -->
   <script src="../js/actividad.js"></script>
 </body>
 </html>
