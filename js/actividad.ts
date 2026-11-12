@@ -153,9 +153,11 @@ const detalleBackup: Record<string, Actividad> = {
     ubicacion: "Melipeuco / Curacautín, Región de La Araucanía",
     descripcion: "Reconocido mundialmente por sus bosques milenarios de araucarias, lagunas cordilleranas y la imponente presencia del Volcán Llaima. Un imperdible del turismo sustentable en La Araucanía.",
     imagenes: [
-      "assets/imagenes/Conguillio/conguillio1.jpg",
-      "assets/imagenes/Conguillio/conguillio2.jpg"
-    ],
+        "assets/imagenes/Conguillio/Conguillio1.jpg",
+        "assets/imagenes/Conguillio/Conguillio2.jpg",
+        "assets/imagenes/Conguillio/Conguillio3.jpg",
+        "assets/imagenes/Conguillio/Conguillio4.jpg"
+      ],
     detalles: {
       duracion: "Día completo (4 a 6 horas de recorrido)",
       dificultad: "Moderada",
