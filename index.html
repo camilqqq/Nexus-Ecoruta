@@ -1,259 +1,228 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EcoRuta Temuco</title>
-    <link rel="stylesheet" href="css/index.css" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus Ecoruta - Turismo Sustentable</title>
+  <link rel="stylesheet" href="css/index.css" />
+</head>
+<body>
 
-  <body>
-    <header>
-      <div class="header">
-        <div class="brand">
-          <img src="assets/imagenes/Logo.png" alt="Logo EcoRuta Temuco" class="logo" width="40" height="40" />
-          <div>
-            <p class="brand-name">EcoRuta Temuco</p>
-            <p>Turismo sustentable • Temuco</p>
-          </div>
+  <!-- Encabezado / Header -->
+  <header>
+    <div class="header">
+      <div class="brand">
+        <img src="assets/imagenes/logo.png" alt="Logo Nexus Ecoruta" class="logo" width="120" height="45" />
+        <div>
+          <h1 class="brand-name">Nexus Ecoruta</h1>
+          <p>Turismo Sustentable en La Araucanía</p>
         </div>
-
-        <nav>
-          <a href="#inicio" aria-current="page">Inicio</a>
-          <a href="#explorar">Explorar</a>
-          <a href="paginas/emprendimientos.html">Emprendedores</a>
-          <a href="paginas/contacto.html">Contacto</a>
-          <a href="paginas/vista4.html">Administración</a>
-        </nav>
-
-        <button class="menu" aria-label="Abrir menú">☰</button>
       </div>
-    </header>
+      <nav>
+        <a href="index.html" class="active">Inicio</a>
+        <a href="paginas/emprendimientos.html">Emprendimientos</a>
+        <a href="paginas/contacto.html">Contacto</a>
+      </nav>
+    </div>
+  </header>
 
-    <main id="inicio">
-      <section class="hero">
-        <h1>Descubre experiencias sustentables en Temuco</h1>
-
-        <p>
-          Encuentra rutas, actividades y emprendimientos locales con información clara sobre
-          ubicación, accesibilidad, horarios y contacto.
-        </p>
-
-        <div class="catalog-access">
-          <a href="#explorar" class="catalog-button">
-            Explorar catálogo sin registrarme
-          </a>
-          <p>Acceso libre · No necesitas crear una cuenta</p>
-        </div>
-
-        <div class="search">
-          <input
-            type="search"
-            aria-label="Buscar por nombre o categoría"
-            placeholder="Buscar por nombre o categoría"
-          />
-
-          <div class="filters">
-            <button class="active" aria-pressed="true">Todas</button>
-            <button aria-pressed="false">Naturaleza</button>
-            <button aria-pressed="false">Cultura</button>
-            <button aria-pressed="false">Gastronomía</button>
-          </div>
-        </div>
-      </section>
-
-      <section class="activities" id="explorar">
-        <div class="section-title">
-          <h2>Actividades destacadas</h2>
-          <span>4 resultados</span>
-        </div>
-
-        <div class="list">
-          <!-- 1. Sendero Ñielol -->
-          <article class="activity" data-categoria="Naturaleza">
-            <div class="image">
-              <img src="assets/imagenes/Sendero/Sendero_Nielol.jpg" alt="Sendero de trekking en el Parque Ñielol" width="400" height="250" loading="lazy" />
-            </div>
-
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Sendero Ñielol</h3>
-                  <p>Naturaleza • Parque Ñielol, Temuco</p>
-                </div>
-
-                <small>Actualizado: 2026-08-10</small>
-              </div>
-
-              <p>Duración: 1 hr 30 min · Dificultad: Moderada</p>
-
-              <div class="buttons">
-                <a href="paginas/Actividad.html?id=1" class="primary" aria-label="Ver ficha detallada de Sendero Ñielol">Ver ficha</a>
-                <a href="https://wa.me/56912345678" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp sobre Sendero Ñielol">Contactar</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- 2. Museo Regional de La Araucanía -->
-          <article class="activity" data-categoria="Cultura">
-            <div class="image">
-              <img src="assets/imagenes/Museo/museo.jpg" alt="Fachada del Museo Regional de La Araucanía" width="400" height="250" loading="lazy" />
-            </div>
-
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Museo Regional de La Araucanía</h3>
-                  <p>Cultura • Av. Alemania 0842, Temuco</p>
-                </div>
-
-                <small>Actualizado: 2026-08-06</small>
-              </div>
-
-              <div class="buttons">
-                <a href="paginas/Actividad.html?id=2" class="primary" aria-label="Ver ficha detallada del Museo Regional de La Araucanía">Ver ficha</a>
-                <a href="mailto:contacto@museoaraucania.cl" aria-label="Contactar por correo sobre Museo Regional de La Araucanía">Contactar</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- 3. Feria Agroecológica -->
-          <article class="activity" data-categoria="Gastronomía">
-            <div class="image">
-              <img src="assets/imagenes/Feria/feria.jpg" alt="Puestos de la Feria Agroecológica en Plaza Aníbal Pinto" width="400" height="250" loading="lazy" />
-            </div>
-
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Feria Agroecológica</h3>
-                  <p>Gastronomía • Plaza Aníbal Pinto</p>
-                </div>
-
-                <small>Actualizado: 2026-08-12</small>
-              </div>
-
-              <div class="buttons">
-                <a href="paginas/Actividad.html?id=3" class="primary" aria-label="Ver ficha detallada de la Feria Agroecológica">Ver ficha</a>
-                <a href="https://wa.me/56912345678" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp sobre Feria Agroecológica">Contactar</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- 4. Parque Isla Cautín -->
-          <article class="activity" data-categoria="Naturaleza">
-            <div class="image">
-              <img src="assets/imagenes/Isla_Cautin/Isla1.jpg" alt="Vista del Parque Isla Cautín" width="400" height="250" loading="lazy" />
-            </div>
-
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Parque Isla Cautín</h3>
-                  <p>Naturaleza • Av. los Poetas, Temuco</p>
-                </div>
-
-                <small>Actualizado: 2026-08-15</small>
-              </div>
-
-              <p>Duración: 1-2 hrs · Dificultad: Fácil</p>
-
-              <div class="buttons">
-                <a href="paginas/Actividad.html?id=4" class="primary" aria-label="Ver ficha detallada del Parque Isla Cautín">Ver ficha</a>
-                <a href="https://wa.me/56912345678" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp sobre Parque Isla Cautín">Contactar</a>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <!-- Contenedor inyectado dinámicamente desde la API -->
-        <div id="contenedor-api" class="api-container">
-          <p>Cargando información desde la API...</p>
-        </div>
-      </section>
-    </main>
-
-    <div id="widget-clima"></div>
-
-    <footer>
-      <span>EcoRuta Temuco • Información local y accesible</span>
-
-      <div>
-        <a href="https://github.com/camilqqq/Nexus-Ecoruta/blob/main/documentos/reportes/reporte-bug-bounty.pdf" target="_blank" rel="noopener">Bug Bounty</a>
-        <a href="paginas/contacto.html">Contacto</a>      
+  <!-- Hero & Buscador -->
+  <main>
+    <section class="hero">
+      <h1>Descubre la magia natural y cultural de nuestra región</h1>
+      <p>Explora senderos, ferias agroecológicas y espacios patrimoniales diseñados para un turismo consciente y respetuoso con el medio ambiente.</p>
+      
+      <div class="search">
+        <input type="search" placeholder="Buscar por nombre, ubicación o categoría..." aria-label="Buscar actividades" />
       </div>
-    </footer>
 
-    <!-- Lógica de filtros del frontend -->
-    <script>
-      const botones = document.querySelectorAll('.filters button');
-      const tarjetas = document.querySelectorAll('.activity');
-      const buscador = document.querySelector('.search input');
-      const contador = document.querySelector('.section-title span');
-      const mensajeSinResultados = document.createElement('p');
-      mensajeSinResultados.textContent = 'No se encontraron actividades con esos criterios.';
-      mensajeSinResultados.hidden = true;
-      mensajeSinResultados.className = 'mensaje-vacio';
+      <div class="filters">
+        <button class="active" data-categoria="Todas">Todas</button>
+        <button data-categoria="Naturaleza">Naturaleza</button>
+        <button data-categoria="Cultura">Cultura</button>
+        <button data-categoria="Gastronomía">Gastronomía</button>
+      </div>
+    </section>
 
-      document.querySelector('.list').appendChild(mensajeSinResultados);
+    <!-- Catálogo de Actividades -->
+    <section class="activities">
+      <div class="section-title">
+        <h2>Actividades destacadas</h2>
+        <span id="contador-resultados">5 resultados</span>
+      </div>
 
-      let categoriaActual = 'Todas';
+      <div class="list">
+        <!-- 1. Sendero Ñielol -->
+        <article class="activity" data-categoria="Naturaleza">
+          <div class="image">
+            <img src="assets/imagenes/Sendero/Sendero_Nielol.jpg" alt="Sendero Cerro Ñielol" width="400" height="250" fetchpriority="high" />
+          </div>
+          <div class="info">
+            <div class="activity-header">
+              <div>
+                <h3>Sendero Ñielol</h3>
+                <p>Naturaleza • Parque Ñielol, Temuco</p>
+              </div>
+              <small>Actualizado: 2026-08-10</small>
+            </div>
+            <p>Duración: 1 hr 30 min · Dificultad: Moderada</p>
+            <div class="buttons">
+              <a href="paginas/Actividad.html?id=1" class="primary" aria-label="Ver ficha detallada de Sendero Ñielol">Ver ficha</a>
+              <a href="https://wa.me/56912345678" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp sobre Sendero Ñielol">Contactar</a>
+            </div>
+          </div>
+        </article>
 
-      const limpiar = (texto) =>
-        texto.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        <!-- 2. Museo Regional de La Araucanía -->
+        <article class="activity" data-categoria="Cultura">
+          <div class="image">
+            <img src="assets/imagenes/Museo/museo.jpg" alt="Museo Regional de La Araucanía" width="400" height="250" loading="lazy" />
+          </div>
+          <div class="info">
+            <div class="activity-header">
+              <div>
+                <h3>Museo Regional de La Araucanía</h3>
+                <p>Cultura • Av. Alemania 0842, Temuco</p>
+              </div>
+              <small>Actualizado: 2026-08-06</small>
+            </div>
+            <p>Duración: 1 hr · Dificultad: Fácil</p>
+            <div class="buttons">
+              <a href="paginas/Actividad.html?id=2" class="primary" aria-label="Ver ficha detallada de Museo Regional">Ver ficha</a>
+              <a href="https://wa.me/56912345678" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp sobre Museo Regional">Contactar</a>
+            </div>
+          </div>
+        </article>
 
-      contador.setAttribute('aria-live', 'polite');
+        <!-- 3. Feria Agroecológica -->
+        <article class="activity" data-categoria="Gastronomía">
+          <div class="image">
+            <img src="assets/imagenes/Feria/feria.jpg" alt="Feria Agroecológica" width="400" height="250" loading="lazy" />
+          </div>
+          <div class="info">
+            <div class="activity-header">
+              <div>
+                <h3>Feria Agroecológica</h3>
+                <p>Gastronomía • Plaza Aníbal Pinto</p>
+              </div>
+              <small>Actualizado: 2026-08-12</small>
+            </div>
+            <p>Duración: 45 min · Dificultad: Fácil</p>
+            <div class="buttons">
+              <a href="paginas/Actividad.html?id=3" class="primary" aria-label="Ver ficha detallada de la Feria Agroecológica">Ver ficha</a>
+              <a href="https://wa.me/56912345678" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp sobre Feria Agroecológica">Contactar</a>
+            </div>
+          </div>
+        </article>
 
-      function aplicarFiltros() {
-        const busqueda = limpiar(buscador.value.trim());
-        let visibles = 0;
+        <!-- 4. Parque Isla Cautín -->
+        <article class="activity" data-categoria="Naturaleza">
+          <div class="image">
+            <img src="assets/imagenes/Isla_Cautin/Isla1.jpg" alt="Vista del Parque Isla Cautín" width="400" height="250" loading="lazy" />
+          </div>
+          <div class="info">
+            <div class="activity-header">
+              <div>
+                <h3>Parque Isla Cautín</h3>
+                <p>Naturaleza • Av. los Poetas, Temuco</p>
+              </div>
+              <small>Actualizado: 2026-08-15</small>
+            </div>
+            <p>Duración: 1-2 hrs · Dificultad: Fácil</p>
+            <div class="buttons">
+              <a href="paginas/Actividad.html?id=4" class="primary" aria-label="Ver ficha detallada del Parque Isla Cautín">Ver ficha</a>
+              <a href="https://wa.me/56912345678" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp sobre Parque Isla Cautín">Contactar</a>
+            </div>
+          </div>
+        </article>
 
-        tarjetas.forEach((tarjeta) => {
-          const nombre = tarjeta.querySelector('h3').textContent;
-          const categoria = tarjeta.dataset.categoria;
+        <!-- 5. Parque Nacional Conguillío -->
+        <article class="activity" data-categoria="Naturaleza">
+          <div class="image">
+            <img src="assets/imagenes/Conguillio/conguillio1.jpg" alt="Parque Nacional Conguillío" width="400" height="250" loading="lazy" />
+          </div>
+          <div class="info">
+            <div class="activity-header">
+              <div>
+                <h3>Parque Nacional Conguillío</h3>
+                <p>Naturaleza • Melipeuco / Curacautín</p>
+              </div>
+              <small>Actualizado: 2026-11-11</small>
+            </div>
+            <p>Duración: Día completo · Dificultad: Moderada</p>
+            <div class="buttons">
+              <a href="paginas/Actividad.html?id=5" class="primary" aria-label="Ver ficha detallada de Parque Nacional Conguillío">Ver ficha</a>
+              <a href="https://wa.me/56912345678" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp sobre Parque Nacional Conguillío">Contactar</a>
+            </div>
+          </div>
+        </article>
+      </div>
 
-          const coincideCategoria =
-            categoriaActual === 'Todas' || categoria === categoriaActual;
+      <!-- Contenedor inyectado dinámicamente desde la API -->
+      <div id="contenedor-api" class="api-container">
+        <p>Cargando información desde la API...</p>
+      </div>
+    </section>
+  </main>
 
-          const coincideBusqueda =
-            limpiar(nombre + ' ' + categoria).includes(busqueda);
+  <div id="widget-clima"></div>
 
-          const mostrar = coincideCategoria && coincideBusqueda;
+  <footer>
+    <span>EcoRuta Temuco • Información local y accesible</span>
+    <div>
+      <a href="https://github.com/camilqqq/Nexus-Ecoruta/blob/main/documentos/reportes/reporte-bug-bounty.pdf" target="_blank" rel="noopener">Bug Bounty</a>
+      <a href="paginas/contacto.html">Contacto</a>
+    </div>
+  </footer>
 
-          if (mostrar) {
-            tarjeta.style.removeProperty('display');
-            visibles++;
-          } else {
-            tarjeta.style.setProperty('display', 'none');
-          }
-        });
+  <!-- Lógica de filtros del frontend -->
+  <script>
+    const botones = document.querySelectorAll('.filters button');
+    const tarjetas = document.querySelectorAll('.activity');
+    const buscador = document.querySelector('.search input');
+    const contador = document.querySelector('.section-title span');
+    const mensajeSinResultados = document.createElement('p');
+    mensajeSinResultados.textContent = 'No se encontraron actividades con esos criterios.';
+    mensajeSinResultados.hidden = true;
+    mensajeSinResultados.className = 'mensaje-vacio';
+    document.querySelector('.list').appendChild(mensajeSinResultados);
 
-        contador.textContent =
-          visibles + (visibles === 1 ? ' resultado' : ' resultados');
+    let categoriaActual = 'Todas';
 
-        mensajeSinResultados.hidden = visibles !== 0;
-      }
+    const limpiar = (texto) => texto.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
-      botones.forEach((boton) => {
-        boton.addEventListener('click', () => {
-          botones.forEach((b) => {
-            b.classList.remove('active');
-            b.setAttribute('aria-pressed', 'false');
-          });
+    function filtrarActividades() {
+      const termino = limpiar(buscador.value.trim());
+      let visibles = 0;
 
-          boton.classList.add('active');
-          boton.setAttribute('aria-pressed', 'true');
+      tarjetas.forEach((tarjeta) => {
+        const categoriaTarjeta = tarjeta.getAttribute('data-categoria');
+        const contenidoTexto = limpiar(tarjeta.textContent);
+        const coincideCategoria = categoriaActual === 'Todas' || categoriaTarjeta === categoriaActual;
+        const coincideBusqueda = !termino || contenidoTexto.includes(termino);
 
-          categoriaActual = boton.textContent.trim();
-          aplicarFiltros();
-        });
+        if (coincideCategoria && coincideBusqueda) {
+          tarjeta.style.display = 'flex';
+          visibles++;
+        } else {
+          tarjeta.style.display = 'none';
+        }
       });
 
-      buscador.addEventListener('input', aplicarFiltros);
-    </script>
+      contador.textContent = `${visibles} resultado${visibles === 1 ? '' : 's'}`;
+      mensajeSinResultados.hidden = visibles > 0;
+    }
 
-    <!-- Vinculación de scripts de la aplicación -->
-    <script src="js/api.js"></script>
-    <script src="js/rutas.js"></script>
-  </body>
+    botones.forEach((boton) => {
+      boton.addEventListener('click', () => {
+        botones.forEach((b) => b.classList.remove('active'));
+        boton.classList.add('active');
+        categoriaActual = boton.getAttribute('data-categoria');
+        filtrarActividades();
+      });
+    });
+
+    buscador.addEventListener('input', filtrarActividades);
+  </script>
+</body>
 </html>
