@@ -7,8 +7,9 @@ const detalleBackup = {
     descripcion: "Hermoso sendero natural rodeado de flora y fauna nativa de la Región de La Araucanía. Ideal para caminatas familiares y observación de aves.",
     imagenes: [
       "../assets/imagenes/Sendero/Sendero_Nielol.jpg",
-      "../assets/imagenes/Sendero/Sendero2.jpg",
-      "../assets/imagenes/Sendero/Sendero3.jpg"
+      "../assets/imagenes/Sendero/sendero2.jpg",
+      "../assets/imagenes/Sendero/sendero3.jpg",
+      "../assets/imagenes/Sendero/sendero4.jpg"
     ],
     detalles: {
       duracion: "1 hr 30 min",
@@ -18,7 +19,7 @@ const detalleBackup = {
       accesibilidad: "Apto para personas con movilidad reducida en tramos iniciales.",
       horarios: "Martes a Domingo: 08:30 - 17:30 hrs"
     },
-    mapaIframe: '<iframe src="https://www.google.com/maps/d/embed?mid=1vX88s9-9Zg6-x4Z-58xZ-58xZ-58" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Monumento+Natural+Cerro+Nielol+Temuco&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
     itinerario: [
       { hora: "08:30", actividad: "Registro en portería e inicio de caminata." },
       { hora: "09:15", actividad: "Llegada al Mirador Agua Santa." },
@@ -169,15 +170,15 @@ async function cargarFicha() {
 
       <!-- Galería de imágenes -->
       <div>
-        <img id="imagen-principal" src="${actividad.imagenes[0]}" alt="${actividad.nombre}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800';" style="width: 100%; height: 400px; object-fit: cover; border-radius: 8px;" />
+        <img id="imagen-principal" src="${actividad.imagenes[0]}" alt="${actividad.nombre}" style="width: 100%; height: 400px; object-fit: cover; border-radius: 8px;" />
         <div style="display: flex; gap: 0.5rem; margin-top: 0.8rem; overflow-x: auto;">
           ${actividad.imagenes.map(img => `
-            <img src="${img}" alt="Miniatura" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=200';" onclick="cambiarImagen('${img}')" style="width: 80px; height: 60px; object-fit: cover; border-radius: 4px; cursor: pointer; border: 2px solid #ddd;" />
+            <img src="${img}" alt="Miniatura" onerror="this.style.display='none'" onclick="cambiarImagen('${img}')" style="width: 80px; height: 60px; object-fit: cover; border-radius: 4px; cursor: pointer; border: 2px solid #ddd;" />
           `).join('')}
         </div>
       </div>
 
-      <!-- Cuadro de métricas (no muestra dificultad, duración ni distancia si no existen) -->
+      <!-- Cuadro de métricas -->
       <div style="background: #f4f9f4; padding: 1.25rem; border-radius: 8px; margin: 1.5rem 0; border-left: 5px solid #2e7d32; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem;">
         ${actividad.detalles.dificultad ? `<p style="margin: 0;"><strong>Dificultad:</strong> <span style="color: #2e7d32;">${actividad.detalles.dificultad}</span></p>` : ''}
         ${actividad.detalles.duracion ? `<p style="margin: 0;"><strong>Duración:</strong> ${actividad.detalles.duracion}</p>` : ''}
