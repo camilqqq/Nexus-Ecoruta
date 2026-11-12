@@ -19,7 +19,7 @@ const detalleBackup = {
       accesibilidad: "Apto para personas con movilidad reducida en tramos iniciales.",
       horarios: "Martes a Domingo: 08:30 - 17:30 hrs"
     },
-    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Monumento+Natural+Cerro+Nielol+Temuco&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    mapaIframe: '<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1_V34G2jycQVduIN1hsLN_wdnFvSbsqs&ehbc=2E312F" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
     itinerario: [
       { hora: "08:30", actividad: "Registro en portería e inicio de caminata." },
       { hora: "09:15", actividad: "Llegada al Mirador Agua Santa." },
