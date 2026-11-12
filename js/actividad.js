@@ -1,3 +1,4 @@
+// Objeto de respaldo con las actividades (1 a 5)
 const detalleBackup = {
   "1": {
     id: "1",
