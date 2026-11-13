@@ -3,6 +3,7 @@ const detalleBackup = {
     id: "1",
     nombre: "Sendero Ñielol",
     categoria: "Naturaleza",
+    tipo:"RUTA",
     ubicacion: "Parque Nacional Cerro Ñielol, Temuco",
     descripcion: "Hermoso sendero natural rodeado de flora y fauna nativa de la Región de La Araucanía. Ideal para caminatas familiares y observación de aves.",
     imagenes: [
@@ -30,6 +31,7 @@ const detalleBackup = {
     id: "2",
     nombre: "Museo Regional de La Araucanía",
     categoria: "Cultura",
+    tipo: "ACTIVIDAD",
     ubicacion: "Av. Alemania 0842, Temuco",
     descripcion: "Espacio cultural que resguarda la historia, arqueología y etnografía de los pueblos originarios y la colonización en La Araucanía.",
     imagenes: [
@@ -58,6 +60,7 @@ const detalleBackup = {
     id: "3",
     nombre: "Feria Agroecológica",
     categoria: "Gastronomía",
+    tipo: "ACTIVIDAD",
     ubicacion: "Feria Pinto, Av. Balmaceda, Temuco",
     descripcion: "Descubre un espacio lleno de sabores, colores y tradiciones de La Araucanía. Encuentra productos frescos de la tierra, hortalizas locales, alimentos orgánicos y artesanías con identidad regional, ofrecidos directamente por pequeños productores y emprendedores de la zona. Una experiencia para disfrutar, conocer y valorar lo nuestro.",
     imagenes: [
@@ -87,6 +90,7 @@ const detalleBackup = {
     id: "4",
     nombre: "Parque Isla Cautín",
     categoria: "Naturaleza",
+    tipo: "RUTA",
     ubicacion: "Av. Los Poetas, Temuco",
     descripcion: "Gran pulmón verde urbano a orillas del Río Cautín con ciclovías, plazas de juegos, zonas de picnic y áreas de conservación vegetal.",
     imagenes: [
@@ -108,6 +112,7 @@ const detalleBackup = {
     id: "5",
     nombre: "Parque Nacional Conguillío",
     categoria: "Naturaleza",
+    tipo: "RUTA",
     ubicacion: "Melipeuco / Curacautín, Región de La Araucanía",
     descripcion: "Reconocido mundialmente por sus bosques milenarios de araucarias, lagunas cordilleranas y la imponente presencia del Volcán Llaima. Un imperdible del turismo sustentable en La Araucanía.",
     imagenes: [
@@ -164,9 +169,14 @@ async function cargarFicha() {
   contenedor.innerHTML = `
     <section style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
       <h1 style="color: #2e7d32; font-size: 2rem; margin-bottom: 0.5rem;">${actividad.nombre}</h1>
-      <span style="background: #e8f5e9; color: #2e7d32; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.9rem; font-weight: bold; display: inline-block; margin-bottom: 1rem;">
-        ${actividad.categoria}
-      </span>
+      <div style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-bottom:1rem;">
+  <span style="background:#e8f5e9; color:#1b5e20; padding:0.4rem 1rem; border-radius:20px; font-size:0.9rem; font-weight:bold;">
+    ${actividad.tipo}
+  </span>
+  <span style="background:#e3f2fd; color:#1565c0; padding:0.4rem 1rem; border-radius:20px; font-size:0.9rem; font-weight:bold;">
+    ${actividad.categoria}
+  </span>
+</div>
 
       <!-- Galería de imágenes -->
       <div>
