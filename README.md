@@ -54,21 +54,15 @@ El sitio cumple con buenas prácticas de accesibilidad web (WCAG):
 ---
 ## Configuración de TypeScript
 
--El proyecto utiliza el archivo tsconfig.json para configurar el compilador de TypeScript.
+- El proyecto utiliza el archivo `tsconfig.json` para configurar el compilador de TypeScript.
+- `target: ES2020`, define la versión de JavaScript de destino.
+- `module: ESNext`, establece el sistema de módulos.
+- `strict: false`, desactiva la comprobación estricta de tipos.
+- `rootDir: ./js`, establece la carpeta de origen de los archivos TypeScript.
+- `outDir: ./js`, define la carpeta de salida de los archivos compilados.
+- `include: js/*.ts`, indica los archivos TypeScript que serán incluidos.
+- `exclude: node_modules`, excluye las dependencias del proceso de compilación.
 
--target: ES2020, define la versión de JavaScript de destino.
-
--module: ESNext, establece el sistema de módulos.
-
--strict: false, desactiva la comprobación estricta de tipos.
-
--rootDir: ./js, establece la carpeta de origen de los archivos TypeScript.
-
--outDir: ./js, define la carpeta de salida de los archivos compilados.
-
--include: js/*.ts, indica los archivos TypeScript que serán incluidos.
-
--exclude: node_modules, excluye las dependencias del proceso de compilación.
 ---
 
 ## Equipo de Trabajo
