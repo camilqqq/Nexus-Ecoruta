@@ -55,7 +55,7 @@ const detalleBackup = {
       { tipo: "Público General", precio: "Entrada liberada / Gratuita" },
       { tipo: "Delegaciones Escolares", precio: "Gratuito previa reserva previa" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Museo+Regional+de+La+Araucania+Av+Alemania+0842+Temuco&t=&z=16&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
+    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Plaza+Anibal+Pinto+Temuco&daddr=Avenida+Alemania+Temuco+to:Museo+Regional+de+La+Araucania+Av+Alemania+0842+Temuco&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
   },
   "3": {
     id: "3",
@@ -86,7 +86,7 @@ const detalleBackup = {
     tarifas: [
       { tipo: "Acceso", precio: "Acceso libre y gratuito para todo espectador" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Feria+Pinto+Balmaceda+Temuco&t=&z=16&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
+    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Estacion+de+Ferrocarriles+Temuco&daddr=Feria+Pinto+Balmaceda+Temuco+to:Mercado+Modelo+Temuco&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
   },
   "4": {
     id: "4",
@@ -108,7 +108,7 @@ const detalleBackup = {
       accesibilidad: "Rutas pavimentadas y baños adaptados.",
       horarios: "Lunes a Domingo: 08:30 - 20:00 hrs"
     },
-    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Parque+Isla+Cautin+Temuco&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
+    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Acceso+Parque+Isla+Cautin+Temuco&daddr=Memorial+Derechos+Humanos+Isla+Cautin+to:Humedal+Parque+Isla+Cautin+Temuco&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
   },
   "5": {
     id: "5",
@@ -173,7 +173,7 @@ const detalleBackup = {
       { tipo: "Adulto chileno (18 a 59 años)", precio: "$4.700" },
       { tipo: "Extranjeros", precio: "$9.300" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Parque+Nacional+Villarrica+Chile&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Porteria+Rucapillan+Parque+Nacional+Villarrica&daddr=Cuevas+Volcanicas+Pucon+to:Sendero+Mirador+Los+Crateres+Villarrica&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
     itinerario: [
       { hora: "08:30", actividad: "Registro en guardaparques sector Rucapillán." },
       { hora: "09:30", actividad: "Inicio de caminata por Sendero Mirador Los Cráteres." },
@@ -208,7 +208,7 @@ const detalleBackup = {
       { tipo: "Adulto chileno (18 a 59 años)", precio: "$4.700" },
       { tipo: "Extranjeros", precio: "$9.300" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Parque+Nacional+Huerquehue+Pucon&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Porteria+Parque+Nacional+Huerquehue+Pucon&daddr=Lago+Tinquilco+Pucon+to:Lago+Chico+Huerquehue+to:Lago+Toro+Huerquehue+to:Lago+Verde+Huerquehue&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
     itinerario: [
       { hora: "08:30", actividad: "Ingreso y registro en administración Lago Tinquilco." },
       { hora: "10:00", actividad: "Mirador Lago Tinquilco y Salto Nido de Águila." },
@@ -242,7 +242,7 @@ const detalleBackup = {
       { tipo: "Adulto chileno (18 a 59 años)", precio: "$3.700" },
       { tipo: "Extranjeros", precio: "$7.300" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Reserva+Nacional+Malalcahuello+Chile&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Administracion+CONAF+Reserva+Nacional+Malalcahuello&daddr=Centro+de+Esqui+Corralco+to:Crater+Navidad+Lonquimay&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
     itinerario: [
       { hora: "09:00", actividad: "Ingreso por sector Piedra Santa." },
       { hora: "10:00", actividad: "Ascenso por sendero volcánico hacia Cráter Navidad." },
@@ -276,7 +276,7 @@ const detalleBackup = {
       { tipo: "Adulto chileno (18 a 59 años)", precio: "$3.700" },
       { tipo: "Extranjeros", precio: "$7.300" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Parque+Nacional+Nahuelbuta+Angol&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Administracion+Pehuenco+Parque+Nacional+Nahuelbuta&daddr=Sendero+Casa+de+Piedra+Nahuelbuta+to:Piedra+del+Aguila+Nahuelbuta&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
     itinerario: [
       { hora: "09:30", actividad: "Registro en guardaparques sector Pehuenco." },
       { hora: "10:15", actividad: "Caminata interpretativa entre araucarias costeras." },
@@ -310,7 +310,7 @@ const detalleBackup = {
       { tipo: "Adulto chileno (18 a 59 años)", precio: "$3.700" },
       { tipo: "Extranjeros", precio: "$7.300" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Parque+Nacional+Tolhuaca+Chile&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Laguna+Malleco+Parque+Nacional+Tolhuaca&daddr=Salto+de+la+Culebra+Tolhuaca+to:Laguna+Verde+Tolhuaca&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
     itinerario: [
       { hora: "09:00", actividad: "Ingreso y paseo por orilla de Laguna Malleco." },
       { hora: "10:15", actividad: "Caminata hacia mirador Salto de la Culebra." },
@@ -344,7 +344,7 @@ const detalleBackup = {
       { tipo: "Estudiantes / Adulto Mayor Nacional", precio: "$2.700" },
       { tipo: "Extranjeros", precio: "$10.800" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Valle+de+la+Luna+San+Pedro+de+Atacama&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Acceso+Valle+de+la+Luna+San+Pedro+de+Atacama&daddr=Duna+Mayor+Valle+de+la+Luna+to:Anfiteatro+Valle+de+la+Luna+to:Tres+Marias+Valle+de+la+Luna&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
     itinerario: [
       { hora: "15:00", actividad: "Ingreso por control sector Cordillera de la Sal." },
       { hora: "15:45", actividad: "Caminata por sendero Duna Mayor y Anfiteatro." },
@@ -378,7 +378,7 @@ const detalleBackup = {
       { tipo: "Adulto chileno (18 a 59 años)", precio: "$3.700" },
       { tipo: "Extranjeros", precio: "$7.300" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Parque+Nacional+La+Campana+Olmue&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Sector+Granizo+Parque+Nacional+La+Campana&daddr=Sector+La+Mina+La+Campana+to:Cumbre+Cerro+La+Campana+Olmue&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
     itinerario: [
       { hora: "08:30", actividad: "Ingreso por sector Granizo o Palmar de Ocoa." },
       { hora: "10:00", actividad: "Recorrido entre palmas chilenas centenarias y bosque esclerófilo." },
@@ -412,7 +412,7 @@ const detalleBackup = {
       { tipo: "Adulto chileno (18 a 59 años)", precio: "$4.700" },
       { tipo: "Extranjeros", precio: "$9.300" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Parque+Nacional+Radal+Siete+Tazas+Molina&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Salto+Velo+de+la+Novia+Molina&daddr=Mirador+Siete+Tazas+Molina+to:Salto+La+Leona+Radal+Siete+Tazas&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
     itinerario: [
       { hora: "09:30", actividad: "Mirador Salto Velo de la Novia." },
       { hora: "10:15", actividad: "Recorrido por pasarelas de las Siete Tazas." },
@@ -446,7 +446,7 @@ const detalleBackup = {
       { tipo: "Adulto chileno (18 a 59 años)", precio: "$4.700" },
       { tipo: "Extranjeros", precio: "$9.300" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Saltos+del+Petrohue+Puerto+Varas&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Acceso+Saltos+del+Petrohue+Puerto+Varas&daddr=Mirador+Saltos+del+Petrohue+to:Sendero+Los+Enamorados+Petrohue&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
     itinerario: [
       { hora: "10:00", actividad: "Ingreso y recorrido por pasarelas sobre los rápidos del río Petrohué." },
       { hora: "10:40", actividad: "Mirador principal con vista al Volcán Osorno." },
@@ -479,7 +479,7 @@ const detalleBackup = {
       { tipo: "Adulto chileno (18 a 59 años)", precio: "$3.700" },
       { tipo: "Extranjeros", precio: "$7.300" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Parque+Nacional+Chiloe+Cucao&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Administracion+Chanquin+Parque+Nacional+Chiloe&daddr=Sendero+El+Tepual+Chiloe+to:Playa+de+Cucao+Chiloe&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
     itinerario: [
       { hora: "10:00", actividad: "Centro de Información Ambiental en Chanquín." },
       { hora: "10:30", actividad: "Recorrido por pasarelas de Sendero El Tepual." },
@@ -512,7 +512,7 @@ const detalleBackup = {
       { tipo: "Adulto chileno (18 a 59 años)", precio: "$5.400" },
       { tipo: "Extranjeros", precio: "$10.800" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Ventisquero+Colgante+Parque+Nacional+Queulat&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Porteria+Ventisquero+Colgante+Parque+Nacional+Queulat&daddr=Laguna+Tempanos+Queulat+to:Mirador+Ventisquero+Colgante+Queulat&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
     itinerario: [
       { hora: "09:30", actividad: "Cruce del puente colgante sobre el río Ventisquero." },
       { hora: "10:30", actividad: "Ascenso a través del bosque siempreverde patagónico." },
@@ -546,7 +546,7 @@ const detalleBackup = {
       { tipo: "Adulto chileno (hasta 3 días)", precio: "$11.400" },
       { tipo: "Extranjeros (hasta 3 días)", precio: "$32.400" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Parque+Nacional+Torres+del+Paine+Chile&t=&z=11&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Sector+Central+Torres+del+Paine&daddr=Refugio+El+Chileno+Torres+del+Paine+to:Mirador+Base+Las+Torres+Magallanes&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
     itinerario: [
       { hora: "08:00", actividad: "Inicio de caminata desde Sector Central hacia Valle Ascencio." },
       { hora: "10:00", actividad: "Paso por Campamento El Chileno entre bosque de lengas." },
@@ -583,7 +583,7 @@ const detalleBackup = {
     tarifas: [
       { tipo: "Público General", precio: "Entrada liberada / Gratuita" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?q=Castillo+de+Niebla+Valdivia+Chile&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Feria+Fluvial+de+Valdivia&daddr=Costanera+de+Valdivia+to:Muelle+Niebla+Valdivia+to:Castillo+de+Niebla+Valdivia&dirflg=d&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
     itinerario: [
       { hora: "10:30", actividad: "Ingreso al Museo de Sitio Castillo de Niebla." },
       { hora: "11:00", actividad: "Recorrido por la batería de cañones mirando la bahía de Corral." },
