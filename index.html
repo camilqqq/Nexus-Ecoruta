@@ -711,12 +711,12 @@
             </div>
           </article>
 
-          <!-- 18. Feria Fluvial de Valdivia -->
-          <article class="activity" data-categoria="Gastronomía">
+          <!-- 18. Castillo de Niebla (Valdivia) -->
+          <article class="activity" data-categoria="Cultura">
             <div class="image">
               <img
                 src="assets/imagenes/Valdivia/mercado_valdivia.jpg"
-                alt="Feria Fluvial de Valdivia junto al río Calle-Calle"
+                alt="Castillo de Niebla en la bahía de Corral, Valdivia"
                 width="400"
                 height="250"
                 loading="lazy"
@@ -725,24 +725,24 @@
             <div class="info">
               <div class="activity-header">
                 <div>
-                  <h3>Feria Fluvial de Valdivia</h3>
-                  <p>Gastronomía • Av. Arturo Prat, Valdivia, Los Ríos</p>
+                  <h3>Castillo de Niebla (Valdivia)</h3>
+                  <p>Cultura • Camino a Niebla s/n, Valdivia, Los Ríos</p>
                 </div>
                 <small>Actualizado: 2026-11-14</small>
               </div>
-              <p>Productos marinos y hortofrutícolas locales • Acceso libre</p>
+              <p>Duración: 1 hr 30 min · Dificultad: Fácil</p>
               <div class="buttons">
                 <a
                   href="paginas/Actividad.html?id=18"
                   class="primary"
-                  aria-label="Ver ficha detallada de Feria Fluvial de Valdivia"
+                  aria-label="Ver ficha detallada de Castillo de Niebla en Valdivia"
                   >Ver ficha</a
                 >
                 <a
                   href="https://wa.me/56912345678"
                   target="_blank"
                   rel="noopener"
-                  aria-label="Contactar por WhatsApp sobre Feria Fluvial de Valdivia"
+                  aria-label="Contactar por WhatsApp sobre Castillo de Niebla"
                   >Contactar</a
                 >
               </div>
@@ -828,6 +828,120 @@
       });
 
       buscador.addEventListener('input', filtrarActividades);
+    </script>
+
+    <!-- Estilos y animación automática de galería de 4 fotos por tarjeta -->
+    <style>
+      .activity .image {
+        position: relative;
+        overflow: hidden;
+      }
+      .activity .image img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transform: scale(1);
+        transition: opacity 0.9s ease-in-out, transform 6s ease-out;
+      }
+      .activity .image img.activa {
+        opacity: 1;
+        transform: scale(1.07);
+        z-index: 1;
+      }
+      .carrusel-dots {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 6px;
+        z-index: 2;
+        background: rgba(0, 0, 0, 0.35);
+        padding: 4px 8px;
+        border-radius: 999px;
+        backdrop-filter: blur(4px);
+      }
+      .carrusel-dots span {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .carrusel-dots span.activa {
+        background: #ffffff;
+        width: 16px;
+        border-radius: 999px;
+      }
+    </style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const contenedores = document.querySelectorAll('.activity .image');
+
+        contenedores.forEach((contenedor, cardIdx) => {
+          const imgPrincipal = contenedor.querySelector('img');
+          if (!imgPrincipal) return;
+
+          const srcOriginal = imgPrincipal.getAttribute('src');
+          const rutas = [srcOriginal];
+          for (let i = 2; i <= 4; i++) {
+            const nuevaRuta = srcOriginal.replace(/1?(\.[a-zA-Z]+)$/, `${i}$1`);
+            rutas.push(nuevaRuta);
+          }
+
+          imgPrincipal.classList.add('activa');
+          const imagenes = [imgPrincipal];
+
+          const dotsBox = document.createElement('div');
+          dotsBox.className = 'carrusel-dots';
+
+          rutas.forEach((ruta, idx) => {
+            if (idx > 0) {
+              const img = document.createElement('img');
+              img.src = ruta;
+              img.alt = `${imgPrincipal.alt} (${idx + 1})`;
+              img.loading = 'lazy';
+              img.onerror = function () {
+                this.onerror = null;
+                this.src = srcOriginal;
+              };
+              contenedor.appendChild(img);
+              imagenes.push(img);
+            }
+
+            const dot = document.createElement('span');
+            if (idx === 0) dot.classList.add('activa');
+            dot.addEventListener('click', (e) => {
+              e.preventDefault();
+              cambiarSlide(idx);
+            });
+            dotsBox.appendChild(dot);
+          });
+
+          contenedor.appendChild(dotsBox);
+          const dots = dotsBox.querySelectorAll('span');
+          let indice = 0;
+
+          function cambiarSlide(nuevoIndice) {
+            imagenes[indice].classList.remove('activa');
+            dots[indice].classList.remove('activa');
+            indice = nuevoIndice;
+            imagenes[indice].classList.add('activa');
+            dots[indice].classList.add('activa');
+          }
+
+          setTimeout(() => {
+            setInterval(() => {
+              cambiarSlide((indice + 1) % imagenes.length);
+            }, 3800);
+          }, cardIdx * 400);
+        });
+      });
     </script>
 
     <script src="js/api.js"></script>
