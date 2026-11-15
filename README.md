@@ -22,7 +22,14 @@ nexus-ecoruta/
 │   ├── reportes/            # Reportes de accesibilidad y pruebas
 │   └── reuniones/           # Actas de seguimiento del equipo
 ├── paginas/                 # Vistas adicionales (Actividad.html, etc.)
+├── administracion/          # Acceso al panel de administración
+│   └── index.html           # Redirección hacia paginas/vista4.html
+├── js/                      # Scripts JavaScript y TypeScript
+│   ├── api.js               # Consulta de información climática mediante Open-Meteo
+│   ├── rutas.js             # Funcionalidades de clima y datos de respaldo del catálogo
+│   └── rutas.ts             # Tipado, carga, filtrado y visualización de rutas turísticas
 ├── index.html               # Página principal / Catálogo
+├── tsconfig.json            # Configuración del compilador TypeScript
 └── README.md                # Documentación general del repositorio
 ```
 
@@ -30,6 +37,8 @@ nexus-ecoruta/
 
 - **HTML:** Estructuración semántica con soporte de accesibilidad (ARIA, landmarks).
 - **CSS:** Diseño responsivo mediante Flexbox, CSS Grid y variables CSS (*Mobile-First*).
+- **JavaScript:** Implementación de funcionalidades interactivas, manipulación del DOM, validación de formularios, almacenamiento mediante localStorage y consumo de APIs externas.
+- **TypeScript:** Definición de interfaces y estructuras de datos para representar rutas turísticas, implementar funciones de carga y filtrado por dificultad.
 - **Git / GitHub:** Control de versiones colaborativo y despliegue continuo con GitHub Pages.
 
 ---
@@ -42,6 +51,24 @@ El sitio cumple con buenas prácticas de accesibilidad web (WCAG):
 - Indicadores de foco visibles (`:focus-visible`) para navegación por teclado.
 - Etiquetas `aria-label` en controles interactivos y redes sociales.
 
+---
+## Configuración de TypeScript
+
+-El proyecto utiliza el archivo tsconfig.json para configurar el compilador de TypeScript.
+
+-target: ES2020, define la versión de JavaScript de destino.
+
+-module: ESNext, establece el sistema de módulos.
+
+-strict: false, desactiva la comprobación estricta de tipos.
+
+-rootDir: ./js, establece la carpeta de origen de los archivos TypeScript.
+
+-outDir: ./js, define la carpeta de salida de los archivos compilados.
+
+-include: js/*.ts, indica los archivos TypeScript que serán incluidos.
+
+-exclude: node_modules, excluye las dependencias del proceso de compilación.
 ---
 
 ## Equipo de Trabajo
