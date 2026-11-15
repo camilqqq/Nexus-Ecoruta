@@ -686,7 +686,7 @@ const detalleBackup = {
       { hora: "16:30", actividad: "Retorno a la base." }
     ]
   },
- "18": {
+  "18": {
     id: "18",
     nombre: "Fuerte de Niebla (Castillo de Niebla)",
     categoria: "Cultura",
@@ -731,6 +731,7 @@ const detalleBackup = {
       { hora: "11:45", actividad: "Visita a las salas históricas y cierre en el mirador costero." }
     ]
   }
+};
 
 function obtenerParametroUrl(nombre) {
   const urlParams = new URLSearchParams(window.location.search);
@@ -858,13 +859,13 @@ async function cargarFicha() {
     <section style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
       <h1 style="color: #2e7d32; font-size: 2rem; margin-bottom: 0.5rem;">${actividad.nombre}</h1>
       <div style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-bottom:1rem;">
-  <span style="background:#e8f5e9; color:#1b5e20; padding:0.4rem 1rem; border-radius:20px; font-size:0.9rem; font-weight:bold;">
-    ${actividad.tipo}
-  </span>
-  <span style="background:#e3f2fd; color:#1565c0; padding:0.4rem 1rem; border-radius:20px; font-size:0.9rem; font-weight:bold;">
-    ${actividad.categoria}
-  </span>
-</div>
+        <span style="background:#e8f5e9; color:#1b5e20; padding:0.4rem 1rem; border-radius:20px; font-size:0.9rem; font-weight:bold;">
+          ${actividad.tipo}
+        </span>
+        <span style="background:#e3f2fd; color:#1565c0; padding:0.4rem 1rem; border-radius:20px; font-size:0.9rem; font-weight:bold;">
+          ${actividad.categoria}
+        </span>
+      </div>
 
       <!-- Galería de imágenes -->
       <div>
