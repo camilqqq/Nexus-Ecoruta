@@ -3,7 +3,7 @@ const detalleBackup = {
     id: "1",
     nombre: "Sendero Ñielol",
     categoria: "Naturaleza",
-    tipo:"RUTA",
+    tipo: "RUTA",
     ubicacion: "Parque Nacional Cerro Ñielol, Temuco",
     descripcion: "Hermoso sendero natural rodeado de flora y fauna nativa de la Región de La Araucanía. Ideal para caminatas familiares y observación de aves.",
     imagenes: [
@@ -20,7 +20,17 @@ const detalleBackup = {
       accesibilidad: "Apto para personas con movilidad reducida en tramos iniciales.",
       horarios: "Martes a Domingo: 08:30 - 17:30 hrs"
     },
-    mapaIframe: '<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1_V34G2jycQVduIN1hsLN_wdnFvSbsqs&ehbc=2E312F" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    rutaGps: {
+      puntos: [
+        { nombre: "Acceso Principal Cerro Ñielol", coords: [-38.7294, -72.5892] },
+        { nombre: "Centro de Informaciones Ambientales", coords: [-38.7279, -72.5924] },
+        { nombre: "Chemamüll Ñielol", coords: [-38.7263, -72.5931] },
+        { nombre: "Mirador Agua Santa", coords: [-38.7254, -72.5906] },
+        { nombre: "Cumbre / Monumento Natural", coords: [-38.7235, -72.5894] },
+        { nombre: "Retorno Sendero Los Pataguas", coords: [-38.7275, -72.5878] },
+        { nombre: "Salida Portería", coords: [-38.7294, -72.5892] }
+      ]
+    },
     itinerario: [
       { hora: "08:30", actividad: "Registro en portería e inicio de caminata." },
       { hora: "09:15", actividad: "Llegada al Mirador Agua Santa." },
@@ -46,7 +56,7 @@ const detalleBackup = {
       tipoTerreno: "Piso cerámico, parqué y senderos adosados de piedra",
       tipoRuta: "Recorrido guiado / Salón y parque urbano"
     },
-    sectors: [
+    sectores: [
       "Galería Principal de Historia Regional",
       "Sala de Arqueología y Cosmovisión Mapuche",
       "Jardín Botánico Palacio Thiers"
@@ -55,7 +65,13 @@ const detalleBackup = {
       { tipo: "Público General", precio: "Entrada liberada / Gratuita" },
       { tipo: "Delegaciones Escolares", precio: "Gratuito previa reserva previa" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Plaza+Anibal+Pinto+Temuco&daddr=Avenida+Alemania+Temuco+to:Museo+Regional+de+La+Araucania+Av+Alemania+0842+Temuco&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
+    rutaGps: {
+      puntos: [
+        { nombre: "Acceso Av. Alemania 0842", coords: [-38.7381, -72.6079] },
+        { nombre: "Casona Palacio Thiers (Salas)", coords: [-38.7377, -72.6083] },
+        { nombre: "Jardín Botánico y Ruka", coords: [-38.7374, -72.6088] }
+      ]
+    }
   },
   "3": {
     id: "3",
@@ -86,7 +102,13 @@ const detalleBackup = {
     tarifas: [
       { tipo: "Acceso", precio: "Acceso libre y gratuito para todo espectador" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Estacion+de+Ferrocarriles+Temuco&daddr=Feria+Pinto+Balmaceda+Temuco+to:Mercado+Modelo+Temuco&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
+    rutaGps: {
+      puntos: [
+        { nombre: "Inicio Bandejón Av. Balmaceda", coords: [-38.7336, -72.5809] },
+        { nombre: "Paseo Productores Agroecológicos", coords: [-38.7332, -72.5785] },
+        { nombre: "Sector Artesanía Mapuche y Patio Comidas", coords: [-38.7327, -72.5758] }
+      ]
+    }
   },
   "4": {
     id: "4",
@@ -108,7 +130,15 @@ const detalleBackup = {
       accesibilidad: "Rutas pavimentadas y baños adaptados.",
       horarios: "Lunes a Domingo: 08:30 - 20:00 hrs"
     },
-    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Acceso+Parque+Isla+Cautin+Temuco&daddr=Memorial+Derechos+Humanos+Isla+Cautin+to:Humedal+Parque+Isla+Cautin+Temuco&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
+    rutaGps: {
+      puntos: [
+        { nombre: "Acceso Principal Av. Los Poetas", coords: [-38.7495, -72.5872] },
+        { nombre: "Plaza Cívica y Memorial", coords: [-38.7514, -72.5858] },
+        { nombre: "Mirador Humedal Río Cautín", coords: [-38.7536, -72.5835] },
+        { nombre: "Circuito Bosquete Nativo", coords: [-38.7521, -72.5812] },
+        { nombre: "Retorno Ciclovía Central", coords: [-38.7495, -72.5872] }
+      ]
+    }
   },
   "5": {
     id: "5",
@@ -137,7 +167,14 @@ const detalleBackup = {
       { tipo: "Adulto chileno (18 a 59 años)", precio: "$4.700" },
       { tipo: "Extranjeros", precio: "$9.300" }
     ],
-    mapaIframe: '<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1J9507tFzl7qB0ZLBeSsNB4FFUjDWfGk&ehbc=2E312F" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    rutaGps: {
+      puntos: [
+        { nombre: "Playa Linda / Inicio Sendero Sierra Nevada", coords: [-38.6476, -71.6225] },
+        { nombre: "Primer Mirador Laguna Conguillío", coords: [-38.6432, -71.6138] },
+        { nombre: "Bosque de Araucarias Milenarias", coords: [-38.6388, -71.6062] },
+        { nombre: "Mirador Cumbre Sierra Nevada (Vista Volcán Llaima)", coords: [-38.6335, -71.5984] }
+      ]
+    },
     itinerario: [
       { hora: "08:30", actividad: "Ingreso por Caseta de Control CONAF." },
       { hora: "09:30", actividad: "Caminata por Sendero Sierra Nevada entre araucarias." },
@@ -173,7 +210,14 @@ const detalleBackup = {
       { tipo: "Adulto chileno (18 a 59 años)", precio: "$4.700" },
       { tipo: "Extranjeros", precio: "$9.300" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Porteria+Rucapillan+Parque+Nacional+Villarrica&daddr=Cuevas+Volcanicas+Pucon+to:Sendero+Mirador+Los+Crateres+Villarrica&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    rutaGps: {
+      puntos: [
+        { nombre: "Guardaparques CONAF Sector Rucapillán", coords: [-39.3812, -71.9585] },
+        { nombre: "Cuevas Volcánicas", coords: [-39.3865, -71.9532] },
+        { nombre: "Sendero Escorial Volcánico", coords: [-39.3930, -71.9468] },
+        { nombre: "Mirador Los Cráteres", coords: [-39.3992, -71.9395] }
+      ]
+    },
     itinerario: [
       { hora: "08:30", actividad: "Registro en guardaparques sector Rucapillán." },
       { hora: "09:30", actividad: "Inicio de caminata por Sendero Mirador Los Cráteres." },
@@ -208,7 +252,15 @@ const detalleBackup = {
       { tipo: "Adulto chileno (18 a 59 años)", precio: "$4.700" },
       { tipo: "Extranjeros", precio: "$9.300" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Porteria+Parque+Nacional+Huerquehue+Pucon&daddr=Lago+Tinquilco+Pucon+to:Lago+Chico+Huerquehue+to:Lago+Toro+Huerquehue+to:Lago+Verde+Huerquehue&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    rutaGps: {
+      puntos: [
+        { nombre: "Administración Lago Tinquilco", coords: [-39.1588, -71.7245] },
+        { nombre: "Salto Nido de Águila", coords: [-39.1534, -71.7168] },
+        { nombre: "Lago Chico", coords: [-39.1475, -71.7112] },
+        { nombre: "Lago Toro", coords: [-39.1432, -71.7065] },
+        { nombre: "Lago Verde", coords: [-39.1396, -71.7024] }
+      ]
+    },
     itinerario: [
       { hora: "08:30", actividad: "Ingreso y registro en administración Lago Tinquilco." },
       { hora: "10:00", actividad: "Mirador Lago Tinquilco y Salto Nido de Águila." },
@@ -242,7 +294,14 @@ const detalleBackup = {
       { tipo: "Adulto chileno (18 a 59 años)", precio: "$3.700" },
       { tipo: "Extranjeros", precio: "$7.300" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Administracion+CONAF+Reserva+Nacional+Malalcahuello&daddr=Centro+de+Esqui+Corralco+to:Crater+Navidad+Lonquimay&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    rutaGps: {
+      puntos: [
+        { nombre: "Portería Sector Piedra Santa", coords: [-38.4235, -71.5642] },
+        { nombre: "Base Volcán Lonquimay (Corralco)", coords: [-38.4048, -71.5615] },
+        { nombre: "Escorial Volcánico 1988", coords: [-38.3935, -71.5568] },
+        { nombre: "Mirador Cráter Navidad", coords: [-38.3842, -71.5512] }
+      ]
+    },
     itinerario: [
       { hora: "09:00", actividad: "Ingreso por sector Piedra Santa." },
       { hora: "10:00", actividad: "Ascenso por sendero volcánico hacia Cráter Navidad." },
@@ -276,7 +335,14 @@ const detalleBackup = {
       { tipo: "Adulto chileno (18 a 59 años)", precio: "$3.700" },
       { tipo: "Extranjeros", precio: "$7.300" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Administracion+Pehuenco+Parque+Nacional+Nahuelbuta&daddr=Sendero+Casa+de+Piedra+Nahuelbuta+to:Piedra+del+Aguila+Nahuelbuta&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    rutaGps: {
+      puntos: [
+        { nombre: "Guardaparques Sector Pehuenco", coords: [-37.8265, -73.0112] },
+        { nombre: "Bosque de Araucarias Costeras", coords: [-37.8218, -73.0215] },
+        { nombre: "Mirador Piedra del Águila (1.379 m)", coords: [-37.8174, -73.0308] },
+        { nombre: "Retorno Circuito Casa de Piedra", coords: [-37.8265, -73.0112] }
+      ]
+    },
     itinerario: [
       { hora: "09:30", actividad: "Registro en guardaparques sector Pehuenco." },
       { hora: "10:15", actividad: "Caminata interpretativa entre araucarias costeras." },
@@ -310,7 +376,14 @@ const detalleBackup = {
       { tipo: "Adulto chileno (18 a 59 años)", precio: "$3.700" },
       { tipo: "Extranjeros", precio: "$7.300" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Laguna+Malleco+Parque+Nacional+Tolhuaca&daddr=Salto+de+la+Culebra+Tolhuaca+to:Laguna+Verde+Tolhuaca&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    rutaGps: {
+      puntos: [
+        { nombre: "Administración Laguna Malleco", coords: [-38.2156, -71.8165] },
+        { nombre: "Sendero Ribera Laguna Malleco", coords: [-38.2112, -71.8084] },
+        { nombre: "Mirador Salto de la Culebra", coords: [-38.2068, -71.7995] },
+        { nombre: "Laguna Verde", coords: [-38.2025, -71.7920] }
+      ]
+    },
     itinerario: [
       { hora: "09:00", actividad: "Ingreso y paseo por orilla de Laguna Malleco." },
       { hora: "10:15", actividad: "Caminata hacia mirador Salto de la Culebra." },
@@ -344,7 +417,14 @@ const detalleBackup = {
       { tipo: "Estudiantes / Adulto Mayor Nacional", precio: "$2.700" },
       { tipo: "Extranjeros", precio: "$10.800" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Acceso+Valle+de+la+Luna+San+Pedro+de+Atacama&daddr=Duna+Mayor+Valle+de+la+Luna+to:Anfiteatro+Valle+de+la+Luna+to:Tres+Marias+Valle+de+la+Luna&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    rutaGps: {
+      puntos: [
+        { nombre: "Control Acceso Cordillera de la Sal", coords: [-22.9125, -68.2685] },
+        { nombre: "Mirador Duna Mayor", coords: [-22.9228, -68.2812] },
+        { nombre: "El Anfiteatro", coords: [-22.9295, -68.2915] },
+        { nombre: "Formación Las Tres Marías", coords: [-22.9372, -68.3018] }
+      ]
+    },
     itinerario: [
       { hora: "15:00", actividad: "Ingreso por control sector Cordillera de la Sal." },
       { hora: "15:45", actividad: "Caminata por sendero Duna Mayor y Anfiteatro." },
@@ -378,7 +458,14 @@ const detalleBackup = {
       { tipo: "Adulto chileno (18 a 59 años)", precio: "$3.700" },
       { tipo: "Extranjeros", precio: "$7.300" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Sector+Granizo+Parque+Nacional+La+Campana&daddr=Sector+La+Mina+La+Campana+to:Cumbre+Cerro+La+Campana+Olmue&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    rutaGps: {
+      puntos: [
+        { nombre: "Portería Sector Granizo", coords: [-32.9785, -71.1325] },
+        { nombre: "Sector La Mina y Placa Darwin", coords: [-32.9652, -71.1248] },
+        { nombre: "Portezuelo Ocoa", coords: [-32.9574, -71.1212] },
+        { nombre: "Cumbre Cerro La Campana (1.880 m)", coords: [-32.9536, -71.1195] }
+      ]
+    },
     itinerario: [
       { hora: "08:30", actividad: "Ingreso por sector Granizo o Palmar de Ocoa." },
       { hora: "10:00", actividad: "Recorrido entre palmas chilenas centenarias y bosque esclerófilo." },
@@ -412,7 +499,14 @@ const detalleBackup = {
       { tipo: "Adulto chileno (18 a 59 años)", precio: "$4.700" },
       { tipo: "Extranjeros", precio: "$9.300" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Salto+Velo+de+la+Novia+Molina&daddr=Mirador+Siete+Tazas+Molina+to:Salto+La+Leona+Radal+Siete+Tazas&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    rutaGps: {
+      puntos: [
+        { nombre: "Mirador Salto Velo de la Novia", coords: [-35.4518, -71.0312] },
+        { nombre: "Pasarelas Mirador Siete Tazas", coords: [-35.4584, -71.0235] },
+        { nombre: "Sendero Bosque Río Claro", coords: [-35.4622, -71.0168] },
+        { nombre: "Salto La Leona", coords: [-35.4655, -71.0115] }
+      ]
+    },
     itinerario: [
       { hora: "09:30", actividad: "Mirador Salto Velo de la Novia." },
       { hora: "10:15", actividad: "Recorrido por pasarelas de las Siete Tazas." },
@@ -446,7 +540,14 @@ const detalleBackup = {
       { tipo: "Adulto chileno (18 a 59 años)", precio: "$4.700" },
       { tipo: "Extranjeros", precio: "$9.300" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Acceso+Saltos+del+Petrohue+Puerto+Varas&daddr=Mirador+Saltos+del+Petrohue+to:Sendero+Los+Enamorados+Petrohue&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    rutaGps: {
+      puntos: [
+        { nombre: "Acceso CONAF Saltos del Petrohué", coords: [-41.1738, -72.4485] },
+        { nombre: "Pasarela Rápidos Río Petrohué", coords: [-41.1722, -72.4452] },
+        { nombre: "Mirador Principal (Vista Volcán Osorno)", coords: [-41.1708, -72.4428] },
+        { nombre: "Sendero Los Enamorados", coords: [-41.1685, -72.4412] }
+      ]
+    },
     itinerario: [
       { hora: "10:00", actividad: "Ingreso y recorrido por pasarelas sobre los rápidos del río Petrohué." },
       { hora: "10:40", actividad: "Mirador principal con vista al Volcán Osorno." },
@@ -479,7 +580,14 @@ const detalleBackup = {
       { tipo: "Adulto chileno (18 a 59 años)", precio: "$3.700" },
       { tipo: "Extranjeros", precio: "$7.300" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Administracion+Chanquin+Parque+Nacional+Chiloe&daddr=Sendero+El+Tepual+Chiloe+to:Playa+de+Cucao+Chiloe&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    rutaGps: {
+      puntos: [
+        { nombre: "Centro Ambiental Chanquín", coords: [-42.6258, -74.1045] },
+        { nombre: "Pasarelas Sendero El Tepual", coords: [-42.6242, -74.1112] },
+        { nombre: "Mirador Dunas de Cucao", coords: [-42.6235, -74.1178] },
+        { nombre: "Playa Pacífico Cucao", coords: [-42.6232, -74.1225] }
+      ]
+    },
     itinerario: [
       { hora: "10:00", actividad: "Centro de Información Ambiental en Chanquín." },
       { hora: "10:30", actividad: "Recorrido por pasarelas de Sendero El Tepual." },
@@ -512,7 +620,14 @@ const detalleBackup = {
       { tipo: "Adulto chileno (18 a 59 años)", precio: "$5.400" },
       { tipo: "Extranjeros", precio: "$10.800" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Porteria+Ventisquero+Colgante+Parque+Nacional+Queulat&daddr=Laguna+Tempanos+Queulat+to:Mirador+Ventisquero+Colgante+Queulat&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    rutaGps: {
+      puntos: [
+        { nombre: "Portería y Puente Colgante Río Ventisquero", coords: [-44.4135, -72.5592] },
+        { nombre: "Mirador Laguna Témpanos", coords: [-44.4148, -72.5465] },
+        { nombre: "Ascenso Selva Fría Patagónica", coords: [-44.4112, -72.5398] },
+        { nombre: "Mirador Panorámico Ventisquero Colgante", coords: [-44.4085, -72.5342] }
+      ]
+    },
     itinerario: [
       { hora: "09:30", actividad: "Cruce del puente colgante sobre el río Ventisquero." },
       { hora: "10:30", actividad: "Ascenso a través del bosque siempreverde patagónico." },
@@ -546,7 +661,14 @@ const detalleBackup = {
       { tipo: "Adulto chileno (hasta 3 días)", precio: "$11.400" },
       { tipo: "Extranjeros (hasta 3 días)", precio: "$32.400" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Sector+Central+Torres+del+Paine&daddr=Refugio+El+Chileno+Torres+del+Paine+to:Mirador+Base+Las+Torres+Magallanes&dirflg=w&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    rutaGps: {
+      puntos: [
+        { nombre: "Inicio Sendero Sector Central", coords: [-50.9715, -72.8742] },
+        { nombre: "Paso de los Vientos (Valle Ascencio)", coords: [-50.9582, -72.9015] },
+        { nombre: "Refugio y Campamento El Chileno", coords: [-50.9518, -72.9195] },
+        { nombre: "Mirador Base Las Torres", coords: [-50.9422, -72.9488] }
+      ]
+    },
     itinerario: [
       { hora: "08:00", actividad: "Inicio de caminata desde Sector Central hacia Valle Ascencio." },
       { hora: "10:00", actividad: "Paso por Campamento El Chileno entre bosque de lengas." },
@@ -583,7 +705,14 @@ const detalleBackup = {
     tarifas: [
       { tipo: "Público General", precio: "Entrada liberada / Gratuita" }
     ],
-    mapaIframe: '<iframe src="https://maps.google.com/maps?saddr=Feria+Fluvial+de+Valdivia&daddr=Costanera+de+Valdivia+to:Muelle+Niebla+Valdivia+to:Castillo+de+Niebla+Valdivia&dirflg=d&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+    rutaGps: {
+      puntos: [
+        { nombre: "Acceso Museo de Sitio Castillo de Niebla", coords: [-39.8665, -73.3958] },
+        { nombre: "Foso Defensivo y Polvorín", coords: [-39.8673, -73.3972] },
+        { nombre: "Batería de Cañones", coords: [-39.8682, -73.3988] },
+        { nombre: "Mirador Bahía de Corral e Isla Mancera", coords: [-39.8689, -73.3996] }
+      ]
+    },
     itinerario: [
       { hora: "10:30", actividad: "Ingreso al Museo de Sitio Castillo de Niebla." },
       { hora: "11:00", actividad: "Recorrido por la batería de cañones mirando la bahía de Corral." },
@@ -601,6 +730,113 @@ function cambiarImagen(src) {
   const imgPrincipal = document.getElementById("imagen-principal");
   if (imgPrincipal) {
     imgPrincipal.src = src;
+  }
+}
+
+function cargarLibreriaLeaflet() {
+  return new Promise((resolve, reject) => {
+    if (window.L) {
+      resolve(window.L);
+      return;
+    }
+
+    if (!document.getElementById("leaflet-css")) {
+      const link = document.createElement("link");
+      link.id = "leaflet-css";
+      link.rel = "stylesheet";
+      link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+      document.head.appendChild(link);
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+    script.onload = () => resolve(window.L);
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+}
+
+async function inicializarMapaSatelite(actividad) {
+  const contenedorMapa = document.getElementById("mapa-satelite-ruta");
+  if (!contenedorMapa || !actividad.rutaGps) return;
+
+  try {
+    const L = await cargarLibreriaLeaflet();
+    const puntos = actividad.rutaGps.puntos;
+    const coordenadas = puntos.map(p => p.coords);
+
+    const mapa = L.map("mapa-satelite-ruta", {
+      scrollWheelZoom: false
+    });
+
+    // Capa Satélite Real (Esri World Imagery - gratuita, sin login ni API Key)
+    const capaSatelite = L.tileLayer(
+      "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+      {
+        attribution: "Imágenes satélite © Esri, Maxar, Earthstar Geographics",
+        maxZoom: 18
+      }
+    ).addTo(mapa);
+
+    // Etiquetas de lugares y caminos sobre satélite
+    const capaEtiquetas = L.tileLayer(
+      "https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
+      { maxZoom: 18 }
+    ).addTo(mapa);
+
+    // Capa alternativa de mapa callejero/topográfico
+    const capaMapa = L.tileLayer(
+      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      {
+        attribution: "© OpenStreetMap contributors",
+        maxZoom: 18
+      }
+    );
+
+    const grupoSatelite = L.layerGroup([capaSatelite, capaEtiquetas]);
+    L.control.layers(
+      { "Vista Satélite": grupoSatelite, "Mapa Estándar": capaMapa },
+      null,
+      { position: "topright" }
+    ).addTo(mapa);
+
+    // Halo blanco exterior para contraste + línea azul del recorrido GPS
+    L.polyline(coordenadas, {
+      color: "#ffffff",
+      weight: 8,
+      opacity: 0.75
+    }).addTo(mapa);
+
+    const lineaRuta = L.polyline(coordenadas, {
+      color: "#1e88e5",
+      weight: 5,
+      opacity: 0.95
+    }).addTo(mapa);
+
+    // Marcadores de inicio, hitos intermedios y destino final
+    puntos.forEach((punto, idx) => {
+      const esInicio = idx === 0;
+      const esFin = idx === puntos.length - 1;
+      const colorPin = esInicio ? "#2e7d32" : esFin ? "#d32f2f" : "#1e88e5";
+      const letra = esInicio ? "A" : esFin ? "B" : idx;
+
+      const icono = L.divIcon({
+        className: "marcador-ruta-gps",
+        html: `<div style="background:${colorPin}; color:white; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:12px; border:2px solid white; box-shadow:0 2px 6px rgba(0,0,0,0.45);">${letra}</div>`,
+        iconSize: [26, 26],
+        iconAnchor: [13, 13]
+      });
+
+      const marcador = L.marker(punto.coords, { icon: icono }).addTo(mapa);
+      marcador.bindPopup(`<strong>${punto.nombre}</strong>`);
+      if (esInicio || esFin) {
+        marcador.bindTooltip(punto.nombre, { permanent: false, direction: "top" });
+      }
+    });
+
+    mapa.fitBounds(lineaRuta.getBounds(), { padding: [45, 45] });
+  } catch (error) {
+    console.error("Error al cargar el mapa satélite:", error);
   }
 }
 
@@ -691,15 +927,18 @@ async function cargarFicha() {
         ` : ''}
       </div>
 
-      <!-- Mapa GPS -->
-      ${actividad.mapaIframe ? `
-        <h3 style="color: #2e7d32; margin-top: 2rem; font-size: 1.25rem; border-bottom: 2px solid #e8f5e9; padding-bottom: 0.5rem;">Ruta y Mapa GPS</h3>
-        <div style="width: 100%; height: 450px; border-radius: 10px; overflow: hidden; margin-top: 1rem; border: 1px solid #e0e0e0;">
-          ${actividad.mapaIframe}
-        </div>
+      <!-- Mapa GPS Satelital Interactivo -->
+      ${actividad.rutaGps ? `
+        <h3 style="color: #2e7d32; margin-top: 2rem; font-size: 1.25rem; border-bottom: 2px solid #e8f5e9; padding-bottom: 0.5rem;">Ruta y Mapa GPS Satelital</h3>
+        <p style="font-size: 0.9rem; color: #555; margin: 0.5rem 0 0.8rem 0;">🟢 <strong>A:</strong> Inicio del recorrido &nbsp;·&nbsp; 🔵 <strong>Puntos:</strong> Miradores e hitos &nbsp;·&nbsp; 🔴 <strong>B:</strong> Destino / Retorno (haz clic en cada marcador para ver su nombre)</p>
+        <div id="mapa-satelite-ruta" style="width: 100%; height: 450px; border-radius: 10px; overflow: hidden; border: 1px solid #e0e0e0; z-index: 1;"></div>
       ` : ''}
     </section>
   `;
+
+  if (actividad.rutaGps) {
+    inicializarMapaSatelite(actividad);
+  }
 }
 
 window.cambiarImagen = cambiarImagen;
