@@ -23,15 +23,13 @@ const detalleBackup = {
     rutaGps: {
       puntos: [
         { nombre: "Acceso Principal Portería CONAF", coords: [-38.7294, -72.5892] },
-        { nombre: "Curva Sendero Los Copihues", coords: [-38.7286, -72.5910] },
+        { nombre: "Curva Sendero Los Copihues", coords: [-38.7285, -72.5912] },
         { nombre: "Centro de Informaciones Ambientales", coords: [-38.7279, -72.5924] },
         { nombre: "Escultura Chemamüll Ñielol", coords: [-38.7263, -72.5931] },
-        { nombre: "Bifurcación Sendero Agua Santa", coords: [-38.7258, -72.5918] },
         { nombre: "Mirador Agua Santa", coords: [-38.7254, -72.5906] },
         { nombre: "Laguna Huesqueque", coords: [-38.7244, -72.5900] },
-        { nombre: "Cumbre / Monumento Natural Cerro Ñielol", coords: [-38.7235, -72.5894] },
-        { nombre: "Descenso Sendero Los Pataguas", coords: [-38.7256, -72.5882] },
-        { nombre: "Tramo Bosque Nativo", coords: [-38.7275, -72.5878] },
+        { nombre: "Cumbre Monumento Natural Cerro Ñielol", coords: [-38.7235, -72.5894] },
+        { nombre: "Descenso Sendero Los Pataguas", coords: [-38.7264, -72.5880] },
         { nombre: "Salida Portería", coords: [-38.7294, -72.5892] }
       ]
     },
@@ -71,13 +69,10 @@ const detalleBackup = {
     ],
     rutaGps: {
       puntos: [
-        { nombre: "Acceso Peatonal Av. Alemania 0842", coords: [-38.7381, -72.6079] },
-        { nombre: "Patio Exterior y Boletaría", coords: [-38.7379, -72.6081] },
-        { nombre: "Casona Palacio Thiers (Salas Permanentes)", coords: [-38.7377, -72.6083] },
-        { nombre: "Sala Cosmovisión Mapuche", coords: [-38.7375, -72.6085] },
-        { nombre: "Jardín Botánico y Ruka Exterior", coords: [-38.7374, -72.6088] },
-        { nombre: "Paseo Parque Interior", coords: [-38.7378, -72.6086] },
-        { nombre: "Salida Av. Alemania", coords: [-38.7381, -72.6079] }
+        { nombre: "Acceso Av. Alemania 0842", coords: [-38.73808, -72.60785] },
+        { nombre: "Casona Monumento Nacional Palacio Thiers", coords: [-38.73772, -72.60828] },
+        { nombre: "Salas de Arqueología y Etnohistoria", coords: [-38.73755, -72.60855] },
+        { nombre: "Jardín Botánico y Ruka Exterior", coords: [-38.73738, -72.60885] }
       ]
     }
   },
@@ -112,12 +107,10 @@ const detalleBackup = {
     ],
     rutaGps: {
       puntos: [
-        { nombre: "Inicio Bandejón Av. Balmaceda / Pinto", coords: [-38.7336, -72.5809] },
-        { nombre: "Pabellón Hortalizas Orgánicas", coords: [-38.7334, -72.5797] },
-        { nombre: "Paseo Productores Agroecológicos", coords: [-38.7332, -72.5785] },
-        { nombre: "Sector Frutos Secos y Mieles", coords: [-38.7330, -72.5772] },
-        { nombre: "Sector Artesanía Mapuche en Madera", coords: [-38.7328, -72.5764] },
-        { nombre: "Patio de Comidas Tradicionales", coords: [-38.7327, -72.5758] }
+        { nombre: "Inicio Bandejón Av. Balmaceda / Pinto", coords: [-38.73362, -72.58095] },
+        { nombre: "Pabellón Productores Agroecológicos", coords: [-38.73335, -72.57945] },
+        { nombre: "Sector Artesanía Mapuche en Madera", coords: [-38.73308, -72.57785] },
+        { nombre: "Patio de Comidas Tradicionales", coords: [-38.73275, -72.57595] }
       ]
     }
   },
@@ -144,14 +137,11 @@ const detalleBackup = {
     rutaGps: {
       puntos: [
         { nombre: "Acceso Principal Av. Los Poetas", coords: [-38.7495, -72.5872] },
-        { nombre: "Explanada Eventos y Anfiteatro", coords: [-38.7505, -72.5866] },
         { nombre: "Plaza Cívica y Memorial", coords: [-38.7514, -72.5858] },
-        { nombre: "Paseo Costanera Río Cautín", coords: [-38.7526, -72.5847] },
         { nombre: "Mirador Humedal Río Cautín", coords: [-38.7536, -72.5835] },
-        { nombre: "Sendero Bosque Boldos Nativos", coords: [-38.7530, -72.5821] },
-        { nombre: "Circuito Bosquete Nativo", coords: [-38.7521, -72.5812] },
-        { nombre: "Plaza de Juegos Infantiles", coords: [-38.7508, -72.5839] },
-        { nombre: "Retorno Ciclovía Central", coords: [-38.7495, -72.5872] }
+        { nombre: "Bosque Nativo Isla Cautín", coords: [-38.7521, -72.5812] },
+        { nombre: "Ciclovía Central y Juegos", coords: [-38.7506, -72.5842] },
+        { nombre: "Salida Av. Los Poetas", coords: [-38.7495, -72.5872] }
       ]
     }
   },
@@ -184,13 +174,11 @@ const detalleBackup = {
     ],
     rutaGps: {
       puntos: [
-        { nombre: "Playa Linda / Inicio Sendero Sierra Nevada", coords: [-38.6476, -71.6225] },
-        { nombre: "Borde Bahía Laguna Conguillío", coords: [-38.6458, -71.6184] },
-        { nombre: "Primer Mirador Laguna Conguillío", coords: [-38.6432, -71.6138] },
-        { nombre: "Tramo Ñirres y Coihues", coords: [-38.6410, -71.6102] },
-        { nombre: "Bosque de Araucarias Milenarias", coords: [-38.6388, -71.6062] },
-        { nombre: "Segundo Mirador Glaciar Sierra Nevada", coords: [-38.6361, -71.6025] },
-        { nombre: "Mirador Cumbre Sierra Nevada (Vista Volcán Llaima)", coords: [-38.6335, -71.5984] }
+        { nombre: "Playa Linda - Inicio Sendero Sierra Nevada", coords: [-38.6489, -71.6228] },
+        { nombre: "Primer Mirador Laguna Conguillío", coords: [-38.6455, -71.6152] },
+        { nombre: "Bosque de Araucarias Milenarias", coords: [-38.6412, -71.6085] },
+        { nombre: "Segundo Mirador Glaciar Sierra Nevada", coords: [-38.6368, -71.6022] },
+        { nombre: "Mirador Cumbre Sierra Nevada (Vista Volcán Llaima)", coords: [-38.6328, -71.5965] }
       ]
     },
     itinerario: [
@@ -231,12 +219,10 @@ const detalleBackup = {
     rutaGps: {
       puntos: [
         { nombre: "Guardaparques CONAF Sector Rucapillán", coords: [-39.3812, -71.9585] },
-        { nombre: "Sendero Bosque de Lengas", coords: [-39.3838, -71.9562] },
-        { nombre: "Cuevas Volcánicas", coords: [-39.3865, -71.9532] },
-        { nombre: "Ladera Base Centro Esquí", coords: [-39.3895, -71.9504] },
-        { nombre: "Sendero Escorial Volcánico", coords: [-39.3930, -71.9468] },
-        { nombre: "Cráter Parásito Intermedio", coords: [-39.3964, -71.9431] },
-        { nombre: "Mirador Los Cráteres", coords: [-39.3992, -71.9395] }
+        { nombre: "Cuevas Volcánicas Villarrica", coords: [-39.3868, -71.9535] },
+        { nombre: "Base Centro de Esquí Volcán Villarrica", coords: [-39.3915, -71.9492] },
+        { nombre: "Sendero Escorial Volcánico", coords: [-39.3958, -71.9445] },
+        { nombre: "Mirador Los Cráteres", coords: [-39.3995, -71.9398] }
       ]
     },
     itinerario: [
@@ -275,12 +261,10 @@ const detalleBackup = {
     ],
     rutaGps: {
       puntos: [
-        { nombre: "Administración Lago Tinquilco", coords: [-39.1588, -71.7245] },
-        { nombre: "Mirador Lago Tinquilco", coords: [-39.1562, -71.7204] },
+        { nombre: "Administración CONAF Lago Tinquilco", coords: [-39.1588, -71.7245] },
+        { nombre: "Mirador Lago Tinquilco", coords: [-39.1560, -71.7198] },
         { nombre: "Salto Nido de Águila", coords: [-39.1534, -71.7168] },
-        { nombre: "Salto Trufulco", coords: [-39.1506, -71.7141] },
         { nombre: "Lago Chico", coords: [-39.1475, -71.7112] },
-        { nombre: "Sendero Araucarias Milenarias", coords: [-39.1452, -71.7089] },
         { nombre: "Lago Toro", coords: [-39.1432, -71.7065] },
         { nombre: "Lago Verde", coords: [-39.1396, -71.7024] }
       ]
@@ -320,12 +304,9 @@ const detalleBackup = {
     ],
     rutaGps: {
       puntos: [
-        { nombre: "Portería Sector Piedra Santa", coords: [-38.4235, -71.5642] },
-        { nombre: "Camino Bosque Araucarias", coords: [-38.4142, -71.5631] },
+        { nombre: "Portería CONAF Sector Piedra Santa", coords: [-38.4235, -71.5642] },
         { nombre: "Base Volcán Lonquimay (Corralco)", coords: [-38.4048, -71.5615] },
-        { nombre: "Planicie Arenal Volcánico", coords: [-38.3991, -71.5592] },
         { nombre: "Escorial Volcánico 1988", coords: [-38.3935, -71.5568] },
-        { nombre: "Ascenso Cono de Escoria", coords: [-38.3886, -71.5541] },
         { nombre: "Mirador Cráter Navidad", coords: [-38.3842, -71.5512] }
       ]
     },
@@ -364,13 +345,11 @@ const detalleBackup = {
     ],
     rutaGps: {
       puntos: [
-        { nombre: "Guardaparques Sector Pehuenco", coords: [-37.8265, -73.0112] },
-        { nombre: "Sector Camping y Merienda", coords: [-37.8245, -73.0161] },
+        { nombre: "Guardaparques CONAF Sector Pehuenco", coords: [-37.8265, -73.0112] },
         { nombre: "Bosque de Araucarias Costeras", coords: [-37.8218, -73.0215] },
-        { nombre: "Mirador Cerro Anay", coords: [-37.8195, -73.0262] },
         { nombre: "Mirador Piedra del Águila (1.379 m)", coords: [-37.8174, -73.0308] },
-        { nombre: "Sendero Casa de Piedra", coords: [-37.8219, -73.0242] },
-        { nombre: "Retorno Guardaparques Pehuenco", coords: [-37.8265, -73.0112] }
+        { nombre: "Circuito Casa de Piedra", coords: [-37.8224, -73.0245] },
+        { nombre: "Retorno Sector Pehuenco", coords: [-37.8265, -73.0112] }
       ]
     },
     itinerario: [
@@ -408,13 +387,11 @@ const detalleBackup = {
     ],
     rutaGps: {
       puntos: [
-        { nombre: "Administración Laguna Malleco", coords: [-38.2156, -71.8165] },
-        { nombre: "Muelle y Ribera Laguna Malleco", coords: [-38.2134, -71.8124] },
-        { nombre: "Sendero Bosque de Robles y Raulíes", coords: [-38.2112, -71.8084] },
-        { nombre: "Puente Estero Malleco", coords: [-38.2090, -71.8040] },
-        { nombre: "Mirador Salto de la Culebra", coords: [-38.2068, -71.7995] },
-        { nombre: "Ascenso Bosque Araucarias", coords: [-38.2046, -71.7958] },
-        { nombre: "Laguna Verde", coords: [-38.2025, -71.7920] }
+        { nombre: "Administración CONAF Laguna Malleco", coords: [-38.2156, -71.8165] },
+        { nombre: "Ribera Norte Laguna Malleco", coords: [-38.2122, -71.8095] },
+        { nombre: "Mirador Salto de la Culebra", coords: [-38.2085, -71.8012] },
+        { nombre: "Sendero Bosque de Araucarias", coords: [-38.2052, -71.7955] },
+        { nombre: "Laguna Verde Tolhuaca", coords: [-38.2025, -71.7918] }
       ]
     },
     itinerario: [
@@ -453,11 +430,8 @@ const detalleBackup = {
     rutaGps: {
       puntos: [
         { nombre: "Control Acceso Cordillera de la Sal", coords: [-22.9125, -68.2685] },
-        { nombre: "Sendero Cresta Duna Mayor", coords: [-22.9178, -68.2752] },
         { nombre: "Mirador Duna Mayor", coords: [-22.9228, -68.2812] },
-        { nombre: "Cañón de Sal", coords: [-22.9261, -68.2865] },
         { nombre: "El Anfiteatro", coords: [-22.9295, -68.2915] },
-        { nombre: "Antigua Mina de Sal Victoria", coords: [-22.9334, -68.2968] },
         { nombre: "Formación Las Tres Marías", coords: [-22.9372, -68.3018] }
       ]
     },
@@ -496,12 +470,9 @@ const detalleBackup = {
     ],
     rutaGps: {
       puntos: [
-        { nombre: "Portería Sector Granizo", coords: [-32.9785, -71.1325] },
-        { nombre: "Bosque Esclerófilo y Palmas Chilenas", coords: [-32.9718, -71.1286] },
+        { nombre: "Portería CONAF Sector Granizo", coords: [-32.9785, -71.1325] },
         { nombre: "Sector La Mina y Placa Charles Darwin", coords: [-32.9652, -71.1248] },
-        { nombre: "Mirador Valle del Aconcagua", coords: [-32.9612, -71.1230] },
         { nombre: "Portezuelo Ocoa", coords: [-32.9574, -71.1212] },
-        { nombre: "Acarreo Rocoso Final", coords: [-32.9554, -71.1203] },
         { nombre: "Cumbre Cerro La Campana (1.880 m)", coords: [-32.9536, -71.1195] }
       ]
     },
@@ -541,11 +512,8 @@ const detalleBackup = {
     rutaGps: {
       puntos: [
         { nombre: "Mirador Salto Velo de la Novia", coords: [-35.4518, -71.0312] },
-        { nombre: "Acceso Pasarelas CONAF", coords: [-35.4552, -71.0274] },
         { nombre: "Pasarelas Mirador Siete Tazas", coords: [-35.4584, -71.0235] },
-        { nombre: "Mirador Pozones Basálticos", coords: [-35.4602, -71.0201] },
         { nombre: "Sendero Bosque Río Claro", coords: [-35.4622, -71.0168] },
-        { nombre: "Sector Parque Inglés", coords: [-35.4638, -71.0142] },
         { nombre: "Salto La Leona", coords: [-35.4655, -71.0115] }
       ]
     },
@@ -585,11 +553,9 @@ const detalleBackup = {
     rutaGps: {
       puntos: [
         { nombre: "Acceso CONAF Saltos del Petrohué", coords: [-41.1738, -72.4485] },
-        { nombre: "Sendero Bosque Siempreverde", coords: [-41.1730, -72.4468] },
         { nombre: "Pasarela Rápidos Río Petrohué", coords: [-41.1722, -72.4452] },
         { nombre: "Mirador Principal (Vista Volcán Osorno)", coords: [-41.1708, -72.4428] },
-        { nombre: "Bifurcación Sendero Los Enamorados", coords: [-41.1696, -72.4420] },
-        { nombre: "Mirador Pozón Esmeralda", coords: [-41.1685, -72.4412] }
+        { nombre: "Sendero Los Enamorados", coords: [-41.1685, -72.4412] }
       ]
     },
     itinerario: [
@@ -627,9 +593,7 @@ const detalleBackup = {
     rutaGps: {
       puntos: [
         { nombre: "Centro Ambiental Chanquín", coords: [-42.6258, -74.1045] },
-        { nombre: "Inicio Pasarelas Bosque Tepual", coords: [-42.6250, -74.1078] },
         { nombre: "Pasarelas Sendero El Tepual", coords: [-42.6242, -74.1112] },
-        { nombre: "Bosque Helechos y Arrayanes", coords: [-42.6238, -74.1145] },
         { nombre: "Mirador Dunas de Cucao", coords: [-42.6235, -74.1178] },
         { nombre: "Playa Pacífico Cucao", coords: [-42.6232, -74.1225] }
       ]
@@ -669,11 +633,8 @@ const detalleBackup = {
     rutaGps: {
       puntos: [
         { nombre: "Portería y Puente Colgante Río Ventisquero", coords: [-44.4135, -72.5592] },
-        { nombre: "Sendero Bosque Siempreverde", coords: [-44.4142, -72.5528] },
         { nombre: "Mirador Laguna Témpanos", coords: [-44.4148, -72.5465] },
-        { nombre: "Bifurcación Sendero Panorámico", coords: [-44.4130, -72.5432] },
         { nombre: "Ascenso Selva Fría Patagónica", coords: [-44.4112, -72.5398] },
-        { nombre: "Mirador Morrena Glaciar", coords: [-44.4098, -72.5370] },
         { nombre: "Mirador Panorámico Ventisquero Colgante", coords: [-44.4085, -72.5342] }
       ]
     },
@@ -713,11 +674,8 @@ const detalleBackup = {
     rutaGps: {
       puntos: [
         { nombre: "Inicio Sendero Sector Central", coords: [-50.9715, -72.8742] },
-        { nombre: "Puente Colgante Río Ascencio", coords: [-50.9648, -72.8878] },
         { nombre: "Paso de los Vientos (Valle Ascencio)", coords: [-50.9582, -72.9015] },
         { nombre: "Refugio y Campamento El Chileno", coords: [-50.9518, -72.9195] },
-        { nombre: "Bosque de Lengas Valle Ascencio", coords: [-50.9482, -72.9312] },
-        { nombre: "Inicio Morrena Glaciar", coords: [-50.9452, -72.9405] },
         { nombre: "Mirador Base Las Torres", coords: [-50.9422, -72.9488] }
       ]
     },
@@ -730,11 +688,11 @@ const detalleBackup = {
   },
   "18": {
     id: "18",
-    nombre: "Castillo de Niebla (Valdivia)",
-    categoria: "Cultura",
+    nombre: "Feria Fluvial de Valdivia",
+    categoria: "Gastronomía",
     tipo: "RUTA",
-    ubicacion: "Camino a Niebla s/n, Bahía de Corral, Valdivia, Región de Los Ríos",
-    descripcion: "Monumento Histórico Nacional construido en el siglo XVII sobre el acantilado costero de Niebla. Forma parte del sistema defensivo español más importante del Pacífico Sur, con vistas panorámicas a la desembocadura del río Valdivia.",
+    ubicacion: "Av. Arturo Prat, Costanera del Río Calle-Calle, Valdivia, Región de Los Ríos",
+    descripcion: "Emblemático mercado al aire libre a orillas del río Calle-Calle y Monumento Histórico, famoso por sus productos frescos del mar, hortalizas locales y los lobos marinos que descansan junto a la costanera.",
     imagenes: [
       "../assets/imagenes/Valdivia/Valdivia.jpg",
       "../assets/imagenes/Valdivia/Valdivia2.jpg",
@@ -744,33 +702,31 @@ const detalleBackup = {
     detalles: {
       duracion: "1 hr 30 min",
       dificultad: "Fácil",
-      distancia: "1.5 km",
-      desnivel: "+30 m",
-      accesibilidad: "Pasarelas de madera y miradores habilitados en gran parte del recinto.",
-      horarios: "Martes a Domingo: 10:00 - 17:30 hrs"
+      distancia: "1.2 km",
+      desnivel: "0 m",
+      accesibilidad: "Paseo costanera plano y completamente accesible para sillas de ruedas y coches.",
+      horarios: "Lunes a Domingo: 08:00 - 17:30 hrs"
     },
     sectores: [
-      "Batería de Cañones y Foso Defensivo",
-      "Polvorín y Salas Museográficas del Sitio",
-      "Mirador Panorámico Bahía de Corral e Isla Mancera"
+      "Puestos de Pescados, Mariscos y Algas Frescas",
+      "Sector Frutas, Verduras y Quesos Regionales",
+      "Muelle Costanera y Avistamiento de Lobos Marinos"
     ],
     tarifas: [
-      { tipo: "Público General", precio: "Entrada liberada / Gratuita" }
+      { tipo: "Público General", precio: "Acceso libre y gratuito" }
     ],
     rutaGps: {
       puntos: [
-        { nombre: "Acceso Museo de Sitio Castillo de Niebla", coords: [-39.8665, -73.3958] },
-        { nombre: "Foso Defensivo Tallado en Cancagua", coords: [-39.8670, -73.3965] },
-        { nombre: "Polvorín y Salas Museográficas", coords: [-39.8675, -73.3974] },
-        { nombre: "Batería de Cañones", coords: [-39.8682, -73.3988] },
-        { nombre: "Garita de Vigilancia Costera", coords: [-39.8686, -73.3992] },
-        { nombre: "Mirador Bahía de Corral e Isla Mancera", coords: [-39.8689, -73.3996] }
+        { nombre: "Acceso Norte Feria Fluvial Av. Arturo Prat", coords: [-39.8128, -73.2478] },
+        { nombre: "Puestos de Mariscos y Pescados Frescos", coords: [-39.8136, -73.2484] },
+        { nombre: "Muelle Costanera Lobos Marinos", coords: [-39.8143, -73.2491] },
+        { nombre: "Sector Hortalizas y Productos Valdivianos", coords: [-39.8151, -73.2496] }
       ]
     },
     itinerario: [
-      { hora: "10:30", actividad: "Ingreso al Museo de Sitio Castillo de Niebla." },
-      { hora: "11:00", actividad: "Recorrido por la batería de cañones mirando la bahía de Corral." },
-      { hora: "11:45", actividad: "Visita a las salas históricas y cierre en el mirador costero." }
+      { hora: "10:00", actividad: "Recorrido por los puestos de productos del mar y hortalizas locales." },
+      { hora: "10:45", actividad: "Avistamiento de lobos marinos y aves costeras en el borde del río Calle-Calle." },
+      { hora: "11:15", actividad: "Paseo por la Costanera de Valdivia hacia el Mercado Municipal." }
     ]
   }
 };
