@@ -684,10 +684,11 @@ const detalleBackup = {
     ubicacion: "Camino a Niebla s/n, Bahía de Corral, Valdivia, Región de Los Ríos",
     descripcion: "Monumento Histórico Nacional construido en el siglo XVII sobre el acantilado costero de Niebla. Forma parte del sistema defensivo español más importante del Pacífico Sur, con vistas panorámicas a la desembocadura del río Valdivia.",
     imagenes: [
-      "../assets/imagenes/Valdivia/mercado_valdivia.jpg",
-      "../assets/imagenes/Valdivia/mercado_valdivia2.jpg",
-      "../assets/imagenes/Valdivia/mercado_valdivia3.jpg",
-      "../assets/imagenes/Valdivia/mercado_valdivia4.jpg"
+    "../assets/imagenes/Valdivia/Valdivia.jpg",
+    "../assets/imagenes/Valdivia/Valdivia2.jpg",
+    "../assets/imagenes/Valdivia/Valdivia3.jpg",
+    "../assets/imagenes/Valdivia/Valdivia4.jpg"
+  ],
     ],
     detalles: {
       duracion: "1 hr 30 min",
