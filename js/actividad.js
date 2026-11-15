@@ -686,13 +686,13 @@ const detalleBackup = {
       { hora: "16:30", actividad: "Retorno a la base." }
     ]
   },
-  "18": {
+ "18": {
     id: "18",
-    nombre: "Feria Fluvial de Valdivia",
-    categoria: "Gastronomía",
+    nombre: "Fuerte de Niebla (Castillo de Niebla)",
+    categoria: "Cultura",
     tipo: "RUTA",
-    ubicacion: "Av. Arturo Prat, Costanera del Río Calle-Calle, Valdivia, Región de Los Ríos",
-    descripcion: "Emblemático mercado al aire libre a orillas del río Calle-Calle y Monumento Histórico, famoso por sus productos frescos del mar, hortalizas locales y los lobos marinos que descansan junto a la costanera.",
+    ubicacion: "Camino a Niebla s/n, Bahía de Corral, Valdivia, Región de Los Ríos",
+    descripcion: "Monumento Histórico Nacional construido en el siglo XVII sobre el acantilado costero de Niebla. Forma parte del sistema defensivo español más importante del Pacífico Sur, con vistas panorámicas a la desembocadura del río Valdivia.",
     imagenes: [
       "../assets/imagenes/Valdivia/Valdivia.jpg",
       "../assets/imagenes/Valdivia/Valdivia2.jpg",
@@ -702,34 +702,35 @@ const detalleBackup = {
     detalles: {
       duracion: "1 hr 30 min",
       dificultad: "Fácil",
-      distancia: "1.2 km",
-      desnivel: "0 m",
-      accesibilidad: "Paseo costanera plano y completamente accesible para sillas de ruedas y coches.",
-      horarios: "Lunes a Domingo: 08:00 - 17:30 hrs"
+      distancia: "1.5 km",
+      desnivel: "+30 m",
+      accesibilidad: "Pasarelas de madera y miradores habilitados en gran parte del recinto.",
+      horarios: "Martes a Domingo: 10:00 - 17:30 hrs"
     },
     sectores: [
-      "Puestos de Pescados, Mariscos y Algas Frescas",
-      "Sector Frutas, Verduras y Quesos Regionales",
-      "Muelle Costanera y Avistamiento de Lobos Marinos"
+      "Batería de Cañones y Foso Defensivo",
+      "Polvorín y Salas Museográficas del Sitio",
+      "Mirador Panorámico Bahía de Corral e Isla Mancera"
     ],
     tarifas: [
-      { tipo: "Público General", precio: "Acceso libre y gratuito" }
+      { tipo: "Público General", precio: "Entrada liberada / Gratuita" }
     ],
     rutaGps: {
       puntos: [
-        { nombre: "Acceso Norte Feria Fluvial Av. Arturo Prat", coords: [-39.8128, -73.2478] },
-        { nombre: "Puestos de Mariscos y Pescados Frescos", coords: [-39.8136, -73.2484] },
-        { nombre: "Muelle Costanera Lobos Marinos", coords: [-39.8143, -73.2491] },
-        { nombre: "Sector Hortalizas y Productos Valdivianos", coords: [-39.8151, -73.2496] }
+        { nombre: "Acceso Museo de Sitio Castillo de Niebla", coords: [-39.8665, -73.3958] },
+        { nombre: "Foso Defensivo Tallado en Cancagua", coords: [-39.8670, -73.3965] },
+        { nombre: "Polvorín y Salas Museográficas", coords: [-39.8675, -73.3974] },
+        { nombre: "Batería de Cañones", coords: [-39.8682, -73.3988] },
+        { nombre: "Garita de Vigilancia Costera", coords: [-39.8686, -73.3992] },
+        { nombre: "Mirador Bahía de Corral e Isla Mancera", coords: [-39.8689, -73.3996] }
       ]
     },
     itinerario: [
-      { hora: "10:00", actividad: "Recorrido por los puestos de productos del mar y hortalizas locales." },
-      { hora: "10:45", actividad: "Avistamiento de lobos marinos y aves costeras en el borde del río Calle-Calle." },
-      { hora: "11:15", actividad: "Paseo por la Costanera de Valdivia hacia el Mercado Municipal." }
+      { hora: "10:30", actividad: "Ingreso al Museo de Sitio Castillo de Niebla." },
+      { hora: "11:00", actividad: "Recorrido por la batería de cañones mirando la bahía de Corral." },
+      { hora: "11:45", actividad: "Visita a las salas históricas y cierre en el mirador costero." }
     ]
   }
-};
 
 function obtenerParametroUrl(nombre) {
   const urlParams = new URLSearchParams(window.location.search);
