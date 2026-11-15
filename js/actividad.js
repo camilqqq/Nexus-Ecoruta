@@ -725,7 +725,7 @@ const detalleBackup = {
         { nombre: "Mirador Bahía de Corral e Isla Mancera", coords: [-39.8689, -73.3996] }
       ]
     },
-    itinerario: [
+ itinerario: [
       { hora: "10:30", actividad: "Ingreso al Museo de Sitio Castillo de Niebla." },
       { hora: "11:00", actividad: "Recorrido por la batería de cañones mirando la bahía de Corral." },
       { hora: "11:45", actividad: "Visita a las salas históricas y cierre en el mirador costero." }
@@ -733,7 +733,7 @@ const detalleBackup = {
   }
 };
 
-function obtenerParametroUrl(nombre) {
+function obtenerParametroUrl(nombre) { 
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get(nombre);
 }
