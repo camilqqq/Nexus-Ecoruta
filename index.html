@@ -5,836 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nexus Ecoruta - Turismo Sustentable</title>
     <link rel="stylesheet" href="css/index.css" />
-  </head>
-  <body>
-    <!-- Encabezado / Header -->
-    <header>
-      <div class="header">
-        <div class="brand">
-          <img
-            src="assets/imagenes/Logo.png"
-            alt="Logo Nexus Ecoruta"
-            class="logo"
-            width="120"
-            height="45"
-          />
-          <div>
-            <h1 class="brand-name">Nexus Ecoruta</h1>
-            <p>Turismo Sustentable en La Araucanía</p>
-          </div>
-        </div>
-        <nav>
-          <a href="index.html" class="active">Inicio</a>
-          <a href="paginas/emprendimientos.html">Emprendimientos</a>
-          <a href="paginas/contacto.html">Contacto</a>
-        </nav>
-      </div>
-    </header>
-
-    <!-- Hero & Buscador -->
-    <main>
-      <section class="hero">
-        <h1>Descubre la magia natural y cultural de nuestra región</h1>
-        <p>
-          Explora senderos, ferias agroecológicas y espacios patrimoniales
-          diseñados para un turismo consciente y respetuoso con el medio
-          ambiente.
-        </p>
-
-        <div class="search">
-          <input
-            type="search"
-            placeholder="Buscar por nombre, ubicación o categoría..."
-            aria-label="Buscar actividades"
-          />
-        </div>
-
-        <div class="filters">
-          <button class="active" data-categoria="Todas">Todas</button>
-          <button data-categoria="Naturaleza">Naturaleza</button>
-          <button data-categoria="Cultura">Cultura</button>
-          <button data-categoria="Gastronomía">Gastronomía</button>
-        </div>
-      </section>
-
-      <!-- Catálogo de Actividades -->
-      <section class="activities">
-        <div class="section-title">
-          <h2>Actividades destacadas</h2>
-          <span id="contador-resultados">18 resultados</span>
-        </div>
-
-        <div class="list">
-          <!-- 1. Sendero Ñielol -->
-          <article class="activity" data-categoria="Naturaleza">
-            <div class="image">
-              <img
-                src="assets/imagenes/Sendero/Sendero_Nielol.jpg"
-                alt="Sendero Cerro Ñielol"
-                width="400"
-                height="250"
-                fetchpriority="high"
-              />
-            </div>
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Sendero Ñielol</h3>
-                  <p>Naturaleza • Parque Ñielol, Temuco</p>
-                </div>
-                <small>Actualizado: 2026-08-10</small>
-              </div>
-              <p>Duración: 1 hr 30 min · Dificultad: Moderada</p>
-              <div class="buttons">
-                <a
-                  href="paginas/Actividad.html?id=1"
-                  class="primary"
-                  aria-label="Ver ficha detallada de Sendero Ñielol"
-                  >Ver ficha</a
-                >
-                <a
-                  href="https://wa.me/56912345678"
-                  target="_blank"
-                  rel="noopener"
-                  aria-label="Contactar por WhatsApp sobre Sendero Ñielol"
-                  >Contactar</a
-                >
-              </div>
-            </div>
-          </article>
-
-          <!-- 2. Museo Regional de La Araucanía (Sin duración ni dificultad) -->
-          <article class="activity" data-categoria="Cultura">
-            <div class="image">
-              <img
-                src="assets/imagenes/Museo/museo.jpg"
-                alt="Museo Regional de La Araucanía"
-                width="400"
-                height="250"
-                loading="lazy"
-              />
-            </div>
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Museo Regional de La Araucanía</h3>
-                  <p>Cultura • Av. Alemania 0842, Temuco</p>
-                </div>
-                <small>Actualizado: 2026-08-06</small>
-              </div>
-              <p>Horario: Martes a Domingo · Entrada liberada</p>
-              <div class="buttons">
-                <a
-                  href="paginas/Actividad.html?id=2"
-                  class="primary"
-                  aria-label="Ver ficha detallada de Museo Regional"
-                  >Ver ficha</a
-                >
-                <a
-                  href="https://wa.me/56912345678"
-                  target="_blank"
-                  rel="noopener"
-                  aria-label="Contactar por WhatsApp sobre Museo Regional"
-                  >Contactar</a
-                >
-              </div>
-            </div>
-          </article>
-
-          <!-- 3. Feria Agroecológica (Sin duración ni dificultad) -->
-          <article class="activity" data-categoria="Gastronomía">
-            <div class="image">
-              <img
-                src="assets/imagenes/Feria/feria.jpg"
-                alt="Feria Agroecológica"
-                width="400"
-                height="250"
-                loading="lazy"
-              />
-            </div>
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Feria Agroecológica</h3>
-                  <p>Gastronomía • Feria Pinto, Temuco</p>
-                </div>
-                <small>Actualizado: 2026-08-12</small>
-              </div>
-              <p>Productos locales y orgánicos • Acceso libre</p>
-              <div class="buttons">
-                <a
-                  href="paginas/Actividad.html?id=3"
-                  class="primary"
-                  aria-label="Ver ficha detallada de la Feria Agroecológica"
-                  >Ver ficha</a
-                >
-                <a
-                  href="https://wa.me/56912345678"
-                  target="_blank"
-                  rel="noopener"
-                  aria-label="Contactar por WhatsApp sobre Feria Agroecológica"
-                  >Contactar</a
-                >
-              </div>
-            </div>
-          </article>
-
-          <!-- 4. Parque Isla Cautín -->
-          <article class="activity" data-categoria="Naturaleza">
-            <div class="image">
-              <img
-                src="assets/imagenes/Isla_Cautin/Isla1.jpg"
-                alt="Vista del Parque Isla Cautín"
-                width="400"
-                height="250"
-                loading="lazy"
-              />
-            </div>
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Parque Isla Cautín</h3>
-                  <p>Naturaleza • Av. los Poetas, Temuco</p>
-                </div>
-                <small>Actualizado: 2026-08-15</small>
-              </div>
-              <p>Duración: 1-2 hrs · Dificultad: Fácil</p>
-              <div class="buttons">
-                <a
-                  href="paginas/Actividad.html?id=4"
-                  class="primary"
-                  aria-label="Ver ficha detallada del Parque Isla Cautín"
-                  >Ver ficha</a
-                >
-                <a
-                  href="https://wa.me/56912345678"
-                  target="_blank"
-                  rel="noopener"
-                  aria-label="Contactar por WhatsApp sobre Parque Isla Cautín"
-                  >Contactar</a
-                >
-              </div>
-            </div>
-          </article>
-
-          <!-- 5. Parque Nacional Conguillío -->
-          <article class="activity" data-categoria="Naturaleza">
-            <div class="image">
-              <img
-                src="assets/imagenes/Conguillio/Conguillio1.jpg"
-                alt="Parque Nacional Conguillío"
-                width="400"
-                height="250"
-                loading="lazy"
-              />
-            </div>
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Parque Nacional Conguillío</h3>
-                  <p>Naturaleza • Melipeuco / Curacautín</p>
-                </div>
-                <small>Actualizado: 2026-11-11</small>
-              </div>
-              <p>Duración: Día completo · Dificultad: Moderada</p>
-              <div class="buttons">
-                <a
-                  href="paginas/Actividad.html?id=5"
-                  class="primary"
-                  aria-label="Ver ficha detallada de Parque Nacional Conguillío"
-                  >Ver ficha</a
-                >
-                <a
-                  href="https://wa.me/56912345678"
-                  target="_blank"
-                  rel="noopener"
-                  aria-label="Contactar por WhatsApp sobre Parque Nacional Conguillío"
-                  >Contactar</a
-                >
-              </div>
-            </div>
-          </article>
-
-          <!-- 6. Parque Nacional Villarrica -->
-          <article class="activity" data-categoria="Naturaleza">
-            <div class="image">
-              <img
-                src="assets/imagenes/Villarrica/villarrica.jpg"
-                alt="Volcán y Parque Nacional Villarrica"
-                width="400"
-                height="250"
-                loading="lazy"
-              />
-            </div>
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Parque Nacional Villarrica</h3>
-                  <p>Naturaleza • Pucón / Villarrica, La Araucanía</p>
-                </div>
-                <small>Actualizado: 2026-11-14</small>
-              </div>
-              <p>Duración: 4-5 hrs · Dificultad: Moderada</p>
-              <div class="buttons">
-                <a
-                  href="paginas/Actividad.html?id=6"
-                  class="primary"
-                  aria-label="Ver ficha detallada de Parque Nacional Villarrica"
-                  >Ver ficha</a
-                >
-                <a
-                  href="https://wa.me/56912345678"
-                  target="_blank"
-                  rel="noopener"
-                  aria-label="Contactar por WhatsApp sobre Parque Nacional Villarrica"
-                  >Contactar</a
-                >
-              </div>
-            </div>
-          </article>
-
-          <!-- 7. Parque Nacional Huerquehue -->
-          <article class="activity" data-categoria="Naturaleza">
-            <div class="image">
-              <img
-                src="assets/imagenes/Huerquehue/huerquehue.jpg"
-                alt="Sendero Los Lagos en Parque Nacional Huerquehue"
-                width="400"
-                height="250"
-                loading="lazy"
-              />
-            </div>
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Parque Nacional Huerquehue</h3>
-                  <p>Naturaleza • Paillaco, Pucón</p>
-                </div>
-                <small>Actualizado: 2026-11-14</small>
-              </div>
-              <p>Duración: 5-6 hrs · Dificultad: Moderada</p>
-              <div class="buttons">
-                <a
-                  href="paginas/Actividad.html?id=7"
-                  class="primary"
-                  aria-label="Ver ficha detallada de Parque Nacional Huerquehue"
-                  >Ver ficha</a
-                >
-                <a
-                  href="https://wa.me/56912345678"
-                  target="_blank"
-                  rel="noopener"
-                  aria-label="Contactar por WhatsApp sobre Parque Nacional Huerquehue"
-                  >Contactar</a
-                >
-              </div>
-            </div>
-          </article>
-
-          <!-- 8. Reserva Nacional Malalcahuello -->
-          <article class="activity" data-categoria="Naturaleza">
-            <div class="image">
-              <img
-                src="assets/imagenes/Malalcahuello/malalcahuello.jpg"
-                alt="Araucarias en Reserva Nacional Malalcahuello"
-                width="400"
-                height="250"
-                loading="lazy"
-              />
-            </div>
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Reserva Nacional Malalcahuello</h3>
-                  <p>Naturaleza • Curacautín, La Araucanía</p>
-                </div>
-                <small>Actualizado: 2026-11-14</small>
-              </div>
-              <p>Duración: 3-4 hrs · Dificultad: Moderada</p>
-              <div class="buttons">
-                <a
-                  href="paginas/Actividad.html?id=8"
-                  class="primary"
-                  aria-label="Ver ficha detallada de Reserva Nacional Malalcahuello"
-                  >Ver ficha</a
-                >
-                <a
-                  href="https://wa.me/56912345678"
-                  target="_blank"
-                  rel="noopener"
-                  aria-label="Contactar por WhatsApp sobre Reserva Nacional Malalcahuello"
-                  >Contactar</a
-                >
-              </div>
-            </div>
-          </article>
-
-          <!-- 9. Parque Nacional Nahuelbuta -->
-          <article class="activity" data-categoria="Naturaleza">
-            <div class="image">
-              <img
-                src="assets/imagenes/Nahuelbuta/nahuelbuta.jpg"
-                alt="Mirador Piedra del Águila en Parque Nacional Nahuelbuta"
-                width="400"
-                height="250"
-                loading="lazy"
-              />
-            </div>
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Parque Nacional Nahuelbuta</h3>
-                  <p>Naturaleza • Angol, Malleco</p>
-                </div>
-                <small>Actualizado: 2026-11-14</small>
-              </div>
-              <p>Duración: 2-3 hrs · Dificultad: Fácil</p>
-              <div class="buttons">
-                <a
-                  href="paginas/Actividad.html?id=9"
-                  class="primary"
-                  aria-label="Ver ficha detallada de Parque Nacional Nahuelbuta"
-                  >Ver ficha</a
-                >
-                <a
-                  href="https://wa.me/56912345678"
-                  target="_blank"
-                  rel="noopener"
-                  aria-label="Contactar por WhatsApp sobre Parque Nacional Nahuelbuta"
-                  >Contactar</a
-                >
-              </div>
-            </div>
-          </article>
-
-          <!-- 10. Parque Nacional Tolhuaca -->
-          <article class="activity" data-categoria="Naturaleza">
-            <div class="image">
-              <img
-                src="assets/imagenes/Tolhuaca/tolhuaca.jpg"
-                alt="Laguna Malleco en Parque Nacional Tolhuaca"
-                width="400"
-                height="250"
-                loading="lazy"
-              />
-            </div>
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Parque Nacional Tolhuaca</h3>
-                  <p>Naturaleza • Victoria / Curacautín</p>
-                </div>
-                <small>Actualizado: 2026-11-14</small>
-              </div>
-              <p>Duración: 3 hrs · Dificultad: Fácil</p>
-              <div class="buttons">
-                <a
-                  href="paginas/Actividad.html?id=10"
-                  class="primary"
-                  aria-label="Ver ficha detallada de Parque Nacional Tolhuaca"
-                  >Ver ficha</a
-                >
-                <a
-                  href="https://wa.me/56912345678"
-                  target="_blank"
-                  rel="noopener"
-                  aria-label="Contactar por WhatsApp sobre Parque Nacional Tolhuaca"
-                  >Contactar</a
-                >
-              </div>
-            </div>
-          </article>
-
-          <!-- 11. Valle de la Luna -->
-          <article class="activity" data-categoria="Naturaleza">
-            <div class="image">
-              <img
-                src="assets/imagenes/Valle_Luna/valle_luna.jpg"
-                alt="Formaciones rocosas en Valle de la Luna"
-                width="400"
-                height="250"
-                loading="lazy"
-              />
-            </div>
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Valle de la Luna</h3>
-                  <p>Naturaleza • San Pedro de Atacama, Antofagasta</p>
-                </div>
-                <small>Actualizado: 2026-11-14</small>
-              </div>
-              <p>Duración: 3-4 hrs · Dificultad: Fácil</p>
-              <div class="buttons">
-                <a
-                  href="paginas/Actividad.html?id=11"
-                  class="primary"
-                  aria-label="Ver ficha detallada de Valle de la Luna"
-                  >Ver ficha</a
-                >
-                <a
-                  href="https://wa.me/56912345678"
-                  target="_blank"
-                  rel="noopener"
-                  aria-label="Contactar por WhatsApp sobre Valle de la Luna"
-                  >Contactar</a
-                >
-              </div>
-            </div>
-          </article>
-
-          <!-- 12. Parque Nacional La Campana -->
-          <article class="activity" data-categoria="Naturaleza">
-            <div class="image">
-              <img
-                src="assets/imagenes/La_Campana/campana.jpg"
-                alt="Palmas chilenas en Parque Nacional La Campana"
-                width="400"
-                height="250"
-                loading="lazy"
-              />
-            </div>
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Parque Nacional La Campana</h3>
-                  <p>Naturaleza • Olmué, Valparaíso</p>
-                </div>
-                <small>Actualizado: 2026-11-14</small>
-              </div>
-              <p>Duración: 4-5 hrs · Dificultad: Moderada</p>
-              <div class="buttons">
-                <a
-                  href="paginas/Actividad.html?id=12"
-                  class="primary"
-                  aria-label="Ver ficha detallada de Parque Nacional La Campana"
-                  >Ver ficha</a
-                >
-                <a
-                  href="https://wa.me/56912345678"
-                  target="_blank"
-                  rel="noopener"
-                  aria-label="Contactar por WhatsApp sobre Parque Nacional La Campana"
-                  >Contactar</a
-                >
-              </div>
-            </div>
-          </article>
-
-          <!-- 13. Parque Nacional Radal Siete Tazas -->
-          <article class="activity" data-categoria="Naturaleza">
-            <div class="image">
-              <img
-                src="assets/imagenes/Siete_Tazas/siete_tazas.jpg"
-                alt="Cascadas en Reserva Nacional Radal Siete Tazas"
-                width="400"
-                height="250"
-                loading="lazy"
-              />
-            </div>
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Parque Nacional Radal Siete Tazas</h3>
-                  <p>Naturaleza • Molina, Maule</p>
-                </div>
-                <small>Actualizado: 2026-11-14</small>
-              </div>
-              <p>Duración: 2-3 hrs · Dificultad: Fácil</p>
-              <div class="buttons">
-                <a
-                  href="paginas/Actividad.html?id=13"
-                  class="primary"
-                  aria-label="Ver ficha detallada de Radal Siete Tazas"
-                  >Ver ficha</a
-                >
-                <a
-                  href="https://wa.me/56912345678"
-                  target="_blank"
-                  rel="noopener"
-                  aria-label="Contactar por WhatsApp sobre Radal Siete Tazas"
-                  >Contactar</a
-                >
-              </div>
-            </div>
-          </article>
-
-          <!-- 14. Saltos del Petrohué -->
-          <article class="activity" data-categoria="Naturaleza">
-            <div class="image">
-              <img
-                src="assets/imagenes/Petrohue/petrohue.jpg"
-                alt="Saltos del Petrohué y Volcán Osorno"
-                width="400"
-                height="250"
-                loading="lazy"
-              />
-            </div>
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Saltos del Petrohué</h3>
-                  <p>Naturaleza • Puerto Varas, Los Lagos</p>
-                </div>
-                <small>Actualizado: 2026-11-14</small>
-              </div>
-              <p>Duración: 1 hr 30 min · Dificultad: Fácil</p>
-              <div class="buttons">
-                <a
-                  href="paginas/Actividad.html?id=14"
-                  class="primary"
-                  aria-label="Ver ficha detallada de Saltos del Petrohué"
-                  >Ver ficha</a
-                >
-                <a
-                  href="https://wa.me/56912345678"
-                  target="_blank"
-                  rel="noopener"
-                  aria-label="Contactar por WhatsApp sobre Saltos del Petrohué"
-                  >Contactar</a
-                >
-              </div>
-            </div>
-          </article>
-
-          <!-- 15. Parque Nacional Chiloé -->
-          <article class="activity" data-categoria="Naturaleza">
-            <div class="image">
-              <img
-                src="assets/imagenes/Chiloe/chiloe.jpg"
-                alt="Sendero El Tepual en Parque Nacional Chiloé"
-                width="400"
-                height="250"
-                loading="lazy"
-              />
-            </div>
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Parque Nacional Chiloé</h3>
-                  <p>Naturaleza • Cucao, Chonchi, Los Lagos</p>
-                </div>
-                <small>Actualizado: 2026-11-14</small>
-              </div>
-              <p>Duración: 2 hrs · Dificultad: Fácil</p>
-              <div class="buttons">
-                <a
-                  href="paginas/Actividad.html?id=15"
-                  class="primary"
-                  aria-label="Ver ficha detallada de Parque Nacional Chiloé"
-                  >Ver ficha</a
-                >
-                <a
-                  href="https://wa.me/56912345678"
-                  target="_blank"
-                  rel="noopener"
-                  aria-label="Contactar por WhatsApp sobre Parque Nacional Chiloé"
-                  >Contactar</a
-                >
-              </div>
-            </div>
-          </article>
-
-          <!-- 16. Parque Nacional Queulat -->
-          <article class="activity" data-categoria="Naturaleza">
-            <div class="image">
-              <img
-                src="assets/imagenes/Queulat/queulat.jpg"
-                alt="Ventisquero Colgante en Parque Nacional Queulat"
-                width="400"
-                height="250"
-                loading="lazy"
-              />
-            </div>
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Parque Nacional Queulat</h3>
-                  <p>Naturaleza • Puyuhuapi, Aysén</p>
-                </div>
-                <small>Actualizado: 2026-11-14</small>
-              </div>
-              <p>Duración: 3-4 hrs · Dificultad: Moderada</p>
-              <div class="buttons">
-                <a
-                  href="paginas/Actividad.html?id=16"
-                  class="primary"
-                  aria-label="Ver ficha detallada de Parque Nacional Queulat"
-                  >Ver ficha</a
-                >
-                <a
-                  href="https://wa.me/56912345678"
-                  target="_blank"
-                  rel="noopener"
-                  aria-label="Contactar por WhatsApp sobre Parque Nacional Queulat"
-                  >Contactar</a
-                >
-              </div>
-            </div>
-          </article>
-
-          <!-- 17. Parque Nacional Torres del Paine -->
-          <article class="activity" data-categoria="Naturaleza">
-            <div class="image">
-              <img
-                src="assets/imagenes/Torres_Paine/torres_paine.jpg"
-                alt="Mirador Base Las Torres en Torres del Paine"
-                width="400"
-                height="250"
-                loading="lazy"
-              />
-            </div>
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Parque Nacional Torres del Paine</h3>
-                  <p>Naturaleza • Torres del Paine, Magallanes</p>
-                </div>
-                <small>Actualizado: 2026-11-14</small>
-              </div>
-              <p>Duración: Día completo · Dificultad: Alta</p>
-              <div class="buttons">
-                <a
-                  href="paginas/Actividad.html?id=17"
-                  class="primary"
-                  aria-label="Ver ficha detallada de Parque Nacional Torres del Paine"
-                  >Ver ficha</a
-                >
-                <a
-                  href="https://wa.me/56912345678"
-                  target="_blank"
-                  rel="noopener"
-                  aria-label="Contactar por WhatsApp sobre Parque Nacional Torres del Paine"
-                  >Contactar</a
-                >
-              </div>
-            </div>
-          </article>
-
-          <!-- 18. Castillo de Niebla (Valdivia) -->
-          <article class="activity" data-categoria="Cultura">
-            <div class="image">
-              <img
-                src="assets/imagenes/Valdivia/Valdivia.jpg"
-                alt="Castillo de Niebla en la bahía de Corral, Valdivia"
-                width="400"
-                height="250"
-                loading="lazy"
-              />
-            </div>
-            <div class="info">
-              <div class="activity-header">
-                <div>
-                  <h3>Castillo de Niebla (Valdivia)</h3>
-                  <p>Cultura • Camino a Niebla s/n, Valdivia, Los Ríos</p>
-                </div>
-                <small>Actualizado: 2026-11-14</small>
-              </div>
-              <p>Duración: 1 hr 30 min · Dificultad: Fácil</p>
-              <div class="buttons">
-                <a
-                  href="paginas/Actividad.html?id=18"
-                  class="primary"
-                  aria-label="Ver ficha detallada de Castillo de Niebla en Valdivia"
-                  >Ver ficha</a
-                >
-                <a
-                  href="https://wa.me/56912345678"
-                  target="_blank"
-                  rel="noopener"
-                  aria-label="Contactar por WhatsApp sobre Castillo de Niebla"
-                  >Contactar</a
-                >
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- Tarjeta del Clima Aesthetic con Humedad, Viento y Sensación -->
-      <section style="max-width: 1100px; margin: 2rem auto 1rem auto; padding: 0 1rem;">
-        <div id="clima-info"></div>
-      </section>
-    </main>
-
-    <footer>
-      <span>EcoRuta Temuco • Información local y accesible</span>
-      <div>
-        <a
-          href="documentos/reportes/reporte-bug-bounty.pdf"
-          target="_blank"
-          rel="noopener"
-          >Bug Bounty</a
-        >
-        <a href="paginas/contacto.html">Contacto</a>
-        <a href="administracion/">Administración</a>
-      </div>
-    </footer>
-
-    <!-- Lógica de filtros del frontend -->
-    <script>
-      const botones = document.querySelectorAll('.filters button');
-      const tarjetas = document.querySelectorAll('.activity');
-      const buscador = document.querySelector('.search input');
-      const contador = document.querySelector('.section-title span');
-
-      const mensajeSinResultados = document.createElement('p');
-      mensajeSinResultados.textContent =
-        'No se encontraron actividades con esos criterios.';
-      mensajeSinResultados.hidden = true;
-      mensajeSinResultados.className = 'mensaje-vacio';
-      document.querySelector('.list').appendChild(mensajeSinResultados);
-
-      let categoriaActual = 'Todas';
-
-      const limpiar = (texto) =>
-        texto
-          .toLowerCase()
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '');
-
-      function filtrarActividades() {
-        const termino = limpiar(buscador.value.trim());
-        let visibles = 0;
-
-        tarjetas.forEach((tarjeta) => {
-          const categoriaTarjeta = tarjeta.getAttribute('data-categoria');
-          const contenidoTexto = limpiar(tarjeta.textContent);
-
-          const coincideCategoria =
-            categoriaActual === 'Todas' || categoriaTarjeta === categoriaActual;
-          const coincideBusqueda =
-            !termino || contenidoTexto.includes(termino);
-
-          if (coincideCategoria && coincideBusqueda) {
-            tarjeta.style.display = 'flex';
-            visibles++;
-          } else {
-            tarjeta.style.display = 'none';
-          }
-        });
-
-        contador.textContent = `${visibles} resultado${visibles === 1 ? '' : 's'}`;
-        mensajeSinResultados.hidden = visibles > 0;
-      }
-
-      botones.forEach((boton) => {
-        boton.addEventListener('click', () => {
-          botones.forEach((b) => b.classList.remove('active'));
-          boton.classList.add('active');
-          categoriaActual = boton.getAttribute('data-categoria');
-          filtrarActividades();
-        });
-      });
-
-      buscador.addEventListener('input', filtrarActividades);
-    </script>
-
-    <!-- Estilos y animación automática de galería de 4 fotos por tarjeta -->
     <style>
       .activity .image {
         position: relative;
         overflow: hidden;
+        height: 220px;
+        min-height: 220px;
+        background: #e8f5e9;
       }
       .activity .image img {
         position: absolute;
@@ -878,20 +55,519 @@
         border-radius: 999px;
       }
     </style>
+  </head>
+  <body>
+    <header>
+      <div class="header">
+        <div class="brand">
+          <img
+            src="assets/imagenes/Logo.png"
+            alt="Logo Nexus Ecoruta"
+            class="logo"
+            width="120"
+            height="45"
+          />
+          <div>
+            <h1 class="brand-name">Nexus Ecoruta</h1>
+            <p>Turismo Sustentable en La Araucanía</p>
+          </div>
+        </div>
+        <nav>
+          <a href="index.html" class="active">Inicio</a>
+          <a href="paginas/emprendimientos.html">Emprendimientos</a>
+          <a href="paginas/contacto.html">Contacto</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1>Descubre la magia natural y cultural de nuestra región</h1>
+        <p>
+          Explora senderos, ferias agroecológicas y espacios patrimoniales
+          diseñados para un turismo consciente y respetuoso con el medio
+          ambiente.
+        </p>
+
+        <div class="search">
+          <input
+            type="search"
+            placeholder="Buscar por nombre, ubicación o categoría..."
+            aria-label="Buscar actividades"
+          />
+        </div>
+
+        <div class="filters">
+          <button class="active" data-categoria="Todas">Todas</button>
+          <button data-categoria="Naturaleza">Naturaleza</button>
+          <button data-categoria="Cultura">Cultura</button>
+          <button data-categoria="Gastronomía">Gastronomía</button>
+        </div>
+      </section>
+
+      <section class="activities">
+        <div class="section-title">
+          <h2>Actividades destacadas</h2>
+          <span id="contador-resultados">18 resultados</span>
+        </div>
+
+        <div class="list">
+          <!-- 1 -->
+          <article class="activity" data-categoria="Naturaleza">
+            <div class="image">
+              <img src="assets/imagenes/Sendero/Sendero_Nielol.jpg" alt="Sendero Cerro Ñielol" width="400" height="250" fetchpriority="high" />
+            </div>
+            <div class="info">
+              <div class="activity-header">
+                <div>
+                  <h3>Sendero Ñielol</h3>
+                  <p>Naturaleza • Parque Ñielol, Temuco</p>
+                </div>
+                <small>Actualizado: 2026-08-10</small>
+              </div>
+              <p>Duración: 1 hr 30 min · Dificultad: Moderada</p>
+              <div class="buttons">
+                <a href="paginas/Actividad.html?id=1" class="primary">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 2 -->
+          <article class="activity" data-categoria="Cultura">
+            <div class="image">
+              <img src="assets/imagenes/Museo/museo.jpg" alt="Museo Regional de La Araucanía" width="400" height="250" loading="lazy" />
+            </div>
+            <div class="info">
+              <div class="activity-header">
+                <div>
+                  <h3>Museo Regional de La Araucanía</h3>
+                  <p>Cultura • Av. Alemania 0842, Temuco</p>
+                </div>
+                <small>Actualizado: 2026-08-06</small>
+              </div>
+              <p>Horario: Martes a Domingo · Entrada liberada</p>
+              <div class="buttons">
+                <a href="paginas/Actividad.html?id=2" class="primary">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 3 -->
+          <article class="activity" data-categoria="Gastronomía">
+            <div class="image">
+              <img src="assets/imagenes/Feria/feria.jpg" alt="Feria Agroecológica" width="400" height="250" loading="lazy" />
+            </div>
+            <div class="info">
+              <div class="activity-header">
+                <div>
+                  <h3>Feria Agroecológica</h3>
+                  <p>Gastronomía • Feria Pinto, Temuco</p>
+                </div>
+                <small>Actualizado: 2026-08-12</small>
+              </div>
+              <p>Productos locales y orgánicos • Acceso libre</p>
+              <div class="buttons">
+                <a href="paginas/Actividad.html?id=3" class="primary">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 4 -->
+          <article class="activity" data-categoria="Naturaleza">
+            <div class="image">
+              <img src="assets/imagenes/Isla_Cautin/Isla1.jpg" alt="Vista del Parque Isla Cautín" width="400" height="250" loading="lazy" />
+            </div>
+            <div class="info">
+              <div class="activity-header">
+                <div>
+                  <h3>Parque Isla Cautín</h3>
+                  <p>Naturaleza • Av. los Poetas, Temuco</p>
+                </div>
+                <small>Actualizado: 2026-08-15</small>
+              </div>
+              <p>Duración: 1-2 hrs · Dificultad: Fácil</p>
+              <div class="buttons">
+                <a href="paginas/Actividad.html?id=4" class="primary">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 5 -->
+          <article class="activity" data-categoria="Naturaleza">
+            <div class="image">
+              <img src="assets/imagenes/Conguillio/Conguillio1.jpg" alt="Parque Nacional Conguillío" width="400" height="250" loading="lazy" />
+            </div>
+            <div class="info">
+              <div class="activity-header">
+                <div>
+                  <h3>Parque Nacional Conguillío</h3>
+                  <p>Naturaleza • Melipeuco / Curacautín</p>
+                </div>
+                <small>Actualizado: 2026-11-11</small>
+              </div>
+              <p>Duración: Día completo · Dificultad: Moderada</p>
+              <div class="buttons">
+                <a href="paginas/Actividad.html?id=5" class="primary">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 6 -->
+          <article class="activity" data-categoria="Naturaleza">
+            <div class="image">
+              <img src="assets/imagenes/Villarrica/villarrica.jpg" alt="Volcán y Parque Nacional Villarrica" width="400" height="250" loading="lazy" />
+            </div>
+            <div class="info">
+              <div class="activity-header">
+                <div>
+                  <h3>Parque Nacional Villarrica</h3>
+                  <p>Naturaleza • Pucón / Villarrica, La Araucanía</p>
+                </div>
+                <small>Actualizado: 2026-11-14</small>
+              </div>
+              <p>Duración: 4-5 hrs · Dificultad: Moderada</p>
+              <div class="buttons">
+                <a href="paginas/Actividad.html?id=6" class="primary">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 7 -->
+          <article class="activity" data-categoria="Naturaleza">
+            <div class="image">
+              <img src="assets/imagenes/Huerquehue/huerquehue.jpg" alt="Sendero Los Lagos en Parque Nacional Huerquehue" width="400" height="250" loading="lazy" />
+            </div>
+            <div class="info">
+              <div class="activity-header">
+                <div>
+                  <h3>Parque Nacional Huerquehue</h3>
+                  <p>Naturaleza • Paillaco, Pucón</p>
+                </div>
+                <small>Actualizado: 2026-11-14</small>
+              </div>
+              <p>Duración: 5-6 hrs · Dificultad: Moderada</p>
+              <div class="buttons">
+                <a href="paginas/Actividad.html?id=7" class="primary">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 8 -->
+          <article class="activity" data-categoria="Naturaleza">
+            <div class="image">
+              <img src="assets/imagenes/Malalcahuello/malalcahuello.jpg" alt="Araucarias en Reserva Nacional Malalcahuello" width="400" height="250" loading="lazy" />
+            </div>
+            <div class="info">
+              <div class="activity-header">
+                <div>
+                  <h3>Reserva Nacional Malalcahuello</h3>
+                  <p>Naturaleza • Curacautín, La Araucanía</p>
+                </div>
+                <small>Actualizado: 2026-11-14</small>
+              </div>
+              <p>Duración: 3-4 hrs · Dificultad: Moderada</p>
+              <div class="buttons">
+                <a href="paginas/Actividad.html?id=8" class="primary">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 9 -->
+          <article class="activity" data-categoria="Naturaleza">
+            <div class="image">
+              <img src="assets/imagenes/Nahuelbuta/nahuelbuta.jpg" alt="Mirador Piedra del Águila en Parque Nacional Nahuelbuta" width="400" height="250" loading="lazy" />
+            </div>
+            <div class="info">
+              <div class="activity-header">
+                <div>
+                  <h3>Parque Nacional Nahuelbuta</h3>
+                  <p>Naturaleza • Angol, Malleco</p>
+                </div>
+                <small>Actualizado: 2026-11-14</small>
+              </div>
+              <p>Duración: 2-3 hrs · Dificultad: Fácil</p>
+              <div class="buttons">
+                <a href="paginas/Actividad.html?id=9" class="primary">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 10 -->
+          <article class="activity" data-categoria="Naturaleza">
+            <div class="image">
+              <img src="assets/imagenes/Tolhuaca/tolhuaca.jpg" alt="Laguna Malleco en Parque Nacional Tolhuaca" width="400" height="250" loading="lazy" />
+            </div>
+            <div class="info">
+              <div class="activity-header">
+                <div>
+                  <h3>Parque Nacional Tolhuaca</h3>
+                  <p>Naturaleza • Victoria / Curacautín</p>
+                </div>
+                <small>Actualizado: 2026-11-14</small>
+              </div>
+              <p>Duración: 3 hrs · Dificultad: Fácil</p>
+              <div class="buttons">
+                <a href="paginas/Actividad.html?id=10" class="primary">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 11 -->
+          <article class="activity" data-categoria="Naturaleza">
+            <div class="image">
+              <img src="assets/imagenes/Valle_Luna/valle_luna.jpg" alt="Formaciones rocosas en Valle de la Luna" width="400" height="250" loading="lazy" />
+            </div>
+            <div class="info">
+              <div class="activity-header">
+                <div>
+                  <h3>Valle de la Luna</h3>
+                  <p>Naturaleza • San Pedro de Atacama, Antofagasta</p>
+                </div>
+                <small>Actualizado: 2026-11-14</small>
+              </div>
+              <p>Duración: 3-4 hrs · Dificultad: Fácil</p>
+              <div class="buttons">
+                <a href="paginas/Actividad.html?id=11" class="primary">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 12 -->
+          <article class="activity" data-categoria="Naturaleza">
+            <div class="image">
+              <img src="assets/imagenes/La_Campana/campana.jpg" alt="Palmas chilenas en Parque Nacional La Campana" width="400" height="250" loading="lazy" />
+            </div>
+            <div class="info">
+              <div class="activity-header">
+                <div>
+                  <h3>Parque Nacional La Campana</h3>
+                  <p>Naturaleza • Olmué, Valparaíso</p>
+                </div>
+                <small>Actualizado: 2026-11-14</small>
+              </div>
+              <p>Duración: 4-5 hrs · Dificultad: Moderada</p>
+              <div class="buttons">
+                <a href="paginas/Actividad.html?id=12" class="primary">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 13 -->
+          <article class="activity" data-categoria="Naturaleza">
+            <div class="image">
+              <img src="assets/imagenes/Siete_Tazas/siete_tazas.jpg" alt="Cascadas en Reserva Nacional Radal Siete Tazas" width="400" height="250" loading="lazy" />
+            </div>
+            <div class="info">
+              <div class="activity-header">
+                <div>
+                  <h3>Parque Nacional Radal Siete Tazas</h3>
+                  <p>Naturaleza • Molina, Maule</p>
+                </div>
+                <small>Actualizado: 2026-11-14</small>
+              </div>
+              <p>Duración: 2-3 hrs · Dificultad: Fácil</p>
+              <div class="buttons">
+                <a href="paginas/Actividad.html?id=13" class="primary">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 14 -->
+          <article class="activity" data-categoria="Naturaleza">
+            <div class="image">
+              <img src="assets/imagenes/Petrohue/petrohue.jpg" alt="Saltos del Petrohué y Volcán Osorno" width="400" height="250" loading="lazy" />
+            </div>
+            <div class="info">
+              <div class="activity-header">
+                <div>
+                  <h3>Saltos del Petrohué</h3>
+                  <p>Naturaleza • Puerto Varas, Los Lagos</p>
+                </div>
+                <small>Actualizado: 2026-11-14</small>
+              </div>
+              <p>Duración: 1 hr 30 min · Dificultad: Fácil</p>
+              <div class="buttons">
+                <a href="paginas/Actividad.html?id=14" class="primary">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 15 -->
+          <article class="activity" data-categoria="Naturaleza">
+            <div class="image">
+              <img src="assets/imagenes/Chiloe/chiloe.jpg" alt="Sendero El Tepual en Parque Nacional Chiloé" width="400" height="250" loading="lazy" />
+            </div>
+            <div class="info">
+              <div class="activity-header">
+                <div>
+                  <h3>Parque Nacional Chiloé</h3>
+                  <p>Naturaleza • Cucao, Chonchi, Los Lagos</p>
+                </div>
+                <small>Actualizado: 2026-11-14</small>
+              </div>
+              <p>Duración: 2 hrs · Dificultad: Fácil</p>
+              <div class="buttons">
+                <a href="paginas/Actividad.html?id=15" class="primary">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 16 -->
+          <article class="activity" data-categoria="Naturaleza">
+            <div class="image">
+              <img src="assets/imagenes/Queulat/queulat.jpg" alt="Ventisquero Colgante en Parque Nacional Queulat" width="400" height="250" loading="lazy" />
+            </div>
+            <div class="info">
+              <div class="activity-header">
+                <div>
+                  <h3>Parque Nacional Queulat</h3>
+                  <p>Naturaleza • Puyuhuapi, Aysén</p>
+                </div>
+                <small>Actualizado: 2026-11-14</small>
+              </div>
+              <p>Duración: 3-4 hrs · Dificultad: Moderada</p>
+              <div class="buttons">
+                <a href="paginas/Actividad.html?id=16" class="primary">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 17 -->
+          <article class="activity" data-categoria="Naturaleza">
+            <div class="image">
+              <img src="assets/imagenes/Torres_Paine/torres_paine.jpg" alt="Mirador Base Las Torres en Torres del Paine" width="400" height="250" loading="lazy" />
+            </div>
+            <div class="info">
+              <div class="activity-header">
+                <div>
+                  <h3>Parque Nacional Torres del Paine</h3>
+                  <p>Naturaleza • Torres del Paine, Magallanes</p>
+                </div>
+                <small>Actualizado: 2026-11-14</small>
+              </div>
+              <p>Duración: Día completo · Dificultad: Alta</p>
+              <div class="buttons">
+                <a href="paginas/Actividad.html?id=17" class="primary">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 18 -->
+          <article class="activity" data-categoria="Cultura">
+            <div class="image">
+              <img src="assets/imagenes/Valdivia/Valdivia.jpg" alt="Castillo de Niebla en la bahía de Corral, Valdivia" width="400" height="250" loading="lazy" />
+            </div>
+            <div class="info">
+              <div class="activity-header">
+                <div>
+                  <h3>Castillo de Niebla (Valdivia)</h3>
+                  <p>Cultura • Camino a Niebla s/n, Valdivia, Los Ríos</p>
+                </div>
+                <small>Actualizado: 2026-11-14</small>
+              </div>
+              <p>Duración: 1 hr 30 min · Dificultad: Fácil</p>
+              <div class="buttons">
+                <a href="paginas/Actividad.html?id=18" class="primary">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section style="max-width: 1100px; margin: 2rem auto 1rem auto; padding: 0 1rem;">
+        <div id="clima-info"></div>
+      </section>
+    </main>
+
+    <footer>
+      <span>EcoRuta Temuco • Información local y accesible</span>
+      <div>
+        <a href="documentos/reportes/reporte-bug-bounty.pdf" target="_blank" rel="noopener">Bug Bounty</a>
+        <a href="paginas/contacto.html">Contacto</a>
+        <a href="administracion/">Administración</a>
+      </div>
+    </footer>
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const contenedores = document.querySelectorAll('.activity .image');
+        const botones = document.querySelectorAll('.filters button');
+        const tarjetas = document.querySelectorAll('.activity');
+        const buscador = document.querySelector('.search input');
+        const contador = document.getElementById('contador-resultados');
 
-        contenedores.forEach((contenedor, cardIdx) => {
+        const mensajeSinResultados = document.createElement('p');
+        mensajeSinResultados.textContent = 'No se encontraron actividades con esos criterios.';
+        mensajeSinResultados.hidden = true;
+        mensajeSinResultados.className = 'mensaje-vacio';
+        document.querySelector('.list').appendChild(mensajeSinResultados);
+
+        let categoriaActual = 'Todas';
+
+        const limpiar = (texto) =>
+          texto.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+        function filtrarActividades() {
+          const termino = limpiar(buscador.value.trim());
+          let visibles = 0;
+
+          tarjetas.forEach((tarjeta) => {
+            const categoriaTarjeta = tarjeta.getAttribute('data-categoria');
+            const contenidoTexto = limpiar(tarjeta.textContent);
+
+            const coincideCategoria =
+              categoriaActual === 'Todas' || categoriaTarjeta === categoriaActual;
+            const coincideBusqueda = !termino || contenidoTexto.includes(termino);
+
+            if (coincideCategoria && coincideBusqueda) {
+              tarjeta.style.display = 'flex';
+              visibles++;
+            } else {
+              tarjeta.style.display = 'none';
+            }
+          });
+
+          contador.textContent = `${visibles} resultado${visibles === 1 ? '' : 's'}`;
+          mensajeSinResultados.hidden = visibles > 0;
+        }
+
+        botones.forEach((boton) => {
+          boton.addEventListener('click', () => {
+            botones.forEach((b) => b.classList.remove('active'));
+            boton.classList.add('active');
+            categoriaActual = boton.getAttribute('data-categoria');
+            filtrarActividades();
+          });
+        });
+
+        buscador.addEventListener('input', filtrarActividades);
+
+        // Carrusel automático de 4 fotos por tarjeta
+        document.querySelectorAll('.activity .image').forEach((contenedor, cardIdx) => {
           const imgPrincipal = contenedor.querySelector('img');
           if (!imgPrincipal) return;
 
           const srcOriginal = imgPrincipal.getAttribute('src');
           const rutas = [srcOriginal];
           for (let i = 2; i <= 4; i++) {
-            const nuevaRuta = srcOriginal.replace(/1?(\.[a-zA-Z]+)$/, `${i}$1`);
-            rutas.push(nuevaRuta);
+            rutas.push(srcOriginal.replace(/1?(\.[a-zA-Z]+)$/, `${i}$1`));
           }
 
           imgPrincipal.classList.add('activa');
@@ -945,6 +621,5 @@
     </script>
 
     <script src="js/api.js"></script>
-    <script src="js/script.js"></script>
   </body>
 </html>
