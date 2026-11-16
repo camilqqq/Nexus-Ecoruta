@@ -435,3 +435,63 @@ nav a {
     border-radius: 8px;
 }
 
+/* --- Estilos del Selector de Idioma con Banderas --- */
+.custom-lang-wrapper {
+  position: relative;
+  display: inline-block;
+  font-family: inherit;
+  font-size: 0.9rem;
+  user-select: none;
+}
+
+.custom-lang-selected {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #1d2d24;
+  font-weight: 600;
+}
+
+.custom-lang-selected:hover {
+  border-color: #1b4332;
+}
+
+/* Oculta las opciones por defecto */
+.custom-lang-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 4px);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 100;
+  min-width: 100px;
+  overflow: hidden;
+}
+
+/* Muestra el menú cuando se hace clic */
+.custom-lang-dropdown.show {
+  display: block;
+}
+
+.custom-lang-option {
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #1d2d24;
+  font-weight: 500;
+}
+
+.custom-lang-option:hover {
+  background-color: #f4f6f5;
+  color: #1b4332;
+}

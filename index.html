@@ -69,21 +69,27 @@
           />
           <div>
             <h1 class="brand-name">Nexus Ecoruta</h1>
-            <p>Turismo Sustentable en La Araucanía</p>
+            <p data-i18n="brand.subtitle">Turismo Sustentable en La Araucanía</p>
           </div>
         </div>
         <nav>
-          <a href="index.html" class="active">Inicio</a>
-          <a href="paginas/emprendimientos.html">Emprendimientos</a>
-          <a href="paginas/contacto.html">Contacto</a>
+          <a href="index.html" class="active" data-i18n="nav.inicio">Inicio</a>
+          <a href="paginas/emprendimientos.html" data-i18n="nav.emprendimientos">Emprendimientos</a>
+          <a href="paginas/contacto.html" data-i18n="nav.contacto">Contacto</a>
+    
+          <!-- Selector de idioma nativo con banderas -->
+          <select id="language-selector" aria-label="Seleccionar idioma" style="padding: 0.3rem 0.5rem; border-radius: 6px; border: 1px solid #ccc; background: #fff; font-weight: 600; cursor: pointer;">
+            <option value="es">🇪🇸 Español</option>
+            <option value="en">🇬🇧 English</option>
+          </select>
         </nav>
       </div>
     </header>
 
     <main>
       <section class="hero">
-        <h1>Descubre la magia natural y cultural de nuestra región</h1>
-        <p>
+        <h1 data-i18n="hero.title">Descubre la magia natural y cultural de nuestra región</h1>
+        <p data-i18n="hero.subtitle">
           Explora senderos, ferias agroecológicas y espacios patrimoniales
           diseñados para un turismo consciente y respetuoso con el medio
           ambiente.
@@ -92,22 +98,23 @@
         <div class="search">
           <input
             type="search"
+            data-i18n="search.placeholder"
             placeholder="Buscar por nombre, ubicación o categoría..."
             aria-label="Buscar actividades"
           />
         </div>
 
         <div class="filters">
-          <button class="active" data-categoria="Todas">Todas</button>
-          <button data-categoria="Naturaleza">Naturaleza</button>
-          <button data-categoria="Cultura">Cultura</button>
-          <button data-categoria="Gastronomía">Gastronomía</button>
+          <button class="active" data-categoria="Todas" data-i18n="filter.todas">Todas</button>
+          <button data-categoria="Naturaleza" data-i18n="filter.naturaleza">Naturaleza</button>
+          <button data-categoria="Cultura" data-i18n="filter.cultura">Cultura</button>
+          <button data-categoria="Gastronomía" data-i18n="filter.gastronomia">Gastronomía</button>
         </div>
       </section>
 
       <section class="activities">
         <div class="section-title">
-          <h2>Actividades destacadas</h2>
+          <h2 data-i18n="section.destacadas">Actividades destacadas</h2>
           <span id="contador-resultados">18 resultados</span>
         </div>
 
@@ -121,14 +128,14 @@
               <div class="activity-header">
                 <div>
                   <h3>Sendero Ñielol</h3>
-                  <p>Naturaleza • Parque Ñielol, Temuco</p>
+                  <p data-i18n="act.nielol.desc">Naturaleza • Parque Ñielol, Temuco</p>
                 </div>
-                <small>Actualizado: 2026-08-10</small>
+                <small><span data-i18n="act.actualizado">Actualizado: </span>2026-08-10</small>
               </div>
-              <p>Duración: 1 hr 30 min · Dificultad: Moderada</p>
+              <p data-i18n="act.nielol.det">Duración: 1 hr 30 min · Dificultad: Moderada</p>
               <div class="buttons">
-                <a href="paginas/Actividad.html?id=1" class="primary">Ver ficha</a>
-                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+                <a href="paginas/Actividad.html?id=1" class="primary" data-i18n="btn.verFicha">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener" data-i18n="btn.contactar">Contactar</a>
               </div>
             </div>
           </article>
@@ -142,14 +149,14 @@
               <div class="activity-header">
                 <div>
                   <h3>Museo Regional de La Araucanía</h3>
-                  <p>Cultura • Av. Alemania 0842, Temuco</p>
+                  <p data-i18n="act.museo.desc">Cultura • Av. Alemania 0842, Temuco</p>
                 </div>
-                <small>Actualizado: 2026-08-06</small>
+                <small><span data-i18n="act.actualizado">Actualizado: </span>2026-08-06</small>
               </div>
-              <p>Horario: Martes a Domingo · Entrada liberada</p>
+              <p data-i18n="act.museo.det">Horario: Martes a Domingo · Entrada liberada</p>
               <div class="buttons">
-                <a href="paginas/Actividad.html?id=2" class="primary">Ver ficha</a>
-                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+                <a href="paginas/Actividad.html?id=2" class="primary" data-i18n="btn.verFicha">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener" data-i18n="btn.contactar">Contactar</a>
               </div>
             </div>
           </article>
@@ -163,14 +170,14 @@
               <div class="activity-header">
                 <div>
                   <h3>Feria Agroecológica</h3>
-                  <p>Gastronomía • Feria Pinto, Temuco</p>
+                  <p data-i18n="act.feria.desc">Gastronomía • Feria Pinto, Temuco</p>
                 </div>
-                <small>Actualizado: 2026-08-12</small>
+                <small><span data-i18n="act.actualizado">Actualizado: </span>2026-08-12</small>
               </div>
-              <p>Productos locales y orgánicos • Acceso libre</p>
+              <p data-i18n="act.feria.det">Productos locales y orgánicos • Acceso libre</p>
               <div class="buttons">
-                <a href="paginas/Actividad.html?id=3" class="primary">Ver ficha</a>
-                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+                <a href="paginas/Actividad.html?id=3" class="primary" data-i18n="btn.verFicha">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener" data-i18n="btn.contactar">Contactar</a>
               </div>
             </div>
           </article>
@@ -184,14 +191,14 @@
               <div class="activity-header">
                 <div>
                   <h3>Parque Isla Cautín</h3>
-                  <p>Naturaleza • Av. los Poetas, Temuco</p>
+                  <p data-i18n="act.cautin.desc">Naturaleza • Av. los Poetas, Temuco</p>
                 </div>
-                <small>Actualizado: 2026-08-15</small>
+                <small><span data-i18n="act.actualizado">Actualizado: </span>2026-08-15</small>
               </div>
-              <p>Duración: 1-2 hrs · Dificultad: Fácil</p>
+              <p data-i18n="act.cautin.det">Duración: 1-2 hrs · Dificultad: Fácil</p>
               <div class="buttons">
-                <a href="paginas/Actividad.html?id=4" class="primary">Ver ficha</a>
-                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+                <a href="paginas/Actividad.html?id=4" class="primary" data-i18n="btn.verFicha">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener" data-i18n="btn.contactar">Contactar</a>
               </div>
             </div>
           </article>
@@ -205,14 +212,14 @@
               <div class="activity-header">
                 <div>
                   <h3>Parque Nacional Conguillío</h3>
-                  <p>Naturaleza • Melipeuco / Curacautín</p>
+                  <p data-i18n="act.conguillio.desc">Naturaleza • Melipeuco / Curacautín</p>
                 </div>
-                <small>Actualizado: 2026-11-11</small>
+                <small><span data-i18n="act.actualizado">Actualizado: </span>2026-11-11</small>
               </div>
-              <p>Duración: Día completo · Dificultad: Moderada</p>
+              <p data-i18n="act.conguillio.det">Duración: Día completo · Dificultad: Moderada</p>
               <div class="buttons">
-                <a href="paginas/Actividad.html?id=5" class="primary">Ver ficha</a>
-                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+                <a href="paginas/Actividad.html?id=5" class="primary" data-i18n="btn.verFicha">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener" data-i18n="btn.contactar">Contactar</a>
               </div>
             </div>
           </article>
@@ -226,14 +233,14 @@
               <div class="activity-header">
                 <div>
                   <h3>Parque Nacional Villarrica</h3>
-                  <p>Naturaleza • Pucón / Villarrica, La Araucanía</p>
+                  <p data-i18n="act.villarrica.desc">Naturaleza • Pucón / Villarrica, La Araucanía</p>
                 </div>
-                <small>Actualizado: 2026-11-14</small>
+                <small><span data-i18n="act.actualizado">Actualizado: </span>2026-11-14</small>
               </div>
-              <p>Duración: 4-5 hrs · Dificultad: Moderada</p>
+              <p data-i18n="act.villarrica.det">Duración: 4-5 hrs · Dificultad: Moderada</p>
               <div class="buttons">
-                <a href="paginas/Actividad.html?id=6" class="primary">Ver ficha</a>
-                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+                <a href="paginas/Actividad.html?id=6" class="primary" data-i18n="btn.verFicha">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener" data-i18n="btn.contactar">Contactar</a>
               </div>
             </div>
           </article>
@@ -247,14 +254,14 @@
               <div class="activity-header">
                 <div>
                   <h3>Parque Nacional Huerquehue</h3>
-                  <p>Naturaleza • Paillaco, Pucón</p>
+                  <p data-i18n="act.huerquehue.desc">Naturaleza • Paillaco, Pucón</p>
                 </div>
-                <small>Actualizado: 2026-11-14</small>
+                <small><span data-i18n="act.actualizado">Actualizado: </span>2026-11-14</small>
               </div>
-              <p>Duración: 5-6 hrs · Dificultad: Moderada</p>
+              <p data-i18n="act.huerquehue.det">Duración: 5-6 hrs · Dificultad: Moderada</p>
               <div class="buttons">
-                <a href="paginas/Actividad.html?id=7" class="primary">Ver ficha</a>
-                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+                <a href="paginas/Actividad.html?id=7" class="primary" data-i18n="btn.verFicha">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener" data-i18n="btn.contactar">Contactar</a>
               </div>
             </div>
           </article>
@@ -268,14 +275,14 @@
               <div class="activity-header">
                 <div>
                   <h3>Reserva Nacional Malalcahuello</h3>
-                  <p>Naturaleza • Curacautín, La Araucanía</p>
+                  <p data-i18n="act.malalcahuello.desc">Naturaleza • Curacautín, La Araucanía</p>
                 </div>
-                <small>Actualizado: 2026-11-14</small>
+                <small><span data-i18n="act.actualizado">Actualizado: </span>2026-11-14</small>
               </div>
-              <p>Duración: 3-4 hrs · Dificultad: Moderada</p>
+              <p data-i18n="act.malalcahuello.det">Duración: 3-4 hrs · Dificultad: Moderada</p>
               <div class="buttons">
-                <a href="paginas/Actividad.html?id=8" class="primary">Ver ficha</a>
-                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+                <a href="paginas/Actividad.html?id=8" class="primary" data-i18n="btn.verFicha">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener" data-i18n="btn.contactar">Contactar</a>
               </div>
             </div>
           </article>
@@ -289,14 +296,14 @@
               <div class="activity-header">
                 <div>
                   <h3>Parque Nacional Nahuelbuta</h3>
-                  <p>Naturaleza • Angol, Malleco</p>
+                  <p data-i18n="act.nahuelbuta.desc">Naturaleza • Angol, Malleco</p>
                 </div>
-                <small>Actualizado: 2026-11-14</small>
+                <small><span data-i18n="act.actualizado">Actualizado: </span>2026-11-14</small>
               </div>
-              <p>Duración: 2-3 hrs · Dificultad: Fácil</p>
+              <p data-i18n="act.nahuelbuta.det">Duración: 2-3 hrs · Dificultad: Fácil</p>
               <div class="buttons">
-                <a href="paginas/Actividad.html?id=9" class="primary">Ver ficha</a>
-                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+                <a href="paginas/Actividad.html?id=9" class="primary" data-i18n="btn.verFicha">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener" data-i18n="btn.contactar">Contactar</a>
               </div>
             </div>
           </article>
@@ -310,14 +317,14 @@
               <div class="activity-header">
                 <div>
                   <h3>Parque Nacional Tolhuaca</h3>
-                  <p>Naturaleza • Victoria / Curacautín</p>
+                  <p data-i18n="act.tolhuaca.desc">Naturaleza • Victoria / Curacautín</p>
                 </div>
-                <small>Actualizado: 2026-11-14</small>
+                <small><span data-i18n="act.actualizado">Actualizado: </span>2026-11-14</small>
               </div>
-              <p>Duración: 3 hrs · Dificultad: Fácil</p>
+              <p data-i18n="act.tolhuaca.det">Duración: 3 hrs · Dificultad: Fácil</p>
               <div class="buttons">
-                <a href="paginas/Actividad.html?id=10" class="primary">Ver ficha</a>
-                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+                <a href="paginas/Actividad.html?id=10" class="primary" data-i18n="btn.verFicha">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener" data-i18n="btn.contactar">Contactar</a>
               </div>
             </div>
           </article>
@@ -331,14 +338,14 @@
               <div class="activity-header">
                 <div>
                   <h3>Valle de la Luna</h3>
-                  <p>Naturaleza • San Pedro de Atacama, Antofagasta</p>
+                  <p data-i18n="act.valleluna.desc">Naturaleza • San Pedro de Atacama, Antofagasta</p>
                 </div>
-                <small>Actualizado: 2026-11-14</small>
+                <small><span data-i18n="act.actualizado">Actualizado: </span>2026-11-14</small>
               </div>
-              <p>Duración: 3-4 hrs · Dificultad: Fácil</p>
+              <p data-i18n="act.valleluna.det">Duración: 3-4 hrs · Dificultad: Fácil</p>
               <div class="buttons">
-                <a href="paginas/Actividad.html?id=11" class="primary">Ver ficha</a>
-                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+                <a href="paginas/Actividad.html?id=11" class="primary" data-i18n="btn.verFicha">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener" data-i18n="btn.contactar">Contactar</a>
               </div>
             </div>
           </article>
@@ -352,14 +359,14 @@
               <div class="activity-header">
                 <div>
                   <h3>Parque Nacional La Campana</h3>
-                  <p>Naturaleza • Olmué, Valparaíso</p>
+                  <p data-i18n="act.lacampana.desc">Naturaleza • Olmué, Valparaíso</p>
                 </div>
-                <small>Actualizado: 2026-11-14</small>
+                <small><span data-i18n="act.actualizado">Actualizado: </span>2026-11-14</small>
               </div>
-              <p>Duración: 4-5 hrs · Dificultad: Moderada</p>
+              <p data-i18n="act.lacampana.det">Duración: 4-5 hrs · Dificultad: Moderada</p>
               <div class="buttons">
-                <a href="paginas/Actividad.html?id=12" class="primary">Ver ficha</a>
-                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+                <a href="paginas/Actividad.html?id=12" class="primary" data-i18n="btn.verFicha">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener" data-i18n="btn.contactar">Contactar</a>
               </div>
             </div>
           </article>
@@ -373,14 +380,14 @@
               <div class="activity-header">
                 <div>
                   <h3>Parque Nacional Radal Siete Tazas</h3>
-                  <p>Naturaleza • Molina, Maule</p>
+                  <p data-i18n="act.sietetazas.desc">Naturaleza • Molina, Maule</p>
                 </div>
-                <small>Actualizado: 2026-11-14</small>
+                <small><span data-i18n="act.actualizado">Actualizado: </span>2026-11-14</small>
               </div>
-              <p>Duración: 2-3 hrs · Dificultad: Fácil</p>
+              <p data-i18n="act.sietetazas.det">Duración: 2-3 hrs · Dificultad: Fácil</p>
               <div class="buttons">
-                <a href="paginas/Actividad.html?id=13" class="primary">Ver ficha</a>
-                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+                <a href="paginas/Actividad.html?id=13" class="primary" data-i18n="btn.verFicha">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener" data-i18n="btn.contactar">Contactar</a>
               </div>
             </div>
           </article>
@@ -394,14 +401,14 @@
               <div class="activity-header">
                 <div>
                   <h3>Saltos del Petrohué</h3>
-                  <p>Naturaleza • Puerto Varas, Los Lagos</p>
+                  <p data-i18n="act.petrohue.desc">Naturaleza • Puerto Varas, Los Lagos</p>
                 </div>
-                <small>Actualizado: 2026-11-14</small>
+                <small><span data-i18n="act.actualizado">Actualizado: </span>2026-11-14</small>
               </div>
-              <p>Duración: 1 hr 30 min · Dificultad: Fácil</p>
+              <p data-i18n="act.petrohue.det">Duración: 1 hr 30 min · Dificultad: Fácil</p>
               <div class="buttons">
-                <a href="paginas/Actividad.html?id=14" class="primary">Ver ficha</a>
-                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+                <a href="paginas/Actividad.html?id=14" class="primary" data-i18n="btn.verFicha">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener" data-i18n="btn.contactar">Contactar</a>
               </div>
             </div>
           </article>
@@ -415,14 +422,14 @@
               <div class="activity-header">
                 <div>
                   <h3>Parque Nacional Chiloé</h3>
-                  <p>Naturaleza • Cucao, Chonchi, Los Lagos</p>
+                  <p data-i18n="act.chiloe.desc">Naturaleza • Cucao, Chonchi, Los Lagos</p>
                 </div>
-                <small>Actualizado: 2026-11-14</small>
+                <small><span data-i18n="act.actualizado">Actualizado: </span>2026-11-14</small>
               </div>
-              <p>Duración: 2 hrs · Dificultad: Fácil</p>
+              <p data-i18n="act.chiloe.det">Duración: 2 hrs · Dificultad: Fácil</p>
               <div class="buttons">
-                <a href="paginas/Actividad.html?id=15" class="primary">Ver ficha</a>
-                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+                <a href="paginas/Actividad.html?id=15" class="primary" data-i18n="btn.verFicha">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener" data-i18n="btn.contactar">Contactar</a>
               </div>
             </div>
           </article>
@@ -436,14 +443,14 @@
               <div class="activity-header">
                 <div>
                   <h3>Parque Nacional Queulat</h3>
-                  <p>Naturaleza • Puyuhuapi, Aysén</p>
+                  <p data-i18n="act.queulat.desc">Naturaleza • Puyuhuapi, Aysén</p>
                 </div>
-                <small>Actualizado: 2026-11-14</small>
+                <small><span data-i18n="act.actualizado">Actualizado: </span>2026-11-14</small>
               </div>
-              <p>Duración: 3-4 hrs · Dificultad: Moderada</p>
+              <p data-i18n="act.queulat.det">Duración: 3-4 hrs · Dificultad: Moderada</p>
               <div class="buttons">
-                <a href="paginas/Actividad.html?id=16" class="primary">Ver ficha</a>
-                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+                <a href="paginas/Actividad.html?id=16" class="primary" data-i18n="btn.verFicha">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener" data-i18n="btn.contactar">Contactar</a>
               </div>
             </div>
           </article>
@@ -457,14 +464,14 @@
               <div class="activity-header">
                 <div>
                   <h3>Parque Nacional Torres del Paine</h3>
-                  <p>Naturaleza • Torres del Paine, Magallanes</p>
+                  <p data-i18n="act.torrespaine.desc">Naturaleza • Torres del Paine, Magallanes</p>
                 </div>
-                <small>Actualizado: 2026-11-14</small>
+                <small><span data-i18n="act.actualizado">Actualizado: </span>2026-11-14</small>
               </div>
-              <p>Duración: Día completo · Dificultad: Alta</p>
+              <p data-i18n="act.torrespaine.det">Duración: Día completo · Dificultad: Alta</p>
               <div class="buttons">
-                <a href="paginas/Actividad.html?id=17" class="primary">Ver ficha</a>
-                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+                <a href="paginas/Actividad.html?id=17" class="primary" data-i18n="btn.verFicha">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener" data-i18n="btn.contactar">Contactar</a>
               </div>
             </div>
           </article>
@@ -478,14 +485,14 @@
               <div class="activity-header">
                 <div>
                   <h3>Castillo de Niebla (Valdivia)</h3>
-                  <p>Cultura • Camino a Niebla s/n, Valdivia, Los Ríos</p>
+                  <p data-i18n="act.valdivia.desc">Cultura • Camino a Niebla s/n, Valdivia, Los Ríos</p>
                 </div>
-                <small>Actualizado: 2026-11-14</small>
+                <small><span data-i18n="act.actualizado">Actualizado: </span>2026-11-14</small>
               </div>
-              <p>Duración: 1 hr 30 min · Dificultad: Fácil</p>
+              <p data-i18n="act.valdivia.det">Duración: 1 hr 30 min · Dificultad: Fácil</p>
               <div class="buttons">
-                <a href="paginas/Actividad.html?id=18" class="primary">Ver ficha</a>
-                <a href="https://wa.me/56912345678" target="_blank" rel="noopener">Contactar</a>
+                <a href="paginas/Actividad.html?id=18" class="primary" data-i18n="btn.verFicha">Ver ficha</a>
+                <a href="https://wa.me/56912345678" target="_blank" rel="noopener" data-i18n="btn.contactar">Contactar</a>
               </div>
             </div>
           </article>
@@ -498,22 +505,38 @@
     </main>
 
     <footer>
-      <span>EcoRuta Temuco • Información local y accesible</span>
+      <span data-i18n="footer.text">EcoRuta Temuco • Información local y accesible</span>
       <div>
         <a href="documentos/reportes/reporte-bug-bounty.pdf" target="_blank" rel="noopener">Bug Bounty</a>
-        <a href="paginas/contacto.html">Contacto</a>
-        <a href="administracion/">Administración</a>
+        <a href="paginas/contacto.html" data-i18n="footer.contacto">Contacto</a>
+        <a href="administracion/" data-i18n="footer.admin">Administración</a>
       </div>
     </footer>
 
+    <script src="js/api.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
+
     <script>
       document.addEventListener('DOMContentLoaded', () => {
+        // --- Selector de idioma nativo ---
+        const selector = document.getElementById("language-selector");
+        if (selector) {
+          selector.value = localStorage.getItem("selectedLang") || "es";
+          selector.addEventListener("change", (e) => {
+            localStorage.setItem("selectedLang", e.target.value);
+            location.reload();
+          });
+        }
+
+        // --- Filtros, buscador y carrusel de index.html ---
         const botones = document.querySelectorAll('.filters button');
         const tarjetas = document.querySelectorAll('.activity');
         const buscador = document.querySelector('.search input');
         const contador = document.getElementById('contador-resultados');
 
         const mensajeSinResultados = document.createElement('p');
+        mensajeSinResultados.setAttribute('data-i18n', 'msg.sinResultados');
         mensajeSinResultados.textContent = 'No se encontraron actividades con esos criterios.';
         mensajeSinResultados.hidden = true;
         mensajeSinResultados.className = 'mensaje-vacio';
@@ -559,7 +582,7 @@
 
         buscador.addEventListener('input', filtrarActividades);
 
-        // Carrusel automático de 4 fotos por tarjeta
+        // Carrusel automático de fotos por tarjeta
         document.querySelectorAll('.activity .image').forEach((contenedor, cardIdx) => {
           const imgPrincipal = contenedor.querySelector('img');
           if (!imgPrincipal) return;
@@ -619,7 +642,5 @@
         });
       });
     </script>
-
-    <script src="js/api.js"></script>
   </body>
 </html>

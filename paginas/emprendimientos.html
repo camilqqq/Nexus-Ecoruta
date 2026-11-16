@@ -20,38 +20,44 @@
           <img src="../assets/imagenes/Logo.png" alt="Logo EcoRuta Temuco" class="logo" />
           <span class="brand-name">EcoRuta Temuco</span>
         </div>
-        <button class="menu-btn" aria-label="Abrir menú" aria-expanded="false" id="menuBtn">☰ Menú</button>
+        <div style="display: flex; gap: 1rem; align-items: center;">
+          <!-- Selector de idioma nativo con banderas -->
+          <select id="language-selector" aria-label="Seleccionar idioma" style="padding: 0.3rem 0.5rem; border-radius: 6px; border: 1px solid #ccc; background: #fff; font-weight: 600; cursor: pointer;">
+            <option value="es">🇪🇸 Español</option>
+            <option value="en">🇬🇧 English</option>
+          </select>
+          <button class="menu-btn" aria-label="Abrir menú" aria-expanded="false" id="menuBtn">☰ Menú</button>
+        </div>
       </div>
 
       <nav id="menuNav" aria-label="Menú principal">
-         <a href="emprendimientos.html" class="active" aria-current="page">Emprendedores</a>
-         <a href="../index.html">Inicio</a>
-         <a href="../index.html#explorar">Explorar</a>
-         <a href="emprendimientos.html">Emprendedores</a>
-         <a href="contacto.html">Contacto</a>
+         <a href="emprendimientos.html" class="active" aria-current="page" data-i18n="nav.emprendedores">Emprendedores</a>
+         <a href="../index.html" data-i18n="nav.inicio">Inicio</a>
+         <a href="../index.html#explorar" data-i18n="nav.emprendimientos">Explorar</a>
+         <a href="contacto.html" data-i18n="nav.contacto">Contacto</a>
       </nav>
     </header>
 
     <main id="contenido">
       <div class="intro">
-        <h1>Emprendimientos sustentables</h1>
-        <p>
+        <h1 data-i18n="emp.titulo">Emprendimientos sustentables</h1>
+        <p data-i18n="emp.subtitulo">
           Conoce a los guías, artesanos y negocios locales de La Araucanía, qué hacen por el
           entorno y cómo contactarlos directamente.
         </p>
-        <p class="nota-ejemplo">
+        <p class="nota-ejemplo" data-i18n="emp.notaEjemplo">
           Los emprendimientos de esta página son ejemplos del prototipo.
         </p>
       </div>
 
       <div class="leyenda">
-        <p><strong>Comercio Justo:</strong> precios y condiciones equitativas para quienes producen.</p>
-        <p><strong>Sello Verde:</strong> prácticas que reducen el impacto en el medio ambiente.</p>
+        <p data-i18n="emp.comercioJusto"><strong>Comercio Justo:</strong> precios y condiciones equitativas para quienes producen.</p>
+        <p data-i18n="emp.selloVerde"><strong>Sello Verde:</strong> prácticas que reducen el impacto en el medio ambiente.</p>
       </div>
 
       <section aria-labelledby="titulo-lista">
         <div class="section-title">
-          <h2 id="titulo-lista">Locales, guías y artesanos de La Araucanía</h2>
+          <h2 id="titulo-lista" data-i18n="emp.seccionLista">Locales, guías y artesanos de La Araucanía</h2>
           <span id="contador">6 emprendimientos</span>
         </div>
 
@@ -60,273 +66,268 @@
             type="text" 
             id="buscadorInput" 
             placeholder="Buscar emprendimiento por nombre o descripción..." 
+            data-i18n-placeholder="emp.buscarPlace"
             aria-label="Buscar emprendimiento por texto"
             style="width: 100%; padding: 0.6rem 1rem; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem;"
           />
         </div>
-                <div class="filtros" role="group" aria-label="Filtrar emprendimientos por rubro">
-          <button type="button" class="filtro active" aria-pressed="true">Todos</button>
-          <button type="button" class="filtro" aria-pressed="false">Guías locales</button>
-          <button type="button" class="filtro" aria-pressed="false">Productos locales</button>
-          <button type="button" class="filtro" aria-pressed="false">Gastronomía típica</button>
-          <button type="button" class="filtro" aria-pressed="false">Hospedaje sustentable</button>
+        <div class="filtros" role="group" aria-label="Filtrar emprendimientos por rubro">
+          <button type="button" class="filtro active" aria-pressed="true" data-i18n="emp.filtroTodos" data-rubro-val="Todos">Todos</button>
+          <button type="button" class="filtro" aria-pressed="false" data-i18n="emp.filtroGuias" data-rubro-val="Guías locales">Guías locales</button>
+          <button type="button" class="filtro" aria-pressed="false" data-i18n="emp.filtroProductos" data-rubro-val="Productos locales">Productos locales</button>
+          <button type="button" class="filtro" aria-pressed="false" data-i18n="emp.filtroGastronomia" data-rubro-val="Gastronomía típica">Gastronomía típica</button>
+          <button type="button" class="filtro" aria-pressed="false" data-i18n="emp.filtroHospedaje" data-rubro-val="Hospedaje sustentable">Hospedaje sustentable</button>
         </div>
         <div class="emprendimientos-grid" id="listaEmprendimientos">
+          <!-- Tarjeta 1 -->
           <article class="emprendimiento" data-rubro="Guías locales">
             <div class="emprendimiento-top">
               <span class="inicial" aria-hidden="true">G</span>
               <div>
-                <h3>Guías Locales Ñielol</h3>
-                <p class="rubro">Guías locales</p>
+                <h3 data-i18n="emp1.nombre">Guías Locales Ñielol</h3>
+                <p class="rubro" data-i18n="emp1.rubro">Guías locales</p>
               </div>
             </div>
-            <p class="ubicacion">Cerro Ñielol, Temuco</p>
-            <p class="descripcion">
+            <p class="ubicacion" data-i18n="emp1.ubicacion">Cerro Ñielol, Temuco</p>
+            <p class="descripcion" data-i18n="emp1.desc">
               Caminatas guiadas por el Monumento Natural Cerro Ñielol, con foco en la flora nativa
               y las aves de la zona.
             </p>
             <div class="impacto">
-              <h4>Impacto ecológico</h4>
+              <h4 data-i18n="emp.impactoEcologico">Impacto ecológico</h4>
               <ul>
-                <li>Grupos de máximo 10 personas</li>
-                <li>Recorridos solo por senderos habilitados</li>
-                <li>Retiro de todos los residuos al terminar</li>
+                <li data-i18n="emp1.imp1">Grupos de máximo 10 personas</li>
+                <li data-i18n="emp1.imp2">Recorridos solo por senderos habilitados</li>
+                <li data-i18n="emp1.imp3">Retiro de todos los residuos al terminar</li>
               </ul>
             </div>
             <ul class="distintivos" aria-label="Distintivos">
-              <li class="distintivo">Sello Verde</li>
+              <li class="distintivo" data-i18n="emp1.dist1">Sello Verde</li>
             </ul>
             <div class="emprendimiento-pie">
               <small>Actualizado: 2026-10-12</small>
-              <a
-                class="btn-contacto"
-                href="mailto:contacto@example.com"
-                aria-label="Contactar a Guías Locales Ñielol por correo"
-                >Contactar</a
-              >
+              <a class="btn-contacto" href="mailto:contacto@example.com" data-i18n="btn.contactar">Contactar</a>
             </div>
           </article>
 
+          <!-- Tarjeta 2 -->
           <article class="emprendimiento" data-rubro="Productos locales">
             <div class="emprendimiento-top">
               <span class="inicial" aria-hidden="true">T</span>
               <div>
-                <h3>Taller Artesanal Raíces</h3>
-                <p class="rubro">Productos locales</p>
+                <h3 data-i18n="emp2.nombre">Taller Artesanal Raíces</h3>
+                <p class="rubro" data-i18n="emp2.rubro">Productos locales</p>
               </div>
             </div>
-            <p class="ubicacion">Padre Las Casas</p>
-            <p class="descripcion">
+            <p class="ubicacion" data-i18n="emp2.ubicacion">Padre Las Casas</p>
+            <p class="descripcion" data-i18n="emp2.desc">
               Tejidos y cestería hechos a mano por artesanas de la comunidad, con técnicas
               tradicionales de la región.
             </p>
             <div class="impacto">
-              <h4>Impacto ecológico</h4>
+              <h4 data-i18n="emp.impactoEcologico">Impacto ecológico</h4>
               <ul>
-                <li>Lana de ovejas criadas en la zona</li>
-                <li>Tintes de origen vegetal</li>
-                <li>Empaque de papel reciclado</li>
+                <li data-i18n="emp2.imp1">Lana de ovejas criadas en la zona</li>
+                <li data-i18n="emp2.imp2">Tintes de origen vegetal</li>
+                <li data-i18n="emp2.imp3">Empaque de papel reciclado</li>
               </ul>
             </div>
             <ul class="distintivos" aria-label="Distintivos">
-              <li class="distintivo">Comercio Justo</li>
-              <li class="distintivo">Sello Verde</li>
+              <li class="distintivo" data-i18n="emp2.dist1">Comercio Justo</li>
+              <li class="distintivo" data-i18n="emp2.dist2">Sello Verde</li>
             </ul>
             <div class="emprendimiento-pie">
               <small>Actualizado: 2026-10-10</small>
-              <a
-                class="btn-contacto"
-                href="mailto:contacto@example.com"
-                aria-label="Contactar a Taller Artesanal Raíces por correo"
-                >Contactar</a
-              >
+              <a class="btn-contacto" href="mailto:contacto@example.com" data-i18n="btn.contactar">Contactar</a>
             </div>
           </article>
 
+          <!-- Tarjeta 3 -->
           <article class="emprendimiento" data-rubro="Gastronomía típica">
             <div class="emprendimiento-top">
               <span class="inicial" aria-hidden="true">F</span>
               <div>
-                <h3>Fogón Araucano</h3>
-                <p class="rubro">Gastronomía típica</p>
+                <h3 data-i18n="emp3.nombre">Fogón Araucano</h3>
+                <p class="rubro" data-i18n="emp3.rubro">Gastronomía típica</p>
               </div>
             </div>
-            <p class="ubicacion">Centro de Temuco</p>
-            <p class="descripcion">
+            <p class="ubicacion" data-i18n="emp3.ubicacion">Centro de Temuco</p>
+            <p class="descripcion" data-i18n="emp3.desc">
               Cocina tradicional de La Araucanía preparada con ingredientes de productores de la
               región.
             </p>
             <div class="impacto">
-              <h4>Impacto ecológico</h4>
+              <h4 data-i18n="emp.impactoEcologico">Impacto ecológico</h4>
               <ul>
-                <li>Compra directa a productores locales</li>
-                <li>Menú según la temporada</li>
-                <li>Separación y reciclaje de residuos</li>
+                <li data-i18n="emp3.imp1">Compra directa a productores locales</li>
+                <li data-i18n="emp3.imp2">Menú según la temporada</li>
+                <li data-i18n="emp3.imp3">Separación y reciclaje de residuos</li>
               </ul>
             </div>
             <ul class="distintivos" aria-label="Distintivos">
-              <li class="distintivo">Comercio Justo</li>
+              <li class="distintivo" data-i18n="emp3.dist1">Comercio Justo</li>
             </ul>
             <div class="emprendimiento-pie">
               <small>Actualizado: 2026-10-09</small>
-              <a
-                class="btn-contacto"
-                href="mailto:contacto@example.com"
-                aria-label="Contactar a Fogón Araucano por correo"
-                >Contactar</a
-              >
+              <a class="btn-contacto" href="mailto:contacto@example.com" data-i18n="btn.contactar">Contactar</a>
             </div>
           </article>
 
+          <!-- Tarjeta 4 -->
           <article class="emprendimiento" data-rubro="Productos locales">
             <div class="emprendimiento-top">
               <span class="inicial" aria-hidden="true">M</span>
               <div>
-                <h3>Miel y Hierbas del Valle</h3>
-                <p class="rubro">Productos locales</p>
+                <h3 data-i18n="emp4.nombre">Miel y Hierbas del Valle</h3>
+                <p class="rubro" data-i18n="emp4.rubro">Productos locales</p>
               </div>
             </div>
-            <p class="ubicacion">Lautaro</p>
-            <p class="descripcion">
+            <p class="ubicacion" data-i18n="emp4.ubicacion">Lautaro</p>
+            <p class="descripcion" data-i18n="emp4.desc">
               Miel, mermeladas y hierbas medicinales producidas por una familia apicultora de la
               zona.
             </p>
             <div class="impacto">
-              <h4>Impacto ecológico</h4>
+              <h4 data-i18n="emp.impactoEcologico">Impacto ecológico</h4>
               <ul>
-                <li>Apicultura sin químicos</li>
-                <li>Frascos de vidrio retornables</li>
-                <li>Cultivo sin pesticidas</li>
+                <li data-i18n="emp4.imp1">Apicultura sin químicos</li>
+                <li data-i18n="emp4.imp2">Frascos de vidrio retornables</li>
+                <li data-i18n="emp4.imp3">Cultivo sin pesticidas</li>
               </ul>
             </div>
             <ul class="distintivos" aria-label="Distintivos">
-              <li class="distintivo">Sello Verde</li>
+              <li class="distintivo" data-i18n="emp4.dist1">Sello Verde</li>
             </ul>
             <div class="emprendimiento-pie">
               <small>Actualizado: 2026-10-08</small>
-              <a
-                class="btn-contacto"
-                href="mailto:contacto@example.com"
-                aria-label="Contactar a Miel y Hierbas del Valle por correo"
-                >Contactar</a
-              >
+              <a class="btn-contacto" href="mailto:contacto@example.com" data-i18n="btn.contactar">Contactar</a>
             </div>
           </article>
 
+          <!-- Tarjeta 5 -->
           <article class="emprendimiento" data-rubro="Hospedaje sustentable">
             <div class="emprendimiento-top">
               <span class="inicial" aria-hidden="true">C</span>
               <div>
-                <h3>Cabañas Bosque Nativo</h3>
-                <p class="rubro">Hospedaje sustentable</p>
+                <h3 data-i18n="emp5.nombre">Cabañas Bosque Nativo</h3>
+                <p class="rubro" data-i18n="emp5.rubro">Hospedaje sustentable</p>
               </div>
             </div>
-            <p class="ubicacion">Camino a Cunco</p>
-            <p class="descripcion">
+            <p class="ubicacion" data-i18n="emp5.ubicacion">Camino a Cunco</p>
+            <p class="descripcion" data-i18n="emp5.desc">
               Cabañas rodeadas de bosque nativo, pensadas para descansar con el menor impacto
               posible en el entorno.
             </p>
             <div class="impacto">
-              <h4>Impacto ecológico</h4>
+              <h4 data-i18n="emp.impactoEcologico">Impacto ecológico</h4>
               <ul>
-                <li>Energía solar para agua caliente</li>
-                <li>Reutilización de aguas grises</li>
-                <li>Construcción con madera local</li>
+                <li data-i18n="emp5.imp1">Energía solar para agua caliente</li>
+                <li data-i18n="emp5.imp2">Reutilización de aguas grises</li>
+                <li data-i18n="emp5.imp3">Construcción con madera local</li>
               </ul>
             </div>
             <ul class="distintivos" aria-label="Distintivos">
-              <li class="distintivo">Sello Verde</li>
+              <li class="distintivo" data-i18n="emp5.dist1">Sello Verde</li>
             </ul>
             <div class="emprendimiento-pie">
               <small>Actualizado: 2026-10-11</small>
-              <a
-                class="btn-contacto"
-                href="mailto:contacto@example.com"
-                aria-label="Contactar a Cabañas Bosque Nativo por correo"
-                >Contactar</a
-              >
+              <a class="btn-contacto" href="mailto:contacto@example.com" data-i18n="btn.contactar">Contactar</a>
             </div>
           </article>
 
+          <!-- Tarjeta 6 -->
           <article class="emprendimiento" data-rubro="Gastronomía típica">
             <div class="emprendimiento-top">
               <span class="inicial" aria-hidden="true">H</span>
               <div>
-                <h3>Horno de Barro Don Sergio</h3>
-                <p class="rubro">Gastronomía típica</p>
+                <h3 data-i18n="emp6.nombre">Horno de Barro Don Sergio</h3>
+                <p class="rubro" data-i18n="emp6.rubro">Gastronomía típica</p>
               </div>
             </div>
-            <p class="ubicacion">Freire</p>
-            <p class="descripcion">
+            <p class="ubicacion" data-i18n="emp6.ubicacion">Freire</p>
+            <p class="descripcion" data-i18n="emp6.desc">
               Pan amasado y empanadas horneadas en horno de barro, con harina de molinos de la
               región.
             </p>
             <div class="impacto">
-              <h4>Impacto ecológico</h4>
+              <h4 data-i18n="emp.impactoEcologico">Impacto ecológico</h4>
               <ul>
-                <li>Horno de leña con madera de poda</li>
-                <li>Harina de molinos cercanos</li>
-                <li>Bolsas de tela en vez de plástico</li>
+                <li data-i18n="emp6.imp1">Horno de leña con madera de poda</li>
+                <li data-i18n="emp6.imp2">Harina de molinos cercanos</li>
+                <li data-i18n="emp6.imp3">Bolsas de tela en vez de plástico</li>
               </ul>
             </div>
             <ul class="distintivos" aria-label="Distintivos">
-              <li class="distintivo">Comercio Justo</li>
+              <li class="distintivo" data-i18n="emp6.dist1">Comercio Justo</li>
             </ul>
             <div class="emprendimiento-pie">
               <small>Actualizado: 2026-10-07</small>
-              <a
-                class="btn-contacto"
-                href="mailto:contacto@example.com"
-                aria-label="Contactar a Horno de Barro Don Sergio por correo"
-                >Contactar</a
-              >
+              <a class="btn-contacto" href="mailto:contacto@example.com" data-i18n="btn.contactar">Contactar</a>
             </div>
           </article>
         </div>
 
         <div id="mensajeVacio" style="display: none; text-align: center; padding: 2rem; color: #666;" role="alert">
-          <p>No se encontraron emprendimientos que coincidan con la búsqueda.</p>
+          <p data-i18n="emp.sinEmprendimientos">No se encontraron emprendimientos que coincidan con la búsqueda.</p>
         </div>
       </section>
 
       <section class="sumate" aria-labelledby="titulo-sumate">
-        <h2 id="titulo-sumate">¿Tienes un emprendimiento sustentable?</h2>
-        <p>Cuéntanos qué haces y aparece en el catálogo para que más turistas te encuentren.</p>
-        <a href="vista3_emprendedor.html">Registrar mi emprendimiento</a>
+        <h2 id="titulo-sumate" data-i18n="emp.sumateTitulo">¿Tienes un emprendimiento sustentable?</h2>
+        <p data-i18n="emp.sumateTexto">Cuéntanos qué haces y aparece en el catálogo para que más turistas te encuentren.</p>
+        <a href="vista3_emprendedor.html" data-i18n="emp.sumateBtn">Registrar mi emprendimiento</a>
       </section>
     </main>
 
     <footer>
       <div class="footer-links">
-        <a href="contacto.html">Contacto</a>
+        <a href="contacto.html" data-i18n="contacto.contacto">Contacto</a>
         <a href="https://github.com/camilqqq/Nexus-Ecoruta/blob/main/documentos/reportes/reporte-bug-bounty.pdf" target="_blank" rel="noopener">Bug Bounty</a>
-        <a href="../index.html">Información local</a>
+        <a href="../index.html" data-i18n="footer.admin">Información local</a>
       </div>
     </footer>
 
-   <script>
+    <!-- Cargar archivo de traducciones -->
+    <script src="../js/translations.js"></script>
+    <script>
+      function actualizarTraduccionesEmpredimientos() {
+        const lang = localStorage.getItem("selectedLang") || "es";
+        const dict = translations[lang] || translations["es"];
+        document.querySelectorAll("[data-i18n]").forEach(el => {
+          const key = el.getAttribute("data-i18n");
+          if (dict[key]) el.innerHTML = dict[key];
+        });
+
+        document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+          const key = el.getAttribute("data-i18n-placeholder");
+          if (dict[key]) el.placeholder = dict[key];
+        });
+
+        aplicarFiltros();
+      }
+
       const menuBtn = document.getElementById('menuBtn');
       const menuNav = document.getElementById('menuNav');
 
-      menuBtn.addEventListener('click', () => {
-        const abierto = menuNav.classList.toggle('menu-visible');
-        menuBtn.setAttribute('aria-expanded', abierto ? 'true' : 'false');
-      });
+      if (menuBtn && menuNav) {
+        menuBtn.addEventListener('click', () => {
+          const abierto = menuNav.classList.toggle('menu-visible');
+          menuBtn.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+        });
+      }
 
-      // Cargar emprendimientos aprobados desde localStorage
       function cargarAprobados() {
         const contenedor = document.getElementById('listaEmprendimientos');
         const aprobados = JSON.parse(localStorage.getItem('emprendimientosAprobados')) || [];
 
         if (contenedor && aprobados.length > 0) {
           aprobados.forEach(emp => {
-            // Evitar renderizar si ya existe en el DOM
             if (document.getElementById(`emp-${emp.nombre.replace(/\s+/g, '-')}`)) return;
 
             const articulo = document.createElement('article');
             articulo.className = 'emprendimiento';
             articulo.id = `emp-${emp.nombre.replace(/\s+/g, '-')}`;
-            articulo.dataset.rubro = emp.rubro || 'Guías locales'; // Rubro por defecto o el ingresado
+            articulo.dataset.rubro = emp.rubro || 'Guías locales';
 
             const inicial = emp.nombre.charAt(0).toUpperCase();
             const fechaHoy = new Date().toISOString().split('T')[0];
@@ -342,7 +343,7 @@
               <p class="ubicacion">${emp.ubicacion || 'La Araucanía'}</p>
               <p class="descripcion">${emp.descripcion || 'Sin descripción disponible.'}</p>
               <div class="impacto">
-                <h4>Impacto ecológico</h4>
+                <h4 data-i18n="emp.impactoEcologico">Impacto ecológico</h4>
                 <ul>
                   <li>Práctica agroecológica / sustentable local</li>
                   <li>Contacto directo con el productor</li>
@@ -353,28 +354,25 @@
               </ul>
               <div class="emprendimiento-pie">
                 <small>Actualizado: ${fechaHoy}</small>
-                <a class="btn-contacto" href="mailto:${emp.datoContacto}" aria-label="Contactar a ${emp.nombre}">Contactar</a>
+                <a class="btn-contacto" href="mailto:${emp.datoContacto}" aria-label="Contactar a ${emp.nombre}" data-i18n="btn.contactar">Contactar</a>
               </div>
             `;
-
             contenedor.appendChild(articulo);
           });
         }
       }
 
-      // Filtro combinado (Rubro + Buscador) y Estado Vacío 
       const botonesFiltro = document.querySelectorAll('.filtro');
       const contador = document.getElementById('contador');
       const buscadorInput = document.getElementById('buscadorInput');
       const mensajeVacio = document.getElementById('mensajeVacio');
 
-      contador.setAttribute('aria-live', 'polite');
-
+      if (contador) contador.setAttribute('aria-live', 'polite');
       let rubroSeleccionado = 'Todos';
 
       function aplicarFiltros() {
         const fichas = document.querySelectorAll('.emprendimiento');
-        const textoBusqueda = buscadorInput.value.toLowerCase().trim();
+        const textoBusqueda = buscadorInput ? buscadorInput.value.toLowerCase().trim() : '';
         let visibles = 0;
 
         fichas.forEach((ficha) => {
@@ -390,19 +388,19 @@
           }
         });
 
-        // Actualizar el contador dinámico
-        contador.textContent =
-          visibles + (visibles === 1 ? ' emprendimiento' : ' emprendimientos');
+        const lang = localStorage.getItem("selectedLang") || "es";
+        const sufijo = (lang === 'en') ? (visibles === 1 ? ' business' : ' businesses') : (visibles === 1 ? ' emprendimiento' : ' emprendimientos');
+        if (contador) contador.textContent = visibles + sufijo;
 
-        // Mostrar u ocultar mensaje vacío
-        if (visibles === 0) {
-          mensajeVacio.style.display = 'block';
-        } else {
-          mensajeVacio.style.display = 'none';
+        if (mensajeVacio) {
+          if (visibles === 0) {
+            mensajeVacio.style.display = 'block';
+          } else {
+            mensajeVacio.style.display = 'none';
+          }
         }
       }
 
-      // Evento para los botones de rubro
       botonesFiltro.forEach((boton) => {
         boton.addEventListener('click', () => {
           botonesFiltro.forEach((b) => {
@@ -412,18 +410,26 @@
           boton.classList.add('active');
           boton.setAttribute('aria-pressed', 'true');
 
-          rubroSeleccionado = boton.textContent.trim();
+          rubroSeleccionado = boton.getAttribute('data-rubro-val');
           aplicarFiltros();
         });
       });
 
-      // Evento para el buscador por texto
-      buscadorInput.addEventListener('input', aplicarFiltros);
+      if (buscadorInput) buscadorInput.addEventListener('input', aplicarFiltros);
 
-      // Cargar los aprobados al iniciar la página
       document.addEventListener('DOMContentLoaded', () => {
+        // --- Selector de idioma nativo ---
+        const selector = document.getElementById("language-selector");
+        if (selector) {
+          selector.value = localStorage.getItem("selectedLang") || "es";
+          selector.addEventListener("change", (e) => {
+            localStorage.setItem("selectedLang", e.target.value);
+            actualizarTraduccionesEmpredimientos();
+          });
+        }
+
         cargarAprobados();
-        aplicarFiltros();
+        actualizarTraduccionesEmpredimientos();
       });
     </script>
   </body>

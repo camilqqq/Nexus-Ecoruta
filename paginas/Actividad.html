@@ -15,37 +15,45 @@
         <img src="../assets/imagenes/Logo.png" alt="Logo Nexus Ecoruta" class="logo" width="120" height="45" />
         <div>
           <h1 class="brand-name">Nexus Ecoruta</h1>
-          <p>Turismo Sustentable en La Araucanía</p>
+          <p data-i18n="brand.subtitle">Turismo Sustentable en La Araucanía</p>
         </div>
       </div>
       <nav>
-        <a href="../index.html">Inicio</a>
-        <a href="emprendimientos.html">Emprendimientos</a>
-        <a href="contacto.html">Contacto</a>
+        <a href="../index.html" data-i18n="nav.inicio">Inicio</a>
+        <a href="emprendimientos.html" data-i18n="nav.emprendimientos">Emprendimientos</a>
+        <a href="contacto.html" data-i18n="nav.contacto">Contacto</a>
+
+        <!-- Selector de idioma -->
+        <select id="language-selector" class="language-select">
+          <option value="es">🇪🇸 ES</option>
+          <option value="en">🇬🇧 EN</option>
+        </select>
       </nav>
     </div>
   </header>
 
   <main style="max-width: 1100px; margin: 2rem auto; padding: 0 1rem;">
     <div style="margin-bottom: 1.5rem;">
-      <a href="../index.html" style="color: #2e7d32; text-decoration: none; font-weight: bold;">← Volver al catálogo</a>
+      <a href="../index.html" style="color: #2e7d32; text-decoration: none; font-weight: bold;" data-i18n="detalle.volver">← Volver al catálogo</a>
     </div>
 
     <!-- Contenedor principal donde se inyecta la ficha -->
     <div id="detalle-actividad">
-      <p style="text-align: center; font-size: 1.2rem; color: #666; padding: 3rem 0;">Cargando información de la actividad...</p>
+      <p style="text-align: center; font-size: 1.2rem; color: #666; padding: 3rem 0;" data-i18n="detalle.cargando">Cargando información de la actividad...</p>
     </div>
   </main>
 
   <footer>
-    <span>EcoRuta Temuco • Información local y accesible</span>
+    <span data-i18n="footer.text">EcoRuta Temuco • Información local y accesible</span>
     <div>
       <a href="../documentos/reportes/reporte-bug-bounty.pdf" target="_blank" rel="noopener">Bug Bounty</a>
-      <a href="contacto.html">Contacto</a>
+      <a href="contacto.html" data-i18n="footer.contacto">Contacto</a>
     </div>
   </footer>
 
-  <!-- Script que carga la lógica de la ficha -->
+  <!-- Scripts -->
+  <script src="../js/translations.js"></script>
+  <script src="../js/i18n.js"></script>
   <script src="../js/actividad.js"></script>
 </body>
 </html>
