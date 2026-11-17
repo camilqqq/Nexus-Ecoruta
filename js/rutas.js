@@ -1,142 +1,176 @@
-// APIs
-const CLIMA_API_URL = "https://api.open-meteo.com/v1/forecast?latitude=-38.7397&longitude=-72.5984&current_weather=true&relativehumidity_2m=true";
+const API_RUTAS_URL = "data/rutas.json";
+let rutasCargadas = [];
+let categoriaSeleccionada = "Todas";
 
-// Datos de respaldo para el clima
-const climaRespaldo = {
-  temperatura: "14°C",
-  humedad: "85%",
-  condicion: "📍 Temuco · Lluvia moderada 🌧️"
-};
+function normalizarTexto(texto) {
+  return texto
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
 
-// Datos de respaldo para el catálogo
-const rutasBackup = [
-  {
-    id: "1",
-    nombre: "Sendero Ñielol",
-    categoria: "Naturaleza",
-    ubicacion: "Parque Ñielol, Temuco",
-    duracion: "1 a 1.5 h",
-    dificultad: "Moderada"
-  },
-  {
-    id: "2",
-    nombre: "Museo Regional de La Araucanía",
-    categoria: "Cultura",
-    ubicacion: "Av. Alemania 0842, Temuco"
-    // Sin duración ni dificultad
-  },
-  {
-    id: "3",
-    nombre: "Feria Pinto",
-    categoria: "Gastronomía",
-    ubicacion: "Plaza Aníbal Pinto / Mercado, Temuco"
-    // Sin duración ni dificultad
-  },
-  {
-    id: "4",
-    nombre: "Parque Isla Cautín",
-    categoria: "Naturaleza",
-    ubicacion: "Av. los Poetas, Temuco",
-    duracion: "1 a 2 h",
-    dificultad: "Fácil"
-  }
-];
-
-// Cargar Clima de Temuco
-async function cargarClimaTemuco() {
-  const contenedor = document.getElementById("contenedor-api");
-  if (!contenedor) return;
-
-  let temp = climaRespaldo.temperatura;
-  let humedad = climaRespaldo.humedad;
-  let condicion = climaRespaldo.condicion;
-
+async function obtenerRutasDesdeAPI() {
   try {
-    const res = await fetch(CLIMA_API_URL);
-    if (res.ok) {
-      const data = await res.json();
-      if (data.current_weather) {
-        temp = `${Math.round(data.current_weather.temperature)}°C`;
-        condicion = `📍 Temuco · ${interpretarCodigoClima(data.current_weather.weathercode)}`;
-      }
+    const respuesta = await fetch(API_RUTAS_URL);
+    if (!respuesta.ok) {
+      throw new Error(`Error HTTP ${respuesta.status}`);
     }
+    return await respuesta.json();
   } catch (error) {
-    console.log("Usando datos de clima de respaldo");
+    console.warn("No se pudo obtener rutas desde la API:", error);
+    return [];
+  }
+}
+
+function filtrarRutas(rutas, categoria, terminoBusqueda) {
+  const termino = normalizarTexto(terminoBusqueda.trim());
+  return rutas.filter((ruta) => {
+    const coincideCat = categoria === "Todas" || ruta.categoria === categoria;
+    const textoCompleto = normalizarTexto(
+      `${ruta.nombre} ${ruta.categoria} ${ruta.ubicacion} ${ruta.detalle} ${ruta.dificultad}`
+    );
+    const coincideTexto = !termino || textoCompleto.includes(termino);
+    return coincideCat && coincideTexto;
+  });
+}
+
+function iniciarCarruselTarjeta(contenedor, cardIdx) {
+  const imgPrincipal = contenedor.querySelector("img");
+  if (!imgPrincipal) return;
+
+  const srcOriginal = imgPrincipal.getAttribute("src") || "";
+  const rutas = [srcOriginal];
+  for (let i = 2; i <= 4; i++) {
+    rutas.push(srcOriginal.replace(/1?(\.[a-zA-Z]+)$/, `${i}$1`));
   }
 
-  contenedor.innerHTML = `
-    <div style="
-      background: linear-gradient(135deg, #f4f9f4 0%, #e8f5e9 100%);
-      border: 1px solid #c8e6c9;
-      border-radius: 16px;
-      padding: 1.5rem 2rem;
-      margin: 2rem 0;
-      box-shadow: 0 4px 20px rgba(46, 125, 50, 0.05);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      font-family: system-ui, -apple-system, sans-serif;
-    ">
-      <div>
-        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem;">
-          <span style="
-            background: #e8f5e9;
-            color: #2e7d32;
-            border: 1px solid #a5d6a7;
-            font-size: 0.72rem;
-            font-weight: 700;
-            padding: 0.2rem 0.7rem;
-            border-radius: 20px;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-          ">API Clima en Vivo</span>
-          <span style="font-size: 0.85rem; color: #666; font-weight: 500;">• Open-Meteo</span>
-        </div>
-        
-        <h3 style="margin: 0.3rem 0 0.1rem 0; font-size: 1.35rem; font-weight: 700; color: #1b5e20;">
-          Estado del Tiempo en Temuco
-        </h3>
-        <p style="margin: 0; font-size: 1rem; color: #2e7d32; font-weight: 500;">
-          ${condicion}
-        </p>
-      </div>
-      
-      <div style="
-        display: flex;
-        gap: 1.5rem;
-        align-items: center;
-        background: #ffffff;
-        padding: 0.85rem 1.4rem;
-        border-radius: 14px;
-        border: 1px solid #e0e0e0;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-      ">
-        <div style="text-align: center;">
-          <span style="font-size: 0.7rem; text-transform: uppercase; color: #777; display: block; letter-spacing: 0.5px; font-weight: 700;">Temperatura</span>
-          <span style="font-size: 1.6rem; font-weight: 800; color: #1b5e20;">🌡️ ${temp}</span>
-        </div>
-        <div style="width: 1px; height: 35px; background: #e0e0e0;"></div>
-        <div style="text-align: center;">
-          <span style="font-size: 0.7rem; text-transform: uppercase; color: #777; display: block; letter-spacing: 0.5px; font-weight: 700;">Humedad</span>
-          <span style="font-size: 1.6rem; font-weight: 800; color: #0288d1;">💧 ${humedad}</span>
-        </div>
-      </div>
-    </div>
-  `;
+  imgPrincipal.classList.add("activa");
+  const imagenes = [imgPrincipal];
+
+  const dotsBox = document.createElement("div");
+  dotsBox.className = "carrusel-dots";
+
+  rutas.forEach((ruta, idx) => {
+    if (idx > 0) {
+      const img = document.createElement("img");
+      img.src = ruta;
+      img.alt = `${imgPrincipal.alt} (${idx + 1})`;
+      img.loading = "lazy";
+      img.onerror = function () {
+        this.onerror = null;
+        this.src = srcOriginal;
+      };
+      contenedor.appendChild(img);
+      imagenes.push(img);
+    }
+
+    const dot = document.createElement("span");
+    if (idx === 0) dot.classList.add("activa");
+    dot.addEventListener("click", (e) => {
+      e.preventDefault();
+      cambiarSlide(idx);
+    });
+    dotsBox.appendChild(dot);
+  });
+
+  contenedor.appendChild(dotsBox);
+  const dots = dotsBox.querySelectorAll("span");
+  let indice = 0;
+
+  function cambiarSlide(nuevoIndice) {
+    imagenes[indice].classList.remove("activa");
+    dots[indice].classList.remove("activa");
+    indice = nuevoIndice;
+    imagenes[indice].classList.add("activa");
+    dots[indice].classList.add("activa");
+  }
+
+  setTimeout(() => {
+    setInterval(() => {
+      cambiarSlide((indice + 1) % imagenes.length);
+    }, 3800);
+  }, cardIdx * 400);
 }
 
-function interpretarCodigoClima(code) {
-  if (code === 0) return "Cielo despejado ☀️";
-  if (code >= 1 && code <= 3) return "Parcialmente nublado ⛅";
-  if (code >= 45 && code <= 48) return "Neblina 🌫️";
-  if (code >= 51 && code <= 67) return "Lluvia moderada 🌧️";
-  if (code >= 71 && code <= 77) return "Nieve ❄️";
-  if (code >= 80 && code <= 82) return "Chubascos 🌦️";
-  return "Tiempo variable 🌤️";
+function renderizarCatalogo(rutas) {
+  const contenedorLista = document.querySelector(".list");
+  const contador = document.getElementById("contador-resultados");
+  if (!contenedorLista) return;
+
+  contenedorLista.innerHTML = "";
+
+  if (contador) {
+    contador.textContent = `${rutas.length} resultado${rutas.length === 1 ? "" : "s"}`;
+  }
+
+  if (rutas.length === 0) {
+    const mensaje = document.createElement("p");
+    mensaje.className = "mensaje-vacio";
+    mensaje.textContent = "No se encontraron actividades con esos criterios.";
+    contenedorLista.appendChild(mensaje);
+    return;
+  }
+
+  rutas.forEach((ruta, index) => {
+    const article = document.createElement("article");
+    article.className = "activity";
+    article.setAttribute("data-categoria", ruta.categoria);
+    article.setAttribute("data-dificultad", ruta.dificultad);
+
+    article.innerHTML = `
+      <div class="image">
+        <img src="${ruta.imagen}" alt="${ruta.alt}" width="400" height="250" ${
+      index === 0 ? 'fetchpriority="high"' : 'loading="lazy"'
+    } />
+      </div>
+      <div class="info">
+        <div class="activity-header">
+          <div>
+            <h3>${ruta.nombre}</h3>
+            <p>${ruta.categoria} • ${ruta.ubicacion}</p>
+          </div>
+          <small>Actualizado: ${ruta.actualizado}</small>
+        </div>
+        <p>${ruta.detalle}</p>
+        <div class="buttons">
+          <a href="paginas/Actividad.html?id=${ruta.id}" class="primary" aria-label="Ver ficha detallada de ${ruta.nombre}">Ver ficha</a>
+          <a href="https://wa.me/56912345678" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp sobre ${ruta.nombre}">Contactar</a>
+        </div>
+      </div>
+    `;
+
+    contenedorLista.appendChild(article);
+    const boxImg = article.querySelector(".image");
+    if (boxImg) iniciarCarruselTarjeta(boxImg, index);
+  });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  cargarClimaTemuco();
+document.addEventListener("DOMContentLoaded", async () => {
+  const botones = document.querySelectorAll(".filters button");
+  const buscador = document.querySelector(".search input");
+
+  const datosAPI = await obtenerRutasDesdeAPI();
+  if (datosAPI.length > 0) {
+    rutasCargadas = datosAPI;
+    renderizarCatalogo(rutasCargadas);
+  }
+
+  const actualizarVista = () => {
+    const texto = buscador ? buscador.value : "";
+    const filtradas = filtrarRutas(rutasCargadas, categoriaSeleccionada, texto);
+    renderizarCatalogo(filtradas);
+  };
+
+  botones.forEach((boton) => {
+    boton.addEventListener("click", () => {
+      botones.forEach((b) => b.classList.remove("active"));
+      boton.classList.add("active");
+      categoriaSeleccionada = boton.getAttribute("data-categoria") || "Todas";
+      actualizarVista();
+    });
+  });
+
+  if (buscador) {
+    buscador.addEventListener("input", actualizarVista);
+  }
 });
