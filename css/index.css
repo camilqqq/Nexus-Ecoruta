@@ -495,3 +495,40 @@ nav a {
   background-color: #f4f6f5;
   color: #1b4332;
 }
+
+/* --- Variables de Temas y Accesibilidad --- */
+:root {
+  --bg-main: #f4f6f5;
+  --surface: #ffffff;
+  --text-dark: #1d2d24;
+  --text-muted: #5e6d64;
+  --primary: #1b4332;
+  --primary-hover: #2d6a4f;
+  --border-color: #e2e8e4;
+}
+
+[data-theme="dark"] {
+  --bg-main: #121814;
+  --surface: #1e2620;
+  --text-dark: #e0e6e2;
+  --text-muted: #a0aab0;
+  --primary: #52b788;
+  --primary-hover: #74c69d;
+  --border-color: #334238;
+}
+
+[data-theme="colorblind"] {
+  --bg-main: #ffffff;
+  --surface: #ffffff;
+  --text-dark: #000000;
+  --text-muted: #222222;
+  --primary: #004b23;
+  --primary-hover: #006432;
+  --border-color: #000000;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-dark);
+  transition: background-color 0.3s, color 0.3s;
+}

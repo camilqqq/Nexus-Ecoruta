@@ -72,7 +72,7 @@
             <p data-i18n="brand.subtitle">Turismo Sustentable en La Araucanía</p>
           </div>
         </div>
-        <nav>
+        <nav style="display: flex; gap: 0.5rem; align-items: center;">
           <a href="index.html" class="active" data-i18n="nav.inicio">Inicio</a>
           <a href="paginas/emprendimientos.html" data-i18n="nav.emprendimientos">Emprendimientos</a>
           <a href="paginas/contacto.html" data-i18n="nav.contacto">Contacto</a>
@@ -81,6 +81,13 @@
           <select id="language-selector" aria-label="Seleccionar idioma" style="padding: 0.3rem 0.5rem; border-radius: 6px; border: 1px solid #ccc; background: #fff; font-weight: 600; cursor: pointer;">
             <option value="es">🇪🇸 Español</option>
             <option value="en">🇬🇧 English</option>
+          </select>
+
+          <!-- Selector de Temas y Accesibilidad -->
+          <select id="theme-selector" aria-label="Seleccionar modo de visualización" style="padding: 0.3rem 0.5rem; border-radius: 6px; border: 1px solid #ccc; background: #fff; font-weight: 600; cursor: pointer;">
+            <option value="normal">☀️ Normal</option>
+            <option value="dark">🌙 Oscuro</option>
+            <option value="colorblind">👁️ Daltónico</option>
           </select>
         </nav>
       </div>
@@ -528,6 +535,28 @@
             localStorage.setItem("selectedLang", e.target.value);
             location.reload();
           });
+        }
+
+        // --- Selector de Tema (Normal, Oscuro, Daltónico) ---
+        const themeSelector = document.getElementById("theme-selector");
+        if (themeSelector) {
+          const savedTheme = localStorage.getItem("selectedTheme") || "normal";
+          themeSelector.value = savedTheme;
+          applyTheme(savedTheme);
+
+          themeSelector.addEventListener("change", (e) => {
+            const selectedTheme = e.target.value;
+            localStorage.setItem("selectedTheme", selectedTheme);
+            applyTheme(selectedTheme);
+          });
+        }
+
+        function applyTheme(theme) {
+          if (theme === "normal") {
+            document.documentElement.removeAttribute("data-theme");
+          } else {
+            document.documentElement.setAttribute("data-theme", theme);
+          }
         }
 
         // --- Filtros, buscador y carrusel de index.html ---

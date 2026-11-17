@@ -266,3 +266,141 @@ textarea:focus-visible {
     flex-direction: column;
   }
 }
+
+/* --- Variables y Modo Oscuro Global --- */
+:root {
+  --bg-main: #f4f6f5;
+  --surface: #ffffff;
+  --text-dark: #1d2d24;
+  --text-muted: #5e6d64;
+  --primary: #1b4332;
+  --primary-hover: #2d6a4f;
+  --border-color: #dbe3de;
+}
+
+[data-theme="dark"] {
+  --bg-main: #121814 !important;
+  --surface: #1e2620 !important;
+  --text-dark: #f0f4f1 !important;
+  --text-muted: #b8c7be !important;
+  --primary: #52b788 !important;
+  --primary-hover: #74c69d !important;
+  --border-color: #334238 !important;
+}
+
+[data-theme="colorblind"] {
+  --bg-main: #ffffff !important;
+  --surface: #ffffff !important;
+  --text-dark: #000000 !important;
+  --text-muted: #222222 !important;
+  --primary: #004b23 !important;
+  --primary-hover: #006432 !important;
+  --border-color: #000000 !important;
+}
+
+/* Aplicación global obligatoria para cualquier vista */
+html, body {
+  background-color: var(--bg-main) !important;
+  color: var(--text-dark) !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="dark"] body {
+  background-color: #121814 !important;
+  color: #f0f4f1 !important;
+}
+
+[data-theme="dark"] header, 
+[data-theme="dark"] footer, 
+[data-theme="dark"] .emprendimiento, 
+[data-theme="dark"] .form-card, 
+[data-theme="dark"] section,
+[data-theme="dark"] main {
+  background-color: var(--surface) !important;
+  color: var(--text-dark) !important;
+  border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] h1, 
+[data-theme="dark"] h2, 
+[data-theme="dark"] h3, 
+[data-theme="dark"] h4, 
+[data-theme="dark"] p, 
+[data-theme="dark"] span, 
+[data-theme="dark"] strong,
+[data-theme="dark"] label {
+  color: var(--text-dark) !important;
+}
+
+[data-theme="dark"] input, 
+[data-theme="dark"] textarea,
+[data-theme="dark"] select {
+  background-color: #121814 !important;
+  color: #f0f4f1 !important;
+  border-color: var(--border-color) !important;
+}
+
+/* --- Estilos para el Selector de Idioma con Banderas --- */
+.custom-lang-wrapper {
+  position: relative;
+  display: inline-block;
+  font-family: inherit;
+  font-size: 0.9rem;
+  user-select: none;
+}
+
+.custom-lang-selected {
+  background-color: var(--surface);
+  border: 1px solid var(--border-color);
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-dark);
+  font-weight: 600;
+  min-width: 125px;
+}
+
+.custom-lang-selected:hover {
+  border-color: var(--primary);
+}
+
+.custom-lang-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 4px);
+  background-color: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 100;
+  min-width: 125px;
+  overflow: hidden;
+}
+
+.custom-lang-dropdown.show {
+  display: block;
+}
+
+.custom-lang-option {
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+.custom-lang-option:hover {
+  background-color: var(--verde-claro);
+  color: var(--primary);
+}
+
+[data-theme="dark"] .custom-lang-option:hover {
+  background-color: #24332b !important;
+  color: #52b788 !important;
+}

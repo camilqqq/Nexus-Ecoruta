@@ -21,19 +21,36 @@
           <span class="brand-name">EcoRuta Temuco</span>
         </div>
         <div style="display: flex; gap: 1rem; align-items: center;">
-          <!-- Selector de idioma nativo con banderas -->
-          <select id="language-selector" aria-label="Seleccionar idioma" style="padding: 0.3rem 0.5rem; border-radius: 6px; border: 1px solid #ccc; background: #fff; font-weight: 600; cursor: pointer;">
-            <option value="es">🇪🇸 Español</option>
-            <option value="en">🇬🇧 English</option>
+          <!-- Selector de idioma con Banderas -->
+          <div class="custom-lang-wrapper" id="langDropdownWrapper">
+            <div class="custom-lang-selected" id="langSelected">
+              <span id="langFlag">🇪🇸</span> <span id="langText">Español</span>
+              <span style="font-size: 0.75rem; margin-left: auto;">▼</span>
+            </div>
+            <div class="custom-lang-dropdown" id="langMenu">
+              <div class="custom-lang-option" data-value="es" data-flag="🇪🇸" data-name="Español">
+                <span>🇪🇸</span> Español
+              </div>
+              <div class="custom-lang-option" data-value="en" data-flag="🇬🇧" data-name="English">
+                <span>🇬🇧</span> English
+              </div>
+            </div>
+          </div>
+
+          <!-- Selector de Tema -->
+          <select id="theme-selector" aria-label="Seleccionar modo de visualización" style="padding: 0.3rem 0.5rem; border-radius: 6px; border: 1px solid var(--border-color); background: var(--surface); color: var(--text-dark); font-weight: 600; cursor: pointer;">
+            <option value="normal">☀️ Normal</option>
+            <option value="dark">🌙 Oscuro</option>
+            <option value="colorblind">👁️ Daltónico</option>
           </select>
           <button class="menu-btn" aria-label="Abrir menú" aria-expanded="false" id="menuBtn">☰ Menú</button>
         </div>
       </div>
 
       <nav id="menuNav" aria-label="Menú principal">
-         <a href="emprendimientos.html" class="active" aria-current="page" data-i18n="nav.emprendedores">Emprendedores</a>
          <a href="../index.html" data-i18n="nav.inicio">Inicio</a>
-         <a href="../index.html#explorar" data-i18n="nav.emprendimientos">Explorar</a>
+         <a href="emprendimientos.html" class="active" aria-current="page" data-i18n="nav.emprendimientos">Emprendimientos</a>
+         <a href="vista3_emprendedor.html" data-i18n="nav.emprendedores">Emprendedores</a>
          <a href="contacto.html" data-i18n="nav.contacto">Contacto</a>
       </nav>
     </header>
@@ -68,7 +85,7 @@
             placeholder="Buscar emprendimiento por nombre o descripción..." 
             data-i18n-placeholder="emp.buscarPlace"
             aria-label="Buscar emprendimiento por texto"
-            style="width: 100%; padding: 0.6rem 1rem; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem;"
+            style="width: 100%; padding: 0.6rem 1rem; border: 1px solid var(--border-color); border-radius: 6px; font-size: 1rem;"
           />
         </div>
         <div class="filtros" role="group" aria-label="Filtrar emprendimientos por rubro">
@@ -172,102 +189,9 @@
               <a class="btn-contacto" href="mailto:contacto@example.com" data-i18n="btn.contactar">Contactar</a>
             </div>
           </article>
-
-          <!-- Tarjeta 4 -->
-          <article class="emprendimiento" data-rubro="Productos locales">
-            <div class="emprendimiento-top">
-              <span class="inicial" aria-hidden="true">M</span>
-              <div>
-                <h3 data-i18n="emp4.nombre">Miel y Hierbas del Valle</h3>
-                <p class="rubro" data-i18n="emp4.rubro">Productos locales</p>
-              </div>
-            </div>
-            <p class="ubicacion" data-i18n="emp4.ubicacion">Lautaro</p>
-            <p class="descripcion" data-i18n="emp4.desc">
-              Miel, mermeladas y hierbas medicinales producidas por una familia apicultora de la
-              zona.
-            </p>
-            <div class="impacto">
-              <h4 data-i18n="emp.impactoEcologico">Impacto ecológico</h4>
-              <ul>
-                <li data-i18n="emp4.imp1">Apicultura sin químicos</li>
-                <li data-i18n="emp4.imp2">Frascos de vidrio retornables</li>
-                <li data-i18n="emp4.imp3">Cultivo sin pesticidas</li>
-              </ul>
-            </div>
-            <ul class="distintivos" aria-label="Distintivos">
-              <li class="distintivo" data-i18n="emp4.dist1">Sello Verde</li>
-            </ul>
-            <div class="emprendimiento-pie">
-              <small>Actualizado: 2026-10-08</small>
-              <a class="btn-contacto" href="mailto:contacto@example.com" data-i18n="btn.contactar">Contactar</a>
-            </div>
-          </article>
-
-          <!-- Tarjeta 5 -->
-          <article class="emprendimiento" data-rubro="Hospedaje sustentable">
-            <div class="emprendimiento-top">
-              <span class="inicial" aria-hidden="true">C</span>
-              <div>
-                <h3 data-i18n="emp5.nombre">Cabañas Bosque Nativo</h3>
-                <p class="rubro" data-i18n="emp5.rubro">Hospedaje sustentable</p>
-              </div>
-            </div>
-            <p class="ubicacion" data-i18n="emp5.ubicacion">Camino a Cunco</p>
-            <p class="descripcion" data-i18n="emp5.desc">
-              Cabañas rodeadas de bosque nativo, pensadas para descansar con el menor impacto
-              posible en el entorno.
-            </p>
-            <div class="impacto">
-              <h4 data-i18n="emp.impactoEcologico">Impacto ecológico</h4>
-              <ul>
-                <li data-i18n="emp5.imp1">Energía solar para agua caliente</li>
-                <li data-i18n="emp5.imp2">Reutilización de aguas grises</li>
-                <li data-i18n="emp5.imp3">Construcción con madera local</li>
-              </ul>
-            </div>
-            <ul class="distintivos" aria-label="Distintivos">
-              <li class="distintivo" data-i18n="emp5.dist1">Sello Verde</li>
-            </ul>
-            <div class="emprendimiento-pie">
-              <small>Actualizado: 2026-10-11</small>
-              <a class="btn-contacto" href="mailto:contacto@example.com" data-i18n="btn.contactar">Contactar</a>
-            </div>
-          </article>
-
-          <!-- Tarjeta 6 -->
-          <article class="emprendimiento" data-rubro="Gastronomía típica">
-            <div class="emprendimiento-top">
-              <span class="inicial" aria-hidden="true">H</span>
-              <div>
-                <h3 data-i18n="emp6.nombre">Horno de Barro Don Sergio</h3>
-                <p class="rubro" data-i18n="emp6.rubro">Gastronomía típica</p>
-              </div>
-            </div>
-            <p class="ubicacion" data-i18n="emp6.ubicacion">Freire</p>
-            <p class="descripcion" data-i18n="emp6.desc">
-              Pan amasado y empanadas horneadas en horno de barro, con harina de molinos de la
-              región.
-            </p>
-            <div class="impacto">
-              <h4 data-i18n="emp.impactoEcologico">Impacto ecológico</h4>
-              <ul>
-                <li data-i18n="emp6.imp1">Horno de leña con madera de poda</li>
-                <li data-i18n="emp6.imp2">Harina de molinos cercanos</li>
-                <li data-i18n="emp6.imp3">Bolsas de tela en vez de plástico</li>
-              </ul>
-            </div>
-            <ul class="distintivos" aria-label="Distintivos">
-              <li class="distintivo" data-i18n="emp6.dist1">Comercio Justo</li>
-            </ul>
-            <div class="emprendimiento-pie">
-              <small>Actualizado: 2026-10-07</small>
-              <a class="btn-contacto" href="mailto:contacto@example.com" data-i18n="btn.contactar">Contactar</a>
-            </div>
-          </article>
         </div>
 
-        <div id="mensajeVacio" style="display: none; text-align: center; padding: 2rem; color: #666;" role="alert">
+        <div id="mensajeVacio" style="display: none; text-align: center; padding: 2rem; color: var(--text-muted);" role="alert">
           <p data-i18n="emp.sinEmprendimientos">No se encontraron emprendimientos que coincidan con la búsqueda.</p>
         </div>
       </section>
@@ -287,7 +211,6 @@
       </div>
     </footer>
 
-    <!-- Cargar archivo de traducciones -->
     <script src="../js/translations.js"></script>
     <script>
       function actualizarTraduccionesEmpredimientos() {
@@ -306,9 +229,75 @@
         aplicarFiltros();
       }
 
+      // Script para el selector de idioma con banderas
+      document.addEventListener('DOMContentLoaded', () => {
+        const wrapper = document.getElementById('langDropdownWrapper');
+        const selected = document.getElementById('langSelected');
+        const menu = document.getElementById('langMenu');
+        const flagSpan = document.getElementById('langFlag');
+        const textSpan = document.getElementById('langText');
+
+        const currentLang = localStorage.getItem("selectedLang") || "es";
+        if (currentLang === 'en') {
+          flagSpan.textContent = '🇬🇧';
+          textSpan.textContent = 'English';
+        } else {
+          flagSpan.textContent = '🇪🇸';
+          textSpan.textContent = 'Español';
+        }
+
+        if (selected && menu) {
+          selected.addEventListener('click', (e) => {
+            e.stopPropagation();
+            menu.classList.toggle('show');
+          });
+
+          document.addEventListener('click', () => {
+            menu.classList.remove('show');
+          });
+
+          menu.querySelectorAll('.custom-lang-option').forEach(option => {
+            option.addEventListener('click', () => {
+              const val = option.getAttribute('data-value');
+              const flag = option.getAttribute('data-flag');
+              const name = option.getAttribute('data-name');
+
+              flagSpan.textContent = flag;
+              textSpan.textContent = name;
+              menu.classList.remove('show');
+
+              localStorage.setItem("selectedLang", val);
+              actualizarTraduccionesEmpredimientos();
+            });
+          });
+        }
+
+        const themeSelector = document.getElementById("theme-selector");
+        if (themeSelector) {
+          const savedTheme = localStorage.getItem("selectedTheme") || "normal";
+          themeSelector.value = savedTheme;
+          applyTheme(savedTheme);
+
+          themeSelector.addEventListener("change", (e) => {
+            const selectedTheme = e.target.value;
+            localStorage.setItem("selectedTheme", selectedTheme);
+            applyTheme(selectedTheme);
+          });
+        }
+
+        function applyTheme(theme) {
+          if (theme === "normal") {
+            document.documentElement.removeAttribute("data-theme");
+          } else {
+            document.documentElement.setAttribute("data-theme", theme);
+          }
+        }
+
+        actualizarTraduccionesEmpredimientos();
+      });
+
       const menuBtn = document.getElementById('menuBtn');
       const menuNav = document.getElementById('menuNav');
-
       if (menuBtn && menuNav) {
         menuBtn.addEventListener('click', () => {
           const abierto = menuNav.classList.toggle('menu-visible');
@@ -316,57 +305,10 @@
         });
       }
 
-      function cargarAprobados() {
-        const contenedor = document.getElementById('listaEmprendimientos');
-        const aprobados = JSON.parse(localStorage.getItem('emprendimientosAprobados')) || [];
-
-        if (contenedor && aprobados.length > 0) {
-          aprobados.forEach(emp => {
-            if (document.getElementById(`emp-${emp.nombre.replace(/\s+/g, '-')}`)) return;
-
-            const articulo = document.createElement('article');
-            articulo.className = 'emprendimiento';
-            articulo.id = `emp-${emp.nombre.replace(/\s+/g, '-')}`;
-            articulo.dataset.rubro = emp.rubro || 'Guías locales';
-
-            const inicial = emp.nombre.charAt(0).toUpperCase();
-            const fechaHoy = new Date().toISOString().split('T')[0];
-
-            articulo.innerHTML = `
-              <div class="emprendimiento-top">
-                <span class="inicial" aria-hidden="true">${inicial}</span>
-                <div>
-                  <h3>${emp.nombre}</h3>
-                  <p class="rubro">${emp.rubro || 'Emprendimiento'}</p>
-                </div>
-              </div>
-              <p class="ubicacion">${emp.ubicacion || 'La Araucanía'}</p>
-              <p class="descripcion">${emp.descripcion || 'Sin descripción disponible.'}</p>
-              <div class="impacto">
-                <h4 data-i18n="emp.impactoEcologico">Impacto ecológico</h4>
-                <ul>
-                  <li>Práctica agroecológica / sustentable local</li>
-                  <li>Contacto directo con el productor</li>
-                </ul>
-              </div>
-              <ul class="distintivos" aria-label="Distintivos">
-                <li class="distintivo">Nuevo Aprobado</li>
-              </ul>
-              <div class="emprendimiento-pie">
-                <small>Actualizado: ${fechaHoy}</small>
-                <a class="btn-contacto" href="mailto:${emp.datoContacto}" aria-label="Contactar a ${emp.nombre}" data-i18n="btn.contactar">Contactar</a>
-              </div>
-            `;
-            contenedor.appendChild(articulo);
-          });
-        }
-      }
-
       const botonesFiltro = document.querySelectorAll('.filtro');
       const contador = document.getElementById('contador');
       const buscadorInput = document.getElementById('buscadorInput');
       const mensajeVacio = document.getElementById('mensajeVacio');
-
       if (contador) contador.setAttribute('aria-live', 'polite');
       let rubroSeleccionado = 'Todos';
 
@@ -391,14 +333,7 @@
         const lang = localStorage.getItem("selectedLang") || "es";
         const sufijo = (lang === 'en') ? (visibles === 1 ? ' business' : ' businesses') : (visibles === 1 ? ' emprendimiento' : ' emprendimientos');
         if (contador) contador.textContent = visibles + sufijo;
-
-        if (mensajeVacio) {
-          if (visibles === 0) {
-            mensajeVacio.style.display = 'block';
-          } else {
-            mensajeVacio.style.display = 'none';
-          }
-        }
+        if (mensajeVacio) mensajeVacio.style.display = visibles === 0 ? 'block' : 'none';
       }
 
       botonesFiltro.forEach((boton) => {
@@ -409,28 +344,12 @@
           });
           boton.classList.add('active');
           boton.setAttribute('aria-pressed', 'true');
-
           rubroSeleccionado = boton.getAttribute('data-rubro-val');
           aplicarFiltros();
         });
       });
 
       if (buscadorInput) buscadorInput.addEventListener('input', aplicarFiltros);
-
-      document.addEventListener('DOMContentLoaded', () => {
-        // --- Selector de idioma nativo ---
-        const selector = document.getElementById("language-selector");
-        if (selector) {
-          selector.value = localStorage.getItem("selectedLang") || "es";
-          selector.addEventListener("change", (e) => {
-            localStorage.setItem("selectedLang", e.target.value);
-            actualizarTraduccionesEmpredimientos();
-          });
-        }
-
-        cargarAprobados();
-        actualizarTraduccionesEmpredimientos();
-      });
     </script>
   </body>
 </html>
