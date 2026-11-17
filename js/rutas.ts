@@ -1,110 +1,193 @@
-// Interface que define la estructura de una Ruta
-export interface Ruta {
-  id?: string | number;
+export interface RutaTuristica {
+  id: number;
   nombre: string;
-  dificultad: "Fácil" | "Media" | "Alta" | string;
-  distancia: string;
-  kilometros?: number;
-  tiempoEstimado: string;
-  descripcion: string;
-  inicio?: string;
-  fin?: string;
-  imagen?: string;
-  mapaRutaImg?: string;
-  ubicacion?: string;
-  desnivel?: string;
+  categoria: "Naturaleza" | "Cultura" | "Gastronomía";
+  ubicacion: string;
+  actualizado: string;
+  detalle: string;
+  dificultad: "Fácil" | "Moderada" | "Alta";
+  imagen: string;
+  alt: string;
 }
 
-// Endpoint de la API
-const RUTAS_API_URL = "https://6724eb29c39fedae05b33100.mockapi.io/api/v1/rutas";
+const API_RUTAS_URL = "data/rutas.json";
+let rutasCargadas: RutaTuristica[] = [];
+let categoriaSeleccionada: string = "Todas";
 
-// Datos de respaldo
-const rutasBase: Ruta[] = [
-  {
-    id: 1,
-    nombre: "Sendero Cerro Ñielol",
-    dificultad: "Fácil",
-    distancia: "2.5 km",
-    tiempoEstimado: "1h 30min",
-    descripcion: "Caminata entre bosque nativo con vista panorámica a Temuco.",
-    ubicacion: "Monumento Natural Cerro Ñielol"
-  },
-  {
-    id: 2,
-    nombre: "Ruta Eco-Etnia Ruka Mapuche",
-    dificultad: "Media",
-    distancia: "5.0 km",
-    tiempoEstimado: "2h 45min",
-    descripcion: "Recorrido cultural y gastronómico por rukas y senderos locales.",
-    ubicacion: "Padre Las Casas"
-  }
-];
+function normalizarTexto(texto: string): string {
+  return texto
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
 
-// FUNCIÓN 1: Obtener rutas desde la API
-export async function cargarRutas(): Promise<Ruta[]> {
+export async function obtenerRutasDesdeAPI(): Promise<RutaTuristica[]> {
   try {
-    const response = await fetch(RUTAS_API_URL);
-    if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
-    const data: Ruta[] = await response.json();
-    return data && data.length > 0 ? data : rutasBase;
+    const respuesta = await fetch(API_RUTAS_URL);
+    if (!respuesta.ok) {
+      throw new Error(`Error HTTP ${respuesta.status}`);
+    }
+    const datos: RutaTuristica[] = await respuesta.json();
+    return datos;
   } catch (error) {
-    console.warn("No se pudo conectar con la API de rutas. Cargando datos de respaldo:", error);
-    return rutasBase;
+    console.warn("No se pudo obtener rutas desde la API, usando DOM existente:", error);
+    return [];
   }
 }
 
-// FUNCIÓN 2: Filtrar lista de rutas según nivel de dificultad
-export function filtrarRutasPorDificultad(listaRutas: Ruta[], dificultad: string): Ruta[] {
-  if (!dificultad || dificultad === "Todas") return listaRutas;
-  return listaRutas.filter(
-    (ruta) => ruta.dificultad.toLowerCase() === dificultad.toLowerCase()
-  );
+export function filtrarRutas(
+  rutas: RutaTuristica[],
+  categoria: string,
+  terminoBusqueda: string
+): RutaTuristica[] {
+  const termino = normalizarTexto(terminoBusqueda.trim());
+  return rutas.filter((ruta) => {
+    const coincideCat = categoria === "Todas" || ruta.categoria === categoria;
+    const textoCompleto = normalizarTexto(
+      `${ruta.nombre} ${ruta.categoria} ${ruta.ubicacion} ${ruta.detalle} ${ruta.dificultad}`
+    );
+    const coincideTexto = !termino || textoCompleto.includes(termino);
+    return coincideCat && coincideTexto;
+  });
 }
 
-// FUNCIÓN 3: Renderizar las rutas en el DOM
-async function renderizarRutas(): Promise<void> {
-  const contenedor = document.getElementById("contenedor-rutas") || document.getElementById("contenedor-api");
-  if (!contenedor) return;
+function iniciarCarruselTarjeta(contenedor: HTMLElement, cardIdx: number): void {
+  const imgPrincipal = contenedor.querySelector("img") as HTMLImageElement | null;
+  if (!imgPrincipal) return;
 
-  const rutas = await cargarRutas();
+  const srcOriginal = imgPrincipal.getAttribute("src") || "";
+  const rutas: string[] = [srcOriginal];
+  for (let i = 2; i <= 4; i++) {
+    rutas.push(srcOriginal.replace(/1?(\.[a-zA-Z]+)$/, `${i}$1`));
+  }
 
-  contenedor.innerHTML = rutas.map((ruta) => `
-    <article class="ruta-card" style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 1.2rem; margin-bottom: 1.5rem; background: #fff;">
-      ${ruta.imagen ? `<img src="${ruta.imagen}" alt="${ruta.nombre}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 6px; margin-bottom: 0.8rem;" />` : ''}
-      <h3 style="color: #2e7d32; margin-top: 0;">${ruta.nombre}</h3>
-      <p style="margin: 0.4rem 0;"><strong>Dificultad:</strong> <span class="badge-dificultad">${ruta.dificultad}</span></p>
-      <p style="margin: 0.4rem 0;"><strong>Distancia:</strong> ${ruta.distancia} | <strong>Duración:</strong> ${ruta.tiempoEstimado}</p>
-      ${ruta.inicio ? `<p style="margin: 0.4rem 0;"><strong>📍 Inicio:</strong> ${ruta.inicio} ➡️ <strong>🏁 Fin:</strong> ${ruta.fin}</p>` : ''}
-      <p style="color: #555; margin-top: 0.5rem;">${ruta.descripcion}</p>
-      ${ruta.ubicacion ? `<small style="color: #2d3748;">📍 ${ruta.ubicacion}</small>` : ''}
-    </article>
-  `).join('');
-}
+  imgPrincipal.classList.add("activa");
+  const imagenes: HTMLImageElement[] = [imgPrincipal];
 
-// Escuchar el evento DOMContentLoaded de manera independiente
-document.addEventListener("DOMContentLoaded", () => {
-  renderizarRutas();
+  const dotsBox = document.createElement("div");
+  dotsBox.className = "carrusel-dots";
 
-  // Filtrado por dificultad
-  const filtroDificultad = document.getElementById("filtro-dificultad") as HTMLSelectElement;
-  if (filtroDificultad) {
-    filtroDificultad.addEventListener("change", async () => {
-      const rutas = await cargarRutas();
-      const rutasFiltradas = filtrarRutasPorDificultad(rutas, filtroDificultad.value);
-      const contenedor = document.getElementById("contenedor-rutas") || document.getElementById("contenedor-api");
-      if (contenedor) {
-        contenedor.innerHTML = rutasFiltradas.map((ruta) => `
-          <article class="ruta-card" style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; background: #fff;">
-            ${ruta.imagen ? `<img src="${ruta.imagen}" alt="${ruta.nombre}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 6px; margin-bottom: 0.8rem;" />` : ''}
-            <h3 style="color: #2e7d32; margin-top: 0;">${ruta.nombre}</h3>
-            <p style="margin: 0.4rem 0;"><strong>Dificultad:</strong> <span class="badge-dificultad">${ruta.dificultad}</span></p>
-            <p style="margin: 0.4rem 0;"><strong>Distancia:</strong> ${ruta.distancia} | <strong>Tiempo:</strong> ${ruta.tiempoEstimado}</p>
-            ${ruta.inicio ? `<p style="margin: 0.4rem 0;"><strong>📍 Inicio:</strong> ${ruta.inicio} ➡️ <strong>🏁 Fin:</strong> ${ruta.fin}</p>` : ''}
-            <p style="color: #555; margin-top: 0.5rem;">${ruta.descripcion}</p>
-            ${ruta.ubicacion ? `<small style="color: #777;">📍 ${ruta.ubicacion}</small>` : ''}
-          </article>
-        `).join('');
-      }
+  rutas.forEach((ruta, idx) => {
+    if (idx > 0) {
+      const img = document.createElement("img");
+      img.src = ruta;
+      img.alt = `${imgPrincipal.alt} (${idx + 1})`;
+      img.loading = "lazy";
+      img.onerror = function () {
+        (this as HTMLImageElement).onerror = null;
+        (this as HTMLImageElement).src = srcOriginal;
+      };
+      contenedor.appendChild(img);
+      imagenes.push(img);
+    }
+
+    const dot = document.createElement("span");
+    if (idx === 0) dot.classList.add("activa");
+    dot.addEventListener("click", (e) => {
+      e.preventDefault();
+      cambiarSlide(idx);
     });
+    dotsBox.appendChild(dot);
+  });
+
+  contenedor.appendChild(dotsBox);
+  const dots = dotsBox.querySelectorAll("span");
+  let indice = 0;
+
+  function cambiarSlide(nuevoIndice: number): void {
+    imagenes[indice].classList.remove("activa");
+    dots[indice].classList.remove("activa");
+    indice = nuevoIndice;
+    imagenes[indice].classList.add("activa");
+    dots[indice].classList.add("activa");
+  }
+
+  setTimeout(() => {
+    setInterval(() => {
+      cambiarSlide((indice + 1) % imagenes.length);
+    }, 3800);
+  }, cardIdx * 400);
+}
+
+export function renderizarCatalogo(rutas: RutaTuristica[]): void {
+  const contenedorLista = document.querySelector(".list") as HTMLElement | null;
+  const contador = document.getElementById("contador-resultados");
+  if (!contenedorLista) return;
+
+  contenedorLista.innerHTML = "";
+
+  if (contador) {
+    contador.textContent = `${rutas.length} resultado${rutas.length === 1 ? "" : "s"}`;
+  }
+
+  if (rutas.length === 0) {
+    const mensaje = document.createElement("p");
+    mensaje.className = "mensaje-vacio";
+    mensaje.textContent = "No se encontraron actividades con esos criterios.";
+    contenedorLista.appendChild(mensaje);
+    return;
+  }
+
+  rutas.forEach((ruta, index) => {
+    const article = document.createElement("article");
+    article.className = "activity";
+    article.setAttribute("data-categoria", ruta.categoria);
+    article.setAttribute("data-dificultad", ruta.dificultad);
+
+    article.innerHTML = `
+      <div class="image">
+        <img src="${ruta.imagen}" alt="${ruta.alt}" width="400" height="250" ${
+      index === 0 ? 'fetchpriority="high"' : 'loading="lazy"'
+    } />
+      </div>
+      <div class="info">
+        <div class="activity-header">
+          <div>
+            <h3>${ruta.nombre}</h3>
+            <p>${ruta.categoria} • ${ruta.ubicacion}</p>
+          </div>
+          <small>Actualizado: ${ruta.actualizado}</small>
+        </div>
+        <p>${ruta.detalle}</p>
+        <div class="buttons">
+          <a href="paginas/Actividad.html?id=${ruta.id}" class="primary" aria-label="Ver ficha detallada de ${ruta.nombre}">Ver ficha</a>
+          <a href="https://wa.me/56912345678" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp sobre ${ruta.nombre}">Contactar</a>
+        </div>
+      </div>
+    `;
+
+    contenedorLista.appendChild(article);
+    const boxImg = article.querySelector(".image") as HTMLElement | null;
+    if (boxImg) iniciarCarruselTarjeta(boxImg, index);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const botones = document.querySelectorAll(".filters button");
+  const buscador = document.querySelector(".search input") as HTMLInputElement | null;
+
+  const datosAPI = await obtenerRutasDesdeAPI();
+  if (datosAPI.length > 0) {
+    rutasCargadas = datosAPI;
+    renderizarCatalogo(rutasCargadas);
+  }
+
+  const actualizarVista = () => {
+    const texto = buscador ? buscador.value : "";
+    const filtradas = filtrarRutas(rutasCargadas, categoriaSeleccionada, texto);
+    renderizarCatalogo(filtradas);
+  };
+
+  botones.forEach((boton) => {
+    boton.addEventListener("click", () => {
+      botones.forEach((b) => b.classList.remove("active"));
+      boton.classList.add("active");
+      categoriaSeleccionada = boton.getAttribute("data-categoria") || "Todas";
+      actualizarVista();
+    });
+  });
+
+  if (buscador) {
+    buscador.addEventListener("input", actualizarVista);
   }
 });
