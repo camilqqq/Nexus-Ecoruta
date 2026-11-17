@@ -1,0 +1,200 @@
+[
+  {
+    "id": 1,
+    "nombre": "Sendero Ñielol",
+    "categoria": "Naturaleza",
+    "ubicacion": "Parque Ñielol, Temuco",
+    "actualizado": "2026-08-10",
+    "detalle": "Duración: 1 hr 30 min · Dificultad: Moderada",
+    "dificultad": "Moderada",
+    "imagen": "assets/imagenes/Sendero/Sendero_Nielol.jpg",
+    "alt": "Sendero Cerro Ñielol"
+  },
+  {
+    "id": 2,
+    "nombre": "Museo Regional de La Araucanía",
+    "categoria": "Cultura",
+    "ubicacion": "Av. Alemania 0842, Temuco",
+    "actualizado": "2026-08-06",
+    "detalle": "Horario: Martes a Domingo · Entrada liberada",
+    "dificultad": "Fácil",
+    "imagen": "assets/imagenes/Museo/museo.jpg",
+    "alt": "Museo Regional de La Araucanía"
+  },
+  {
+    "id": 3,
+    "nombre": "Feria Agroecológica",
+    "categoria": "Gastronomía",
+    "ubicacion": "Feria Pinto, Temuco",
+    "actualizado": "2026-08-12",
+    "detalle": "Productos locales y orgánicos • Acceso libre",
+    "dificultad": "Fácil",
+    "imagen": "assets/imagenes/Feria/feria.jpg",
+    "alt": "Feria Agroecológica"
+  },
+  {
+    "id": 4,
+    "nombre": "Parque Isla Cautín",
+    "categoria": "Naturaleza",
+    "ubicacion": "Av. los Poetas, Temuco",
+    "actualizado": "2026-08-15",
+    "detalle": "Duración: 1-2 hrs · Dificultad: Fácil",
+    "dificultad": "Fácil",
+    "imagen": "assets/imagenes/Isla_Cautin/Isla1.jpg",
+    "alt": "Vista del Parque Isla Cautín"
+  },
+  {
+    "id": 5,
+    "nombre": "Parque Nacional Conguillío",
+    "categoria": "Naturaleza",
+    "ubicacion": "Melipeuco / Curacautín",
+    "actualizado": "2026-11-11",
+    "detalle": "Duración: Día completo · Dificultad: Moderada",
+    "dificultad": "Moderada",
+    "imagen": "assets/imagenes/Conguillio/Conguillio1.jpg",
+    "alt": "Parque Nacional Conguillío"
+  },
+  {
+    "id": 6,
+    "nombre": "Parque Nacional Villarrica",
+    "categoria": "Naturaleza",
+    "ubicacion": "Pucón / Villarrica, La Araucanía",
+    "actualizado": "2026-11-14",
+    "detalle": "Duración: 4-5 hrs · Dificultad: Moderada",
+    "dificultad": "Moderada",
+    "imagen": "assets/imagenes/Villarrica/villarrica.jpg",
+    "alt": "Volcán y Parque Nacional Villarrica"
+  },
+  {
+    "id": 7,
+    "nombre": "Parque Nacional Huerquehue",
+    "categoria": "Naturaleza",
+    "ubicacion": "Paillaco, Pucón",
+    "actualizado": "2026-11-14",
+    "detalle": "Duración: 5-6 hrs · Dificultad: Moderada",
+    "dificultad": "Moderada",
+    "imagen": "assets/imagenes/Huerquehue/huerquehue.jpg",
+    "alt": "Sendero Los Lagos en Parque Nacional Huerquehue"
+  },
+  {
+    "id": 8,
+    "nombre": "Reserva Nacional Malalcahuello",
+    "categoria": "Naturaleza",
+    "ubicacion": "Curacautín, La Araucanía",
+    "actualizado": "2026-11-14",
+    "detalle": "Duración: 3-4 hrs · Dificultad: Moderada",
+    "dificultad": "Moderada",
+    "imagen": "assets/imagenes/Malalcahuello/malalcahuello.jpg",
+    "alt": "Araucarias en Reserva Nacional Malalcahuello"
+  },
+  {
+    "id": 9,
+    "nombre": "Parque Nacional Nahuelbuta",
+    "categoria": "Naturaleza",
+    "ubicacion": "Angol, Malleco",
+    "actualizado": "2026-11-14",
+    "detalle": "Duración: 2-3 hrs · Dificultad: Fácil",
+    "dificultad": "Fácil",
+    "imagen": "assets/imagenes/Nahuelbuta/nahuelbuta.jpg",
+    "alt": "Mirador Piedra del Águila en Parque Nacional Nahuelbuta"
+  },
+  {
+    "id": 10,
+    "nombre": "Parque Nacional Tolhuaca",
+    "categoria": "Naturaleza",
+    "ubicacion": "Victoria / Curacautín",
+    "actualizado": "2026-11-14",
+    "detalle": "Duración: 3 hrs · Dificultad: Fácil",
+    "dificultad": "Fácil",
+    "imagen": "assets/imagenes/Tolhuaca/tolhuaca.jpg",
+    "alt": "Laguna Malleco en Parque Nacional Tolhuaca"
+  },
+  {
+    "id": 11,
+    "nombre": "Valle de la Luna",
+    "categoria": "Naturaleza",
+    "ubicacion": "San Pedro de Atacama, Antofagasta",
+    "actualizado": "2026-11-14",
+    "detalle": "Duración: 3-4 hrs · Dificultad: Fácil",
+    "dificultad": "Fácil",
+    "imagen": "assets/imagenes/Valle_Luna/valle_luna.jpg",
+    "alt": "Formaciones rocosas en Valle de la Luna"
+  },
+  {
+    "id": 12,
+    "nombre": "Parque Nacional La Campana",
+    "categoria": "Naturaleza",
+    "ubicacion": "Olmué, Valparaíso",
+    "actualizado": "2026-11-14",
+    "detalle": "Duración: 4-5 hrs · Dificultad: Moderada",
+    "dificultad": "Moderada",
+    "imagen": "assets/imagenes/La_Campana/campana.jpg",
+    "alt": "Palmas chilenas en Parque Nacional La Campana"
+  },
+  {
+    "id": 13,
+    "nombre": "Parque Nacional Radal Siete Tazas",
+    "categoria": "Naturaleza",
+    "ubicacion": "Molina, Maule",
+    "actualizado": "2026-11-14",
+    "detalle": "Duración: 2-3 hrs · Dificultad: Fácil",
+    "dificultad": "Fácil",
+    "imagen": "assets/imagenes/Siete_Tazas/siete_tazas.jpg",
+    "alt": "Cascadas en Reserva Nacional Radal Siete Tazas"
+  },
+  {
+    "id": 14,
+    "nombre": "Saltos del Petrohué",
+    "categoria": "Naturaleza",
+    "ubicacion": "Puerto Varas, Los Lagos",
+    "actualizado": "2026-11-14",
+    "detalle": "Duración: 1 hr 30 min · Dificultad: Fácil",
+    "dificultad": "Fácil",
+    "imagen": "assets/imagenes/Petrohue/petrohue.jpg",
+    "alt": "Saltos del Petrohué y Volcán Osorno"
+  },
+  {
+    "id": 15,
+    "nombre": "Parque Nacional Chiloé",
+    "categoria": "Naturaleza",
+    "ubicacion": "Cucao, Chonchi, Los Lagos",
+    "actualizado": "2026-11-14",
+    "detalle": "Duración: 2 hrs · Dificultad: Fácil",
+    "dificultad": "Fácil",
+    "imagen": "assets/imagenes/Chiloe/chiloe.jpg",
+    "alt": "Sendero El Tepual en Parque Nacional Chiloé"
+  },
+  {
+    "id": 16,
+    "nombre": "Parque Nacional Queulat",
+    "categoria": "Naturaleza",
+    "ubicacion": "Puyuhuapi, Aysén",
+    "actualizado": "2026-11-14",
+    "detalle": "Duración: 3-4 hrs · Dificultad: Moderada",
+    "dificultad": "Moderada",
+    "imagen": "assets/imagenes/Queulat/queulat.jpg",
+    "alt": "Ventisquero Colgante en Parque Nacional Queulat"
+  },
+  {
+    "id": 17,
+    "nombre": "Parque Nacional Torres del Paine",
+    "categoria": "Naturaleza",
+    "ubicacion": "Torres del Paine, Magallanes",
+    "actualizado": "2026-11-14",
+    "detalle": "Duración: Día completo · Dificultad: Alta",
+    "dificultad": "Alta",
+    "imagen": "assets/imagenes/Torres_Paine/torres_paine.jpg",
+    "alt": "Mirador Base Las Torres en Torres del Paine"
+  },
+  {
+    "id": 18,
+    "nombre": "Castillo de Niebla (Valdivia)",
+    "categoria": "Cultura",
+    "ubicacion": "Camino a Niebla s/n, Valdivia, Los Ríos",
+    "actualizado": "2026-11-14",
+    "detalle": "Duración: 1 hr 30 min · Dificultad: Fácil",
+    "dificultad": "Fácil",
+    "imagen": "assets/imagenes/Valdivia/Valdivia.jpg",
+    "alt": "Castillo de Niebla en la bahía de Corral, Valdivia"
+  }
+]
