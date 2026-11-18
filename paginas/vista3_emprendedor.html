@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -135,6 +135,130 @@
         <button type="submit" class="btn-submit" data-i18n="emprendedor.btnEnviar">Enviar información</button>
         <p id="mensajeEstado" role="status" style="margin-top:12px;font-weight:600;color:var(--primary);"></p>
       </form>
+      <section class="form-card" style="margin-top: 2.5rem;" id="portalEmprendimientos">
+        <h2 style="margin-top: 0; color: var(--primary);">Acceso Emprendimientos: Publicar Rutas y Actividades</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.2rem;">Inicia sesión con tu cuenta de emprendimiento o regístrate para publicar y administrar tus rutas o actividades en EcoRuta Temuco.</p>
+
+        <div id="authEmprendimientoBox" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem;">
+          <form id="formLoginEmp" style="padding: 1rem; border-radius: 10px; border: 1px solid var(--border-color, #cbd5e1); background: var(--surface, #fff);">
+            <h3 style="margin-top: 0; color: var(--primary);">Iniciar Sesión</h3>
+            <div class="form-group">
+              <label for="loginCorreo">Correo electrónico</label>
+              <input type="email" id="loginCorreo" required placeholder="contacto@emprendimiento.cl" />
+            </div>
+            <div class="form-group">
+              <label for="loginPass">Contraseña</label>
+              <input type="password" id="loginPass" required placeholder="••••••••" />
+            </div>
+            <button type="submit" class="btn-submit" style="width: 100%;">Ingresar</button>
+          </form>
+
+          <form id="formRegistroEmp" style="padding: 1rem; border-radius: 10px; border: 1px solid var(--border-color, #cbd5e1); background: var(--surface, #fff);">
+            <h3 style="margin-top: 0; color: var(--primary);">Crear Cuenta de Emprendimiento</h3>
+            <div class="form-group">
+              <label for="regNombre">Nombre del Emprendimiento</label>
+              <input type="text" id="regNombre" required placeholder="Ej: Senderos Araucanía" />
+            </div>
+            <div class="form-group">
+              <label for="regCorreo">Correo electrónico</label>
+              <input type="email" id="regCorreo" required placeholder="contacto@emprendimiento.cl" />
+            </div>
+            <div class="form-group">
+              <label for="regWhatsapp">WhatsApp (código país + número)</label>
+              <input type="text" id="regWhatsapp" required placeholder="56912345678" />
+            </div>
+            <div class="form-group">
+              <label for="regPass">Contraseña</label>
+              <input type="password" id="regPass" required minlength="6" placeholder="Mínimo 6 caracteres" />
+            </div>
+            <button type="submit" class="btn-submit" style="width: 100%;">Registrar Emprendimiento</button>
+          </form>
+        </div>
+
+        <div id="panelEmprendimientoActivo" style="display: none; margin-top: 1rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem; padding: 0.85rem 1rem; border-radius: 8px; border: 1px solid var(--primary, #2e7d32); margin-bottom: 1.25rem;">
+            <span>Sesión iniciada como: <strong id="nombreEmpActivo">Emprendimiento</strong></span>
+            <button type="button" id="btnCerrarSesionEmp" style="background: #c62828; color: #fff; border: none; padding: 0.45rem 0.9rem; border-radius: 6px; cursor: pointer; font-weight: 600;">Cerrar sesión</button>
+          </div>
+
+          <form id="formCrearRuta" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.9rem;">
+            <h3 style="grid-column: 1 / -1; margin: 0; color: var(--primary);">Publicar Nueva Ruta o Actividad</h3>
+
+            <div class="form-group" style="margin:0;">
+              <label for="rutaTipo">Tipo</label>
+              <select id="rutaTipo" style="width:100%; padding:0.6rem; border-radius:8px; border:1px solid var(--border-color, #cbd5e1);">
+                <option value="ruta">Ruta</option>
+                <option value="actividad">Actividad</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="margin:0;">
+              <label for="rutaNombre">Nombre</label>
+              <input type="text" id="rutaNombre" required placeholder="Ej: Sendero Mirador Ñielol" />
+            </div>
+
+            <div class="form-group" style="margin:0;">
+              <label for="rutaCategoria">Categoría</label>
+              <select id="rutaCategoria" style="width:100%; padding:0.6rem; border-radius:8px; border:1px solid var(--border-color, #cbd5e1);">
+                <option value="Naturaleza">Naturaleza</option>
+                <option value="Cultura">Cultura</option>
+                <option value="Gastronomía">Gastronomía</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="margin:0;">
+              <label for="rutaDificultad">Dificultad</label>
+              <select id="rutaDificultad" style="width:100%; padding:0.6rem; border-radius:8px; border:1px solid var(--border-color, #cbd5e1);">
+                <option value="Fácil">Fácil</option>
+                <option value="Moderada">Moderada</option>
+                <option value="Alta">Alta</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="margin:0;">
+              <label for="rutaUbicacion">Ubicación</label>
+              <input type="text" id="rutaUbicacion" required placeholder="Ej: Temuco, La Araucanía" />
+            </div>
+
+            <div class="form-group" style="margin:0;">
+              <label for="rutaImagen">Imagen (ruta o URL)</label>
+              <input type="text" id="rutaImagen" value="assets/imagenes/Sendero/Sendero_Nielol.jpg" required />
+            </div>
+
+            <div class="form-group" style="margin:0;">
+              <label for="rutaLat">Latitud GPS (opcional)</label>
+              <input type="number" step="any" id="rutaLat" placeholder="-38.7359" />
+            </div>
+
+            <div class="form-group" style="margin:0;">
+              <label for="rutaLng">Longitud GPS (opcional)</label>
+              <input type="number" step="any" id="rutaLng" placeholder="-72.5904" />
+            </div>
+
+            <div class="form-group" style="grid-column: 1 / -1; margin:0;">
+              <label for="rutaDetalle">Descripción detallada</label>
+              <textarea id="rutaDetalle" rows="2" required placeholder="Describe la experiencia sustentable, qué incluye y recomendaciones..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit" style="grid-column: 1 / -1;">Publicar en EcoRuta</button>
+          </form>
+
+          <h3 style="margin-top: 1.5rem; color: var(--primary);">Mis Rutas y Actividades Publicadas</h3>
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; margin-top: 0.5rem;">
+              <thead>
+                <tr style="border-bottom: 2px solid var(--border-color, #cbd5e1); text-align: left;">
+                  <th style="padding: 0.6rem;">Tipo</th>
+                  <th style="padding: 0.6rem;">Nombre</th>
+                  <th style="padding: 0.6rem;">Categoría</th>
+                  <th style="padding: 0.6rem;">Acción</th>
+                </tr>
+              </thead>
+              <tbody id="tablaMisRutas"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer>
@@ -265,6 +389,290 @@
           formulario.reset();
         });
       }
+      const API_BASE = "http://localhost:8000/api";
+      const TOKEN_KEY = "ecoruta_jwt_token";
+      const EMP_NOMBRE_KEY = "ecoruta_emp_nombre";
+      const EMP_ID_KEY = "ecoruta_emp_id";
+
+      function actualizarSesionEmp() {
+        const token = sessionStorage.getItem(TOKEN_KEY);
+        const nombre = sessionStorage.getItem(EMP_NOMBRE_KEY);
+        const authBox = document.getElementById("authEmprendimientoBox");
+        const panelActivo = document.getElementById("panelEmprendimientoActivo");
+        const lblNombre = document.getElementById("nombreEmpActivo");
+        if (!authBox || !panelActivo) return;
+
+        if (token && nombre) {
+          authBox.style.display = "none";
+          panelActivo.style.display = "block";
+          if (lblNombre) lblNombre.textContent = nombre;
+          cargarMisRutas();
+        } else {
+          authBox.style.display = "grid";
+          panelActivo.style.display = "none";
+        }
+      }
+
+      async function cargarMisRutas() {
+        const tbody = document.getElementById("tablaMisRutas");
+        const empId = Number(sessionStorage.getItem(EMP_ID_KEY) || "0");
+        if (!tbody || !empId) return;
+
+        try {
+          const resp = await fetch(`${API_BASE}/rutas`);
+          if (!resp.ok) return;
+          const rutas = await resp.json();
+          const propias = rutas.filter(r => r.emprendimiento_id === empId);
+
+          if (propias.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="4" style="padding:0.8rem; color:var(--text-muted);">Aún no has publicado rutas o actividades.</td></tr>`;
+            return;
+          }
+
+          tbody.innerHTML = propias.map(r => `
+            <tr style="border-bottom: 1px solid var(--border-color, #e2e8f0);">
+              <td style="padding:0.6rem; text-transform:uppercase; font-weight:700;">${r.tipo}</td>
+              <td style="padding:0.6rem;"><a href="Actividad.html?id=${r.id}" style="color:var(--primary); font-weight:600;">${r.nombre}</a></td>
+              <td style="padding:0.6rem;">${r.categoria} (${r.dificultad})</td>
+              <td style="padding:0.6rem;">
+                <button type="button" onclick="eliminarMiRuta(${r.id})" style="background:#c62828; color:#fff; border:none; padding:0.35rem 0.7rem; border-radius:6px; cursor:pointer;">Eliminar</button>
+              </td>
+            </tr>
+          `).join("");
+        } catch {
+          tbody.innerHTML = `<tr><td colspan="4" style="padding:0.8rem; color:#c62828;">Conecta el backend en localhost:8000 para gestionar tus publicaciones.</td></tr>`;
+        }
+      }
+
+      window.eliminarMiRuta = async function(id) {
+        const token = sessionStorage.getItem(TOKEN_KEY);
+        if (!token || !confirm("¿Eliminar esta publicación?")) return;
+        const resp = await fetch(`${API_BASE}/rutas/${id}`, {
+          method: "DELETE",
+          headers: { "Authorization": `Bearer ${token}` }
+        });
+        if (resp.ok) cargarMisRutas();
+      };
+
+      document.getElementById("formLoginEmp")?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const resp = await fetch(`${API_BASE}/auth/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            correo: document.getElementById("loginCorreo").value.trim(),
+            password: document.getElementById("loginPass").value
+          })
+        });
+        const data = await resp.json();
+        if (!resp.ok) return alert(data.detail || "Correo o contraseña incorrectos");
+        sessionStorage.setItem(TOKEN_KEY, data.token);
+        sessionStorage.setItem(EMP_NOMBRE_KEY, data.nombre);
+        sessionStorage.setItem(EMP_ID_KEY, String(data.id));
+        actualizarSesionEmp();
+      });
+
+      document.getElementById("formRegistroEmp")?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const resp = await fetch(`${API_BASE}/auth/registro`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            nombre: document.getElementById("regNombre").value.trim(),
+            correo: document.getElementById("regCorreo").value.trim(),
+            whatsapp: document.getElementById("regWhatsapp").value.trim(),
+            password: document.getElementById("regPass").value
+          })
+        });
+        const data = await resp.json();
+        if (!resp.ok) return alert(data.detail || "Error al registrar");
+        sessionStorage.setItem(TOKEN_KEY, data.token);
+        sessionStorage.setItem(EMP_NOMBRE_KEY, data.nombre);
+        sessionStorage.setItem(EMP_ID_KEY, String(data.id));
+        actualizarSesionEmp();
+      });
+
+      document.getElementById("btnCerrarSesionEmp")?.addEventListener("click", () => {
+        sessionStorage.removeItem(TOKEN_KEY);
+        sessionStorage.removeItem(EMP_NOMBRE_KEY);
+        sessionStorage.removeItem(EMP_ID_KEY);
+        actualizarSesionEmp();
+      });
+
+      document.getElementById("formCrearRuta")?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const token = sessionStorage.getItem(TOKEN_KEY);
+        if (!token) return alert("Debes iniciar sesión primero.");
+        const latVal = document.getElementById("rutaLat").value;
+        const lngVal = document.getElementById("rutaLng").value;
+
+        const resp = await fetch(`${API_BASE}/rutas`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+          body: JSON.stringify({
+            tipo: document.getElementById("rutaTipo").value,
+            nombre: document.getElementById("rutaNombre").value.trim(),
+            categoria: document.getElementById("rutaCategoria").value,
+            dificultad: document.getElementById("rutaDificultad").value,
+            ubicacion: document.getElementById("rutaUbicacion").value.trim(),
+            imagen: document.getElementById("rutaImagen").value.trim(),
+            alt: document.getElementById("rutaNombre").value.trim(),
+            detalle: document.getElementById("rutaDetalle").value.trim(),
+            latitud: latVal ? parseFloat(latVal) : null,
+            longitud: lngVal ? parseFloat(lngVal) : null
+          })
+        });
+        const data = await resp.json();
+        if (!resp.ok) return alert(data.detail || "Error al publicar");
+        alert("¡Ruta/actividad publicada exitosamente!");
+        e.target.reset();
+        document.getElementById("rutaImagen").value = "assets/imagenes/Sendero/Sendero_Nielol.jpg";
+        cargarMisRutas();
+      });
+
+      document.addEventListener("DOMContentLoaded", actualizarSesionEmp);
+      const API_BASE = "http://localhost:8000/api";
+      const TOKEN_KEY = "ecoruta_jwt_token";
+      const EMP_NOMBRE_KEY = "ecoruta_emp_nombre";
+      const EMP_ID_KEY = "ecoruta_emp_id";
+
+      function actualizarSesionEmp() {
+        const token = sessionStorage.getItem(TOKEN_KEY);
+        const nombre = sessionStorage.getItem(EMP_NOMBRE_KEY);
+        const authBox = document.getElementById("authEmprendimientoBox");
+        const panelActivo = document.getElementById("panelEmprendimientoActivo");
+        const lblNombre = document.getElementById("nombreEmpActivo");
+        if (!authBox || !panelActivo) return;
+
+        if (token && nombre) {
+          authBox.style.display = "none";
+          panelActivo.style.display = "block";
+          if (lblNombre) lblNombre.textContent = nombre;
+          cargarMisRutas();
+        } else {
+          authBox.style.display = "grid";
+          panelActivo.style.display = "none";
+        }
+      }
+
+      async function cargarMisRutas() {
+        const tbody = document.getElementById("tablaMisRutas");
+        const empId = Number(sessionStorage.getItem(EMP_ID_KEY) || "0");
+        if (!tbody || !empId) return;
+
+        try {
+          const resp = await fetch(`${API_BASE}/rutas`);
+          if (!resp.ok) return;
+          const rutas = await resp.json();
+          const propias = rutas.filter(r => r.emprendimiento_id === empId);
+
+          if (propias.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="4" style="padding:0.8rem; color:var(--text-muted);">Aún no has publicado rutas o actividades.</td></tr>`;
+            return;
+          }
+
+          tbody.innerHTML = propias.map(r => `
+            <tr style="border-bottom: 1px solid var(--border-color, #e2e8f0);">
+              <td style="padding:0.6rem; text-transform:uppercase; font-weight:700;">${r.tipo}</td>
+              <td style="padding:0.6rem;"><a href="Actividad.html?id=${r.id}" style="color:var(--primary); font-weight:600;">${r.nombre}</a></td>
+              <td style="padding:0.6rem;">${r.categoria} (${r.dificultad})</td>
+              <td style="padding:0.6rem;">
+                <button type="button" onclick="eliminarMiRuta(${r.id})" style="background:#c62828; color:#fff; border:none; padding:0.35rem 0.7rem; border-radius:6px; cursor:pointer;">Eliminar</button>
+              </td>
+            </tr>
+          `).join("");
+        } catch {
+          tbody.innerHTML = `<tr><td colspan="4" style="padding:0.8rem; color:#c62828;">Conecta el backend en localhost:8000 para gestionar tus publicaciones.</td></tr>`;
+        }
+      }
+
+      window.eliminarMiRuta = async function(id) {
+        const token = sessionStorage.getItem(TOKEN_KEY);
+        if (!token || !confirm("¿Eliminar esta publicación?")) return;
+        const resp = await fetch(`${API_BASE}/rutas/${id}`, {
+          method: "DELETE",
+          headers: { "Authorization": `Bearer ${token}` }
+        });
+        if (resp.ok) cargarMisRutas();
+      };
+
+      document.getElementById("formLoginEmp")?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const resp = await fetch(`${API_BASE}/auth/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            correo: document.getElementById("loginCorreo").value.trim(),
+            password: document.getElementById("loginPass").value
+          })
+        });
+        const data = await resp.json();
+        if (!resp.ok) return alert(data.detail || "Correo o contraseña incorrectos");
+        sessionStorage.setItem(TOKEN_KEY, data.token);
+        sessionStorage.setItem(EMP_NOMBRE_KEY, data.nombre);
+        sessionStorage.setItem(EMP_ID_KEY, String(data.id));
+        actualizarSesionEmp();
+      });
+
+      document.getElementById("formRegistroEmp")?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const resp = await fetch(`${API_BASE}/auth/registro`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            nombre: document.getElementById("regNombre").value.trim(),
+            correo: document.getElementById("regCorreo").value.trim(),
+            whatsapp: document.getElementById("regWhatsapp").value.trim(),
+            password: document.getElementById("regPass").value
+          })
+        });
+        const data = await resp.json();
+        if (!resp.ok) return alert(data.detail || "Error al registrar");
+        sessionStorage.setItem(TOKEN_KEY, data.token);
+        sessionStorage.setItem(EMP_NOMBRE_KEY, data.nombre);
+        sessionStorage.setItem(EMP_ID_KEY, String(data.id));
+        actualizarSesionEmp();
+      });
+
+      document.getElementById("btnCerrarSesionEmp")?.addEventListener("click", () => {
+        sessionStorage.removeItem(TOKEN_KEY);
+        sessionStorage.removeItem(EMP_NOMBRE_KEY);
+        sessionStorage.removeItem(EMP_ID_KEY);
+        actualizarSesionEmp();
+      });
+
+      document.getElementById("formCrearRuta")?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const token = sessionStorage.getItem(TOKEN_KEY);
+        if (!token) return alert("Debes iniciar sesión primero.");
+        const latVal = document.getElementById("rutaLat").value;
+        const lngVal = document.getElementById("rutaLng").value;
+
+        const resp = await fetch(`${API_BASE}/rutas`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+          body: JSON.stringify({
+            tipo: document.getElementById("rutaTipo").value,
+            nombre: document.getElementById("rutaNombre").value.trim(),
+            categoria: document.getElementById("rutaCategoria").value,
+            dificultad: document.getElementById("rutaDificultad").value,
+            ubicacion: document.getElementById("rutaUbicacion").value.trim(),
+            imagen: document.getElementById("rutaImagen").value.trim(),
+            alt: document.getElementById("rutaNombre").value.trim(),
+            detalle: document.getElementById("rutaDetalle").value.trim(),
+            latitud: latVal ? parseFloat(latVal) : null,
+            longitud: lngVal ? parseFloat(lngVal) : null
+          })
+        });
+        const data = await resp.json();
+        if (!resp.ok) return alert(data.detail || "Error al publicar");
+        alert("¡Ruta/actividad publicada exitosamente!");
+        e.target.reset();
+        document.getElementById("rutaImagen").value = "assets/imagenes/Sendero/Sendero_Nielol.jpg";
+        cargarMisRutas();
+      });
+
+      document.addEventListener("DOMContentLoaded", actualizarSesionEmp);
     </script>
   </body>
 </html>

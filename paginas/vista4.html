@@ -12,7 +12,7 @@
       (function () {
         if (sessionStorage.getItem("ecoruta_admin_ok") === "1") return;
         const clavecorrecta = "admin123";
-        const password = prompt("Ingrese la clave de administración (admin123):");
+        const password = prompt("Ingrese la clave de administración:");
 
         if (password !== clavecorrecta) {
           alert("Acceso denegado");
@@ -33,133 +33,38 @@
       </div>
 
       <nav id="menuNav" aria-label="Menú principal">
-        <a href="vista4.html" class="active" aria-current="page">Administración</a>
         <a href="../index.html">Inicio</a>
-        <a href="../index.html#explorar">Explorar</a>
-        <a href="emprendimientos.html">Emprendedores</a>
+        <a href="emprendimientos.html">Emprendimientos</a>
+        <a href="vista3_emprendedor.html">Emprendedores</a>
         <a href="contacto.html">Contacto</a>
       </nav>
     </header>
 
     <main>
       <div class="admin-header">
-        <h1>Panel de Administración y Emprendimientos</h1>
-        <p>Gestión de rutas/actividades en PostgreSQL, solicitudes de emprendedores y mensajes.</p>
+        <h1>Panel de Administración (Uso Interno)</h1>
+        <p>Supervisión de rutas publicadas, solicitudes de emprendedores y mensajes de contacto.</p>
       </div>
 
       <section class="stats-grid">
         <div class="stat-card">
           <span class="stat-number" id="statPublicadas">0</span>
-          <span class="stat-label">Rutas / Actividades en BD</span>
+          <span class="stat-label">Rutas / Actividades publicadas</span>
         </div>
         <div class="stat-card">
           <span class="stat-number">0</span>
           <span class="stat-label">Solicitudes pendientes</span>
         </div>
         <div class="stat-card">
-          <span class="stat-number">PostgreSQL</span>
-          <span class="stat-label">API FastAPI + WhatsApp</span>
+          <span class="stat-number" id="statMensajes">0</span>
+          <span class="stat-label">Mensajes recibidos</span>
         </div>
       </section>
 
-      <!-- Sección 0: Gestión de Rutas y Actividades por Emprendimiento (PostgreSQL) -->
+      <!-- Sección 1: Rutas y Actividades publicadas en PostgreSQL -->
       <section class="admin-section" style="margin-bottom: 2.5rem;">
-        <h2>Gestión de Rutas y Actividades por Emprendimiento</h2>
-
-        <!-- Bloque Login / Registro Emprendimiento -->
-        <div id="authEmprendimientoBox" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
-          <form id="formLoginEmp" style="background: var(--bg-main, #f8fafc); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color, #e2e8f0);">
-            <h3 style="margin-top: 0; color: var(--primary, #2e7d32);">Iniciar Sesión Emprendimiento</h3>
-            <label style="display:block; margin-bottom:0.6rem; font-size:0.9rem;">Correo electrónico
-              <input type="email" id="loginCorreo" required placeholder="contacto@emprendimiento.cl" style="width:100%; padding:0.5rem; margin-top:0.25rem; border-radius:6px; border:1px solid #cbd5e1;" />
-            </label>
-            <label style="display:block; margin-bottom:0.8rem; font-size:0.9rem;">Contraseña
-              <input type="password" id="loginPass" required placeholder="••••••••" style="width:100%; padding:0.5rem; margin-top:0.25rem; border-radius:6px; border:1px solid #cbd5e1;" />
-            </label>
-            <button type="submit" style="background:#2e7d32; color:#fff; border:none; padding:0.6rem 1.2rem; border-radius:8px; font-weight:600; cursor:pointer; width:100%;">Ingresar</button>
-          </form>
-
-          <form id="formRegistroEmp" style="background: var(--bg-main, #f8fafc); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color, #e2e8f0);">
-            <h3 style="margin-top: 0; color: var(--primary, #2e7d32);">Registrar Nuevo Emprendimiento</h3>
-            <label style="display:block; margin-bottom:0.5rem; font-size:0.9rem;">Nombre del Emprendimiento
-              <input type="text" id="regNombre" required placeholder="Ej: Senderos Araucanía" style="width:100%; padding:0.5rem; margin-top:0.2rem; border-radius:6px; border:1px solid #cbd5e1;" />
-            </label>
-            <label style="display:block; margin-bottom:0.5rem; font-size:0.9rem;">Correo electrónico
-              <input type="email" id="regCorreo" required placeholder="contacto@emprendimiento.cl" style="width:100%; padding:0.5rem; margin-top:0.2rem; border-radius:6px; border:1px solid #cbd5e1;" />
-            </label>
-            <label style="display:block; margin-bottom:0.5rem; font-size:0.9rem;">WhatsApp (código país + número)
-              <input type="text" id="regWhatsapp" required placeholder="56912345678" style="width:100%; padding:0.5rem; margin-top:0.2rem; border-radius:6px; border:1px solid #cbd5e1;" />
-            </label>
-            <label style="display:block; margin-bottom:0.8rem; font-size:0.9rem;">Contraseña
-              <input type="password" id="regPass" required minlength="6" placeholder="Mínimo 6 caracteres" style="width:100%; padding:0.5rem; margin-top:0.2rem; border-radius:6px; border:1px solid #cbd5e1;" />
-            </label>
-            <button type="submit" style="background:#1b5e20; color:#fff; border:none; padding:0.6rem 1.2rem; border-radius:8px; font-weight:600; cursor:pointer; width:100%;">Crear Cuenta</button>
-          </form>
-        </div>
-
-        <!-- Bloque Sesión Activa + Crear Ruta/Actividad -->
-        <div id="panelEmprendimientoActivo" style="display:none; margin-top: 1rem;">
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.8rem; background:#e8f5e9; padding:0.9rem 1.2rem; border-radius:8px; border:1px solid #a5d6a7; margin-bottom:1.2rem;">
-            <span>Sesión activa: <strong id="nombreEmpActivo">Emprendimiento</strong></span>
-            <button type="button" id="btnCerrarSesionEmp" style="background:#c62828; color:#fff; border:none; padding:0.4rem 0.9rem; border-radius:6px; cursor:pointer; font-weight:600;">Cerrar sesión</button>
-          </div>
-
-          <form id="formCrearRuta" style="background: var(--bg-main, #f8fafc); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color, #e2e8f0); display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.9rem;">
-            <h3 style="grid-column: 1 / -1; margin: 0; color: var(--primary, #2e7d32);">Publicar Nueva Ruta o Actividad</h3>
-
-            <label style="font-size:0.9rem;">Tipo
-              <select id="rutaTipo" style="width:100%; padding:0.5rem; margin-top:0.2rem; border-radius:6px; border:1px solid #cbd5e1;">
-                <option value="ruta">Ruta</option>
-                <option value="actividad">Actividad</option>
-              </select>
-            </label>
-
-            <label style="font-size:0.9rem;">Nombre
-              <input type="text" id="rutaNombre" required placeholder="Ej: Sendero Mirador Ñielol" style="width:100%; padding:0.5rem; margin-top:0.2rem; border-radius:6px; border:1px solid #cbd5e1;" />
-            </label>
-
-            <label style="font-size:0.9rem;">Categoría
-              <select id="rutaCategoria" style="width:100%; padding:0.5rem; margin-top:0.2rem; border-radius:6px; border:1px solid #cbd5e1;">
-                <option value="Naturaleza">Naturaleza</option>
-                <option value="Cultura">Cultura</option>
-                <option value="Gastronomía">Gastronomía</option>
-              </select>
-            </label>
-
-            <label style="font-size:0.9rem;">Dificultad
-              <select id="rutaDificultad" style="width:100%; padding:0.5rem; margin-top:0.2rem; border-radius:6px; border:1px solid #cbd5e1;">
-                <option value="Fácil">Fácil</option>
-                <option value="Moderada">Moderada</option>
-                <option value="Alta">Alta</option>
-              </select>
-            </label>
-
-            <label style="font-size:0.9rem;">Ubicación
-              <input type="text" id="rutaUbicacion" required placeholder="Ej: Temuco, La Araucanía" style="width:100%; padding:0.5rem; margin-top:0.2rem; border-radius:6px; border:1px solid #cbd5e1;" />
-            </label>
-
-            <label style="font-size:0.9rem;">Imagen (ruta o URL)
-              <input type="text" id="rutaImagen" value="assets/imagenes/Sendero/Sendero_Nielol.jpg" required style="width:100%; padding:0.5rem; margin-top:0.2rem; border-radius:6px; border:1px solid #cbd5e1;" />
-            </label>
-
-            <label style="font-size:0.9rem;">Latitud (opcional)
-              <input type="number" step="any" id="rutaLat" placeholder="-38.7359" style="width:100%; padding:0.5rem; margin-top:0.2rem; border-radius:6px; border:1px solid #cbd5e1;" />
-            </label>
-
-            <label style="font-size:0.9rem;">Longitud (opcional)
-              <input type="number" step="any" id="rutaLng" placeholder="-72.5904" style="width:100%; padding:0.5rem; margin-top:0.2rem; border-radius:6px; border:1px solid #cbd5e1;" />
-            </label>
-
-            <label style="grid-column: 1 / -1; font-size:0.9rem;">Descripción detallada
-              <textarea id="rutaDetalle" rows="2" required placeholder="Describe la experiencia sustentable, qué incluye y recomendaciones..." style="width:100%; padding:0.5rem; margin-top:0.2rem; border-radius:6px; border:1px solid #cbd5e1;"></textarea>
-            </label>
-
-            <button type="submit" style="grid-column: 1 / -1; background:#2e7d32; color:#fff; border:none; padding:0.7rem 1.2rem; border-radius:8px; font-weight:700; cursor:pointer;">Publicar en EcoRuta</button>
-          </form>
-        </div>
-
-        <!-- Tabla de Rutas y Actividades en PostgreSQL -->
-        <div class="table-responsive" style="margin-top: 1.5rem;">
+        <h2>Rutas y Actividades Publicadas por Emprendimientos</h2>
+        <div class="table-responsive">
           <table class="admin-table">
             <thead>
               <tr>
@@ -168,13 +73,12 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Categoría</th>
                 <th scope="col">Emprendimiento / WhatsApp</th>
-                <th scope="col">Acciones</th>
               </tr>
             </thead>
             <tbody id="tablaRutasDb">
               <tr>
-                <td colspan="6" style="text-align: center; color: var(--text-muted); padding: 1.2rem;">
-                  Cargando rutas desde PostgreSQL...
+                <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 1.2rem;">
+                  Cargando rutas...
                 </td>
               </tr>
             </tbody>
@@ -182,7 +86,7 @@
         </div>
       </section>
 
-      <!-- Sección 1: Solicitudes de Emprendedores -->
+      <!-- Sección 2: Solicitudes de Emprendedores -->
       <section class="admin-section">
         <h2>Solicitudes de Emprendedores Pendientes</h2>
         <div class="table-responsive">
@@ -206,7 +110,7 @@
         </div>
       </section>
 
-      <!-- Sección 2: Mensajes de Contacto Recibidos -->
+      <!-- Sección 3: Mensajes de Contacto Recibidos -->
       <section class="admin-section" style="margin-top: 2.5rem;">
         <h2>Mensajes de Contacto Recibidos</h2>
         <div class="table-responsive">
@@ -235,20 +139,14 @@
     <footer>
       <div class="footer-links">
         <a href="contacto.html">Contacto</a>
-        <a href="https://github.com/camilqqq/Nexus-Ecoruta/blob/main/documentos/reportes/reporte-bug-bounty.pdf" target="_blank" rel="noopener">Bug Bounty</a>
+        <a href="https://github.com/camilqqq/Nexus-Ecoruta/security" target="_blank" rel="noopener">Bug Bounty</a>
         <a href="../index.html">Información local</a>
       </div>
     </footer>
 
     <script>
-      const API_BASE = "http://localhost:8000/api";
-      const TOKEN_KEY = "ecoruta_jwt_token";
-      const EMP_NOMBRE_KEY = "ecoruta_emp_nombre";
-      const EMP_ID_KEY = "ecoruta_emp_id";
-
       const menuBtn = document.getElementById('menuBtn');
       const menuNav = document.getElementById('menuNav');
-
       if (menuBtn && menuNav) {
         menuBtn.addEventListener('click', () => {
           const abierto = menuNav.classList.toggle('menu-visible');
@@ -256,176 +154,44 @@
         });
       }
 
-      function actualizarEstadoSesionEmp() {
-        const token = sessionStorage.getItem(TOKEN_KEY);
-        const nombre = sessionStorage.getItem(EMP_NOMBRE_KEY);
-        const authBox = document.getElementById("authEmprendimientoBox");
-        const panelActivo = document.getElementById("panelEmprendimientoActivo");
-        const lblNombre = document.getElementById("nombreEmpActivo");
-
-        if (token && nombre) {
-          authBox.style.display = "none";
-          panelActivo.style.display = "block";
-          lblNombre.textContent = nombre;
-        } else {
-          authBox.style.display = "grid";
-          panelActivo.style.display = "none";
-        }
-      }
-
-      async function cargarRutasPostgreSQL() {
+      async function cargarRutasAdmin() {
         const tbody = document.getElementById("tablaRutasDb");
         const statPub = document.getElementById("statPublicadas");
-        const empIdActual = Number(sessionStorage.getItem(EMP_ID_KEY) || "0");
         if (!tbody) return;
-
         try {
-          const resp = await fetch(`${API_BASE}/rutas`);
-          if (!resp.ok) throw new Error("No se pudo conectar con la API");
+          const resp = await fetch("http://localhost:8000/api/rutas");
+          if (!resp.ok) throw new Error();
           const rutas = await resp.json();
           if (statPub) statPub.textContent = String(rutas.length);
-
           if (rutas.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:1.2rem;">No hay rutas publicadas aún en PostgreSQL.</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:1.2rem;">No hay rutas publicadas aún.</td></tr>`;
             return;
           }
-
-          tbody.innerHTML = rutas.map(r => {
-            const esPropia = empIdActual && r.emprendimiento_id === empIdActual;
-            const btnEliminar = esPropia
-              ? `<button onclick="eliminarRutaDb(${r.id})" style="background:#c62828; color:#fff; border:none; padding:0.35rem 0.65rem; border-radius:4px; cursor:pointer; font-size:0.85rem;">Eliminar</button>`
-              : `<span style="color:#64748b; font-size:0.82rem;">Solo lectura</span>`;
-
-            return `
-              <tr>
-                <td>#${r.id}</td>
-                <td><strong style="text-transform:uppercase;">${r.tipo}</strong></td>
-                <td><a href="Actividad.html?id=${r.id}" style="color:#2e7d32; font-weight:600;">${r.nombre}</a></td>
-                <td>${r.categoria} (${r.dificultad})</td>
-                <td>${r.emprendimiento_nombre || "Emprendimiento"} • +${r.whatsapp || ""}</td>
-                <td>${btnEliminar}</td>
-              </tr>
-            `;
-          }).join("");
-        } catch (err) {
-          tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#c62828; padding:1.2rem;">Servidor FastAPI apagado (inicia uvicorn en localhost:8000 para gestionar PostgreSQL).</td></tr>`;
+          tbody.innerHTML = rutas.map(r => `
+            <tr>
+              <td>#${r.id}</td>
+              <td><strong style="text-transform:uppercase;">${r.tipo}</strong></td>
+              <td><a href="Actividad.html?id=${r.id}" style="color:#2e7d32; font-weight:600;">${r.nombre}</a></td>
+              <td>${r.categoria} (${r.dificultad})</td>
+              <td>${r.emprendimiento_nombre || "Emprendimiento"} • +${r.whatsapp || ""}</td>
+            </tr>
+          `).join("");
+        } catch {
+          tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:var(--text-muted); padding:1.2rem;">Backend local no conectado en este dispositivo.</td></tr>`;
         }
       }
-
-      window.eliminarRutaDb = async function(id) {
-        const token = sessionStorage.getItem(TOKEN_KEY);
-        if (!token) return alert("Debes iniciar sesión con tu emprendimiento.");
-        if (!confirm("¿Eliminar esta ruta/actividad de PostgreSQL?")) return;
-
-        const resp = await fetch(`${API_BASE}/rutas/${id}`, {
-          method: "DELETE",
-          headers: { "Authorization": `Bearer ${token}` }
-        });
-        if (resp.ok) {
-          await cargarRutasPostgreSQL();
-        } else {
-          const data = await resp.json();
-          alert(data.detail || "No se pudo eliminar.");
-        }
-      };
-
-      document.getElementById("formLoginEmp")?.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const correo = document.getElementById("loginCorreo").value.trim();
-        const password = document.getElementById("loginPass").value;
-        const resp = await fetch(`${API_BASE}/auth/login`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ correo, password })
-        });
-        const data = await resp.json();
-        if (!resp.ok) return alert(data.detail || "Error al iniciar sesión");
-        sessionStorage.setItem(TOKEN_KEY, data.token);
-        sessionStorage.setItem(EMP_NOMBRE_KEY, data.nombre);
-        sessionStorage.setItem(EMP_ID_KEY, String(data.id));
-        actualizarEstadoSesionEmp();
-        await cargarRutasPostgreSQL();
-      });
-
-      document.getElementById("formRegistroEmp")?.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const nombre = document.getElementById("regNombre").value.trim();
-        const correo = document.getElementById("regCorreo").value.trim();
-        const whatsapp = document.getElementById("regWhatsapp").value.trim();
-        const password = document.getElementById("regPass").value;
-        const resp = await fetch(`${API_BASE}/auth/registro`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ nombre, correo, whatsapp, password })
-        });
-        const data = await resp.json();
-        if (!resp.ok) return alert(data.detail || "Error al registrar emprendimiento");
-        sessionStorage.setItem(TOKEN_KEY, data.token);
-        sessionStorage.setItem(EMP_NOMBRE_KEY, data.nombre);
-        sessionStorage.setItem(EMP_ID_KEY, String(data.id));
-        actualizarEstadoSesionEmp();
-        await cargarRutasPostgreSQL();
-      });
-
-      document.getElementById("btnCerrarSesionEmp")?.addEventListener("click", async () => {
-        sessionStorage.removeItem(TOKEN_KEY);
-        sessionStorage.removeItem(EMP_NOMBRE_KEY);
-        sessionStorage.removeItem(EMP_ID_KEY);
-        actualizarEstadoSesionEmp();
-        await cargarRutasPostgreSQL();
-      });
-
-      document.getElementById("formCrearRuta")?.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const token = sessionStorage.getItem(TOKEN_KEY);
-        if (!token) return alert("Debes iniciar sesión primero.");
-
-        const latVal = document.getElementById("rutaLat").value;
-        const lngVal = document.getElementById("rutaLng").value;
-
-        const payload = {
-          tipo: document.getElementById("rutaTipo").value,
-          nombre: document.getElementById("rutaNombre").value.trim(),
-          categoria: document.getElementById("rutaCategoria").value,
-          dificultad: document.getElementById("rutaDificultad").value,
-          ubicacion: document.getElementById("rutaUbicacion").value.trim(),
-          imagen: document.getElementById("rutaImagen").value.trim(),
-          alt: document.getElementById("rutaNombre").value.trim(),
-          detalle: document.getElementById("rutaDetalle").value.trim(),
-          latitud: latVal ? parseFloat(latVal) : null,
-          longitud: lngVal ? parseFloat(lngVal) : null
-        };
-
-        const resp = await fetch(`${API_BASE}/rutas`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-          },
-          body: JSON.stringify(payload)
-        });
-        const data = await resp.json();
-        if (!resp.ok) return alert(data.detail || "Error al publicar ruta");
-        alert("¡Ruta/actividad publicada exitosamente en PostgreSQL!");
-        e.target.reset();
-        document.getElementById("rutaImagen").value = "assets/imagenes/Sendero/Sendero_Nielol.jpg";
-        await cargarRutasPostgreSQL();
-      });
 
       function cargarSolicitudes() {
         const tbody = document.getElementById('tablaSolicitudes');
         const statPendientes = document.querySelectorAll('.stat-number')[1];
         if (!tbody) return;
-
         const solicitudes = JSON.parse(localStorage.getItem('solicitudesEmprendedores')) || [];
         const pendientesCount = solicitudes.filter(s => !s.estado || s.estado === 'Pendiente').length;
         if (statPendientes) statPendientes.textContent = pendientesCount;
-
         if (solicitudes.length === 0) {
           tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-muted); padding: 1.5rem">No hay solicitudes pendientes en este momento.</td></tr>`;
           return;
         }
-
         tbody.innerHTML = solicitudes.map((sol, index) => {
           const estado = sol.estado || 'Pendiente';
           let accionesHTML = '';
@@ -445,8 +211,10 @@
 
       function cargarMensajesContacto() {
         const tbodyContacto = document.getElementById('tablaMensajesContacto');
+        const statMensajes = document.getElementById('statMensajes');
         if (!tbodyContacto) return;
         const mensajes = JSON.parse(localStorage.getItem('mensajesContacto')) || [];
+        if (statMensajes) statMensajes.textContent = String(mensajes.length);
         if (mensajes.length === 0) {
           tbodyContacto.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 1.5rem">No hay mensajes de contacto recibidos.</td></tr>`;
           return;
@@ -478,8 +246,7 @@
       };
 
       document.addEventListener('DOMContentLoaded', async () => {
-        actualizarEstadoSesionEmp();
-        await cargarRutasPostgreSQL();
+        await cargarRutasAdmin();
         cargarSolicitudes();
         cargarMensajesContacto();
       });
