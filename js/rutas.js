@@ -1,282 +1,203 @@
 "use strict";
-const BACKEND_RUTAS_URL = "http://localhost:8000/api/rutas";
-const FALLBACK_RUTAS_URL = "data/rutas.json";
-const WHATSAPP_DEFECTO = "56912345678";
-const RUTAS_STORAGE_FAVORITOS = "ecoruta_favoritos";
-const STORAGE_FILTRO_CAT = "ecoruta_filtro_categoria";
-const STORAGE_FILTRO_BUSQ = "ecoruta_filtro_busqueda";
-let rutasCargadas = [];
-let categoriaSeleccionada = sessionStorage.getItem(STORAGE_FILTRO_CAT) || "Todas";
-function normalizarTexto(texto) {
-    return texto
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
-}
-function obtenerFavoritosCatalogo() {
+const API_URL_RUTAS = "http://localhost:8000/api/rutas";
+const FAVORITES_KEY = "ecoruta_favoritos";
+function getFavorites() {
     try {
-        const raw = localStorage.getItem(RUTAS_STORAGE_FAVORITOS);
-        if (!raw)
-            return [];
-        const parsed = JSON.parse(raw);
-        return Array.isArray(parsed)
-            ? parsed.filter((id) => typeof id === "number")
-            : [];
+        const raw = localStorage.getItem(FAVORITES_KEY);
+        return raw ? JSON.parse(raw) : [];
     }
     catch {
         return [];
     }
 }
-function alternarFavoritoCatalogo(id) {
-    const favoritos = obtenerFavoritosCatalogo();
-    const existe = favoritos.includes(id);
-    const actualizados = existe
-        ? favoritos.filter((item) => item !== id)
-        : [...favoritos, id];
-    localStorage.setItem(RUTAS_STORAGE_FAVORITOS, JSON.stringify(actualizados));
-    return !existe;
+function saveFavorites(ids) {
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(ids));
 }
-function mostrarEstadoCarga(contenedor, contador) {
-    if (contador)
-        contador.textContent = "Cargando...";
-    if (!contenedor)
-        return;
-    contenedor.innerHTML = `
-    <div class="estado-api estado-cargando" role="status" aria-live="polite" style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #2e7d32;">
-      <p style="font-weight: 600; margin-bottom: 0.35rem;">Cargando rutas y actividades sustentables...</p>
-      <small style="color: #555;">Conectando con el catálogo de EcoRuta Temuco</small>
+function toggleFavorite(id) {
+    const favs = getFavorites();
+    const idx = favs.indexOf(id);
+    if (idx === -1)
+        favs.push(id);
+    else
+        favs.splice(idx, 1);
+    saveFavorites(favs);
+    aplicarFiltros();
+}
+function normalizarImagen(rutaImg) {
+    if (!rutaImg)
+        return "assets/imagenes/Sendero/Sendero_Nielol.jpg";
+    if (rutaImg.startsWith("http") || rutaImg.startsWith("assets/"))
+        return rutaImg;
+    if (rutaImg.startsWith("../assets/"))
+        return rutaImg.replace("../", "");
+    return rutaImg;
+}
+function construirGaleria(ruta) {
+    const imgPrincipal = normalizarImagen(ruta.imagen);
+    if (ruta.imagenes && ruta.imagenes.length > 0) {
+        return ruta.imagenes.map(normalizarImagen);
+    }
+    const match = imgPrincipal.match(/^(.*?)(\.[a-zA-Z0-9]+)$/);
+    if (!match)
+        return [imgPrincipal];
+    const [, base, ext] = match;
+    return [
+        `${base}${ext}`,
+        `${base}2${ext}`,
+        `${base}3${ext}`,
+        `${base}4${ext}`
+    ];
+}
+let todasLasRutas = [];
+let categoriaActiva = "Todas";
+let soloFavoritas = false;
+function crearTarjeta(ruta) {
+    const article = document.createElement("article");
+    article.className = "card";
+    const galeria = construirGaleria(ruta);
+    const esFav = getFavorites().includes(ruta.id);
+    const slidesHtml = galeria
+        .map((src, i) => `
+      <img
+        src="${src}"
+        alt="${ruta.alt || ruta.nombre}${i > 0 ? ` (${i + 1})` : ""}"
+        class="carousel-img ${i === 0 ? "active" : ""}"
+        loading="lazy"
+        onerror="this.src='assets/imagenes/Sendero/Sendero_Nielol.jpg'"
+      />`)
+        .join("");
+    const dotsHtml = galeria
+        .map((_, i) => `<button type="button" class="carousel-dot ${i === 0 ? "active" : ""}" data-slide="${i}" aria-label="Imagen ${i + 1}"></button>`)
+        .join("");
+    const nombreEmprendimiento = ruta.emprendimiento_nombre ? ` • ${ruta.emprendimiento_nombre}` : "";
+    const urlWhatsapp = ruta.whatsapp_url ||
+        `https://wa.me/${ruta.whatsapp || "56912345678"}?text=${encodeURIComponent(`Hola, vengo desde EcoRuta Temuco y me interesa consultar por "${ruta.nombre}".`)}`;
+    const queryDetalle = ruta.emprendimiento_id
+        ? `paginas/Actividad.html?id=${ruta.id}`
+        : `paginas/Actividad.html?local_id=${ruta.id}`;
+    article.innerHTML = `
+    <div class="card-carousel">
+      ${slidesHtml}
+      ${galeria.length > 1
+        ? `<button type="button" class="carousel-btn prev" aria-label="Anterior">‹</button>
+             <button type="button" class="carousel-btn next" aria-label="Siguiente">›</button>
+             <div class="carousel-dots">${dotsHtml}</div>`
+        : ""}
+    </div>
+    <div class="card-body">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem;">
+        <span class="badge-diff">${ruta.dificultad || "Fácil"}</span>
+        ${ruta.tipo ? `<span style="font-size:0.75rem; font-weight:700; text-transform:uppercase; color:var(--primary);">${ruta.tipo}</span>` : ""}
+      </div>
+      <h3>${ruta.nombre}</h3>
+      <p class="card-meta">${ruta.categoria} • ${ruta.ubicacion}${nombreEmprendimiento}</p>
+      <p class="card-desc">${ruta.detalle}</p>
+      <div class="card-actions">
+        <a href="${queryDetalle}" class="btn-card btn-ficha">Ver ficha</a>
+        <a href="${urlWhatsapp}" target="_blank" rel="noopener noreferrer" class="btn-card btn-whatsapp">Contactar</a>
+        <button type="button" class="btn-fav ${esFav ? "active" : ""}" aria-label="Guardar favorito">
+          ${esFav ? "❤️ Favorito" : "🤍 Favorito"}
+        </button>
+      </div>
     </div>
   `;
-}
-function mostrarEstadoError(contenedor, contador, mensajeError, alReintentar) {
-    if (contador)
-        contador.textContent = "Error de carga";
-    if (!contenedor)
-        return;
-    contenedor.innerHTML = `
-    <div class="estado-api estado-error" role="alert" style="grid-column: 1 / -1; text-align: center; padding: 2rem; background: #fff5f5; border: 1px solid #feb2b2; border-radius: 12px; color: #9b2c2c;">
-      <p style="font-weight: 700; margin-bottom: 0.4rem;">No se pudieron cargar las rutas en este momento</p>
-      <p style="font-size: 0.9rem; margin-bottom: 1rem;">${mensajeError}</p>
-      <button type="button" id="btn-reintentar-api" style="padding: 0.55rem 1.2rem; border-radius: 8px; border: none; background: #2e7d32; color: #fff; font-weight: 600; cursor: pointer;">
-        Reintentar carga
-      </button>
-    </div>
-  `;
-    const btnReintentar = document.getElementById("btn-reintentar-api");
-    if (btnReintentar) {
-        btnReintentar.addEventListener("click", alReintentar);
-    }
-}
-async function obtenerRutasDesdeAPI() {
-    try {
-        const respuestaBackend = await fetch(BACKEND_RUTAS_URL);
-        if (respuestaBackend.ok) {
-            const datosBackend = await respuestaBackend.json();
-            if (Array.isArray(datosBackend) && datosBackend.length > 0) {
-                return { ok: true, datos: datosBackend };
-            }
-        }
-    }
-    catch {
-        console.warn("Backend no disponible en localhost:8000, usando respaldo local.");
-    }
-    try {
-        const respuesta = await fetch(FALLBACK_RUTAS_URL);
-        if (!respuesta.ok) {
-            throw new Error(`Error HTTP ${respuesta.status} al consultar el catálogo.`);
-        }
-        const datos = await respuesta.json();
-        return { ok: true, datos };
-    }
-    catch (error) {
-        const mensaje = error instanceof Error ? error.message : "Error de conexión con el servidor.";
-        console.error("Error al obtener rutas desde la API:", error);
-        return { ok: false, datos: [], error: mensaje };
-    }
-}
-function construirEnlaceWhatsApp(ruta) {
-    const telefono = (ruta.whatsapp || WHATSAPP_DEFECTO).replace(/\D/g, "");
-    const destinatario = ruta.emprendimiento_nombre
-        ? `Hola ${ruta.emprendimiento_nombre}`
-        : "Hola";
-    const texto = `${destinatario}, vengo desde EcoRuta Temuco y me interesa consultar por "${ruta.nombre}".`;
-    return `https://wa.me/${telefono}?text=${encodeURIComponent(texto)}`;
-}
-function filtrarRutas(rutas, categoria, terminoBusqueda) {
-    const termino = normalizarTexto(terminoBusqueda.trim());
-    const favoritos = obtenerFavoritosCatalogo();
-    return rutas.filter((ruta) => {
-        const coincideCat = categoria === "Todas" ||
-            (categoria === "Favoritas"
-                ? favoritos.includes(ruta.id)
-                : ruta.categoria === categoria);
-        const textoCompleto = normalizarTexto(`${ruta.nombre} ${ruta.categoria} ${ruta.ubicacion} ${ruta.detalle} ${ruta.dificultad} ${ruta.emprendimiento_nombre || ""}`);
-        const coincideTexto = !termino || textoCompleto.includes(termino);
-        return coincideCat && coincideTexto;
-    });
-}
-function iniciarCarruselTarjeta(contenedor, cardIdx) {
-    const imgPrincipal = contenedor.querySelector("img");
-    if (!imgPrincipal)
-        return;
-    const srcOriginal = imgPrincipal.getAttribute("src") || "";
-    const rutas = [srcOriginal];
-    for (let i = 2; i <= 4; i++) {
-        rutas.push(srcOriginal.replace(/1?(\.[a-zA-Z]+)$/, `${i}$1`));
-    }
-    imgPrincipal.classList.add("activa");
-    const imagenes = [imgPrincipal];
-    const dotsBox = document.createElement("div");
-    dotsBox.className = "carrusel-dots";
-    rutas.forEach((ruta, idx) => {
-        if (idx > 0) {
-            const img = document.createElement("img");
-            img.src = ruta;
-            img.alt = `${imgPrincipal.alt} (${idx + 1})`;
-            img.loading = "lazy";
-            img.onerror = function () {
-                this.onerror = null;
-                this.src = srcOriginal;
-            };
-            contenedor.appendChild(img);
-            imagenes.push(img);
-        }
-        const dot = document.createElement("span");
-        if (idx === 0)
-            dot.classList.add("activa");
-        dot.addEventListener("click", (e) => {
-            e.preventDefault();
-            cambiarSlide(idx);
-        });
-        dotsBox.appendChild(dot);
-    });
-    contenedor.appendChild(dotsBox);
-    const dots = dotsBox.querySelectorAll("span");
-    let indice = 0;
-    function cambiarSlide(nuevoIndice) {
-        imagenes[indice].classList.remove("activa");
-        dots[indice].classList.remove("activa");
-        indice = nuevoIndice;
-        imagenes[indice].classList.add("activa");
-        dots[indice].classList.add("activa");
-    }
-    setTimeout(() => {
-        setInterval(() => {
-            cambiarSlide((indice + 1) % imagenes.length);
-        }, 3800);
-    }, cardIdx * 400);
-}
-function renderizarCatalogo(rutas, alCambiarFavorito) {
-    const contenedorLista = document.querySelector(".list");
-    const contador = document.getElementById("contador-resultados");
-    if (!contenedorLista)
-        return;
-    contenedorLista.innerHTML = "";
-    if (contador) {
-        contador.textContent = `${rutas.length} resultado${rutas.length === 1 ? "" : "s"}`;
-    }
-    if (rutas.length === 0) {
-        const mensaje = document.createElement("p");
-        mensaje.className = "mensaje-vacio";
-        mensaje.textContent =
-            categoriaSeleccionada === "Favoritas"
-                ? "Aún no tienes rutas o actividades guardadas en Favoritos."
-                : "No se encontraron actividades con esos criterios.";
-        contenedorLista.appendChild(mensaje);
-        return;
-    }
-    const favoritosActuales = obtenerFavoritosCatalogo();
-    rutas.forEach((ruta, index) => {
-        const esFavorito = favoritosActuales.includes(ruta.id);
-        const enlaceWhatsApp = construirEnlaceWhatsApp(ruta);
-        const subtituloEmprendimiento = ruta.emprendimiento_nombre
-            ? ` • ${ruta.emprendimiento_nombre}`
-            : "";
-        const article = document.createElement("article");
-        article.className = "activity";
-        article.setAttribute("data-categoria", ruta.categoria);
-        article.setAttribute("data-dificultad", ruta.dificultad);
-        article.innerHTML = `
-      <div class="image">
-        <img src="${ruta.imagen}" alt="${ruta.alt}" width="400" height="250" ${index === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} />
-      </div>
-      <div class="info">
-        <div class="activity-header">
-          <div>
-            <h3>${ruta.nombre}</h3>
-            <p>${ruta.categoria} • ${ruta.ubicacion}${subtituloEmprendimiento}</p>
-          </div>
-          <small>Actualizado: ${ruta.actualizado}</small>
-        </div>
-        <p>${ruta.detalle}</p>
-        <div class="buttons">
-          <a href="paginas/Actividad.html?id=${ruta.id}" class="primary" aria-label="Ver ficha detallada de ${ruta.nombre}">Ver ficha</a>
-          <a href="${enlaceWhatsApp}" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp sobre ${ruta.nombre}">Contactar</a>
-          <button type="button" class="btn-favorito ${esFavorito ? "activo" : ""}" data-id="${ruta.id}" aria-pressed="${esFavorito}" aria-label="${esFavorito ? "Quitar de favoritos" : "Guardar en favoritos"}: ${ruta.nombre}" style="padding: 0.5rem 0.85rem; border-radius: 8px; border: 1px solid ${esFavorito ? "#e53e3e" : "#cbd5e0"}; background: ${esFavorito ? "#fff5f5" : "#fff"}; color: ${esFavorito ? "#c53030" : "#2d3748"}; font-weight: 600; cursor: pointer;">
-            ${esFavorito ? "❤️ Guardado" : "🤍 Favorito"}
-          </button>
-        </div>
-      </div>
-    `;
-        contenedorLista.appendChild(article);
-        const btnFav = article.querySelector(".btn-favorito");
-        if (btnFav) {
-            btnFav.addEventListener("click", () => {
-                alternarFavoritoCatalogo(ruta.id);
-                if (alCambiarFavorito)
-                    alCambiarFavorito();
-            });
-        }
-        const boxImg = article.querySelector(".image");
-        if (boxImg)
-            iniciarCarruselTarjeta(boxImg, index);
-    });
-}
-document.addEventListener("DOMContentLoaded", async () => {
-    const botones = document.querySelectorAll(".filters button");
-    const buscador = document.querySelector(".search input");
-    const contenedorLista = document.querySelector(".list");
-    const contador = document.getElementById("contador-resultados");
-    const busquedaGuardada = sessionStorage.getItem(STORAGE_FILTRO_BUSQ) || "";
-    if (buscador && busquedaGuardada) {
-        buscador.value = busquedaGuardada;
-    }
-    botones.forEach((boton) => {
-        const cat = boton.getAttribute("data-categoria") || "Todas";
-        if (cat === categoriaSeleccionada) {
-            boton.classList.add("active");
-        }
-        else {
-            boton.classList.remove("active");
-        }
-    });
-    const actualizarVista = () => {
-        const texto = buscador ? buscador.value : "";
-        sessionStorage.setItem(STORAGE_FILTRO_CAT, categoriaSeleccionada);
-        sessionStorage.setItem(STORAGE_FILTRO_BUSQ, texto);
-        const filtradas = filtrarRutas(rutasCargadas, categoriaSeleccionada, texto);
-        renderizarCatalogo(filtradas, actualizarVista);
-    };
-    const iniciarCargaRutas = async () => {
-        mostrarEstadoCarga(contenedorLista, contador);
-        const resultado = await obtenerRutasDesdeAPI();
-        if (!resultado.ok) {
-            mostrarEstadoError(contenedorLista, contador, resultado.error || "Error inesperado al cargar datos.", iniciarCargaRutas);
+    const imgs = article.querySelectorAll(".carousel-img");
+    const dots = article.querySelectorAll(".carousel-dot");
+    let idxActual = 0;
+    const mostrarSlide = (nuevoIdx) => {
+        if (imgs.length === 0)
             return;
-        }
-        rutasCargadas = resultado.datos;
-        actualizarVista();
+        idxActual = (nuevoIdx + imgs.length) % imgs.length;
+        imgs.forEach((img, idx) => img.classList.toggle("active", idx === idxActual));
+        dots.forEach((dot, idx) => dot.classList.toggle("active", idx === idxActual));
     };
-    botones.forEach((boton) => {
-        boton.addEventListener("click", () => {
-            botones.forEach((b) => b.classList.remove("active"));
-            boton.classList.add("active");
-            categoriaSeleccionada = boton.getAttribute("data-categoria") || "Todas";
-            actualizarVista();
+    article.querySelector(".prev")?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        mostrarSlide(idxActual - 1);
+    });
+    article.querySelector(".next")?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        mostrarSlide(idxActual + 1);
+    });
+    dots.forEach((dot) => {
+        dot.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const slide = Number(dot.dataset.slide || "0");
+            mostrarSlide(slide);
         });
     });
-    if (buscador) {
-        buscador.addEventListener("input", actualizarVista);
+    article.querySelector(".btn-fav")?.addEventListener("click", () => toggleFavorite(ruta.id));
+    return article;
+}
+function renderizarRutas(lista) {
+    const contenedor = document.getElementById("cardsContainer");
+    const contador = document.getElementById("resultsCount");
+    if (!contenedor)
+        return;
+    contenedor.innerHTML = "";
+    if (contador) {
+        contador.textContent = `${lista.length} ${lista.length === 1 ? "resultado" : "resultados"}`;
     }
-    await iniciarCargaRutas();
+    if (lista.length === 0) {
+        contenedor.innerHTML = `<p class="empty-msg">No se encontraron actividades con los filtros seleccionados.</p>`;
+        return;
+    }
+    lista.forEach((ruta) => contenedor.appendChild(crearTarjeta(ruta)));
+}
+function aplicarFiltros() {
+    const searchInput = document.getElementById("searchInput");
+    const texto = (searchInput?.value || "").trim().toLowerCase();
+    const favs = getFavorites();
+    const filtradas = todasLasRutas.filter((r) => {
+        const coincideCat = categoriaActiva === "Todas" ||
+            r.categoria.toLowerCase() === categoriaActiva.toLowerCase();
+        const coincideFav = !soloFavoritas || favs.includes(r.id);
+        const coincideTexto = !texto ||
+            r.nombre.toLowerCase().includes(texto) ||
+            r.ubicacion.toLowerCase().includes(texto) ||
+            r.categoria.toLowerCase().includes(texto) ||
+            r.detalle.toLowerCase().includes(texto) ||
+            (r.emprendimiento_nombre || "").toLowerCase().includes(texto);
+        return coincideCat && coincideFav && coincideTexto;
+    });
+    renderizarRutas(filtradas);
+}
+async function inicializarCatalogo() {
+    let rutasLocales = [];
+    let rutasBackend = [];
+    try {
+        const respLocal = await fetch("data/rutas.json");
+        if (respLocal.ok)
+            rutasLocales = await respLocal.json();
+    }
+    catch { }
+    try {
+        const respApi = await fetch(API_URL_RUTAS);
+        if (respApi.ok)
+            rutasBackend = await respApi.json();
+    }
+    catch { }
+    // Combinar rutas de PostgreSQL (primero) + catálogo base de data/rutas.json
+    const idsBackend = new Set(rutasBackend.map((r) => r.nombre.toLowerCase()));
+    const localesSinDuplicar = rutasLocales.filter((r) => !idsBackend.has(r.nombre.toLowerCase()));
+    todasLasRutas = [...rutasBackend, ...localesSinDuplicar];
+    aplicarFiltros();
+}
+document.addEventListener("DOMContentLoaded", () => {
+    inicializarCatalogo();
+    document.getElementById("searchInput")?.addEventListener("input", aplicarFiltros);
+    document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            document.querySelectorAll(".filter-btn").forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+            categoriaActiva = btn.dataset.category || "Todas";
+            aplicarFiltros();
+        });
+    });
+    const btnFavFilter = document.getElementById("btnFavFilter");
+    btnFavFilter?.addEventListener("click", () => {
+        soloFavoritas = !soloFavoritas;
+        btnFavFilter.classList.toggle("active", soloFavoritas);
+        aplicarFiltros();
+    });
 });
