@@ -899,17 +899,93 @@ async function inicializarMapaSatelite(actividad: ActividadDetalle): Promise<voi
   }
 }
 
+const STORAGE_FAVORITOS = "ecoruta_favoritos";
+
+interface RutaCatalogoJSON {
+  id: number;
+  nombre: string;
+  categoria: string;
+  ubicacion: string;
+  actualizado: string;
+  detalle: string;
+  dificultad: string;
+  imagen: string;
+  alt: string;
+}
+
+function obtenerFavoritos(): number[] {
+  try {
+    const raw = localStorage.getItem(STORAGE_FAVORITOS);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed.filter((id) => typeof id === "number") : [];
+  } catch {
+    return [];
+  }
+}
+
+function alternarFavorito(id: number): boolean {
+  const favoritos = obtenerFavoritos();
+  const existe = favoritos.includes(id);
+  const actualizados = existe ? favoritos.filter((item) => item !== id) : [...favoritos, id];
+  localStorage.setItem(STORAGE_FAVORITOS, JSON.stringify(actualizados));
+  return !existe;
+}
+
+async function obtenerActividadSincronizada(id: string): Promise<ActividadDetalle> {
+  const base = detalleBackup[id] || detalleBackup["1"];
+  try {
+    const resp = await fetch("../data/rutas.json");
+    if (!resp.ok) return base;
+    const lista: RutaCatalogoJSON[] = await resp.json();
+    const rutaJson = lista.find((item) => String(item.id) === id);
+    if (!rutaJson) return base;
+
+    const imgPrincipalJson = `../${rutaJson.imagen}`;
+    const imagenesSincronizadas = [
+      imgPrincipalJson,
+      ...base.imagenes.filter((img) => img !== imgPrincipalJson)
+    ];
+
+    return {
+      ...base,
+      id: String(rutaJson.id),
+      nombre: rutaJson.nombre,
+      categoria: rutaJson.categoria,
+      ubicacion: rutaJson.ubicacion,
+      imagenes: imagenesSincronizadas,
+      detalles: {
+        ...base.detalles,
+        dificultad: rutaJson.dificultad || base.detalles.dificultad
+      }
+    };
+  } catch {
+    return base;
+  }
+}
+
 async function cargarFicha(): Promise<void> {
   const id = obtenerParametroUrl("id") || "1";
+  const idNumerico = Number(id) || 1;
   const contenedor = document.getElementById("detalle-actividad");
-
   if (!contenedor) return;
 
-  const actividad = detalleBackup[id] || detalleBackup["1"];
+  const actividad = await obtenerActividadSincronizada(id);
+  const esFavInicial = obtenerFavoritos().includes(idNumerico);
 
   contenedor.innerHTML = `
     <section style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
-      <h1 style="color: #2e7d32; font-size: 2rem; margin-bottom: 0.5rem;">${actividad.nombre}</h1>
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; flex-wrap:wrap; margin-bottom:0.5rem;">
+        <h1 style="color: #2e7d32; font-size: 2rem; margin: 0;">${actividad.nombre}</h1>
+        <button
+          type="button"
+          id="btn-favorito-ficha"
+          aria-pressed="${esFavInicial}"
+          style="padding: 0.55rem 1.1rem; border-radius: 8px; border: 1px solid ${esFavInicial ? "#e53e3e" : "#cbd5e0"}; background: ${esFavInicial ? "#fff5f5" : "#ffffff"}; color: ${esFavInicial ? "#c53030" : "#2d3748"}; font-weight: 600; cursor: pointer; font-size: 0.95rem;"
+        >
+          ${esFavInicial ? "❤️ Guardado en Favoritos" : "🤍 Guardar en Favoritos"}
+        </button>
+      </div>
       <div style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-bottom:1rem;">
         <span style="background:#e8f5e9; color:#1b5e20; padding:0.4rem 1rem; border-radius:20px; font-size:0.9rem; font-weight:bold;">
           ${actividad.tipo}
@@ -959,21 +1035,10 @@ async function cargarFicha(): Promise<void> {
           </ul>
         ` : ""}
 
-        ${actividad.detalles.tipoTerreno ? `
-          <p style="margin-bottom: 0.8rem; color: #333;"><strong>Tipo de terreno:</strong> ${actividad.detalles.tipoTerreno}</p>
-        ` : ""}
-
-        ${actividad.detalles.tipoRuta ? `
-          <p style="margin-bottom: 0.8rem; color: #333;"><strong>Tipo de ruta:</strong> ${actividad.detalles.tipoRuta}</p>
-        ` : ""}
-
-        ${actividad.detalles.desnivelExtra ? `
-          <p style="margin-bottom: 0.8rem; color: #333;"><strong>Desnivel:</strong> ${actividad.detalles.desnivelExtra}</p>
-        ` : ""}
-
-        ${actividad.detalles.altitudMaxima ? `
-          <p style="margin-bottom: 1.5rem; color: #333;"><strong>Altitud máxima:</strong> ${actividad.detalles.altitudMaxima}</p>
-        ` : ""}
+        ${actividad.detalles.tipoTerreno ? `<p style="margin-bottom: 0.8rem; color: #333;"><strong>Tipo de terreno:</strong> ${actividad.detalles.tipoTerreno}</p>` : ""}
+        ${actividad.detalles.tipoRuta ? `<p style="margin-bottom: 0.8rem; color: #333;"><strong>Tipo de ruta:</strong> ${actividad.detalles.tipoRuta}</p>` : ""}
+        ${actividad.detalles.desnivelExtra ? `<p style="margin-bottom: 0.8rem; color: #333;"><strong>Desnivel:</strong> ${actividad.detalles.desnivelExtra}</p>` : ""}
+        ${actividad.detalles.altitudMaxima ? `<p style="margin-bottom: 1.5rem; color: #333;"><strong>Altitud máxima:</strong> ${actividad.detalles.altitudMaxima}</p>` : ""}
 
         <h3 style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: #111;">Accesibilidad</h3>
         <p style="margin-bottom: 1.5rem; color: #333;">${actividad.detalles.accesibilidad}</p>
@@ -995,6 +1060,18 @@ async function cargarFicha(): Promise<void> {
     </section>
   `;
 
+  const btnFavFicha = document.getElementById("btn-favorito-ficha") as HTMLButtonElement | null;
+  if (btnFavFicha) {
+    btnFavFicha.addEventListener("click", () => {
+      const esFavAhora = alternarFavorito(idNumerico);
+      btnFavFicha.textContent = esFavAhora ? "❤️ Guardado en Favoritos" : "🤍 Guardar en Favoritos";
+      btnFavFicha.setAttribute("aria-pressed", String(esFavAhora));
+      btnFavFicha.style.borderColor = esFavAhora ? "#e53e3e" : "#cbd5e0";
+      btnFavFicha.style.background = esFavAhora ? "#fff5f5" : "#ffffff";
+      btnFavFicha.style.color = esFavAhora ? "#c53030" : "#2d3748";
+    });
+  }
+
   if (actividad.rutaGps) {
     inicializarMapaSatelite(actividad);
   }
@@ -1007,4 +1084,5 @@ if (document.readyState === "loading") {
 } else {
   cargarFicha();
 }
+
 export {};
