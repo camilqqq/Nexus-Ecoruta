@@ -1,4 +1,4 @@
-export interface RutaTuristica {
+interface RutaTuristica {
   id: number;
   nombre: string;
   categoria: "Naturaleza" | "Cultura" | "Gastronomía";
@@ -26,7 +26,7 @@ function normalizarTexto(texto: string): string {
 }
 
 // --- Gestión de Favoritos (LocalStorage) ---
-export function obtenerFavoritos(): number[] {
+function obtenerFavoritos(): number[] {
   try {
     const raw = localStorage.getItem(STORAGE_FAVORITOS);
     if (!raw) return [];
@@ -37,7 +37,7 @@ export function obtenerFavoritos(): number[] {
   }
 }
 
-export function alternarFavorito(id: number): boolean {
+function alternarFavorito(id: number): boolean {
   const favoritos = obtenerFavoritos();
   const existe = favoritos.includes(id);
   const actualizados = existe ? favoritos.filter((item) => item !== id) : [...favoritos, id];
@@ -80,7 +80,7 @@ function mostrarEstadoError(
   }
 }
 
-export async function obtenerRutasDesdeAPI(): Promise<{ ok: boolean; datos: RutaTuristica[]; error?: string }> {
+async function obtenerRutasDesdeAPI(): Promise<{ ok: boolean; datos: RutaTuristica[]; error?: string }> {
   try {
     const respuesta = await fetch(API_RUTAS_URL);
     if (!respuesta.ok) {
@@ -95,7 +95,7 @@ export async function obtenerRutasDesdeAPI(): Promise<{ ok: boolean; datos: Ruta
   }
 }
 
-export function filtrarRutas(
+function filtrarRutas(
   rutas: RutaTuristica[],
   categoria: string,
   terminoBusqueda: string
@@ -173,7 +173,7 @@ function iniciarCarruselTarjeta(contenedor: HTMLElement, cardIdx: number): void 
   }, cardIdx * 400);
 }
 
-export function renderizarCatalogo(rutas: RutaTuristica[], alCambiarFavorito?: () => void): void {
+function renderizarCatalogo(rutas: RutaTuristica[], alCambiarFavorito?: () => void): void {
   const contenedorLista = document.querySelector(".list") as HTMLElement | null;
   const contador = document.getElementById("contador-resultados");
   if (!contenedorLista) return;

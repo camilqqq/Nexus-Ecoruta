@@ -1,3 +1,4 @@
+"use strict";
 const API_RUTAS_URL = "data/rutas.json";
 const STORAGE_FAVORITOS = "ecoruta_favoritos";
 const STORAGE_FILTRO_CAT = "ecoruta_filtro_categoria";
@@ -11,7 +12,7 @@ function normalizarTexto(texto) {
         .replace(/[\u0300-\u036f]/g, "");
 }
 // --- Gestión de Favoritos (LocalStorage) ---
-export function obtenerFavoritos() {
+function obtenerFavoritos() {
     try {
         const raw = localStorage.getItem(STORAGE_FAVORITOS);
         if (!raw)
@@ -23,7 +24,7 @@ export function obtenerFavoritos() {
         return [];
     }
 }
-export function alternarFavorito(id) {
+function alternarFavorito(id) {
     const favoritos = obtenerFavoritos();
     const existe = favoritos.includes(id);
     const actualizados = existe ? favoritos.filter((item) => item !== id) : [...favoritos, id];
@@ -62,7 +63,7 @@ function mostrarEstadoError(contenedor, contador, mensajeError, alReintentar) {
         btnReintentar.addEventListener("click", alReintentar);
     }
 }
-export async function obtenerRutasDesdeAPI() {
+async function obtenerRutasDesdeAPI() {
     try {
         const respuesta = await fetch(API_RUTAS_URL);
         if (!respuesta.ok) {
@@ -77,7 +78,7 @@ export async function obtenerRutasDesdeAPI() {
         return { ok: false, datos: [], error: mensaje };
     }
 }
-export function filtrarRutas(rutas, categoria, terminoBusqueda) {
+function filtrarRutas(rutas, categoria, terminoBusqueda) {
     const termino = normalizarTexto(terminoBusqueda.trim());
     const favoritos = obtenerFavoritos();
     return rutas.filter((ruta) => {
@@ -139,7 +140,7 @@ function iniciarCarruselTarjeta(contenedor, cardIdx) {
         }, 3800);
     }, cardIdx * 400);
 }
-export function renderizarCatalogo(rutas, alCambiarFavorito) {
+function renderizarCatalogo(rutas, alCambiarFavorito) {
     const contenedorLista = document.querySelector(".list");
     const contador = document.getElementById("contador-resultados");
     if (!contenedorLista)
