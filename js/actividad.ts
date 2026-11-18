@@ -1007,3 +1007,4 @@ if (document.readyState === "loading") {
 } else {
   cargarFicha();
 }
+export {};
