@@ -11,7 +11,7 @@
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-::selection {  /* cambio al resaltar texto con el mouse, para que tome un color mas natural en la pagina. */
+::selection {
   background-color: var(--primary);
   color: var(--surface);
 }
@@ -37,7 +37,8 @@ body {
   opacity: 0;
   animation: fadeIn 0.4s ease-out forwards;
 }
-@keyframes fadeIn { /*añado un pequeño fade in al cargar/recargar la pagina */
+
+@keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateY(10px);
@@ -91,6 +92,9 @@ header {
 nav {
   display: flex;
   gap: 0.5rem;
+  flex-wrap: wrap;
+  overflow-x: auto;
+  padding-top: 0.75rem;
 }
 
 nav a {
@@ -99,12 +103,32 @@ nav a {
   font-weight: 600;
   padding: 0.4rem 0.8rem;
   border-radius: 6px;
+  white-space: nowrap;
+  font-size: 0.9rem;
   transition: all 0.2s ease;
 }
 
 nav a:hover {
   background-color: var(--bg-main);
   color: var(--primary);
+}
+
+/* --- Corrección del desplegable en el Header --- */
+nav select {
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-color: var(--surface);
+  color: var(--text-dark);
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+nav select option {
+  background-color: var(--surface);
+  color: var(--text-dark);
 }
 
 .menu {
@@ -147,6 +171,7 @@ nav a:hover {
   font-size: 1rem;
   outline: none;
   background-color: var(--bg-main);
+  color: var(--text-dark);
   transition: border-color 0.2s ease;
   margin-bottom: 1rem;
 }
@@ -175,7 +200,7 @@ nav a:hover {
 }
 
 .filters button:hover {
-  background-color: #e2e8e4;
+  background-color: var(--border-color);
 }
 
 .filters button.active {
@@ -220,9 +245,8 @@ nav a:hover {
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .activity:hover {
@@ -294,30 +318,47 @@ nav a:hover {
   margin-top: auto;
 }
 
-.buttons a {
+.buttons a,
+.buttons button {
   flex: 1;
   text-align: center;
-  padding: 0.6rem 0.8rem;
-  border-radius: 6px;
+  padding: 0.65rem 0.5rem; /* Un poco más de espacio arriba y abajo */
+  border-radius: 8px;
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.95rem;      /* Subimos el tamaño de la letra para que destaque más */
   text-decoration: none;
   background-color: var(--bg-main);
   color: var(--text-dark);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
   transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 }
 
-.buttons a:hover {
-  background-color: #e2e8e4;
+.buttons a:hover,
+.buttons button:hover {
+  background-color: var(--border-color);
 }
 
 .buttons a.primary {
   background-color: var(--primary);
   color: var(--surface);
+  border-color: var(--primary);
 }
 
 .buttons a.primary:hover {
   background-color: var(--primary-hover);
+}
+
+/* --- Corrección del botón de Favoritos en las tarjetas para modo oscuro --- */
+.buttons button[aria-pressed="true"],
+.buttons button.favorito-activo {
+  background-color: var(--surface) !important;
+  color: #e53e3e !important;
+  border-color: #e53e3e !important;
 }
 
 footer {
@@ -355,145 +396,12 @@ footer a:hover {
   }
 }
 
-body {
-  padding: 1rem;
-}
-.stats-grid {
-  grid-template-columns: 1fr;
-}
-
-@media (min-width: 600px) {
-  body {
-    padding: 1.5rem;
-  }
-  .form-row {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .stats-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
   outline: 3px solid #ffb703;
   outline-offset: 2px;
-}
-
-.catalog-access {
-  margin: 20px 0;
-}
-
-.catalog-button {
-  display: inline-block;
-  padding: 12px 20px;
-  background-color: var(--primary);
-  color: white;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: background-color 0.2s ease;
-}
-
-.catalog-button:hover {
-  background-color: var(--primary-hover);
-}
-
-.catalog-access p {
-  margin-top: 8px;
-  margin-bottom: 0;
-  font-size: 14px;
-  color: var(--text-muted);
-}
-  
-nav {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap; /* Permite que los enlaces pasen abajo si no caben */
-  overflow-x: auto; /* Agrega scroll horizontal limpio si supera el ancho */
-  padding-top: 0.75rem;
-}
-
-nav a {
-  white-space: nowrap; /* Evita que las palabras se rompan en dos líneas */
-  font-size: 0.9rem; /* Ajusta ligeramente el tamaño para dispositivos móviles */
-}
-
-/* Contenedor de información de la API */
-.api-container {
-    margin-top: 20px;
-    padding: 15px;
-    border: 1px dashed #2c3e50;
-    border-radius: 8px;
-}
-
-/* --- Estilos del Selector de Idioma con Banderas --- */
-.custom-lang-wrapper {
-  position: relative;
-  display: inline-block;
-  font-family: inherit;
-  font-size: 0.9rem;
-  user-select: none;
-}
-
-.custom-lang-selected {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  padding: 0.35rem 0.75rem;
-  border-radius: 6px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #1d2d24;
-  font-weight: 600;
-}
-
-.custom-lang-selected:hover {
-  border-color: #1b4332;
-}
-
-/* Oculta las opciones por defecto */
-.custom-lang-dropdown {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: calc(100% + 4px);
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  z-index: 100;
-  min-width: 100px;
-  overflow: hidden;
-}
-
-/* Muestra el menú cuando se hace clic */
-.custom-lang-dropdown.show {
-  display: block;
-}
-
-.custom-lang-option {
-  padding: 0.5rem 0.75rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #1d2d24;
-  font-weight: 500;
-}
-
-.custom-lang-option:hover {
-  background-color: #f4f6f5;
-  color: #1b4332;
 }
 
 /* --- Variables de Temas y Accesibilidad --- */
@@ -533,7 +441,6 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* Hacer que la barra del clima ocupe el ancho y centre su contenido interno */
 #clima-info, 
 #clima-info > div, 
 .clima-container {

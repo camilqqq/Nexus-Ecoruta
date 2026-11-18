@@ -191,7 +191,7 @@ function renderizarCatalogo(rutas, alCambiarFavorito) {
         <div class="buttons">
           <a href="paginas/Actividad.html?id=${ruta.id}" class="primary" aria-label="Ver ficha detallada de ${ruta.nombre}">Ver ficha</a>
           <a href="https://wa.me/56912345678" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp sobre ${ruta.nombre}">Contactar</a>
-          <button type="button" class="btn-favorito ${esFavorito ? "activo" : ""}" data-id="${ruta.id}" aria-pressed="${esFavorito}" aria-label="${esFavorito ? "Quitar de favoritos" : "Guardar en favoritos"}: ${ruta.nombre}" style="padding: 0.5rem 0.85rem; border-radius: 8px; border: 1px solid ${esFavorito ? "#e53e3e" : "#cbd5e0"}; background: ${esFavorito ? "#fff5f5" : "#fff"}; color: ${esFavorito ? "#c53030" : "#2d3748"}; font-weight: 600; cursor: pointer;">
+          <button type="button" class="btn-favorito ${esFavorito ? "activo" : ""}" data-id="${ruta.id}" aria-pressed="${esFavorito}" aria-label="${esFavorito ? "Quitar de favoritos" : "Guardar en favoritos"}: ${ruta.nombre}" style="padding: 0.5rem 0.85rem; border-radius: 8px; border: 1px solid ${esFavorito ? "#e53e3e" : "var(--border-color)"}; background: ${esFavorito ? "var(--surface)" : "var(--bg-main)"}; color: ${esFavorito ? "#e53e3e" : "var(--text-dark)"}; font-weight: 600; cursor: pointer;">
             ${esFavorito ? "❤️ Guardado" : "🤍 Favorito"}
           </button>
         </div>
