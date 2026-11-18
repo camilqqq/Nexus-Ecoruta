@@ -1,7 +1,7 @@
 "use strict";
 const API_LOCAL_URL = "data/rutas.json";
 const API_BACKEND_URL = "http://localhost:8000/api/rutas";
-const STORAGE_FAVORITOS = "ecoruta_favoritos";
+const RUTAS_STORAGE_FAV = "ecoruta_favoritos";
 const STORAGE_FILTRO_CAT = "ecoruta_filtro_categoria";
 const STORAGE_FILTRO_BUSQ = "ecoruta_filtro_busqueda";
 let rutasCargadas = [];
@@ -20,9 +20,9 @@ function normalizarImagen(rutaImg) {
     return rutaImg;
 }
 // --- Gestión de Favoritos (LocalStorage) ---
-function obtenerFavoritos() {
+function rutasObtenerFav() {
     try {
-        const raw = localStorage.getItem(STORAGE_FAVORITOS);
+        const raw = localStorage.getItem(RUTAS_STORAGE_FAV);
         if (!raw)
             return [];
         const parsed = JSON.parse(raw);
@@ -32,11 +32,11 @@ function obtenerFavoritos() {
         return [];
     }
 }
-function alternarFavorito(id) {
-    const favoritos = obtenerFavoritos();
+function rutasAlternarFav(id) {
+    const favoritos = rutasObtenerFav();
     const existe = favoritos.includes(id);
     const actualizados = existe ? favoritos.filter((item) => item !== id) : [...favoritos, id];
-    localStorage.setItem(STORAGE_FAVORITOS, JSON.stringify(actualizados));
+    localStorage.setItem(RUTAS_STORAGE_FAV, JSON.stringify(actualizados));
     return !existe;
 }
 // --- Estados visuales de Carga y Error en API ---
@@ -97,7 +97,7 @@ async function obtenerRutasDesdeAPI() {
 }
 function filtrarRutas(rutas, categoria, terminoBusqueda) {
     const termino = normalizarTexto(terminoBusqueda.trim());
-    const favoritos = obtenerFavoritos();
+    const favoritos = rutasObtenerFav();
     return rutas.filter((ruta) => {
         const coincideCat = categoria === "Todas" ||
             (categoria === "Favoritas" ? favoritos.includes(ruta.id) : ruta.categoria === categoria);
@@ -176,7 +176,7 @@ function renderizarCatalogo(rutas, alCambiarFavorito) {
         contenedorLista.appendChild(mensaje);
         return;
     }
-    const favoritosActuales = obtenerFavoritos();
+    const favoritosActuales = rutasObtenerFav();
     rutas.forEach((ruta, index) => {
         const esFavorito = favoritosActuales.includes(ruta.id);
         const article = document.createElement("article");
@@ -217,7 +217,7 @@ function renderizarCatalogo(rutas, alCambiarFavorito) {
         const btnFav = article.querySelector(".btn-favorito");
         if (btnFav) {
             btnFav.addEventListener("click", () => {
-                alternarFavorito(ruta.id);
+                rutasAlternarFav(ruta.id);
                 if (alCambiarFavorito)
                     alCambiarFavorito();
             });

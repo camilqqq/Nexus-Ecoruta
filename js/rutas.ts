@@ -17,7 +17,7 @@
 
 const API_LOCAL_URL = "data/rutas.json";
 const API_BACKEND_URL = "http://localhost:8000/api/rutas";
-const STORAGE_FAVORITOS = "ecoruta_favoritos";
+const RUTAS_STORAGE_FAV = "ecoruta_favoritos";
 const STORAGE_FILTRO_CAT = "ecoruta_filtro_categoria";
 const STORAGE_FILTRO_BUSQ = "ecoruta_filtro_busqueda";
 
@@ -38,9 +38,9 @@ function normalizarImagen(rutaImg: string): string {
 }
 
 // --- Gestión de Favoritos (LocalStorage) ---
-function obtenerFavoritos(): number[] {
+function rutasObtenerFav(): number[] {
   try {
-    const raw = localStorage.getItem(STORAGE_FAVORITOS);
+    const raw = localStorage.getItem(RUTAS_STORAGE_FAV);
     if (!raw) return [];
     const parsed = JSON.parse(raw);
     return Array.isArray(parsed) ? parsed.filter((id) => typeof id === "number") : [];
@@ -49,11 +49,11 @@ function obtenerFavoritos(): number[] {
   }
 }
 
-function alternarFavorito(id: number): boolean {
-  const favoritos = obtenerFavoritos();
+function rutasAlternarFav(id: number): boolean {
+  const favoritos = rutasObtenerFav();
   const existe = favoritos.includes(id);
   const actualizados = existe ? favoritos.filter((item) => item !== id) : [...favoritos, id];
-  localStorage.setItem(STORAGE_FAVORITOS, JSON.stringify(actualizados));
+  localStorage.setItem(RUTAS_STORAGE_FAV, JSON.stringify(actualizados));
   return !existe;
 }
 
@@ -125,7 +125,7 @@ function filtrarRutas(
   terminoBusqueda: string
 ): RutaTuristica[] {
   const termino = normalizarTexto(terminoBusqueda.trim());
-  const favoritos = obtenerFavoritos();
+  const favoritos = rutasObtenerFav();
 
   return rutas.filter((ruta) => {
     const coincideCat =
@@ -219,7 +219,7 @@ function renderizarCatalogo(rutas: RutaTuristica[], alCambiarFavorito?: () => vo
     return;
   }
 
-  const favoritosActuales = obtenerFavoritos();
+  const favoritosActuales = rutasObtenerFav();
 
   rutas.forEach((ruta, index) => {
     const esFavorito = favoritosActuales.includes(ruta.id);
@@ -270,7 +270,7 @@ function renderizarCatalogo(rutas: RutaTuristica[], alCambiarFavorito?: () => vo
     const btnFav = article.querySelector(".btn-favorito") as HTMLButtonElement | null;
     if (btnFav) {
       btnFav.addEventListener("click", () => {
-        alternarFavorito(ruta.id);
+        rutasAlternarFav(ruta.id);
         if (alCambiarFavorito) alCambiarFavorito();
       });
     }
@@ -342,3 +342,4 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   await iniciarCargaRutas();
 });
+
