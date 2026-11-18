@@ -188,7 +188,7 @@ function renderizarCatalogo(rutas, alCambiarFavorito) {
         const actualizadoTxt = ruta.actualizado ? `Actualizado: ${ruta.actualizado}` : `Dificultad: ${ruta.dificultad}`;
         const fichaHref = ruta.emprendimiento_id
             ? `paginas/Actividad.html?id=${ruta.id}`
-            : `paginas/Actividad.html?local_id=${ruta.id}`;
+            : `paginas/Actividad.html?id=${ruta.id}`;
         const waHref = ruta.whatsapp_url ||
             `https://wa.me/${ruta.whatsapp || "56912345678"}?text=${encodeURIComponent(`Hola, vengo desde EcoRuta Temuco y me interesa consultar por "${ruta.nombre}".`)}`;
         article.innerHTML = `

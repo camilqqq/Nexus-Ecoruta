@@ -233,7 +233,7 @@ function renderizarCatalogo(rutas: RutaTuristica[], alCambiarFavorito?: () => vo
     const actualizadoTxt = ruta.actualizado ? `Actualizado: ${ruta.actualizado}` : `Dificultad: ${ruta.dificultad}`;
     const fichaHref = ruta.emprendimiento_id
       ? `paginas/Actividad.html?id=${ruta.id}`
-      : `paginas/Actividad.html?local_id=${ruta.id}`;
+      : `paginas/Actividad.html?id=${ruta.id}`;
     const waHref =
       ruta.whatsapp_url ||
       `https://wa.me/${ruta.whatsapp || "56912345678"}?text=${encodeURIComponent(
@@ -342,4 +342,5 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   await iniciarCargaRutas();
 });
+
 
