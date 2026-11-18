@@ -130,7 +130,7 @@ function crearTarjeta(ruta) {
     return article;
 }
 function renderizarRutas(lista) {
-    const contenedor = document.getElementById("cardsContainer");
+    const contenedor = document.getElementById("cards-grid");
     const contador = document.getElementById("resultsCount");
     if (!contenedor)
         return;

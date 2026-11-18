@@ -170,7 +170,7 @@ function crearTarjeta(ruta: RutaActividad): HTMLElement {
 }
 
 function renderizarRutas(lista: RutaActividad[]): void {
-  const contenedor = document.getElementById("cardsContainer");
+  const contenedor = document.getElementById("cards-grid");
   const contador = document.getElementById("resultsCount");
   if (!contenedor) return;
 
@@ -254,3 +254,4 @@ document.addEventListener("DOMContentLoaded", () => {
     aplicarFiltros();
   });
 });
+
