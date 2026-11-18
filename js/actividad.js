@@ -878,24 +878,26 @@ async function cargarFicha() {
         return;
     const actividad = await obtenerActividadSincronizada(id);
     const esFavInicial = obtenerFavoritos().includes(idNumerico);
+    
+    // Usamos las variables nativas CSS de la plataforma (var(--surface), var(--text-dark), etc.)
     contenedor.innerHTML = `
-    <section style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+    <section style="background: var(--surface); color: var(--text-dark); padding: 2rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border: 1px solid var(--border-color);">
       <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; flex-wrap:wrap; margin-bottom:0.5rem;">
-        <h1 style="color: #2e7d32; font-size: 2rem; margin: 0;">${actividad.nombre}</h1>
+        <h1 style="color: var(--primary); font-size: 2rem; margin: 0;">${actividad.nombre}</h1>
         <button
           type="button"
           id="btn-favorito-ficha"
           aria-pressed="${esFavInicial}"
-          style="padding: 0.55rem 1.1rem; border-radius: 8px; border: 1px solid ${esFavInicial ? "#e53e3e" : "#cbd5e0"}; background: ${esFavInicial ? "#fff5f5" : "#ffffff"}; color: ${esFavInicial ? "#c53030" : "#2d3748"}; font-weight: 600; cursor: pointer; font-size: 0.95rem;"
+          style="padding: 0.55rem 1.1rem; border-radius: 8px; border: 1px solid ${esFavInicial ? "#e53e3e" : "var(--border-color)"}; background: var(--bg-main); color: var(--text-dark); font-weight: 600; cursor: pointer; font-size: 0.95rem;"
         >
           ${esFavInicial ? "❤️ Guardado en Favoritos" : "🤍 Guardar en Favoritos"}
         </button>
       </div>
       <div style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-bottom:1rem;">
-        <span style="background:#e8f5e9; color:#1b5e20; padding:0.4rem 1rem; border-radius:20px; font-size:0.9rem; font-weight:bold;">
+        <span style="background:var(--bg-main); color: var(--primary); border: 1px solid var(--border-color); padding:0.4rem 1rem; border-radius:20px; font-size:0.9rem; font-weight:bold;">
           ${actividad.tipo}
         </span>
-        <span style="background:#e3f2fd; color:#1565c0; padding:0.4rem 1rem; border-radius:20px; font-size:0.9rem; font-weight:bold;">
+        <span style="background:var(--bg-main); color: var(--primary); border: 1px solid var(--border-color); padding:0.4rem 1rem; border-radius:20px; font-size:0.9rem; font-weight:bold;">
           ${actividad.categoria}
         </span>
       </div>
@@ -905,14 +907,14 @@ async function cargarFicha() {
         <img id="imagen-principal" src="${actividad.imagenes[0]}" alt="${actividad.nombre}" style="width: 100%; height: 400px; object-fit: cover; border-radius: 8px;" />
         <div style="display: flex; gap: 0.5rem; margin-top: 0.8rem; overflow-x: auto;">
           ${actividad.imagenes.map((img) => `
-            <img src="${img}" alt="Miniatura" onerror="this.style.display='none'" onclick="cambiarImagen('${img}')" style="width: 80px; height: 60px; object-fit: cover; border-radius: 4px; cursor: pointer; border: 2px solid #ddd;" />
+            <img src="${img}" alt="Miniatura" onerror="this.style.display='none'" onclick="cambiarImagen('${img}')" style="width: 80px; height: 60px; object-fit: cover; border-radius: 4px; cursor: pointer; border: 2px solid var(--border-color);" />
           `).join("")}
         </div>
       </div>
 
-      <!-- Cuadro de métricas -->
-      <div style="background: #f4f9f4; padding: 1.25rem; border-radius: 8px; margin: 1.5rem 0; border-left: 5px solid #2e7d32; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem;">
-        ${actividad.detalles.dificultad ? `<p style="margin: 0;"><strong>Dificultad:</strong> <span style="color: #2e7d32;">${actividad.detalles.dificultad}</span></p>` : ""}
+      <!-- Cuadro de métricas unificado -->
+      <div style="background: var(--bg-main); color: var(--text-dark); padding: 1.25rem; border-radius: 8px; margin: 1.5rem 0; border-left: 5px solid var(--primary); display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem; border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+        ${actividad.detalles.dificultad ? `<p style="margin: 0;"><strong>Dificultad:</strong> <span style="color: var(--primary);">${actividad.detalles.dificultad}</span></p>` : ""}
         ${actividad.detalles.duracion ? `<p style="margin: 0;"><strong>Duración:</strong> ${actividad.detalles.duracion}</p>` : ""}
         ${actividad.detalles.distancia ? `<p style="margin: 0;"><strong>Distancia:</strong> ${actividad.detalles.distancia}</p>` : ""}
         ${actividad.detalles.desnivel ? `<p style="margin: 0;"><strong>Desnivel:</strong> ${actividad.detalles.desnivel}</p>` : ""}
@@ -920,37 +922,37 @@ async function cargarFicha() {
       </div>
 
       <!-- Información y detalles -->
-      <div style="line-height: 1.6; font-size: 1.05rem; margin-top: 1.5rem;">
-        <p style="margin-bottom: 1.5rem; color: #444;">${actividad.descripcion}</p>
+      <div style="line-height: 1.6; font-size: 1.05rem; margin-top: 1.5rem; color: var(--text-dark);">
+        <p style="margin-bottom: 1.5rem; color: var(--text-muted);">${actividad.descripcion}</p>
 
-        <h3 style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: #111;">Horarios de atención</h3>
-        <p style="margin-bottom: 1.5rem; color: #333;">${actividad.detalles.horarios}</p>
+        <h3 style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: var(--primary);">Horarios de atención</h3>
+        <p style="margin-bottom: 1.5rem;">${actividad.detalles.horarios}</p>
 
         ${actividad.sectores ? `
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: #111;">Sectores y recorridos</h3>
-          <ul style="margin-top: 0.4rem; margin-bottom: 1.5rem; padding-left: 1.5rem; color: #333;">
+          <h3 style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: var(--primary);">Sectores y recorridos</h3>
+          <ul style="margin-top: 0.4rem; margin-bottom: 1.5rem; padding-left: 1.5rem;">
             ${actividad.sectores.map((s) => `<li style="margin-bottom: 0.4rem;">${s}</li>`).join("")}
           </ul>
         ` : ""}
 
         ${actividad.tarifas ? `
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: #111;">Tarifas de acceso</h3>
-          <ul style="margin-top: 0.4rem; margin-bottom: 1.5rem; padding-left: 1.5rem; color: #333;">
+          <h3 style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: var(--primary);">Tarifas de acceso</h3>
+          <ul style="margin-top: 0.4rem; margin-bottom: 1.5rem; padding-left: 1.5rem;">
             ${actividad.tarifas.map((t) => `<li style="margin-bottom: 0.4rem;"><strong>${t.tipo}:</strong> ${t.precio}</li>`).join("")}
           </ul>
         ` : ""}
 
-        ${actividad.detalles.tipoTerreno ? `<p style="margin-bottom: 0.8rem; color: #333;"><strong>Tipo de terreno:</strong> ${actividad.detalles.tipoTerreno}</p>` : ""}
-        ${actividad.detalles.tipoRuta ? `<p style="margin-bottom: 0.8rem; color: #333;"><strong>Tipo de ruta:</strong> ${actividad.detalles.tipoRuta}</p>` : ""}
-        ${actividad.detalles.desnivelExtra ? `<p style="margin-bottom: 0.8rem; color: #333;"><strong>Desnivel:</strong> ${actividad.detalles.desnivelExtra}</p>` : ""}
-        ${actividad.detalles.altitudMaxima ? `<p style="margin-bottom: 1.5rem; color: #333;"><strong>Altitud máxima:</strong> ${actividad.detalles.altitudMaxima}</p>` : ""}
+        ${actividad.detalles.tipoTerreno ? `<p style="margin-bottom: 0.8rem;"><strong>Tipo de terreno:</strong> ${actividad.detalles.tipoTerreno}</p>` : ""}
+        ${actividad.detalles.tipoRuta ? `<p style="margin-bottom: 0.8rem;"><strong>Tipo de ruta:</strong> ${actividad.detalles.tipoRuta}</p>` : ""}
+        ${actividad.detalles.desnivelExtra ? `<p style="margin-bottom: 0.8rem;"><strong>Desnivel:</strong> ${actividad.detalles.desnivelExtra}</p>` : ""}
+        ${actividad.detalles.altitudMaxima ? `<p style="margin-bottom: 1.5rem;"><strong>Altitud máxima:</strong> ${actividad.detalles.altitudMaxima}</p>` : ""}
 
-        <h3 style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: #111;">Accesibilidad</h3>
-        <p style="margin-bottom: 1.5rem; color: #333;">${actividad.detalles.accesibilidad}</p>
+        <h3 style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: var(--primary);">Accesibilidad</h3>
+        <p style="margin-bottom: 1.5rem;">${actividad.detalles.accesibilidad}</p>
 
         ${actividad.itinerario ? `
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: #111;">Itinerario sugerido</h3>
-          <ul style="margin-top: 0.4rem; margin-bottom: 1.5rem; padding-left: 1.5rem; color: #333;">
+          <h3 style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: var(--primary);">Itinerario sugerido</h3>
+          <ul style="margin-top: 0.4rem; margin-bottom: 1.5rem; padding-left: 1.5rem;">
             ${actividad.itinerario.map((it) => `<li style="margin-bottom: 0.4rem;"><strong>${it.hora}:</strong> ${it.actividad}</li>`).join("")}
           </ul>
         ` : ""}
@@ -958,9 +960,9 @@ async function cargarFicha() {
 
       <!-- Mapa GPS Satelital Interactivo -->
       ${actividad.rutaGps ? `
-        <h3 style="color: #2e7d32; margin-top: 2rem; font-size: 1.25rem; border-bottom: 2px solid #e8f5e9; padding-bottom: 0.5rem;">Ruta y Mapa GPS Satelital</h3>
-        <p style="font-size: 0.9rem; color: #555; margin: 0.5rem 0 0.8rem 0;">🟢 <strong>A:</strong> Inicio del recorrido &nbsp;·&nbsp; 🔵 <strong>Puntos:</strong> Miradores e hitos &nbsp;·&nbsp; 🔴 <strong>B:</strong> Destino / Retorno (haz clic en cada marcador para ver su nombre)</p>
-        <div id="mapa-satelite-ruta" style="width: 100%; height: 450px; border-radius: 10px; overflow: hidden; border: 1px solid #e0e0e0; z-index: 1;"></div>
+        <h3 style="color: var(--primary); margin-top: 2rem; font-size: 1.25rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem;">Ruta y Mapa GPS Satelital</h3>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0.5rem 0 0.8rem 0;">🟢 <strong>A:</strong> Inicio del recorrido &nbsp;·&nbsp; 🔵 <strong>Puntos:</strong> Miradores e hitos &nbsp;·&nbsp; 🔴 <strong>B:</strong> Destino / Retorno (haz clic en cada marcador para ver su nombre)</p>
+        <div id="mapa-satelite-ruta" style="width: 100%; height: 450px; border-radius: 10px; overflow: hidden; border: 1px solid var(--border-color); z-index: 1;"></div>
       ` : ""}
     </section>
   `;
@@ -970,9 +972,9 @@ async function cargarFicha() {
             const esFavAhora = alternarFavorito(idNumerico);
             btnFavFicha.textContent = esFavAhora ? "❤️ Guardado en Favoritos" : "🤍 Guardar en Favoritos";
             btnFavFicha.setAttribute("aria-pressed", String(esFavAhora));
-            btnFavFicha.style.borderColor = esFavAhora ? "#e53e3e" : "#cbd5e0";
-            btnFavFicha.style.background = esFavAhora ? "#fff5f5" : "#ffffff";
-            btnFavFicha.style.color = esFavAhora ? "#c53030" : "#2d3748";
+            btnFavFicha.style.borderColor = esFavAhora ? "#e53e3e" : "var(--border-color)";
+            btnFavFicha.style.background = esFavAhora ? "#fff5f5" : "var(--bg-main)";
+            btnFavFicha.style.color = esFavAhora ? "#c53030" : "var(--text-dark)";
         });
     }
     if (actividad.rutaGps) {

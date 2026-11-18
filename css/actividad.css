@@ -18,11 +18,7 @@
 }
 
 body {
-  font-family:
-    'Segoe UI',
-    system-ui,
-    -apple-system,
-    sans-serif;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   background-color: var(--bg-main);
   color: var(--text-dark);
   line-height: 1.6;
@@ -31,31 +27,17 @@ body {
   margin: 0 auto;
 }
 
-h1,
-h2,
-h3 {
+h1, h2, h3 {
   color: var(--primary);
   font-weight: 700;
   line-height: 1.25;
 }
 
-h1 {
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
-}
-h2 {
-  font-size: 1.3rem;
-  margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
-}
-h3 {
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-}
+h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+h2 { font-size: 1.3rem; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
 
-p {
-  margin-bottom: 0.75rem;
-}
+p { margin-bottom: 0.75rem; }
 
 header {
   background: var(--surface);
@@ -100,6 +82,7 @@ header {
 nav {
   display: flex;
   gap: 1rem;
+  align-items: center;
 }
 
 nav a {
@@ -109,7 +92,6 @@ nav a {
   padding: 0.4rem 0.8rem;
   border-radius: 6px;
   transition: all 0.2s ease;
-  margin-right: 0;
 }
 
 nav a:hover {
@@ -127,7 +109,8 @@ main {
 
 /* Boton para volver */
 .activity-detail > a,
-.back a {
+.back a,
+main > div > a {
   display: inline-flex;
   align-items: center;
   background-color: #e8f0ec;
@@ -144,7 +127,6 @@ main {
 .activity-detail > a:hover,
 .back a:hover {
   background-color: #d2e4db;
-  opacity: 1;
 }
 
 /* Banner */
@@ -164,8 +146,6 @@ main {
   height: 100%;
   object-fit: cover;
   display: block;
-  opacity: 1;
-  transition: opacity 0.4s ease-in-out;
 }
 
 #estado {
@@ -207,7 +187,9 @@ main {
 }
 
 .contact,
-.accessibility {
+.accessibility,
+.stats-grid,
+div[style*="background-color"] {
   background-color: var(--bg-main);
   border-radius: 8px;
   padding: 1.25rem;
@@ -225,13 +207,8 @@ main {
   font-size: 0.9rem;
   margin-right: 0.5rem;
   margin-top: 0.5rem;
-  transition: background-color 0.2s ease;
   border: none;
-}
-
-.contact-button:hover {
-  background-color: var(--primary-hover);
-  opacity: 1;
+  cursor: pointer;
 }
 
 footer {
@@ -253,11 +230,6 @@ footer a {
   margin-right: 1rem;
 }
 
-footer a:hover {
-  text-decoration: underline;
-}
-
-/* Responsivo */
 @media (min-width: 600px) {
   footer {
     flex-direction: row;
@@ -266,100 +238,99 @@ footer a:hover {
   }
 }
 
-body {
-  padding: 1rem;
-}
-.stats-grid {
-  grid-template-columns: 1fr;
-}
-
-@media (min-width: 600px) {
-  body {
-    padding: 1.5rem;
-  }
-  .form-row {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* --- MODO OSCURO UNIFICADO --- */
+[data-theme="dark"] body {
+  background-color: #121212 !important;
+  color: #f1f5f9 !important;
 }
 
-@media (min-width: 1024px) {
-  .stats-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+[data-theme="dark"] header,
+[data-theme="dark"] main,
+[data-theme="dark"] footer {
+  background-color: #1a1a1a !important;
+  color: #f1f5f9 !important;
+  border: 1px solid #2d3748 !important;
+  box-shadow: none !important;
 }
 
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-textarea:focus-visible {
-  outline: 3px solid #ffb703;
-  outline-offset: 2px;
+[data-theme="dark"] main h1, 
+[data-theme="dark"] main h2, 
+[data-theme="dark"] main h3, 
+[data-theme="dark"] main p, 
+[data-theme="dark"] main span, 
+[data-theme="dark"] main strong, 
+[data-theme="dark"] main small,
+[data-theme="dark"] main li {
+  color: #f1f5f9 !important;
 }
 
-.logo {
-  width: 55px;
-  height: 55px;
-  object-fit: contain;
+[data-theme="dark"] .useful-info,
+[data-theme="dark"] .contact,
+[data-theme="dark"] .accessibility,
+[data-theme="dark"] div[style*="background-color"] {
+  background-color: #222222 !important;
+  border: 1px solid #2d3748 !important;
+  color: #f1f5f9 !important;
 }
 
-.logo-group {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+[data-theme="dark"] .useful-info h3 {
+  color: #52b788 !important;
 }
 
-.nav-toggle {
-  display: none;
-  background: none;
-  border: 1px solid var(--border-color);
-  padding: 0.5rem 0.8rem;
-  border-radius: 6px;
-  font-weight: 600;
-  color: var(--primary);
-  cursor: pointer;
+[data-theme="dark"] #estado {
+  background-color: #1b4332 !important;
+  color: #52b788 !important;
 }
 
-@media (max-width: 767px) {
-  .nav-toggle {
-    display: block;
-  }
-
-  .main-nav {
-    display: none;
-  }
-
-  .main-nav.menu-visible {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
+[data-theme="dark"] main > div > a {
+  background-color: #222222 !important;
+  color: #52b788 !important;
+  border: 1px solid #2d3748 !important;
 }
 
-.media-wrapper {
-  width: 100%;
-  max-width: 100%;
-  overflow: hidden;
-  border-radius: var(--radius);
-  margin-bottom: 1.5rem;
+[data-theme="dark"] .contact-button,
+[data-theme="dark"] button {
+  background-color: #2d6a4f !important;
+  color: #ffffff !important;
 }
 
-.feature-img {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  height: 420px;
-  object-fit: cover;
-  object-position: center;
-  border-radius: var(--radius);
-  transition: opacity 0.4s ease-in-out;
+[data-theme="dark"] select {
+  background-color: #222222 !important;
+  color: #f1f5f9 !important;
+  border-color: #2d3748 !important;
 }
 
-@media (max-width: 767px) {
-  .feature-img {
-    height: 240px;
-  }
+/* ==========================================================
+   SOPORTE DE TEMA PARA LA FICHA DE ACTIVIDAD (ACTIVIDAD.HTML)
+   ========================================================== */
+[data-theme="dark"] #detalle-actividad,
+[data-theme="dark"] #detalle-actividad div,
+[data-theme="dark"] .useful-info,
+[data-theme="dark"] .contact,
+[data-theme="dark"] .accessibility {
+  background-color: #1a1a1a !important;
+  color: #f1f5f9 !important;
+  border-color: #2d3748 !important;
 }
 
+[data-theme="dark"] #detalle-actividad h1,
+[data-theme="dark"] #detalle-actividad h2,
+[data-theme="dark"] #detalle-actividad h3,
+[data-theme="dark"] #detalle-actividad p,
+[data-theme="dark"] #detalle-actividad span,
+[data-theme="dark"] #detalle-actividad strong,
+[data-theme="dark"] #detalle-actividad small,
+[data-theme="dark"] #detalle-actividad li {
+  color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] main > div > a {
+  background-color: #222222 !important;
+  color: #52b788 !important;
+  border: 1px solid #2d3748 !important;
+}
+
+[data-theme="colorblind"] #detalle-actividad,
+[data-theme="colorblind"] #detalle-actividad div {
+  color: #0f172a !important;
+}
