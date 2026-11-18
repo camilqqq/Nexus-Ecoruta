@@ -532,3 +532,16 @@ body {
   color: var(--text-dark);
   transition: background-color 0.3s, color 0.3s;
 }
+
+/* Hacer que la barra del clima ocupe el ancho y centre su contenido interno */
+#clima-info, 
+#clima-info > div, 
+.clima-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 1rem !important;
+}

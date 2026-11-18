@@ -5,12 +5,14 @@ const STORAGE_FILTRO_CAT = "ecoruta_filtro_categoria";
 const STORAGE_FILTRO_BUSQ = "ecoruta_filtro_busqueda";
 let rutasCargadas = [];
 let categoriaSeleccionada = sessionStorage.getItem(STORAGE_FILTRO_CAT) || "Todas";
+
 function normalizarTexto(texto) {
     return texto
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
 }
+
 // --- Gestión de Favoritos (LocalStorage) ---
 function obtenerFavoritos() {
     try {
@@ -24,6 +26,7 @@ function obtenerFavoritos() {
         return [];
     }
 }
+
 function alternarFavorito(id) {
     const favoritos = obtenerFavoritos();
     const existe = favoritos.includes(id);
@@ -31,6 +34,7 @@ function alternarFavorito(id) {
     localStorage.setItem(STORAGE_FAVORITOS, JSON.stringify(actualizados));
     return !existe;
 }
+
 // --- Estados visuales de Carga y Error en API ---
 function mostrarEstadoCarga(contenedor, contador) {
     if (contador)
@@ -44,6 +48,7 @@ function mostrarEstadoCarga(contenedor, contador) {
     </div>
   `;
 }
+
 function mostrarEstadoError(contenedor, contador, mensajeError, alReintentar) {
     if (contador)
         contador.textContent = "Error de carga";
@@ -63,6 +68,7 @@ function mostrarEstadoError(contenedor, contador, mensajeError, alReintentar) {
         btnReintentar.addEventListener("click", alReintentar);
     }
 }
+
 async function obtenerRutasDesdeAPI() {
     try {
         const respuesta = await fetch(API_RUTAS_URL);
@@ -78,6 +84,7 @@ async function obtenerRutasDesdeAPI() {
         return { ok: false, datos: [], error: mensaje };
     }
 }
+
 function filtrarRutas(rutas, categoria, terminoBusqueda) {
     const termino = normalizarTexto(terminoBusqueda.trim());
     const favoritos = obtenerFavoritos();
@@ -89,6 +96,7 @@ function filtrarRutas(rutas, categoria, terminoBusqueda) {
         return coincideCat && coincideTexto;
     });
 }
+
 function iniciarCarruselTarjeta(contenedor, cardIdx) {
     const imgPrincipal = contenedor.querySelector("img");
     if (!imgPrincipal)
@@ -140,6 +148,7 @@ function iniciarCarruselTarjeta(contenedor, cardIdx) {
         }, 3800);
     }, cardIdx * 400);
 }
+
 function renderizarCatalogo(rutas, alCambiarFavorito) {
     const contenedorLista = document.querySelector(".list");
     const contador = document.getElementById("contador-resultados");
@@ -202,17 +211,20 @@ function renderizarCatalogo(rutas, alCambiarFavorito) {
             iniciarCarruselTarjeta(boxImg, index);
     });
 }
+
 document.addEventListener("DOMContentLoaded", async () => {
     const botones = document.querySelectorAll(".filters button");
     const buscador = document.querySelector(".search input");
     const contenedorLista = document.querySelector(".list");
     const contador = document.getElementById("contador-resultados");
-    // Restaurar búsqueda previa desde sessionStorage al volver desde una ficha
+
+    // Restaurar búsqueda previa desde sessionStorage al volver desde una ficha[cite: 8]
     const busquedaGuardada = sessionStorage.getItem(STORAGE_FILTRO_BUSQ) || "";
     if (buscador && busquedaGuardada) {
         buscador.value = busquedaGuardada;
     }
-    // Marcar visualmente el botón de categoría restaurado desde sessionStorage
+
+    // Marcar visualmente el botón de categoría restaurado desde sessionStorage[cite: 8]
     botones.forEach((boton) => {
         const cat = boton.getAttribute("data-categoria") || "Todas";
         if (cat === categoriaSeleccionada) {
@@ -222,6 +234,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             boton.classList.remove("active");
         }
     });
+
     const actualizarVista = () => {
         const texto = buscador ? buscador.value : "";
         sessionStorage.setItem(STORAGE_FILTRO_CAT, categoriaSeleccionada);
@@ -229,6 +242,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const filtradas = filtrarRutas(rutasCargadas, categoriaSeleccionada, texto);
         renderizarCatalogo(filtradas, actualizarVista);
     };
+
     const iniciarCargaRutas = async () => {
         mostrarEstadoCarga(contenedorLista, contador);
         const resultado = await obtenerRutasDesdeAPI();
@@ -239,6 +253,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         rutasCargadas = resultado.datos;
         actualizarVista();
     };
+
     botones.forEach((boton) => {
         boton.addEventListener("click", () => {
             botones.forEach((b) => b.classList.remove("active"));
@@ -247,8 +262,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             actualizarVista();
         });
     });
+
     if (buscador) {
         buscador.addEventListener("input", actualizarVista);
     }
+
     await iniciarCargaRutas();
 });
