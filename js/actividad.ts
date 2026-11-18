@@ -43,11 +43,9 @@ interface ActividadDetalle {
   itinerario?: ItinerarioItem[];
 }
 
-declare global {
-  interface Window {
-    L?: any;
-    cambiarImagen: (src: string) => void;
-  }
+interface Window {
+  L: any;
+  cambiarImagen: (src: string) => void;
 }
 
 const detalleBackup: Record<string, ActividadDetalle> = {

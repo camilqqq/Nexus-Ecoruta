@@ -1,3 +1,4 @@
+"use strict";
 const detalleBackup = {
     "1": {
         id: "1",
