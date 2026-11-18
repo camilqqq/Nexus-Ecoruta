@@ -66,7 +66,6 @@ function construirGaleria(ruta: RutaActividad): string[] {
 
 let todasLasRutas: RutaActividad[] = [];
 let categoriaActiva = "Todas";
-let soloFavoritas = false;
 
 function crearTarjeta(ruta: RutaActividad): HTMLElement {
   const article = document.createElement("article");
@@ -170,8 +169,8 @@ function crearTarjeta(ruta: RutaActividad): HTMLElement {
 }
 
 function renderizarRutas(lista: RutaActividad[]): void {
-  const contenedor = document.getElementById("cards-grid");
-  const contador = document.getElementById("resultsCount");
+  const contenedor = document.querySelector(".activities .list");
+  const contador = document.getElementById("contador-resultados");
   if (!contenedor) return;
 
   contenedor.innerHTML = "";
@@ -188,15 +187,18 @@ function renderizarRutas(lista: RutaActividad[]): void {
 }
 
 function aplicarFiltros(): void {
-  const searchInput = document.getElementById("searchInput") as HTMLInputElement | null;
+  const searchInput = document.querySelector<HTMLInputElement>("main input[type='text'], main input[type='search']");
   const texto = (searchInput?.value || "").trim().toLowerCase();
   const favs = getFavorites();
 
   const filtradas = todasLasRutas.filter((r) => {
     const coincideCat =
-      categoriaActiva === "Todas" ||
-      r.categoria.toLowerCase() === categoriaActiva.toLowerCase();
-    const coincideFav = !soloFavoritas || favs.includes(r.id);
+      categoriaActiva === "Todas"
+        ? true
+        : categoriaActiva === "Favoritas"
+        ? favs.includes(r.id)
+        : r.categoria.toLowerCase() === categoriaActiva.toLowerCase();
+
     const coincideTexto =
       !texto ||
       r.nombre.toLowerCase().includes(texto) ||
@@ -205,7 +207,7 @@ function aplicarFiltros(): void {
       r.detalle.toLowerCase().includes(texto) ||
       (r.emprendimiento_nombre || "").toLowerCase().includes(texto);
 
-    return coincideCat && coincideFav && coincideTexto;
+    return coincideCat && coincideTexto;
   });
 
   renderizarRutas(filtradas);
@@ -225,7 +227,6 @@ async function inicializarCatalogo(): Promise<void> {
     if (respApi.ok) rutasBackend = await respApi.json();
   } catch {}
 
-  // Combinar rutas de PostgreSQL (primero) + catálogo base de data/rutas.json
   const idsBackend = new Set(rutasBackend.map((r) => r.nombre.toLowerCase()));
   const localesSinDuplicar = rutasLocales.filter((r) => !idsBackend.has(r.nombre.toLowerCase()));
   todasLasRutas = [...rutasBackend, ...localesSinDuplicar];
@@ -236,22 +237,16 @@ async function inicializarCatalogo(): Promise<void> {
 document.addEventListener("DOMContentLoaded", () => {
   inicializarCatalogo();
 
-  document.getElementById("searchInput")?.addEventListener("input", aplicarFiltros);
+  document
+    .querySelector<HTMLInputElement>("main input[type='text'], main input[type='search']")
+    ?.addEventListener("input", aplicarFiltros);
 
-  document.querySelectorAll<HTMLButtonElement>(".filter-btn").forEach((btn) => {
+  document.querySelectorAll<HTMLButtonElement>("[data-categoria]").forEach((btn) => {
     btn.addEventListener("click", () => {
-      document.querySelectorAll(".filter-btn").forEach((b) => b.classList.remove("active"));
+      document.querySelectorAll("[data-categoria]").forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
-      categoriaActiva = btn.dataset.category || "Todas";
+      categoriaActiva = btn.dataset.categoria || "Todas";
       aplicarFiltros();
     });
   });
-
-  const btnFavFilter = document.getElementById("btnFavFilter");
-  btnFavFilter?.addEventListener("click", () => {
-    soloFavoritas = !soloFavoritas;
-    btnFavFilter.classList.toggle("active", soloFavoritas);
-    aplicarFiltros();
-  });
 });
-

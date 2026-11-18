@@ -50,7 +50,6 @@ function construirGaleria(ruta) {
 }
 let todasLasRutas = [];
 let categoriaActiva = "Todas";
-let soloFavoritas = false;
 function crearTarjeta(ruta) {
     const article = document.createElement("article");
     article.className = "card";
@@ -130,8 +129,8 @@ function crearTarjeta(ruta) {
     return article;
 }
 function renderizarRutas(lista) {
-    const contenedor = document.getElementById("cards-grid");
-    const contador = document.getElementById("resultsCount");
+    const contenedor = document.querySelector(".activities .list");
+    const contador = document.getElementById("contador-resultados");
     if (!contenedor)
         return;
     contenedor.innerHTML = "";
@@ -145,20 +144,22 @@ function renderizarRutas(lista) {
     lista.forEach((ruta) => contenedor.appendChild(crearTarjeta(ruta)));
 }
 function aplicarFiltros() {
-    const searchInput = document.getElementById("searchInput");
+    const searchInput = document.querySelector("main input[type='text'], main input[type='search']");
     const texto = (searchInput?.value || "").trim().toLowerCase();
     const favs = getFavorites();
     const filtradas = todasLasRutas.filter((r) => {
-        const coincideCat = categoriaActiva === "Todas" ||
-            r.categoria.toLowerCase() === categoriaActiva.toLowerCase();
-        const coincideFav = !soloFavoritas || favs.includes(r.id);
+        const coincideCat = categoriaActiva === "Todas"
+            ? true
+            : categoriaActiva === "Favoritas"
+                ? favs.includes(r.id)
+                : r.categoria.toLowerCase() === categoriaActiva.toLowerCase();
         const coincideTexto = !texto ||
             r.nombre.toLowerCase().includes(texto) ||
             r.ubicacion.toLowerCase().includes(texto) ||
             r.categoria.toLowerCase().includes(texto) ||
             r.detalle.toLowerCase().includes(texto) ||
             (r.emprendimiento_nombre || "").toLowerCase().includes(texto);
-        return coincideCat && coincideFav && coincideTexto;
+        return coincideCat && coincideTexto;
     });
     renderizarRutas(filtradas);
 }
@@ -177,7 +178,6 @@ async function inicializarCatalogo() {
             rutasBackend = await respApi.json();
     }
     catch { }
-    // Combinar rutas de PostgreSQL (primero) + catálogo base de data/rutas.json
     const idsBackend = new Set(rutasBackend.map((r) => r.nombre.toLowerCase()));
     const localesSinDuplicar = rutasLocales.filter((r) => !idsBackend.has(r.nombre.toLowerCase()));
     todasLasRutas = [...rutasBackend, ...localesSinDuplicar];
@@ -185,19 +185,15 @@ async function inicializarCatalogo() {
 }
 document.addEventListener("DOMContentLoaded", () => {
     inicializarCatalogo();
-    document.getElementById("searchInput")?.addEventListener("input", aplicarFiltros);
-    document.querySelectorAll(".filter-btn").forEach((btn) => {
+    document
+        .querySelector("main input[type='text'], main input[type='search']")
+        ?.addEventListener("input", aplicarFiltros);
+    document.querySelectorAll("[data-categoria]").forEach((btn) => {
         btn.addEventListener("click", () => {
-            document.querySelectorAll(".filter-btn").forEach((b) => b.classList.remove("active"));
+            document.querySelectorAll("[data-categoria]").forEach((b) => b.classList.remove("active"));
             btn.classList.add("active");
-            categoriaActiva = btn.dataset.category || "Todas";
+            categoriaActiva = btn.dataset.categoria || "Todas";
             aplicarFiltros();
         });
-    });
-    const btnFavFilter = document.getElementById("btnFavFilter");
-    btnFavFilter?.addEventListener("click", () => {
-        soloFavoritas = !soloFavoritas;
-        btnFavFilter.classList.toggle("active", soloFavoritas);
-        aplicarFiltros();
     });
 });
