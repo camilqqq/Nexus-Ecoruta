@@ -1,22 +1,32 @@
-interface RutaTuristica {
+﻿interface RutaTuristica {
   id: number;
+  tipo?: "ruta" | "actividad";
   nombre: string;
   categoria: "Naturaleza" | "Cultura" | "Gastronomía";
   ubicacion: string;
   actualizado: string;
   detalle: string;
   dificultad: "Fácil" | "Moderada" | "Alta";
+  latitud?: number;
+  longitud?: number;
   imagen: string;
   alt: string;
+  emprendimiento_id?: number;
+  emprendimiento_nombre?: string;
+  whatsapp?: string;
 }
 
-const API_RUTAS_URL = "data/rutas.json";
-const STORAGE_FAVORITOS = "ecoruta_favoritos";
+const BACKEND_RUTAS_URL = "http://localhost:8000/api/rutas";
+const FALLBACK_RUTAS_URL = "data/rutas.json";
+const WHATSAPP_DEFECTO = "56912345678";
+
+const RUTAS_STORAGE_FAVORITOS = "ecoruta_favoritos";
 const STORAGE_FILTRO_CAT = "ecoruta_filtro_categoria";
 const STORAGE_FILTRO_BUSQ = "ecoruta_filtro_busqueda";
 
 let rutasCargadas: RutaTuristica[] = [];
-let categoriaSeleccionada: string = sessionStorage.getItem(STORAGE_FILTRO_CAT) || "Todas";
+let categoriaSeleccionada: string =
+  sessionStorage.getItem(STORAGE_FILTRO_CAT) || "Todas";
 
 function normalizarTexto(texto: string): string {
   return texto
@@ -25,28 +35,33 @@ function normalizarTexto(texto: string): string {
     .replace(/[\u0300-\u036f]/g, "");
 }
 
-// --- Gestión de Favoritos (LocalStorage) ---
-function obtenerFavoritos(): number[] {
+function obtenerFavoritosCatalogo(): number[] {
   try {
-    const raw = localStorage.getItem(STORAGE_FAVORITOS);
+    const raw = localStorage.getItem(RUTAS_STORAGE_FAVORITOS);
     if (!raw) return [];
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed.filter((id) => typeof id === "number") : [];
+    return Array.isArray(parsed)
+      ? parsed.filter((id) => typeof id === "number")
+      : [];
   } catch {
     return [];
   }
 }
 
-function alternarFavorito(id: number): boolean {
-  const favoritos = obtenerFavoritos();
+function alternarFavoritoCatalogo(id: number): boolean {
+  const favoritos = obtenerFavoritosCatalogo();
   const existe = favoritos.includes(id);
-  const actualizados = existe ? favoritos.filter((item) => item !== id) : [...favoritos, id];
-  localStorage.setItem(STORAGE_FAVORITOS, JSON.stringify(actualizados));
+  const actualizados = existe
+    ? favoritos.filter((item) => item !== id)
+    : [...favoritos, id];
+  localStorage.setItem(RUTAS_STORAGE_FAVORITOS, JSON.stringify(actualizados));
   return !existe;
 }
 
-// --- Estados visuales de Carga y Error en API ---
-function mostrarEstadoCarga(contenedor: HTMLElement | null, contador: HTMLElement | null): void {
+function mostrarEstadoCarga(
+  contenedor: HTMLElement | null,
+  contador: HTMLElement | null
+): void {
   if (contador) contador.textContent = "Cargando...";
   if (!contenedor) return;
   contenedor.innerHTML = `
@@ -80,19 +95,45 @@ function mostrarEstadoError(
   }
 }
 
-async function obtenerRutasDesdeAPI(): Promise<{ ok: boolean; datos: RutaTuristica[]; error?: string }> {
+async function obtenerRutasDesdeAPI(): Promise<{
+  ok: boolean;
+  datos: RutaTuristica[];
+  error?: string;
+}> {
   try {
-    const respuesta = await fetch(API_RUTAS_URL);
+    const respuestaBackend = await fetch(BACKEND_RUTAS_URL);
+    if (respuestaBackend.ok) {
+      const datosBackend: RutaTuristica[] = await respuestaBackend.json();
+      if (Array.isArray(datosBackend) && datosBackend.length > 0) {
+        return { ok: true, datos: datosBackend };
+      }
+    }
+  } catch {
+    console.warn("Backend no disponible en localhost:8000, usando respaldo local.");
+  }
+
+  try {
+    const respuesta = await fetch(FALLBACK_RUTAS_URL);
     if (!respuesta.ok) {
       throw new Error(`Error HTTP ${respuesta.status} al consultar el catálogo.`);
     }
     const datos: RutaTuristica[] = await respuesta.json();
     return { ok: true, datos };
   } catch (error) {
-    const mensaje = error instanceof Error ? error.message : "Error de conexión con el servidor.";
+    const mensaje =
+      error instanceof Error ? error.message : "Error de conexión con el servidor.";
     console.error("Error al obtener rutas desde la API:", error);
     return { ok: false, datos: [], error: mensaje };
   }
+}
+
+function construirEnlaceWhatsApp(ruta: RutaTuristica): string {
+  const telefono = (ruta.whatsapp || WHATSAPP_DEFECTO).replace(/\D/g, "");
+  const destinatario = ruta.emprendimiento_nombre
+    ? `Hola ${ruta.emprendimiento_nombre}`
+    : "Hola";
+  const texto = `${destinatario}, vengo desde EcoRuta Temuco y me interesa consultar por "${ruta.nombre}".`;
+  return `https://wa.me/${telefono}?text=${encodeURIComponent(texto)}`;
 }
 
 function filtrarRutas(
@@ -101,17 +142,20 @@ function filtrarRutas(
   terminoBusqueda: string
 ): RutaTuristica[] {
   const termino = normalizarTexto(terminoBusqueda.trim());
-  const favoritos = obtenerFavoritos();
+  const favoritos = obtenerFavoritosCatalogo();
 
   return rutas.filter((ruta) => {
     const coincideCat =
       categoria === "Todas" ||
-      (categoria === "Favoritas" ? favoritos.includes(ruta.id) : ruta.categoria === categoria);
+      (categoria === "Favoritas"
+        ? favoritos.includes(ruta.id)
+        : ruta.categoria === categoria);
 
     const textoCompleto = normalizarTexto(
-      `${ruta.nombre} ${ruta.categoria} ${ruta.ubicacion} ${ruta.detalle} ${ruta.dificultad}`
+      `${ruta.nombre} ${ruta.categoria} ${ruta.ubicacion} ${ruta.detalle} ${ruta.dificultad} ${ruta.emprendimiento_nombre || ""}`
     );
     const coincideTexto = !termino || textoCompleto.includes(termino);
+
     return coincideCat && coincideTexto;
   });
 }
@@ -173,7 +217,10 @@ function iniciarCarruselTarjeta(contenedor: HTMLElement, cardIdx: number): void 
   }, cardIdx * 400);
 }
 
-function renderizarCatalogo(rutas: RutaTuristica[], alCambiarFavorito?: () => void): void {
+function renderizarCatalogo(
+  rutas: RutaTuristica[],
+  alCambiarFavorito?: () => void
+): void {
   const contenedorLista = document.querySelector(".list") as HTMLElement | null;
   const contador = document.getElementById("contador-resultados");
   if (!contenedorLista) return;
@@ -195,10 +242,15 @@ function renderizarCatalogo(rutas: RutaTuristica[], alCambiarFavorito?: () => vo
     return;
   }
 
-  const favoritosActuales = obtenerFavoritos();
+  const favoritosActuales = obtenerFavoritosCatalogo();
 
   rutas.forEach((ruta, index) => {
     const esFavorito = favoritosActuales.includes(ruta.id);
+    const enlaceWhatsApp = construirEnlaceWhatsApp(ruta);
+    const subtituloEmprendimiento = ruta.emprendimiento_nombre
+      ? ` • ${ruta.emprendimiento_nombre}`
+      : "";
+
     const article = document.createElement("article");
     article.className = "activity";
     article.setAttribute("data-categoria", ruta.categoria);
@@ -214,15 +266,21 @@ function renderizarCatalogo(rutas: RutaTuristica[], alCambiarFavorito?: () => vo
         <div class="activity-header">
           <div>
             <h3>${ruta.nombre}</h3>
-            <p>${ruta.categoria} • ${ruta.ubicacion}</p>
+            <p>${ruta.categoria} • ${ruta.ubicacion}${subtituloEmprendimiento}</p>
           </div>
           <small>Actualizado: ${ruta.actualizado}</small>
         </div>
         <p>${ruta.detalle}</p>
         <div class="buttons">
           <a href="paginas/Actividad.html?id=${ruta.id}" class="primary" aria-label="Ver ficha detallada de ${ruta.nombre}">Ver ficha</a>
-          <a href="https://wa.me/56912345678" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp sobre ${ruta.nombre}">Contactar</a>
-          <button type="button" class="btn-favorito ${esFavorito ? "activo" : ""}" data-id="${ruta.id}" aria-pressed="${esFavorito}" aria-label="${esFavorito ? "Quitar de favoritos" : "Guardar en favoritos"}: ${ruta.nombre}" style="padding: 0.5rem 0.85rem; border-radius: 8px; border: 1px solid ${esFavorito ? "#e53e3e" : "#cbd5e0"}; background: ${esFavorito ? "#fff5f5" : "#fff"}; color: ${esFavorito ? "#c53030" : "#2d3748"}; font-weight: 600; cursor: pointer;">
+          <a href="${enlaceWhatsApp}" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp sobre ${ruta.nombre}">Contactar</a>
+          <button type="button" class="btn-favorito ${esFavorito ? "activo" : ""}" data-id="${ruta.id}" aria-pressed="${esFavorito}" aria-label="${
+            esFavorito ? "Quitar de favoritos" : "Guardar en favoritos"
+          }: ${ruta.nombre}" style="padding: 0.5rem 0.85rem; border-radius: 8px; border: 1px solid ${
+            esFavorito ? "#e53e3e" : "#cbd5e0"
+          }; background: ${esFavorito ? "#fff5f5" : "#fff"}; color: ${
+            esFavorito ? "#c53030" : "#2d3748"
+          }; font-weight: 600; cursor: pointer;">
             ${esFavorito ? "❤️ Guardado" : "🤍 Favorito"}
           </button>
         </div>
@@ -234,7 +292,7 @@ function renderizarCatalogo(rutas: RutaTuristica[], alCambiarFavorito?: () => vo
     const btnFav = article.querySelector(".btn-favorito") as HTMLButtonElement | null;
     if (btnFav) {
       btnFav.addEventListener("click", () => {
-        alternarFavorito(ruta.id);
+        alternarFavoritoCatalogo(ruta.id);
         if (alCambiarFavorito) alCambiarFavorito();
       });
     }
@@ -250,13 +308,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   const contenedorLista = document.querySelector(".list") as HTMLElement | null;
   const contador = document.getElementById("contador-resultados");
 
-  // Restaurar búsqueda previa desde sessionStorage al volver desde una ficha
   const busquedaGuardada = sessionStorage.getItem(STORAGE_FILTRO_BUSQ) || "";
   if (buscador && busquedaGuardada) {
     buscador.value = busquedaGuardada;
   }
 
-  // Marcar visualmente el botón de categoría restaurado desde sessionStorage
   botones.forEach((boton) => {
     const cat = boton.getAttribute("data-categoria") || "Todas";
     if (cat === categoriaSeleccionada) {
@@ -270,7 +326,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const texto = buscador ? buscador.value : "";
     sessionStorage.setItem(STORAGE_FILTRO_CAT, categoriaSeleccionada);
     sessionStorage.setItem(STORAGE_FILTRO_BUSQ, texto);
-
     const filtradas = filtrarRutas(rutasCargadas, categoriaSeleccionada, texto);
     renderizarCatalogo(filtradas, actualizarVista);
   };
@@ -278,7 +333,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const iniciarCargaRutas = async () => {
     mostrarEstadoCarga(contenedorLista, contador);
     const resultado = await obtenerRutasDesdeAPI();
-
     if (!resultado.ok) {
       mostrarEstadoError(
         contenedorLista,
@@ -288,7 +342,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       );
       return;
     }
-
     rutasCargadas = resultado.datos;
     actualizarVista();
   };
@@ -308,3 +361,4 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   await iniciarCargaRutas();
 });
+
