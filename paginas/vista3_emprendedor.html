@@ -141,7 +141,7 @@
       <div class="footer-links">
         <a href="contacto.html" data-i18n="contacto.contacto">Contacto</a>
         <a href="https://github.com/camilqqq/Nexus-Ecoruta/blob/main/documentos/reportes/reporte-bug-bounty.pdf" target="_blank" rel="noopener">Bug Bounty</a>
-        <a href="../index.html" data-i18n="footer.admin">Información</a>
+        <a href="../index.html" data-i18n="nav.inicio">Información</a>
       </div>
     </footer>
 
@@ -260,7 +260,7 @@
           const lang = localStorage.getItem("selectedLang") || "es";
           const dict = translations[lang] || translations["es"];
           if (mensaje) {
-            mensaje.textContent = dict["emprendedor.exito"] || '¡Solicitud enviada con éxito! Ya está disponible en la vista de administración.';
+            mensaje.textContent = dict["emprendedor.exito"] || '¡Solicitud enviada y guardada con éxito!';
           }
           formulario.reset();
         });

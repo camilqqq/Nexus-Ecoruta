@@ -322,10 +322,10 @@ nav select option {
 .buttons button {
   flex: 1;
   text-align: center;
-  padding: 0.65rem 0.5rem; /* Un poco más de espacio arriba y abajo */
+  padding: 0.65rem 0.5rem; 
   border-radius: 8px;
   font-weight: 600;
-  font-size: 0.95rem;      /* Subimos el tamaño de la letra para que destaque más */
+  font-size: 0.95rem;      
   text-decoration: none;
   background-color: var(--bg-main);
   color: var(--text-dark);
