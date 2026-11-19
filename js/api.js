@@ -237,6 +237,10 @@ async function cargarClimaDestino(contenedor, idxDestino) {
 document.addEventListener("DOMContentLoaded", async () => {
   const contenedorClima = document.getElementById("clima-info");
   if (contenedorClima) {
+    contenedorClima.style.display = "block";
+    contenedorClima.style.width = "100%";
+    contenedorClima.style.maxWidth = "100%";
+    contenedorClima.style.boxSizing = "border-box";
     await detectarUbicacionInicial();
     cargarClimaDestino(contenedorClima, 0);
   }
