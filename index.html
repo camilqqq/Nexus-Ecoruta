@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nexus Ecoruta - Turismo Sustentable</title>
   <link rel="stylesheet" href="css/index.css" />
-  <link rel="preload" as="image" href="assets/imagenes/Sendero/sendero.jpg" fetchpriority="high" />
+  <link rel="preload" as="image" href="assets/imagenes/Sendero/Sendero_Nielol.jpg" fetchpriority="high" />
   <link rel="preload" as="fetch" href="data/rutas.json" crossorigin />
   <style>
     .activity .image {
@@ -94,7 +94,7 @@
   <header>
     <div class="header">
       <div class="brand">
-        <img src="assets/imagenes/Logo.png" alt="Logo Nexus Ecoruta" class="logo" width="120" height="45" />
+        <img src="assets/imagenes/Logo.png" alt="Logo Nexus Ecoruta" class="logo" width="120" height="45" fetchpriority="high" />
         <div>
           <p class="brand-name">Nexus Ecoruta</p>
           <p data-i18n="brand.subtitle">Turismo Sustentable en La Araucanía</p>
@@ -105,10 +105,12 @@
         <a href="index.html" class="active" data-i18n="nav.inicio">Inicio</a>
         <a href="paginas/emprendimientos.html" data-i18n="nav.emprendimientos">Emprendimientos</a>
         <a href="paginas/contacto.html" data-i18n="nav.contacto">Contacto</a>
+        <!-- Selector de idioma nativo con banderas -->
         <select id="language-selector" aria-label="Seleccionar idioma">
           <option value="es">🇪🇸 Español</option>
           <option value="en">🇬🇧 English</option>
         </select>
+        <!-- Selector de Temas y Accesibilidad -->
         <select id="theme-selector" aria-label="Seleccionar modo de visualización">
           <option value="normal">☀️ Normal</option>
           <option value="dark">🌙 Oscuro</option>
@@ -122,7 +124,7 @@
     <section class="hero">
       <h1 data-i18n="hero.title">Descubre la magia natural y cultural de nuestra región</h1>
       <p data-i18n="hero.subtitle">
-        Explora s, ferias agroecológicas y espacios patrimoniales diseñados para un turismo consciente y respetuoso con el medio ambiente.
+        Explora senderos, ferias agroecológicas y espacios patrimoniales diseñados para un turismo consciente y respetuoso con el medio ambiente.
       </p>
 
       <div class="search">
@@ -149,18 +151,9 @@
         <span id="contador-resultados">18 resultados</span>
       </div>
 
-     <div class="list">
-  <article class="activity">
-    <div class="image">
-      <img src="assets/imagenes/Sendero/sendero.jpg" alt="Sendero Cerro Ñielol" class="activa" fetchpriority="high" decoding="async" />
-    </div>
-    <div class="content">
-      <h3>Sendero Ñielol</h3>
-      <p class="meta">Naturaleza • Parque Ñielol, Temuco</p>
-      <p class="details">Duración: 1 hr 30 min · Dificultad: Moderada</p>
-    </div>
-  </article>
-</div>
+      <div class="list">
+        <!-- El catálogo se renderiza dinámicamente mediante rutas.js -->
+      </div>
     </section>
 
     <div style="max-width: 1100px; margin: 2rem auto 1rem auto; padding: 0 1rem;">
@@ -182,6 +175,7 @@
   <script src="js/rutas.js" defer></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // --- Selector de idioma nativo ---
       const selector = document.getElementById("language-selector");
       if (selector) {
         selector.value = localStorage.getItem("selectedLang") || "es";
@@ -191,6 +185,7 @@
         });
       }
 
+      // --- Selector de Tema (Normal, Oscuro, Daltónico) ---
       const themeSelector = document.getElementById("theme-selector");
       if (themeSelector) {
         const savedTheme = localStorage.getItem("selectedTheme") || "normal";
@@ -211,6 +206,7 @@
         }
       }
 
+      // --- Sincronizar aria-pressed en filtros activos ---
       const filterButtons = document.querySelectorAll(".filters button");
       const syncFilterPressed = () => {
         filterButtons.forEach((btn) => {
@@ -222,6 +218,7 @@
         btn.addEventListener("click", () => setTimeout(syncFilterPressed, 0));
       });
 
+      // --- Accesibilidad por teclado en puntitos del carrusel (.carrusel-dots span) ---
       const listContainer = document.querySelector(".list");
       if (listContainer) {
         const enableDotsKeyboard = () => {

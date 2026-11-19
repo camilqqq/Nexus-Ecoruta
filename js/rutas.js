@@ -31,358 +31,286 @@ const GALERIAS_ACTIVIDADES = {
 };
 
 function normalizarTexto(texto) {
-  return texto
+  return String(texto || "")
     .toLowerCase()
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
 }
 
-function normalizarImagen(rutaImg) {
-  if (!rutaImg) return "assets/imagenes/Sendero/sendero";
-  if (rutaImg.startsWith("../assets/")) return rutaImg.replace("../", "");
-  return rutaImg;
-}
-
-function obtenerImagenesRuta(ruta) {
-  const principal = normalizarImagen(ruta.imagen);
-  if (Array.isArray(ruta.imagenes) && ruta.imagenes.length > 0) {
-    return ruta.imagenes.map(normalizarImagen);
-  }
-  if (GALERIAS_ACTIVIDADES[ruta.id]) {
-    return GALERIAS_ACTIVIDADES[ruta.id];
-  }
-  return [principal];
-}
-
-function rutasObtenerFav() {
+function obtenerFavoritos() {
   try {
     const raw = localStorage.getItem(RUTAS_STORAGE_FAV);
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed.filter((id) => typeof id === "number") : [];
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
   } catch {
     return [];
   }
 }
 
-function rutasAlternarFav(id) {
-  const favoritos = rutasObtenerFav();
-  const existe = favoritos.includes(id);
-  const actualizados = existe
-    ? favoritos.filter((item) => item !== id)
-    : [...favoritos, id];
-  localStorage.setItem(RUTAS_STORAGE_FAV, JSON.stringify(actualizados));
-  return !existe;
+function guardarFavoritos(favoritos) {
+  localStorage.setItem(RUTAS_STORAGE_FAV, JSON.stringify(favoritos));
 }
 
-function mostrarEstadoCarga(contenedor, contador) {
-  if (contador) contador.textContent = "Cargando...";
-  if (!contenedor) return;
-  contenedor.innerHTML = `
-    <div class="estado-api estado-cargando" role="status" aria-live="polite" style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: var(--primary);">
-      <p style="font-weight: 600; margin-bottom: 0.35rem;">Cargando rutas y actividades sustentables...</p>
-      <small style="color: var(--text-muted);">Conectando con el catálogo de EcoRuta Temuco</small>
-    </div>
-  `;
-}
-
-function mostrarEstadoError(contenedor, contador, mensajeError, alReintentar) {
-  if (contador) contador.textContent = "Error de carga";
-  if (!contenedor) return;
-  contenedor.innerHTML = `
-    <div class="estado-api estado-error" role="alert" style="grid-column: 1 / -1; text-align: center; padding: 2rem; background: var(--surface); border: 1px solid #feb2b2; border-radius: 12px; color: #e53e3e;">
-      <p style="font-weight: 700; margin-bottom: 0.4rem;">No se pudieron cargar las rutas en este momento</p>
-      <p style="font-size: 0.9rem; margin-bottom: 1rem;">${mensajeError}</p>
-      <button type="button" id="btn-reintentar-api" style="padding: 0.55rem 1.2rem; border-radius: 8px; border: none; background: var(--primary); color: var(--surface); font-weight: 600; cursor: pointer;">
-        Reintentar carga
-      </button>
-    </div>
-  `;
-  const btnReintentar = document.getElementById("btn-reintentar-api");
-  if (btnReintentar) {
-    btnReintentar.addEventListener("click", alReintentar);
+function alternarFavorito(id) {
+  const favoritos = obtenerFavoritos();
+  const idx = favoritos.indexOf(id);
+  if (idx >= 0) {
+    favoritos.splice(idx, 1);
+  } else {
+    favoritos.push(id);
   }
+  guardarFavoritos(favoritos);
+  filtrarYRenderizar();
 }
 
-async function obtenerRutasDesdeAPI() {
-  let rutasLocales = [];
-  let rutasBackend = [];
+function obtenerTextoTraducido(ruta, campo, lang) {
+  if (lang === "en" && ruta[`${campo}_en`]) {
+    return ruta[`${campo}_en`];
+  }
+  return ruta[campo] || "";
+}
 
-  try {
-    const respLocal = await fetch(API_LOCAL_URL);
-    if (respLocal.ok) {
-      rutasLocales = await respLocal.json();
+function inicializarCarruseles() {
+  const tarjetas = document.querySelectorAll(".activity");
+
+  tarjetas.forEach((tarjeta) => {
+    const contenedorImg = tarjeta.querySelector(".image");
+    const imgPrincipal = contenedorImg ? contenedorImg.querySelector("img") : null;
+    if (!contenedorImg || !imgPrincipal) return;
+
+    if (contenedorImg.querySelector(".carrusel-dots")) return;
+
+    const id = Number(tarjeta.dataset.id);
+    const titulo = tarjeta.querySelector("h3")?.textContent?.trim() || "Actividad";
+    const srcBase = imgPrincipal.getAttribute("src");
+
+    let galeria = GALERIAS_ACTIVIDADES[id]
+      ? [...GALERIAS_ACTIVIDADES[id]]
+      : [srcBase, srcBase, srcBase];
+
+    if (galeria[0] !== srcBase) {
+      galeria = [srcBase, ...galeria.filter((s) => s !== srcBase)];
     }
-  } catch {}
 
-  try {
-    const respBack = await fetch(API_BACKEND_URL);
-    if (respBack.ok) {
-      rutasBackend = await respBack.json();
-    }
-  } catch {}
+    imgPrincipal.classList.add("activa");
 
-  if (rutasLocales.length === 0 && rutasBackend.length === 0) {
-    return {
-      ok: false,
-      datos: [],
-      error: "No se pudo conectar con el catálogo local ni con la base de datos."
-    };
-  }
-
-  const nombresBackend = new Set(rutasBackend.map((r) => r.nombre.toLowerCase()));
-  const localesSinDuplicar = rutasLocales.filter(
-    (r) => !nombresBackend.has(r.nombre.toLowerCase())
-  );
-
-  return {
-    ok: true,
-    datos: [...rutasBackend, ...localesSinDuplicar]
-  };
-}
-
-function filtrarRutas(rutas, categoria, terminoBusqueda) {
-  const termino = normalizarTexto(terminoBusqueda.trim());
-  const favoritos = rutasObtenerFav();
-
-  return rutas.filter((ruta) => {
-    const coincideCat =
-      categoria === "Todas" ||
-      (categoria === "Favoritas"
-        ? favoritos.includes(ruta.id)
-        : ruta.categoria === categoria);
-
-    const textoCompleto = normalizarTexto(
-      `${ruta.nombre} ${ruta.categoria} ${ruta.ubicacion} ${ruta.detalle} ${ruta.dificultad} ${ruta.emprendimiento_nombre || ""}`
-    );
-    const coincideTexto = !termino || textoCompleto.includes(termino);
-
-    return coincideCat && coincideTexto;
-  });
-}
-
-function iniciarCarruselTarjeta(contenedor, listaImagenes, cardIdx) {
-  const imgPrincipal = contenedor.querySelector("img");
-  if (!imgPrincipal) return;
-
-  imgPrincipal.classList.add("activa");
-
-  if (!Array.isArray(listaImagenes) || listaImagenes.length <= 1) {
-    return;
-  }
-
-  const imagenes = [imgPrincipal];
-  const dotsBox = document.createElement("div");
-  dotsBox.className = "carrusel-dots";
-
-  listaImagenes.forEach((rutaImg, idx) => {
-    if (idx > 0) {
+    galeria.slice(1).forEach((src, i) => {
       const img = document.createElement("img");
-      img.src = rutaImg;
-      img.alt = `${imgPrincipal.alt} (${idx + 1})`;
+      img.src = src;
+      img.alt = `${titulo} (${i + 2})`;
       img.loading = "lazy";
-      img.onerror = function () {
-        this.onerror = null;
-        this.src = imgPrincipal.src;
-      };
-      contenedor.appendChild(img);
-      imagenes.push(img);
+      img.decoding = "async";
+      if (!GALERIAS_ACTIVIDADES[id]) {
+        img.style.objectPosition = i === 0 ? "left center" : "right center";
+      }
+      contenedorImg.appendChild(img);
+    });
+
+    const todasImgs = contenedorImg.querySelectorAll("img");
+    const dotsContainer = document.createElement("div");
+    dotsContainer.className = "carrusel-dots";
+
+    galeria.forEach((_, idx) => {
+      const dot = document.createElement("span");
+      if (idx === 0) dot.classList.add("activa");
+      dot.addEventListener("click", (e) => {
+        e.stopPropagation();
+        mostrarSlide(idx);
+        reiniciarIntervalo();
+      });
+      dotsContainer.appendChild(dot);
+    });
+
+    contenedorImg.appendChild(dotsContainer);
+    const dots = dotsContainer.querySelectorAll("span");
+
+    let indiceActual = 0;
+    let intervalo = null;
+
+    function mostrarSlide(nuevoIndice) {
+      todasImgs[indiceActual].classList.remove("activa");
+      dots[indiceActual].classList.remove("activa");
+      indiceActual = (nuevoIndice + todasImgs.length) % todasImgs.length;
+      todasImgs[indiceActual].classList.add("activa");
+      dots[indiceActual].classList.add("activa");
     }
 
-    const dot = document.createElement("span");
-    dot.setAttribute("role", "button");
-    dot.setAttribute("tabindex", "0");
-    dot.setAttribute("aria-label", `Ver imagen ${idx + 1}`);
-    if (idx === 0) dot.classList.add("activa");
+    function reiniciarIntervalo() {
+      clearInterval(intervalo);
+      intervalo = setInterval(() => {
+        mostrarSlide(indiceActual + 1);
+      }, 4000);
+    }
 
-    dot.addEventListener("click", (e) => {
-      e.preventDefault();
-      cambiarSlide(idx);
-    });
+    contenedorImg.addEventListener("mouseenter", () => clearInterval(intervalo));
+    contenedorImg.addEventListener("mouseleave", reiniciarIntervalo);
 
-    dot.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        cambiarSlide(idx);
-      }
-    });
-
-    dotsBox.appendChild(dot);
+    reiniciarIntervalo();
   });
-
-  contenedor.appendChild(dotsBox);
-  const dots = dotsBox.querySelectorAll("span");
-  let indice = 0;
-
-  function cambiarSlide(nuevoIndice) {
-    imagenes[indice].classList.remove("activa");
-    dots[indice].classList.remove("activa");
-    indice = nuevoIndice;
-    imagenes[indice].classList.add("activa");
-    dots[indice].classList.add("activa");
-  }
-
-  setTimeout(() => {
-    setInterval(() => {
-      cambiarSlide((indice + 1) % imagenes.length);
-    }, 3800);
-  }, cardIdx * 400);
 }
 
-function renderizarCatalogo(rutas, alCambiarFavorito) {
-  const contenedorLista = document.querySelector(".list");
+function renderizarRutas(lista) {
+  const contenedor = document.querySelector(".list");
   const contador = document.getElementById("contador-resultados");
-  if (!contenedorLista) return;
+  if (!contenedor) return;
 
-  contenedorLista.innerHTML = "";
+  const lang = localStorage.getItem("selectedLang") || "es";
+  const favoritos = obtenerFavoritos();
+
   if (contador) {
-    contador.textContent = `${rutas.length} resultado${rutas.length === 1 ? "" : "s"}`;
+    contador.textContent =
+      lang === "en"
+        ? `${lista.length} ${lista.length === 1 ? "result" : "results"}`
+        : `${lista.length} ${lista.length === 1 ? "resultado" : "resultados"}`;
   }
 
-  if (rutas.length === 0) {
-    const mensaje = document.createElement("p");
-    mensaje.className = "mensaje-vacio";
-    mensaje.textContent =
-      categoriaSeleccionada === "Favoritas"
-        ? "Aún no tienes rutas o actividades guardadas en Favoritos."
-        : "No se encontraron actividades con esos criterios.";
-    contenedorLista.appendChild(mensaje);
+  if (!lista.length) {
+    contenedor.innerHTML = `<p style="grid-column: 1 / -1; text-align: center; padding: 2rem;">${
+      lang === "en"
+        ? "No activities found matching your search."
+        : "No se encontraron actividades que coincidan con tu búsqueda."
+    }</p>`;
     return;
   }
 
-  const favoritosActuales = rutasObtenerFav();
+  contenedor.innerHTML = lista
+    .map((ruta, index) => {
+      const esFavorita = favoritos.includes(ruta.id);
+      const nombre = obtenerTextoTraducido(ruta, "nombre", lang);
+      const ubicacion = obtenerTextoTraducido(ruta, "ubicacion", lang);
+      const categoria = obtenerTextoTraducido(ruta, "categoria", lang);
+      const detalles = obtenerTextoTraducido(ruta, "detalles", lang);
+      const alt = obtenerTextoTraducido(ruta, "alt", lang) || nombre;
+      const actualizado = ruta.actualizado || "";
 
-  rutas.forEach((ruta, index) => {
-    const esFavorito = favoritosActuales.includes(ruta.id);
-    const article = document.createElement("article");
-    article.className = "activity";
-    article.setAttribute("data-categoria", ruta.categoria);
-    article.setAttribute("data-dificultad", ruta.dificultad);
+      const txtVerFicha = lang === "en" ? "View details" : "Ver ficha";
+      const txtContactar = lang === "en" ? "Contact" : "Contactar";
+      const txtFavorito = esFavorita
+        ? lang === "en"
+          ? "❤️ Saved"
+          : "❤️ Favorito"
+        : lang === "en"
+        ? "🤍 Favorite"
+        : "🤍 Favorito";
+      const txtActualizado = lang === "en" ? "Updated:" : "Actualizado:";
 
-    const imagenesRuta = obtenerImagenesRuta(ruta);
-    const imgSrc = imagenesRuta[0];
-    const empTag = ruta.emprendimiento_nombre ? ` • ${ruta.emprendimiento_nombre}` : "";
-    const actualizadoTxt = ruta.actualizado
-      ? `Actualizado: ${ruta.actualizado}`
-      : `Dificultad: ${ruta.dificultad}`;
-    const fichaHref = `paginas/Actividad.html?id=${ruta.id}`;
-    const waHref =
-      ruta.whatsapp_url ||
-      `https://wa.me/${ruta.whatsapp || "56912345678"}?text=${encodeURIComponent(
-        `Hola, vengo desde EcoRuta Temuco y me interesa consultar por "${ruta.nombre}".`
-      )}`;
-
-    article.innerHTML = `
-      <div class="image">
-        <img
-          src="${imgSrc}"
-          alt="${ruta.alt || ruta.nombre}"
-          width="400"
-          height="250"
-         ${index === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}
-          onerror="this.onerror=null;this.src='assets/imagenes/Sendero/sendero.jpg';"
-        />
-      </div>
-      <div class="info">
-        <div class="activity-header">
-          <div>
-            <h3>${ruta.nombre}</h3>
-            <p>${ruta.categoria} • ${ruta.ubicacion}${empTag}</p>
+      return `
+        <article class="activity" data-id="${ruta.id}">
+          <div class="image">
+            <img
+              src="${ruta.imagen}"
+              alt="${alt}"
+              class="activa"
+              decoding="async"
+              ${index === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}
+            />
           </div>
-          <small>${actualizadoTxt}</small>
-        </div>
-        <p>${ruta.detalle}</p>
-        <div class="buttons">
-          <a href="${fichaHref}" class="primary" aria-label="Ver ficha detallada de ${ruta.nombre}">Ver ficha</a>
-          <a href="${waHref}" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp sobre ${ruta.nombre}">Contactar</a>
-          <button
-            type="button"
-            class="btn-favorito ${esFavorito ? "activo favorito-activo" : ""}"
-            data-id="${ruta.id}"
-            aria-pressed="${esFavorito}"
-            aria-label="${esFavorito ? "Quitar de favoritos" : "Guardar en favoritos"}: ${ruta.nombre}"
-          >
-            ${esFavorito ? "❤ Guardado" : "🤍 Favorito"}
-          </button>
-        </div>
-      </div>
-    `;
+          <div class="content">
+            <h3>${nombre}</h3>
+            <p class="meta">${categoria} • ${ubicacion}</p>
+            ${actualizado ? `<p class="updated">${txtActualizado} ${actualizado}</p>` : ""}
+            <p class="details">${detalles}</p>
+            <div class="actions">
+              <a href="paginas/actividad.html?id=${ruta.id}" class="btn-primary">${txtVerFicha}</a>
+              <a href="paginas/contacto.html?actividad=${encodeURIComponent(nombre)}" class="btn-secondary">${txtContactar}</a>
+              <button type="button" class="btn-fav" data-fav-id="${ruta.id}" aria-pressed="${esFavorita}">${txtFavorito}</button>
+            </div>
+          </div>
+        </article>
+      `;
+    })
+    .join("");
 
-    contenedorLista.appendChild(article);
-
-    const btnFav = article.querySelector(".btn-favorito");
-    if (btnFav) {
-      btnFav.addEventListener("click", () => {
-        rutasAlternarFav(ruta.id);
-        if (alCambiarFavorito) alCambiarFavorito();
-      });
-    }
-
-    const boxImg = article.querySelector(".image");
-    if (boxImg) {
-      iniciarCarruselTarjeta(boxImg, imagenesRuta, index);
-    }
-  });
-}
-
-document.addEventListener("DOMContentLoaded", async () => {
-  const botones = document.querySelectorAll(".filters button");
-  const buscador = document.querySelector(".search input");
-  const contenedorLista = document.querySelector(".list");
-  const contador = document.getElementById("contador-resultados");
-
-  const busquedaGuardada = sessionStorage.getItem(STORAGE_FILTRO_BUSQ) || "";
-  if (buscador && busquedaGuardada) {
-    buscador.value = busquedaGuardada;
-  }
-
-  botones.forEach((boton) => {
-    const cat = boton.getAttribute("data-categoria") || "Todas";
-    const esActiva = cat === categoriaSeleccionada;
-    boton.classList.toggle("active", esActiva);
-    boton.setAttribute("aria-pressed", String(esActiva));
-  });
-
-  const actualizarVista = () => {
-    const texto = buscador ? buscador.value : "";
-    sessionStorage.setItem(STORAGE_FILTRO_CAT, categoriaSeleccionada);
-    sessionStorage.setItem(STORAGE_FILTRO_BUSQ, texto);
-    const filtradas = filtrarRutas(rutasCargadas, categoriaSeleccionada, texto);
-    renderizarCatalogo(filtradas, actualizarVista);
-  };
-
-  const iniciarCargaRutas = async () => {
-    mostrarEstadoCarga(contenedorLista, contador);
-    const resultado = await obtenerRutasDesdeAPI();
-    if (!resultado.ok) {
-      mostrarEstadoError(
-        contenedorLista,
-        contador,
-        resultado.error || "Error inesperado al cargar datos.",
-        iniciarCargaRutas
-      );
-      return;
-    }
-    rutasCargadas = resultado.datos;
-    actualizarVista();
-  };
-
-  botones.forEach((boton) => {
-    boton.addEventListener("click", () => {
-      botones.forEach((b) => {
-        b.classList.remove("active");
-        b.setAttribute("aria-pressed", "false");
-      });
-      boton.classList.add("active");
-      boton.setAttribute("aria-pressed", "true");
-      categoriaSeleccionada = boton.getAttribute("data-categoria") || "Todas";
-      actualizarVista();
+  contenedor.querySelectorAll(".btn-fav").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = Number(btn.getAttribute("data-fav-id"));
+      alternarFavorito(id);
     });
   });
 
-  if (buscador) {
-    buscador.addEventListener("input", actualizarVista);
+  inicializarCarruseles();
+}
+
+function filtrarYRenderizar() {
+  const inputBusqueda = document.querySelector(".search input");
+  const termino = normalizarTexto(inputBusqueda ? inputBusqueda.value : "");
+  const favoritos = obtenerFavoritos();
+
+  const filtradas = rutasCargadas.filter((ruta) => {
+    if (categoriaSeleccionada === "Favoritas") {
+      if (!favoritos.includes(ruta.id)) return false;
+    } else if (categoriaSeleccionada !== "Todas") {
+      if (normalizarTexto(ruta.categoria) !== normalizarTexto(categoriaSeleccionada)) {
+        return false;
+      }
+    }
+
+    if (!termino) return true;
+
+    const campos = [
+      ruta.nombre,
+      ruta.nombre_en,
+      ruta.ubicacion,
+      ruta.ubicacion_en,
+      ruta.categoria,
+      ruta.categoria_en,
+      ruta.detalles,
+      ruta.detalles_en
+    ]
+      .map(normalizarTexto)
+      .join(" ");
+
+    return campos.includes(termino);
+  });
+
+  renderizarRutas(filtradas);
+}
+
+async function cargarRutas() {
+  try {
+    const resp = await fetch(API_LOCAL_URL);
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const data = await resp.json();
+    rutasCargadas = Array.isArray(data) ? data : data.rutas || [];
+    filtrarYRenderizar();
+  } catch (err) {
+    console.error("Error cargando rutas:", err);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const botonesFiltro = document.querySelectorAll(".filters button");
+  const inputBusqueda = document.querySelector(".search input");
+
+  botonesFiltro.forEach((btn) => {
+    const cat = btn.getAttribute("data-categoria");
+    if (cat === categoriaSeleccionada) {
+      btn.classList.add("active");
+    } else {
+      btn.classList.remove("active");
+    }
+
+    btn.addEventListener("click", () => {
+      categoriaSeleccionada = cat || "Todas";
+      sessionStorage.setItem(STORAGE_FILTRO_CAT, categoriaSeleccionada);
+
+      botonesFiltro.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      filtrarYRenderizar();
+    });
+  });
+
+  if (inputBusqueda) {
+    const busquedaGuardada = sessionStorage.getItem(STORAGE_FILTRO_BUSQ) || "";
+    inputBusqueda.value = busquedaGuardada;
+
+    inputBusqueda.addEventListener("input", () => {
+      sessionStorage.setItem(STORAGE_FILTRO_BUSQ, inputBusqueda.value);
+      filtrarYRenderizar();
+    });
   }
 
-  await iniciarCargaRutas();
+  cargarRutas();
 });
