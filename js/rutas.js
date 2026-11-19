@@ -82,12 +82,12 @@ function inicializarCarruseles() {
     if (contenedorImg.querySelector(".carrusel-dots")) return;
 
     const id = Number(tarjeta.dataset.id);
-    const titulo = tarjeta.querySelector("h3")?.textContent?.trim() || "Actividad";
+    const titulo = tarjeta.querySelector("h2, h3")?.textContent?.trim() || "Actividad";
     const srcBase = imgPrincipal.getAttribute("src");
 
     let galeria = GALERIAS_ACTIVIDADES[id]
       ? [...GALERIAS_ACTIVIDADES[id]]
-      : [srcBase, srcBase, srcBase];
+      : [srcBase, srcBase, srcBase, srcBase];
 
     if (galeria[0] !== srcBase) {
       galeria = [srcBase, ...galeria.filter((s) => s !== srcBase)];
@@ -95,6 +95,7 @@ function inicializarCarruseles() {
 
     imgPrincipal.classList.add("activa");
 
+    const posiciones = ["left center", "right center", "center top"];
     galeria.slice(1).forEach((src, i) => {
       const img = document.createElement("img");
       img.src = src;
@@ -102,7 +103,7 @@ function inicializarCarruseles() {
       img.loading = "lazy";
       img.decoding = "async";
       if (!GALERIAS_ACTIVIDADES[id]) {
-        img.style.objectPosition = i === 0 ? "left center" : "right center";
+        img.style.objectPosition = posiciones[i] || "center center";
       }
       contenedorImg.appendChild(img);
     });
@@ -206,14 +207,14 @@ function renderizarRutas(lista) {
               ${index === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}
             />
           </div>
-          <div class="content">
-            <h3>${nombre}</h3>
+          <div class="info">
+            <h2>${nombre}</h2>
             <p class="meta">${categoria} • ${ubicacion}</p>
             ${actualizado ? `<p class="updated">${txtActualizado} ${actualizado}</p>` : ""}
             <p class="details">${detalles}</p>
-            <div class="actions">
-              <a href="paginas/actividad.html?id=${ruta.id}" class="btn-primary">${txtVerFicha}</a>
-              <a href="paginas/contacto.html?actividad=${encodeURIComponent(nombre)}" class="btn-secondary">${txtContactar}</a>
+            <div class="buttons">
+              <a href="paginas/actividad.html?id=${ruta.id}">${txtVerFicha}</a>
+              <a href="paginas/contacto.html?actividad=${encodeURIComponent(nombre)}">${txtContactar}</a>
               <button type="button" class="btn-fav" data-fav-id="${ruta.id}" aria-pressed="${esFavorita}">${txtFavorito}</button>
             </div>
           </div>
