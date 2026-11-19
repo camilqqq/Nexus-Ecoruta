@@ -107,6 +107,7 @@ function filtrarRutas(rutas, categoria, terminoBusqueda) {
     });
 }
 function iniciarCarruselTarjeta(contenedor, cardIdx) {
+    return;
     const imgPrincipal = contenedor.querySelector("img");
     if (!imgPrincipal)
         return;
