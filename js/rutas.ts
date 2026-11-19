@@ -141,7 +141,6 @@ function filtrarRutas(
 }
 
 function iniciarCarruselTarjeta(contenedor: HTMLElement, cardIdx: number): void {
-  return;
   const imgPrincipal = contenedor.querySelector("img") as HTMLImageElement | null;
   if (!imgPrincipal) return;
 
@@ -152,6 +151,7 @@ function iniciarCarruselTarjeta(contenedor: HTMLElement, cardIdx: number): void 
   }
 
   imgPrincipal.classList.add("activa");
+    return;
   const imagenes: HTMLImageElement[] = [imgPrincipal];
   const dotsBox = document.createElement("div");
   dotsBox.className = "carrusel-dots";
