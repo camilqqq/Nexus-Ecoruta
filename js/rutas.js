@@ -279,7 +279,7 @@ function renderizarCatalogo(rutas, alCambiarFavorito) {
           alt="${ruta.alt || ruta.nombre}"
           width="400"
           height="250"
-          ${index === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}
+         ${index === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}
           onerror="this.onerror=null;this.src='assets/imagenes/Sendero/sendero.jpg';"
         />
       </div>
