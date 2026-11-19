@@ -1048,6 +1048,7 @@ const traduccionesFichaEn = {
         ]
     },
     "16": {
+        id: "16",
         nombre: "Queulat National Park",
         ubicacion: "Carretera Austral, Puyuhuapi, Aysén Region",
         descripcion: "Gem of the Carretera Austral famous for its Hanging Glacier (Ventisquero Colgante), whose meltwater cascades hundreds of meters into a glacial lagoon surrounded by cold Patagonian rainforest.",
@@ -1332,39 +1333,6 @@ function alternarFavorito(id) {
     return !existe;
 }
 
-async function obtenerActividadSincronizada(id) {
-    const base = detalleBackup[id] || detalleBackup["1"];
-    try {
-        const resp = await fetch("../data/rutas.json");
-        if (!resp.ok)
-            return base;
-        const lista = await resp.json();
-        const rutaJson = lista.find((item) => String(item.id) === id);
-        if (!rutaJson)
-            return base;
-        const imgPrincipalJson = `../${rutaJson.imagen}`;
-        const imagenesSincronizadas = [
-            imgPrincipalJson,
-            ...base.imagenes.filter((img) => img !== imgPrincipalJson)
-        ];
-        return {
-            ...base,
-            id: String(rutaJson.id),
-            nombre: rutaJson.nombre,
-            categoria: rutaJson.categoria,
-            ubicacion: rutaJson.ubicacion,
-            imagenes: imagenesSincronizadas,
-            detalles: {
-                ...base.detalles,
-                dificultad: rutaJson.dificultad || base.detalles.dificultad
-            }
-        };
-    }
-    catch {
-        return base;
-    }
-}
-
 function textoClave(lang, clave, fallback) {
     if (typeof translations !== "undefined" && translations[lang] && translations[lang][clave]) {
         return translations[lang][clave];
@@ -1372,15 +1340,122 @@ function textoClave(lang, clave, fallback) {
     return fallback;
 }
 
+function renderizarRutaNoEncontrada(contenedor, lang, idSolicitado) {
+    const esIngles = lang === "en";
+    const titulo = esIngles ? "Route not found" : "Ruta no encontrada";
+    const mensaje = esIngles
+        ? `We couldn't find any activity or route matching ID "${idSolicitado || "missing"}". It may have been removed or the link is invalid.`
+        : `No encontramos ninguna actividad o ruta asociada al ID "${idSolicitado || "sin especificar"}". Es posible que haya sido eliminada o que el enlace no sea válido.`;
+    const textoBoton = textoClave(lang, "detalle.volver", esIngles ? "← Back to catalog" : "← Volver al catálogo");
+
+    contenedor.innerHTML = `
+    <section style="background: var(--surface, #ffffff); color: var(--text-dark, #1f2937); padding: 2.5rem 2rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center; max-width: 640px; margin: 1.5rem auto; border: 1px solid var(--border-color, #e5e7eb);">
+      <div style="font-size: 2.5rem; margin-bottom: 0.75rem;" aria-hidden="true">🧭</div>
+      <h1 style="color: var(--primary, #2e7d32); font-size: 1.85rem; margin: 0 0 0.75rem 0;">${titulo}</h1>
+      <p style="color: var(--text-muted, #4b5563); font-size: 1.05rem; line-height: 1.6; margin: 0 auto 1.75rem auto; max-width: 500px;">
+        ${mensaje}
+      </p>
+      <a
+        href="../index.html"
+        data-i18n="detalle.volver"
+        style="display: inline-block; background: var(--primary, #2e7d32); color: #ffffff; text-decoration: none; font-weight: 600; padding: 0.75rem 1.5rem; border-radius: 8px;"
+      >
+        ${textoBoton}
+      </a>
+    </section>
+  `;
+
+    if (typeof changeLanguage === "function") {
+        changeLanguage(lang);
+    }
+}
+
+async function obtenerActividadSincronizada(idLimpio) {
+    if (!idLimpio) {
+        return null;
+    }
+
+    let listaJson = null;
+    try {
+        const resp = await fetch("../data/rutas.json");
+        if (resp.ok) {
+            listaJson = await resp.json();
+        }
+    }
+    catch {
+        listaJson = null;
+    }
+
+    const rutaJson = Array.isArray(listaJson)
+        ? listaJson.find((item) => String(item.id).trim() === idLimpio)
+        : null;
+
+    const base = Object.prototype.hasOwnProperty.call(detalleBackup, idLimpio)
+        ? detalleBackup[idLimpio]
+        : null;
+
+    if (!rutaJson && !base) {
+        return null;
+    }
+
+    if (!base && rutaJson) {
+        const imgPrincipalJson = rutaJson.imagen ? `../${rutaJson.imagen}` : "../assets/imagenes/Logo.png";
+        return {
+            id: String(rutaJson.id),
+            nombre: rutaJson.nombre,
+            categoria: rutaJson.categoria || "Naturaleza",
+            tipo: "RUTA",
+            ubicacion: rutaJson.ubicacion || "La Araucanía, Chile",
+            descripcion: rutaJson.detalle || "",
+            imagenes: [imgPrincipalJson],
+            detalles: {
+                dificultad: rutaJson.dificultad || "",
+                accesibilidad: "",
+                horarios: rutaJson.detalle || ""
+            }
+        };
+    }
+
+    if (!rutaJson) {
+        return base;
+    }
+
+    const imgPrincipalJson = `../${rutaJson.imagen}`;
+    const imagenesSincronizadas = [
+        imgPrincipalJson,
+        ...base.imagenes.filter((img) => img !== imgPrincipalJson)
+    ];
+
+    return {
+        ...base,
+        id: String(rutaJson.id),
+        nombre: rutaJson.nombre,
+        categoria: rutaJson.categoria,
+        ubicacion: rutaJson.ubicacion,
+        imagenes: imagenesSincronizadas,
+        detalles: {
+            ...base.detalles,
+            dificultad: rutaJson.dificultad || base.detalles.dificultad
+        }
+    };
+}
+
 async function cargarFicha() {
-    const id = obtenerParametroUrl("id") || "1";
-    const idNumerico = Number(id) || 1;
+    const rawId = obtenerParametroUrl("id");
+    const idLimpio = rawId ? rawId.trim() : "";
     const contenedor = document.getElementById("detalle-actividad");
     if (!contenedor)
         return;
 
     const lang = obtenerIdiomaActual();
-    const actividadBase = await obtenerActividadSincronizada(id);
+    const actividadBase = await obtenerActividadSincronizada(idLimpio);
+
+    if (!actividadBase) {
+        renderizarRutaNoEncontrada(contenedor, lang, idLimpio);
+        return;
+    }
+
+    const idNumerico = Number(actividadBase.id) || 1;
     const actividad = aplicarTraduccionActividad(actividadBase, lang);
     const esFavInicial = obtenerFavoritos().includes(idNumerico);
 
