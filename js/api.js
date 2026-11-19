@@ -136,7 +136,6 @@ async function cargarClimaDestino(contenedor, idxDestino) {
 
     contenedor.innerHTML = `
       <div style="width: 100%; box-sizing: border-box; text-align: left; background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 58%, #40916c 100%); color: #ffffff; border-radius: 18px; padding: 1.5rem 2rem; box-shadow: 0 12px 28px rgba(27, 67, 50, 0.16); display: flex; flex-direction: column; gap: 1.15rem;">
-        
         <div style="width: 100%; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
           <div>
             <span style="display: inline-block; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; background: rgba(255,255,255,0.18); padding: 0.22rem 0.65rem; border-radius: 999px; margin-bottom: 0.4rem;">
