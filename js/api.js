@@ -81,7 +81,9 @@ function detectarUbicacionInicial() {
 
 async function cargarClimaDestino(contenedor, idxDestino) {
   const listaDestinos = obtenerListaDestinos();
-  const destino = listaDestinos[idxDestino] || listaDestinos[0];
+  const total = listaDestinos.length;
+  const indiceSeguro = ((idxDestino % total) + total) % total;
+  const destino = listaDestinos[indiceSeguro];
 
   contenedor.innerHTML = `
     <div style="background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 100%); color: #fff; border-radius: 16px; padding: 1.25rem; box-shadow: 0 10px 25px rgba(27, 67, 50, 0.16); text-align: center;">
@@ -107,7 +109,7 @@ async function cargarClimaDestino(contenedor, idxDestino) {
     const opcionesDestinos = listaDestinos
       .map(
         (d, i) =>
-          `<option value="${i}" ${i === idxDestino ? "selected" : ""} style="color:#1b4332; background:#ffffff;">${d.nombre}</option>`
+          `<option value="${i}" ${i === indiceSeguro ? "selected" : ""} style="color:#1b4332; background:#ffffff;">${d.nombre}</option>`
       )
       .join("");
 
@@ -133,29 +135,44 @@ async function cargarClimaDestino(contenedor, idxDestino) {
     }
 
     contenedor.innerHTML = `
-      <div style="background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 60%, #40916c 100%); color: #ffffff; border-radius: 16px; padding: 1.2rem 1.35rem; box-shadow: 0 10px 24px rgba(27, 67, 50, 0.16); display: flex; flex-direction: column; gap: 0.95rem;">
-        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 0.75rem;">
+      <div style="background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 60%, #40916c 100%); color: #ffffff; border-radius: 16px; padding: 1.25rem 1.4rem; box-shadow: 0 10px 24px rgba(27, 67, 50, 0.16); display: flex; flex-direction: column; gap: 1rem;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.75rem;">
           <div>
-            <span style="display: inline-block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; background: rgba(255,255,255,0.18); padding: 0.18rem 0.55rem; border-radius: 999px; margin-bottom: 0.3rem;">
+            <span style="display: inline-block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; background: rgba(255,255,255,0.18); padding: 0.2rem 0.6rem; border-radius: 999px; margin-bottom: 0.35rem;">
               ● Clima en vivo • Destinos EcoRuta
             </span>
-            <h3 style="margin: 0; font-size: 1.15rem; font-weight: 800; color: #ffffff;">${destino.nombre}</h3>
-            <p style="margin: 0.1rem 0 0 0; font-size: 0.8rem; opacity: 0.85;">${destino.subtitulo}</p>
+            <h3 style="margin: 0; font-size: 1.2rem; font-weight: 800; color: #ffffff;">${destino.nombre}</h3>
+            <p style="margin: 0.15rem 0 0 0; font-size: 0.82rem; opacity: 0.85;">${destino.subtitulo}</p>
           </div>
 
-          <label style="display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.95; min-width: 175px;">
-            Cambiar destino
+          <div style="display: inline-flex; align-items: center; gap: 0.35rem; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.28); border-radius: 999px; padding: 0.25rem 0.4rem;">
+            <button
+              type="button"
+              id="btn-clima-anterior"
+              aria-label="Destino anterior"
+              style="width: 30px; height: 30px; border-radius: 50%; border: none; background: rgba(255,255,255,0.16); color: #ffffff; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center;"
+            >
+              ‹
+            </button>
             <select
               id="select-destino-clima"
               aria-label="Seleccionar destino para ver el clima"
-              style="padding: 0.45rem 0.75rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.35); background: #ffffff; color: #1b4332; font-size: 0.85rem; font-weight: 700; cursor: pointer;"
+              style="background: transparent; border: none; color: #ffffff; font-size: 0.85rem; font-weight: 700; padding: 0.25rem 0.4rem; cursor: pointer; outline: none; max-width: 170px;"
             >
               ${opcionesDestinos}
             </select>
-          </label>
+            <button
+              type="button"
+              id="btn-clima-siguiente"
+              aria-label="Destino siguiente"
+              style="width: 30px; height: 30px; border-radius: 50%; border: none; background: rgba(255,255,255,0.16); color: #ffffff; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center;"
+            >
+              ›
+            </button>
+          </div>
         </div>
 
-        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; border-top: 1px solid rgba(255,255,255,0.16); padding-top: 0.85rem;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; border-top: 1px solid rgba(255,255,255,0.16); padding-top: 0.9rem;">
           <div style="display: flex; align-items: center; gap: 0.85rem;">
             <span style="font-size: 2.6rem; line-height: 1; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));">${estado.icono}</span>
             <div>
@@ -172,7 +189,7 @@ async function cargarClimaDestino(contenedor, idxDestino) {
           </div>
         </div>
 
-        <div style="background: rgba(0,0,0,0.16); border-radius: 10px; padding: 0.5rem 0.8rem; font-size: 0.8rem; display: flex; align-items: center; gap: 0.45rem;">
+        <div style="background: rgba(0,0,0,0.16); border-radius: 10px; padding: 0.55rem 0.85rem; font-size: 0.82rem; display: flex; align-items: center; gap: 0.45rem;">
           <span>🥾</span>
           <span><strong>Recomendación:</strong> ${estado.consejo}</span>
         </div>
@@ -182,10 +199,17 @@ async function cargarClimaDestino(contenedor, idxDestino) {
     const selectDestino = document.getElementById("select-destino-clima");
     if (selectDestino) {
       selectDestino.addEventListener("change", (e) => {
-        const nuevoIdx = Number(e.target.value || "0");
-        cargarClimaDestino(contenedor, nuevoIdx);
+        cargarClimaDestino(contenedor, Number(e.target.value || "0"));
       });
     }
+
+    document.getElementById("btn-clima-anterior")?.addEventListener("click", () => {
+      cargarClimaDestino(contenedor, indiceSeguro - 1);
+    });
+
+    document.getElementById("btn-clima-siguiente")?.addEventListener("click", () => {
+      cargarClimaDestino(contenedor, indiceSeguro + 1);
+    });
   } catch (error) {
     console.warn("Error al obtener clima en vivo:", error);
     contenedor.innerHTML = `
@@ -204,7 +228,7 @@ async function cargarClimaDestino(contenedor, idxDestino) {
     `;
 
     document.getElementById("btn-reintentar-clima")?.addEventListener("click", () => {
-      cargarClimaDestino(contenedor, idxDestino);
+      cargarClimaDestino(contenedor, indiceSeguro);
     });
   }
 }
