@@ -1,190 +1,246 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nexus Ecoruta - Turismo Sustentable</title>
-    <link rel="stylesheet" href="css/index.css" />
-    <link rel="preload" as="image" href="assets/imagenes/Sendero/Sendero_Nielol.jpg" fetchpriority="high" />
-    <style>
-      .activity .image {
-        position: relative;
-        overflow: hidden;
-        height: 220px;
-        min-height: 220px;
-        background: #e8f5e9;
-      }
-      .activity .image img {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        opacity: 0;
-        transform: scale(1);
-        transition: opacity 0.9s ease-in-out, transform 6s ease-out;
-      }
-      .activity .image img.activa {
-        opacity: 1;
-        transform: scale(1.07);
-        z-index: 1;
-      }
-      .carrusel-dots {
-        position: absolute;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 6px;
-        z-index: 2;
-        background: rgba(0, 0, 0, 0.35);
-        padding: 4px 8px;
-        border-radius: 999px;
-        backdrop-filter: blur(4px);
-      }
-      .carrusel-dots span {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.5);
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-      .carrusel-dots span.activa {
-        background: #ffffff;
-        width: 16px;
-        border-radius: 999px;
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <div class="header">
-        <div class="brand">
-          <img
-            src="assets/imagenes/Logo.png"
-            alt="Logo Nexus Ecoruta"
-            class="logo"
-            width="120"
-            height="45"
-            fetchpriority="high"
-          />
-          <div>
-            <p class="brand-name">Nexus Ecoruta</p>
-            <p data-i18n="brand.subtitle">Turismo Sustentable en La Araucanía</p>
-          </div>
-        </div>
-        <nav style="display: flex; gap: 0.5rem; align-items: center;">
-          <a href="index.html" class="active" data-i18n="nav.inicio">Inicio</a>
-          <a href="paginas/emprendimientos.html" data-i18n="nav.emprendimientos">Emprendimientos</a>
-          <a href="paginas/contacto.html" data-i18n="nav.contacto">Contacto</a>
-    
-          <!-- Selector de idioma nativo con banderas -->
-          <select id="language-selector" aria-label="Seleccionar idioma">
-            <option value="es">🇪🇸 Español</option>
-            <option value="en">🇬🇧 English</option>
-          </select>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus Ecoruta - Turismo Sustentable</title>
+  <link rel="stylesheet" href="css/index.css" />
+  <link rel="preload" as="image" href="assets/imagenes/Sendero/Sendero_Nielol.jpg" fetchpriority="high" />
+  <style>
+    .activity .image {
+      position: relative;
+      overflow: hidden;
+      height: 220px;
+      min-height: 220px;
+      background: #e8f5e9;
+    }
 
-          <!-- Selector de Temas y Accesibilidad -->
-          <select id="theme-selector" aria-label="Seleccionar modo de visualización">
-            <option value="normal">☀️ Normal</option>
-            <option value="dark">🌙 Oscuro</option>
-            <option value="colorblind">👁️ Daltónico</option>
-          </select>
-        </nav>
+    .activity .image img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transform: scale(1);
+      transition: opacity 0.9s ease-in-out, transform 6s ease-out;
+    }
+
+    .activity .image img.activa {
+      opacity: 1;
+      transform: scale(1.07);
+      z-index: 1;
+    }
+
+    .carrusel-dots {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 2;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 4px 8px;
+      border-radius: 999px;
+      backdrop-filter: blur(4px);
+    }
+
+    .carrusel-dots span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .carrusel-dots span.activa {
+      background: #ffffff;
+      width: 16px;
+      border-radius: 999px;
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    [tabindex]:focus-visible {
+      outline: 3px solid #1b5e20;
+      outline-offset: 2px;
+      border-radius: 6px;
+    }
+
+    html[data-theme="dark"] button:focus-visible,
+    html[data-theme="dark"] a:focus-visible,
+    html[data-theme="dark"] input:focus-visible,
+    html[data-theme="dark"] select:focus-visible,
+    html[data-theme="dark"] [tabindex]:focus-visible {
+      outline-color: #a5d6a7;
+    }
+
+    .filters button.active,
+    .filters button[aria-pressed="true"] {
+      border: 2px solid #0d3b12;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header">
+      <div class="brand">
+        <img src="assets/imagenes/Logo.png" alt="Logo Nexus Ecoruta" class="logo" width="120" height="45" fetchpriority="high" />
+        <div>
+          <p class="brand-name">Nexus Ecoruta</p>
+          <p data-i18n="brand.subtitle">Turismo Sustentable en La Araucanía</p>
+        </div>
       </div>
-    </header>
 
-    <main>
-      <section class="hero">
-        <h1 data-i18n="hero.title">Descubre la magia natural y cultural de nuestra región</h1>
-        <p data-i18n="hero.subtitle">
-          Explora senderos, ferias agroecológicas y espacios patrimoniales
-          diseñados para un turismo consciente y respetuoso con el medio
-          ambiente.
-        </p>
+      <nav style="display: flex; gap: 0.5rem; align-items: center;">
+        <a href="index.html" class="active" data-i18n="nav.inicio">Inicio</a>
+        <a href="paginas/emprendimientos.html" data-i18n="nav.emprendimientos">Emprendimientos</a>
+        <a href="paginas/contacto.html" data-i18n="nav.contacto">Contacto</a>
+        <!-- Selector de idioma nativo con banderas -->
+        <select id="language-selector" aria-label="Seleccionar idioma">
+          <option value="es">🇪🇸 Español</option>
+          <option value="en">🇬🇧 English</option>
+        </select>
+        <!-- Selector de Temas y Accesibilidad -->
+        <select id="theme-selector" aria-label="Seleccionar modo de visualización">
+          <option value="normal">☀️ Normal</option>
+          <option value="dark">🌙 Oscuro</option>
+          <option value="colorblind">👁️ Daltónico</option>
+        </select>
+      </nav>
+    </div>
+  </header>
 
-        <div class="search">
-          <input
-            type="search"
-            data-i18n="search.placeholder"
-            placeholder="Buscar por nombre, ubicación o categoría..."
-            aria-label="Buscar actividades"
-          />
-        </div>
+  <main>
+    <section class="hero">
+      <h1 data-i18n="hero.title">Descubre la magia natural y cultural de nuestra región</h1>
+      <p data-i18n="hero.subtitle">
+        Explora senderos, ferias agroecológicas y espacios patrimoniales diseñados para un turismo consciente y respetuoso con el medio ambiente.
+      </p>
 
-        <div class="filters">
-          <button data-categoria="Favoritas">❤️ Favoritas</button>
-          <button class="active" data-categoria="Todas" data-i18n="filter.todas">Todas</button>
-          <button data-categoria="Naturaleza" data-i18n="filter.naturaleza">Naturaleza</button>
-          <button data-categoria="Cultura" data-i18n="filter.cultura">Cultura</button>
-          <button data-categoria="Gastronomía" data-i18n="filter.gastronomia">Gastronomía</button>
-        </div>
-      </section>
-
-      <section class="activities">
-        <div class="section-title">
-          <h2 data-i18n="section.destacadas">Actividades destacadas</h2>
-          <span id="contador-resultados">18 resultados</span>
-        </div>
-
-        <div class="list">
-          <!-- El catálogo se renderiza dinámicamente mediante rutas.js -->
-        </div>
-      </section>
-
-      <div style="max-width: 1100px; margin: 2rem auto 1rem auto; padding: 0 1rem;">
-        <div id="clima-info" style="width: 100%;"></div>
+      <div class="search">
+        <input
+          type="search"
+          data-i18n="search.placeholder"
+          placeholder="Buscar por nombre, ubicación o categoría..."
+          aria-label="Buscar actividades"
+        />
       </div>
-    </main>
 
-    <footer>
-      <span data-i18n="footer.text">EcoRuta Temuco • Información local y accesible</span>
-      <div>
-        <a href="documentos/reportes/reporte-bug-bounty.pdf" target="_blank" rel="noopener">Bug Bounty</a>
-        <a href="paginas/contacto.html" data-i18n="footer.contacto">Contacto</a>
+      <div class="filters">
+        <button data-categoria="Favoritas" aria-pressed="false">❤️ Favoritas</button>
+        <button class="active" data-categoria="Todas" data-i18n="filter.todas" aria-pressed="true">Todas</button>
+        <button data-categoria="Naturaleza" data-i18n="filter.naturaleza" aria-pressed="false">Naturaleza</button>
+        <button data-categoria="Cultura" data-i18n="filter.cultura" aria-pressed="false">Cultura</button>
+        <button data-categoria="Gastronomía" data-i18n="filter.gastronomia" aria-pressed="false">Gastronomía</button>
       </div>
-    </footer>
+    </section>
 
-    <script src="js/api.js" defer></script>
-    <script src="js/translations.js" defer></script>
-    <script src="js/i18n.js" defer></script>
-    <script src="js/rutas.js" defer></script>
+    <section class="activities">
+      <div class="section-title">
+        <h2 data-i18n="section.destacadas">Actividades destacadas</h2>
+        <span id="contador-resultados">18 resultados</span>
+      </div>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        // --- Selector de idioma nativo ---
-        const selector = document.getElementById("language-selector");
-        if (selector) {
-          selector.value = localStorage.getItem("selectedLang") || "es";
-          selector.addEventListener("change", (e) => {
-            localStorage.setItem("selectedLang", e.target.value);
-            location.reload();
-          });
+      <div class="list">
+        <!-- El catálogo se renderiza dinámicamente mediante rutas.js -->
+      </div>
+    </section>
+
+    <div style="max-width: 1100px; margin: 2rem auto 1rem auto; padding: 0 1rem;">
+      <div id="clima-info" style="width: 100%;"></div>
+    </div>
+  </main>
+
+  <footer>
+    <span data-i18n="footer.text">EcoRuta Temuco • Información local y accesible</span>
+    <div>
+      <a href="documentos/reportes/reporte-bug-bounty.pdf" target="_blank" rel="noopener">Bug Bounty</a>
+      <a href="paginas/contacto.html" data-i18n="footer.contacto">Contacto</a>
+    </div>
+  </footer>
+
+  <script src="js/api.js" defer></script>
+  <script src="js/translations.js" defer></script>
+  <script src="js/i18n.js" defer></script>
+  <script src="js/rutas.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // --- Selector de idioma nativo ---
+      const selector = document.getElementById("language-selector");
+      if (selector) {
+        selector.value = localStorage.getItem("selectedLang") || "es";
+        selector.addEventListener("change", (e) => {
+          localStorage.setItem("selectedLang", e.target.value);
+          location.reload();
+        });
+      }
+
+      // --- Selector de Tema (Normal, Oscuro, Daltónico) ---
+      const themeSelector = document.getElementById("theme-selector");
+      if (themeSelector) {
+        const savedTheme = localStorage.getItem("selectedTheme") || "normal";
+        themeSelector.value = savedTheme;
+        applyTheme(savedTheme);
+        themeSelector.addEventListener("change", (e) => {
+          const selectedTheme = e.target.value;
+          localStorage.setItem("selectedTheme", selectedTheme);
+          applyTheme(selectedTheme);
+        });
+      }
+
+      function applyTheme(theme) {
+        if (theme === "normal") {
+          document.documentElement.removeAttribute("data-theme");
+        } else {
+          document.documentElement.setAttribute("data-theme", theme);
         }
+      }
 
-        // --- Selector de Tema (Normal, Oscuro, Daltónico) ---
-        const themeSelector = document.getElementById("theme-selector");
-        if (themeSelector) {
-          const savedTheme = localStorage.getItem("selectedTheme") || "normal";
-          themeSelector.value = savedTheme;
-          applyTheme(savedTheme);
-
-          themeSelector.addEventListener("change", (e) => {
-            const selectedTheme = e.target.value;
-            localStorage.setItem("selectedTheme", selectedTheme);
-            applyTheme(selectedTheme);
-          });
-        }
-
-        function applyTheme(theme) {
-          if (theme === "normal") {
-            document.documentElement.removeAttribute("data-theme");
-          } else {
-            document.documentElement.setAttribute("data-theme", theme);
-          }
-        }
+      // --- Sincronizar aria-pressed en filtros activos ---
+      const filterButtons = document.querySelectorAll(".filters button");
+      const syncFilterPressed = () => {
+        filterButtons.forEach((btn) => {
+          btn.setAttribute("aria-pressed", String(btn.classList.contains("active")));
+        });
+      };
+      syncFilterPressed();
+      filterButtons.forEach((btn) => {
+        btn.addEventListener("click", () => setTimeout(syncFilterPressed, 0));
       });
-    </script>
-  </body>
+
+      // --- Accesibilidad por teclado en puntitos del carrusel (.carrusel-dots span) ---
+      const listContainer = document.querySelector(".list");
+      if (listContainer) {
+        const enableDotsKeyboard = () => {
+          const dots = listContainer.querySelectorAll(".carrusel-dots span");
+          dots.forEach((dot, idx) => {
+            if (!dot.hasAttribute("role")) {
+              dot.setAttribute("role", "button");
+              dot.setAttribute("tabindex", "0");
+              dot.setAttribute("aria-label", `Ver imagen ${idx + 1}`);
+              dot.addEventListener("keydown", (ev) => {
+                if (ev.key === "Enter" || ev.key === " ") {
+                  ev.preventDefault();
+                  dot.click();
+                }
+              });
+            }
+          });
+        };
+        enableDotsKeyboard();
+        const observer = new MutationObserver(enableDotsKeyboard);
+        observer.observe(listContainer, { childList: true, subtree: true });
+      }
+    });
+  </script>
+</body>
 </html>
