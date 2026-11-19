@@ -107,7 +107,6 @@ function filtrarRutas(rutas, categoria, terminoBusqueda) {
     });
 }
 function iniciarCarruselTarjeta(contenedor, cardIdx) {
-    return;
     const imgPrincipal = contenedor.querySelector("img");
     if (!imgPrincipal)
         return;
@@ -117,6 +116,7 @@ function iniciarCarruselTarjeta(contenedor, cardIdx) {
         rutas.push(srcOriginal.replace(/1?(\.[a-zA-Z]+)$/, `${i}$1`));
     }
     imgPrincipal.classList.add("activa");
+        return;
     const imagenes = [imgPrincipal];
     const dotsBox = document.createElement("div");
     dotsBox.className = "carrusel-dots";
