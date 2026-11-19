@@ -15,7 +15,6 @@
       min-height: 220px;
       background: #e8f5e9;
     }
-
     .activity .image img {
       position: absolute;
       inset: 0;
@@ -26,13 +25,11 @@
       transform: scale(1);
       transition: opacity 0.9s ease-in-out, transform 6s ease-out;
     }
-
     .activity .image img.activa {
       opacity: 1;
       transform: scale(1.07);
       z-index: 1;
     }
-
     .carrusel-dots {
       position: absolute;
       bottom: 10px;
@@ -46,7 +43,6 @@
       border-radius: 999px;
       backdrop-filter: blur(4px);
     }
-
     .carrusel-dots span {
       width: 7px;
       height: 7px;
@@ -55,13 +51,11 @@
       cursor: pointer;
       transition: all 0.3s ease;
     }
-
     .carrusel-dots span.activa {
       background: #ffffff;
       width: 16px;
       border-radius: 999px;
     }
-
     button:focus-visible,
     a:focus-visible,
     input:focus-visible,
@@ -72,7 +66,6 @@
       outline-offset: 2px;
       border-radius: 6px;
     }
-
     html[data-theme="dark"] button:focus-visible,
     html[data-theme="dark"] a:focus-visible,
     html[data-theme="dark"] input:focus-visible,
@@ -80,7 +73,6 @@
     html[data-theme="dark"] [tabindex]:focus-visible {
       outline-color: #a5d6a7;
     }
-
     .filters button.active,
     .filters button[aria-pressed="true"] {
       border: 2px solid #0d3b12;
@@ -105,10 +97,12 @@
         <a href="index.html" class="active" data-i18n="nav.inicio">Inicio</a>
         <a href="paginas/emprendimientos.html" data-i18n="nav.emprendimientos">Emprendimientos</a>
         <a href="paginas/contacto.html" data-i18n="nav.contacto">Contacto</a>
+
         <select id="language-selector" aria-label="Seleccionar idioma">
           <option value="es">🇪🇸 Español</option>
           <option value="en">🇬🇧 English</option>
         </select>
+
         <select id="theme-selector" aria-label="Seleccionar modo de visualización">
           <option value="normal">☀️ Normal</option>
           <option value="dark">🌙 Oscuro</option>
@@ -122,16 +116,11 @@
     <section class="hero">
       <h1 data-i18n="hero.title">Descubre la magia natural y cultural de nuestra región</h1>
       <p data-i18n="hero.subtitle">
-        Explora s, ferias agroecológicas y espacios patrimoniales diseñados para un turismo consciente y respetuoso con el medio ambiente.
+        Explora senderos, ferias agroecológicas y espacios patrimoniales diseñados para un turismo consciente y respetuoso con el medio ambiente.
       </p>
 
       <div class="search">
-        <input
-          type="search"
-          data-i18n="search.placeholder"
-          placeholder="Buscar por nombre, ubicación o categoría..."
-          aria-label="Buscar actividades"
-        />
+        <input type="search" data-i18n="search.placeholder" placeholder="Buscar por nombre, ubicación o categoría..." aria-label="Buscar actividades" />
       </div>
 
       <div class="filters">
@@ -149,18 +138,18 @@
         <span id="contador-resultados">18 resultados</span>
       </div>
 
-     <div class="list">
-  <article class="activity">
-    <div class="image">
-      <img src="assets/imagenes/Sendero/sendero.jpg" alt="Sendero Cerro Ñielol" class="activa" fetchpriority="high" decoding="async" />
-    </div>
-    <div class="content">
-      <h3>Sendero Ñielol</h3>
-      <p class="meta">Naturaleza • Parque Ñielol, Temuco</p>
-      <p class="details">Duración: 1 hr 30 min · Dificultad: Moderada</p>
-    </div>
-  </article>
-</div>
+      <div class="list">
+        <article class="activity">
+          <div class="image">
+            <img src="assets/imagenes/Sendero/sendero.jpg" alt="Sendero Cerro Ñielol" class="activa" fetchpriority="high" decoding="async" />
+          </div>
+          <div class="content">
+            <h3>Sendero Ñielol</h3>
+            <p class="meta">Naturaleza • Parque Ñielol, Temuco</p>
+            <p class="details">Duración: 1 hr 30 min · Dificultad: Moderada</p>
+          </div>
+        </article>
+      </div>
     </section>
 
     <div style="max-width: 1100px; margin: 2rem auto 1rem auto; padding: 0 1rem;">
@@ -176,10 +165,10 @@
     </div>
   </footer>
 
-  <script src="js/api.js" defer></script>
   <script src="js/translations.js" defer></script>
   <script src="js/i18n.js" defer></script>
   <script src="js/rutas.js" defer></script>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const selector = document.getElementById("language-selector");
