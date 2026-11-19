@@ -105,12 +105,10 @@
         <a href="index.html" class="active" data-i18n="nav.inicio">Inicio</a>
         <a href="paginas/emprendimientos.html" data-i18n="nav.emprendimientos">Emprendimientos</a>
         <a href="paginas/contacto.html" data-i18n="nav.contacto">Contacto</a>
-        <!-- Selector de idioma nativo con banderas -->
         <select id="language-selector" aria-label="Seleccionar idioma">
           <option value="es">🇪🇸 Español</option>
           <option value="en">🇬🇧 English</option>
         </select>
-        <!-- Selector de Temas y Accesibilidad -->
         <select id="theme-selector" aria-label="Seleccionar modo de visualización">
           <option value="normal">☀️ Normal</option>
           <option value="dark">🌙 Oscuro</option>
@@ -184,7 +182,6 @@
   <script src="js/rutas.js" defer></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // --- Selector de idioma nativo ---
       const selector = document.getElementById("language-selector");
       if (selector) {
         selector.value = localStorage.getItem("selectedLang") || "es";
@@ -194,7 +191,6 @@
         });
       }
 
-      // --- Selector de Tema (Normal, Oscuro, Daltónico) ---
       const themeSelector = document.getElementById("theme-selector");
       if (themeSelector) {
         const savedTheme = localStorage.getItem("selectedTheme") || "normal";
@@ -215,7 +211,6 @@
         }
       }
 
-      // --- Sincronizar aria-pressed en filtros activos ---
       const filterButtons = document.querySelectorAll(".filters button");
       const syncFilterPressed = () => {
         filterButtons.forEach((btn) => {
@@ -227,7 +222,6 @@
         btn.addEventListener("click", () => setTimeout(syncFilterPressed, 0));
       });
 
-      // --- Accesibilidad por teclado en puntitos del carrusel (.carrusel-dots span) ---
       const listContainer = document.querySelector(".list");
       if (listContainer) {
         const enableDotsKeyboard = () => {

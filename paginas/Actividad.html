@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Detalle de Actividad - Nexus Ecoruta</title>
-  <!-- Enlace al CSS principal donde residen los temas normal, oscuro y daltónico -->
   <link rel="stylesheet" href="../css/index.css" />
   <style>
     button:focus-visible,
@@ -28,7 +27,6 @@
   </style>
 </head>
 <body>
-  <!-- Encabezado / Header -->
   <header>
     <div class="header">
       <div class="brand">
@@ -42,12 +40,10 @@
         <a href="../index.html" data-i18n="nav.inicio">Inicio</a>
         <a href="emprendimientos.html" data-i18n="nav.emprendimientos">Emprendimientos</a>
         <a href="contacto.html" data-i18n="nav.contacto">Contacto</a>
-        <!-- Selector de idioma -->
         <select id="language-selector" aria-label="Seleccionar idioma" style="padding: 0.3rem 0.5rem; border-radius: 6px; border: 1px solid var(--border-color); background: var(--surface); color: var(--text-dark); font-weight: 600; cursor: pointer;">
           <option value="es">🇪🇸 Español</option>
           <option value="en">🇬🇧 English</option>
         </select>
-        <!-- Selector de Temas y Accesibilidad -->
         <select id="theme-selector" aria-label="Seleccionar modo de visualización" style="padding: 0.3rem 0.5rem; border-radius: 6px; border: 1px solid var(--border-color); background: var(--surface); color: var(--text-dark); font-weight: 600; cursor: pointer;">
           <option value="normal">☀️ Normal</option>
           <option value="dark">🌙 Oscuro</option>
@@ -61,7 +57,6 @@
     <div style="margin-bottom: 1.5rem;">
       <a href="../index.html" style="color: var(--primary); text-decoration: none; font-weight: bold;" data-i18n="detalle.volver">← Volver al catálogo</a>
     </div>
-    <!-- Contenedor principal donde se inyecta la ficha -->
     <div id="detalle-actividad">
       <p style="text-align: center; font-size: 1.2rem; color: var(--text-muted); padding: 3rem 0;" data-i18n="detalle.cargando">Cargando información de la actividad...</p>
     </div>
@@ -75,13 +70,11 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
   <script src="../js/translations.js"></script>
   <script src="../js/i18n.js"></script>
   <script type="module" src="../js/actividad.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // --- Selector de idioma nativo ---
       const selector = document.getElementById("language-selector");
       if (selector) {
         selector.value = localStorage.getItem("selectedLang") || "es";
@@ -91,7 +84,6 @@
         });
       }
 
-      // --- Selector de Tema (Normal, Oscuro, Daltónico) ---
       const themeSelector = document.getElementById("theme-selector");
       if (themeSelector) {
         const savedTheme = localStorage.getItem("selectedTheme") || "normal";
@@ -112,7 +104,6 @@
         }
       }
 
-      // --- Accesibilidad por teclado para puntitos del carrusel (.carrusel-dots span) ---
       const detalleContenedor = document.getElementById("detalle-actividad");
       if (detalleContenedor) {
         const habilitarTecladoDots = () => {

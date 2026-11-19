@@ -54,7 +54,6 @@ function obtenerImagenesRuta(ruta) {
   return [principal];
 }
 
-// --- Gestión de Favoritos (LocalStorage) ---
 function rutasObtenerFav() {
   try {
     const raw = localStorage.getItem(RUTAS_STORAGE_FAV);
@@ -76,14 +75,13 @@ function rutasAlternarFav(id) {
   return !existe;
 }
 
-// --- Estados visuales de Carga y Error en API ---
 function mostrarEstadoCarga(contenedor, contador) {
   if (contador) contador.textContent = "Cargando...";
   if (!contenedor) return;
   contenedor.innerHTML = `
-    <div class="estado-api estado-cargando" role="status" aria-live="polite" style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #2e7d32;">
+    <div class="estado-api estado-cargando" role="status" aria-live="polite" style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: var(--primary);">
       <p style="font-weight: 600; margin-bottom: 0.35rem;">Cargando rutas y actividades sustentables...</p>
-      <small style="color: #555;">Conectando con el catálogo de EcoRuta Temuco</small>
+      <small style="color: var(--text-muted);">Conectando con el catálogo de EcoRuta Temuco</small>
     </div>
   `;
 }
@@ -92,10 +90,10 @@ function mostrarEstadoError(contenedor, contador, mensajeError, alReintentar) {
   if (contador) contador.textContent = "Error de carga";
   if (!contenedor) return;
   contenedor.innerHTML = `
-    <div class="estado-api estado-error" role="alert" style="grid-column: 1 / -1; text-align: center; padding: 2rem; background: #fff5f5; border: 1px solid #feb2b2; border-radius: 12px; color: #9b2c2c;">
+    <div class="estado-api estado-error" role="alert" style="grid-column: 1 / -1; text-align: center; padding: 2rem; background: var(--surface); border: 1px solid #feb2b2; border-radius: 12px; color: #e53e3e;">
       <p style="font-weight: 700; margin-bottom: 0.4rem;">No se pudieron cargar las rutas en este momento</p>
       <p style="font-size: 0.9rem; margin-bottom: 1rem;">${mensajeError}</p>
-      <button type="button" id="btn-reintentar-api" style="padding: 0.55rem 1.2rem; border-radius: 8px; border: none; background: #2e7d32; color: #fff; font-weight: 600; cursor: pointer;">
+      <button type="button" id="btn-reintentar-api" style="padding: 0.55rem 1.2rem; border-radius: 8px; border: none; background: var(--primary); color: var(--surface); font-weight: 600; cursor: pointer;">
         Reintentar carga
       </button>
     </div>
@@ -299,11 +297,10 @@ function renderizarCatalogo(rutas, alCambiarFavorito) {
           <a href="${waHref}" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp sobre ${ruta.nombre}">Contactar</a>
           <button
             type="button"
-            class="btn-favorito ${esFavorito ? "activo" : ""}"
+            class="btn-favorito ${esFavorito ? "activo favorito-activo" : ""}"
             data-id="${ruta.id}"
             aria-pressed="${esFavorito}"
             aria-label="${esFavorito ? "Quitar de favoritos" : "Guardar en favoritos"}: ${ruta.nombre}"
-            style="padding: 0.5rem 0.85rem; border-radius: 8px; border: 1px solid ${esFavorito ? "#e53e3e" : "#cbd5e0"}; background: ${esFavorito ? "#fff5f5" : "#fff"}; color: ${esFavorito ? "#c53030" : "#2d3748"}; font-weight: 600; cursor: pointer;"
           >
             ${esFavorito ? "❤ Guardado" : "🤍 Favorito"}
           </button>
