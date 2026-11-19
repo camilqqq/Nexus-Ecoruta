@@ -141,6 +141,7 @@ function filtrarRutas(
 }
 
 function iniciarCarruselTarjeta(contenedor: HTMLElement, cardIdx: number): void {
+  return;
   const imgPrincipal = contenedor.querySelector("img") as HTMLImageElement | null;
   if (!imgPrincipal) return;
 
