@@ -17,7 +17,8 @@
       dificultad: 'Fácil (apto para familias y adultos mayores)',
       recomendaciones:
         'Llevar zapatillas con buen agarre, botella de agua reutilizable y cortaviento.',
-      condiciones: 'Prohibido fumar, encender fuego y dejar residuos en el parque.',
+      condiciones:
+        'Prohibido fumar, encender fuego y dejar residuos en el parque.',
       emprendimiento: 'Certificado por EcoRuta Temuco',
       labelEstado: 'Estado de ruta:',
       estadoLugar: 'Sendero habilitado y transitable.',
@@ -32,19 +33,22 @@
         { url: '../assets/imagenes/Museo/museo2.jpg', posicion: 'center top' },
         { url: '../assets/imagenes/Museo/museo3.jpg', posicion: 'center' },
         { url: '../assets/imagenes/Museo/museo4.jpg', posicion: 'left top' },
-  ],
+      ],
       actualizacion: '2026-08-06',
       descripcion:
         'Recorrido cultural por el patrimonio histórico, arqueológico y la cosmovisión del pueblo Mapuche en una casona patrimonial declarada Monumento Histórico.',
       ubicacion: 'Av. Alemania 084, Temuco',
       duracion: '45 minutos a 1 hora',
       dificultad: 'Muy fácil (acceso peatonal adaptado)',
-      recomendaciones: 'Mantener el celular en silencio y no usar flash al tomar fotografías.',
-      condiciones: 'Entrada gratuita. Se requiere registro voluntario en la recepción.',
+      recomendaciones:
+        'Mantener el celular en silencio y no usar flash al tomar fotografías.',
+      condiciones:
+        'Entrada gratuita. Se requiere registro voluntario en la recepción.',
       emprendimiento: 'Certificado por EcoRuta Temuco',
       labelEstado: 'Exposiciones:',
       estadoLugar: 'Salas abiertas y exposiciones temporales disponibles.',
-      avisoEspecial: 'Atención de martes a viernes de 09:30 a 17:30 hrs. Cerrado los lunes.',
+      avisoEspecial:
+        'Atención de martes a viernes de 09:30 a 17:30 hrs. Cerrado los lunes.',
     },
     feria: {
       nombre: 'Feria Agroecológica',
@@ -54,7 +58,7 @@
         { url: '../assets/imagenes/Feria/feria2.jpg', posicion: 'center top' },
         { url: '../assets/imagenes/Feria/feria3.jpg', posicion: 'center' },
         { url: '../assets/imagenes/Feria/feria4.jpg', posicion: 'left top' },
-  ],
+      ],
       actualizacion: '2026-08-12',
       descripcion:
         'Espacio de intercambio directo con agricultores locales. Encuentra hortalizas orgánicas, productos del campo, artesanías regionales y gastronomía típica del sur de Chile.',
@@ -63,11 +67,13 @@
       dificultad: 'Muy fácil (paseo urbano)',
       recomendaciones:
         'Llevar bolsas reutilizables o mallas para tus compras y dinero en efectivo.',
-      condiciones: 'Uso de espacio público. Respetar los puestos de los productores locales.',
+      condiciones:
+        'Uso de espacio público. Respetar los puestos de los productores locales.',
       emprendimiento: 'Certificado por EcoRuta Temuco',
       labelEstado: 'Disponibilidad:',
       estadoLugar: 'Puestos de venta abastecidos y atención normal.',
-      avisoEspecial: 'Los mejores productos frescos se encuentran durante la mañana.',
+      avisoEspecial:
+        'Los mejores productos frescos se encuentran durante la mañana.',
     },
   };
 
@@ -104,8 +110,7 @@
       imgElemento.style.opacity = '0';
       setTimeout(() => {
         imgElemento.src = typeof item === 'object' ? item.url : item;
-        imgElemento.style.objectPosition =
-          typeof item === 'object' ? item.posicion || 'center' : 'center';
+        imgElemento.style.objectPosition = typeof item === 'object' ? item.posicion || 'center' : 'center';
         imgElemento.alt = datosActividad.nombre;
         imgElemento.style.opacity = '1';
       }, 400);
@@ -119,8 +124,24 @@
     }, 4000);
   };
 
+  const hacerDotsAccesibles = () => {
+    const dots = document.querySelectorAll('.carrusel-dots span');
+    dots.forEach((dot, idx) => {
+      dot.setAttribute('role', 'button');
+      dot.setAttribute('tabindex', '0');
+      dot.setAttribute('aria-label', `Ver imagen ${idx + 1}`);
+      dot.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          dot.click();
+        }
+      });
+    });
+  };
+
   document.addEventListener('DOMContentLoaded', () => {
     cargarInformacion();
     inicializarCarrusel();
+    hacerDotsAccesibles();
   });
 })();

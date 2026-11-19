@@ -6,9 +6,28 @@
   <title>Detalle de Actividad - Nexus Ecoruta</title>
   <!-- Enlace al CSS principal donde residen los temas normal, oscuro y daltónico -->
   <link rel="stylesheet" href="../css/index.css" />
+  <style>
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    [tabindex]:focus-visible {
+      outline: 3px solid #1b5e20;
+      outline-offset: 2px;
+      border-radius: 6px;
+    }
+
+    html[data-theme="dark"] button:focus-visible,
+    html[data-theme="dark"] a:focus-visible,
+    html[data-theme="dark"] input:focus-visible,
+    html[data-theme="dark"] select:focus-visible,
+    html[data-theme="dark"] [tabindex]:focus-visible {
+      outline-color: #a5d6a7;
+    }
+  </style>
 </head>
 <body>
-
   <!-- Encabezado / Header -->
   <header>
     <div class="header">
@@ -23,13 +42,11 @@
         <a href="../index.html" data-i18n="nav.inicio">Inicio</a>
         <a href="emprendimientos.html" data-i18n="nav.emprendimientos">Emprendimientos</a>
         <a href="contacto.html" data-i18n="nav.contacto">Contacto</a>
-
         <!-- Selector de idioma -->
         <select id="language-selector" aria-label="Seleccionar idioma" style="padding: 0.3rem 0.5rem; border-radius: 6px; border: 1px solid var(--border-color); background: var(--surface); color: var(--text-dark); font-weight: 600; cursor: pointer;">
           <option value="es">🇪🇸 Español</option>
           <option value="en">🇬🇧 English</option>
         </select>
-
         <!-- Selector de Temas y Accesibilidad -->
         <select id="theme-selector" aria-label="Seleccionar modo de visualización" style="padding: 0.3rem 0.5rem; border-radius: 6px; border: 1px solid var(--border-color); background: var(--surface); color: var(--text-dark); font-weight: 600; cursor: pointer;">
           <option value="normal">☀️ Normal</option>
@@ -44,7 +61,6 @@
     <div style="margin-bottom: 1.5rem;">
       <a href="../index.html" style="color: var(--primary); text-decoration: none; font-weight: bold;" data-i18n="detalle.volver">← Volver al catálogo</a>
     </div>
-
     <!-- Contenedor principal donde se inyecta la ficha -->
     <div id="detalle-actividad">
       <p style="text-align: center; font-size: 1.2rem; color: var(--text-muted); padding: 3rem 0;" data-i18n="detalle.cargando">Cargando información de la actividad...</p>
@@ -63,7 +79,6 @@
   <script src="../js/translations.js"></script>
   <script src="../js/i18n.js"></script>
   <script type="module" src="../js/actividad.js"></script>
-
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // --- Selector de idioma nativo ---
@@ -82,7 +97,6 @@
         const savedTheme = localStorage.getItem("selectedTheme") || "normal";
         themeSelector.value = savedTheme;
         applyTheme(savedTheme);
-
         themeSelector.addEventListener("change", (e) => {
           const selectedTheme = e.target.value;
           localStorage.setItem("selectedTheme", selectedTheme);
@@ -96,6 +110,31 @@
         } else {
           document.documentElement.setAttribute("data-theme", theme);
         }
+      }
+
+      // --- Accesibilidad por teclado para puntitos del carrusel (.carrusel-dots span) ---
+      const detalleContenedor = document.getElementById("detalle-actividad");
+      if (detalleContenedor) {
+        const habilitarTecladoDots = () => {
+          const dots = detalleContenedor.querySelectorAll(".carrusel-dots span");
+          dots.forEach((dot, idx) => {
+            if (!dot.hasAttribute("role")) {
+              dot.setAttribute("role", "button");
+              dot.setAttribute("tabindex", "0");
+              dot.setAttribute("aria-label", `Ver imagen ${idx + 1}`);
+              dot.addEventListener("keydown", (ev) => {
+                if (ev.key === "Enter" || ev.key === " ") {
+                  ev.preventDefault();
+                  dot.click();
+                }
+              });
+            }
+          });
+        };
+
+        habilitarTecladoDots();
+        const observer = new MutationObserver(habilitarTecladoDots);
+        observer.observe(detalleContenedor, { childList: true, subtree: true });
       }
     });
   </script>
