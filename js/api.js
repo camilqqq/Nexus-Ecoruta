@@ -85,11 +85,20 @@ async function cargarClimaDestino(contenedor, idxDestino) {
   const indiceSeguro = ((idxDestino % total) + total) % total;
   const destino = listaDestinos[indiceSeguro];
 
-  contenedor.innerHTML = `
-    <div style="width: 100%; box-sizing: border-box; background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 100%); color: #fff; border-radius: 16px; padding: 1.5rem; box-shadow: 0 10px 25px rgba(27, 67, 50, 0.16); text-align: center;">
-      <p style="margin: 0; font-weight: 600; opacity: 0.9;">Consultando estación meteorológica en ${destino.nombre}...</p>
-    </div>
-  `;
+  const tarjetaExistente = contenedor.querySelector("#tarjeta-clima-principal");
+  if (tarjetaExistente) {
+    tarjetaExistente.style.opacity = "0.65";
+    const tituloEl = tarjetaExistente.querySelector("#clima-titulo-destino");
+    const subtituloEl = tarjetaExistente.querySelector("#clima-subtitulo-destino");
+    if (tituloEl) tituloEl.textContent = destino.nombre;
+    if (subtituloEl) subtituloEl.textContent = "Actualizando pronóstico...";
+  } else {
+    contenedor.innerHTML = `
+      <div style="width: 100%; box-sizing: border-box; background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 100%); color: #fff; border-radius: 18px; padding: 1.5rem 2rem; box-shadow: 0 10px 25px rgba(27, 67, 50, 0.16); text-align: center;">
+        <p style="margin: 0; font-weight: 600; opacity: 0.9;">Consultando estación meteorológica en ${destino.nombre}...</p>
+      </div>
+    `;
+  }
 
   try {
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${destino.lat}&longitude=${destino.lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=America%2FSantiago&forecast_days=4`;
@@ -135,14 +144,14 @@ async function cargarClimaDestino(contenedor, idxDestino) {
     }
 
     contenedor.innerHTML = `
-      <div style="width: 100%; box-sizing: border-box; text-align: left; background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 58%, #40916c 100%); color: #ffffff; border-radius: 18px; padding: 1.5rem 2rem; box-shadow: 0 12px 28px rgba(27, 67, 50, 0.16); display: flex; flex-direction: column; gap: 1.15rem;">
+      <div id="tarjeta-clima-principal" style="width: 100%; box-sizing: border-box; text-align: left; background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 58%, #40916c 100%); color: #ffffff; border-radius: 18px; padding: 1.5rem 2rem; box-shadow: 0 12px 28px rgba(27, 67, 50, 0.16); display: flex; flex-direction: column; gap: 1.15rem; transition: opacity 0.2s ease;">
         <div style="width: 100%; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
           <div>
             <span style="display: inline-block; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; background: rgba(255,255,255,0.18); padding: 0.22rem 0.65rem; border-radius: 999px; margin-bottom: 0.4rem;">
               ● Clima en vivo • Destinos EcoRuta
             </span>
-            <h3 style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #ffffff;">${destino.nombre}</h3>
-            <p style="margin: 0.15rem 0 0 0; font-size: 0.86rem; opacity: 0.88;">${destino.subtitulo}</p>
+            <h3 id="clima-titulo-destino" style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #ffffff;">${destino.nombre}</h3>
+            <p id="clima-subtitulo-destino" style="margin: 0.15rem 0 0 0; font-size: 0.86rem; opacity: 0.88;">${destino.subtitulo}</p>
           </div>
 
           <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.28); border-radius: 999px; padding: 0.3rem 0.5rem;">
