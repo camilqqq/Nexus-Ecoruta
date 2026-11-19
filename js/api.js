@@ -65,7 +65,7 @@ function detectarUbicacionInicial() {
       (pos) => {
         destinoUbicacionActual = {
           nombre: "📍 Tu ubicación",
-          subtitulo: `Coordenadas detectadas (${pos.coords.latitude.toFixed(2)}, ${pos.coords.longitude.toFixed(2)})`,
+          subtitulo: `Ubicación actual (${pos.coords.latitude.toFixed(2)}, ${pos.coords.longitude.toFixed(2)})`,
           lat: Number(pos.coords.latitude.toFixed(4)),
           lon: Number(pos.coords.longitude.toFixed(4))
         };
@@ -84,7 +84,7 @@ async function cargarClimaDestino(contenedor, idxDestino) {
   const destino = listaDestinos[idxDestino] || listaDestinos[0];
 
   contenedor.innerHTML = `
-    <div style="background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 100%); color: #fff; border-radius: 16px; padding: 1.5rem; box-shadow: 0 10px 25px rgba(27, 67, 50, 0.16); text-align: center;">
+    <div style="background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 100%); color: #fff; border-radius: 16px; padding: 1.25rem; box-shadow: 0 10px 25px rgba(27, 67, 50, 0.16); text-align: center;">
       <p style="margin: 0; font-weight: 600; opacity: 0.9;">Consultando estación meteorológica en ${destino.nombre}...</p>
     </div>
   `;
@@ -104,18 +104,10 @@ async function cargarClimaDestino(contenedor, idxDestino) {
     const viento = Math.round(actual.wind_speed_10m);
     const estado = interpretarCodigoWMO(actual.weather_code);
 
-    const botonesDestinos = listaDestinos
+    const opcionesDestinos = listaDestinos
       .map(
-        (d, i) => `
-          <button
-            type="button"
-            class="btn-destino-clima"
-            data-idx="${i}"
-            style="padding: 0.35rem 0.8rem; border-radius: 999px; border: 1px solid ${i === idxDestino ? "#ffffff" : "rgba(255,255,255,0.28)"}; background: ${i === idxDestino ? "#ffffff" : "rgba(255,255,255,0.12)"}; color: ${i === idxDestino ? "#1b4332" : "#ffffff"}; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.2s;"
-          >
-            ${d.nombre}
-          </button>
-        `
+        (d, i) =>
+          `<option value="${i}" ${i === idxDestino ? "selected" : ""} style="color:#1b4332; background:#ffffff;">${d.nombre}</option>`
       )
       .join("");
 
@@ -130,10 +122,10 @@ async function cargarClimaDestino(contenedor, idxDestino) {
           const min = Math.round(diario.temperature_2m_min[i]);
 
           return `
-            <div style="background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.16); border-radius: 12px; padding: 0.65rem 0.9rem; text-align: center; min-width: 86px;">
-              <div style="font-size: 0.78rem; font-weight: 700; opacity: 0.9;">${formatearDiaCorto(fecha)}</div>
-              <div style="font-size: 1.35rem; margin: 0.2rem 0;">${infoDia.icono}</div>
-              <div style="font-size: 0.85rem; font-weight: 700;">${max}° <span style="opacity: 0.72; font-weight: 500;">/ ${min}°</span></div>
+            <div style="flex: 1 1 78px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.16); border-radius: 10px; padding: 0.5rem 0.65rem; text-align: center;">
+              <div style="font-size: 0.74rem; font-weight: 700; opacity: 0.9;">${formatearDiaCorto(fecha)}</div>
+              <div style="font-size: 1.2rem; margin: 0.15rem 0;">${infoDia.icono}</div>
+              <div style="font-size: 0.8rem; font-weight: 700;">${max}° <span style="opacity: 0.72; font-weight: 500;">/ ${min}°</span></div>
             </div>
           `;
         })
@@ -141,62 +133,71 @@ async function cargarClimaDestino(contenedor, idxDestino) {
     }
 
     contenedor.innerHTML = `
-      <div style="background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 60%, #40916c 100%); color: #ffffff; border-radius: 18px; padding: 1.5rem 1.75rem; box-shadow: 0 12px 28px rgba(27, 67, 50, 0.18); display: flex; flex-direction: column; gap: 1.15rem;">
-        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.75rem;">
+      <div style="background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 60%, #40916c 100%); color: #ffffff; border-radius: 16px; padding: 1.2rem 1.35rem; box-shadow: 0 10px 24px rgba(27, 67, 50, 0.16); display: flex; flex-direction: column; gap: 0.95rem;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 0.75rem;">
           <div>
-            <span style="display: inline-block; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; background: rgba(255,255,255,0.18); padding: 0.22rem 0.65rem; border-radius: 999px; margin-bottom: 0.35rem;">
+            <span style="display: inline-block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; background: rgba(255,255,255,0.18); padding: 0.18rem 0.55rem; border-radius: 999px; margin-bottom: 0.3rem;">
               ● Clima en vivo • Destinos EcoRuta
             </span>
-            <h3 style="margin: 0; font-size: 1.25rem; font-weight: 800; color: #ffffff;">${destino.nombre}</h3>
-            <p style="margin: 0.15rem 0 0 0; font-size: 0.85rem; opacity: 0.85;">${destino.subtitulo}</p>
+            <h3 style="margin: 0; font-size: 1.15rem; font-weight: 800; color: #ffffff;">${destino.nombre}</h3>
+            <p style="margin: 0.1rem 0 0 0; font-size: 0.8rem; opacity: 0.85;">${destino.subtitulo}</p>
           </div>
-          <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
-            ${botonesDestinos}
-          </div>
+
+          <label style="display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.95; min-width: 175px;">
+            Cambiar destino
+            <select
+              id="select-destino-clima"
+              aria-label="Seleccionar destino para ver el clima"
+              style="padding: 0.45rem 0.75rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.35); background: #ffffff; color: #1b4332; font-size: 0.85rem; font-weight: 700; cursor: pointer;"
+            >
+              ${opcionesDestinos}
+            </select>
+          </label>
         </div>
 
-        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.25rem; border-top: 1px solid rgba(255,255,255,0.16); padding-top: 1rem;">
-          <div style="display: flex; align-items: center; gap: 1rem;">
-            <span style="font-size: 3.1rem; line-height: 1; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));">${estado.icono}</span>
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; border-top: 1px solid rgba(255,255,255,0.16); padding-top: 0.85rem;">
+          <div style="display: flex; align-items: center; gap: 0.85rem;">
+            <span style="font-size: 2.6rem; line-height: 1; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));">${estado.icono}</span>
             <div>
-              <div style="font-size: 2.4rem; font-weight: 800; line-height: 1;">${temp}°C</div>
-              <div style="font-size: 0.98rem; font-weight: 600; margin-top: 0.2rem;">${estado.texto}</div>
-              <div style="font-size: 0.82rem; opacity: 0.85; margin-top: 0.15rem;">
+              <div style="font-size: 2rem; font-weight: 800; line-height: 1;">${temp}°C</div>
+              <div style="font-size: 0.92rem; font-weight: 600; margin-top: 0.15rem;">${estado.texto}</div>
+              <div style="font-size: 0.78rem; opacity: 0.85; margin-top: 0.1rem;">
                 Sensación ${sensacion}°C · 💧 ${humedad}% · 💨 ${viento} km/h
               </div>
             </div>
           </div>
 
-          <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
+          <div style="display: flex; gap: 0.5rem; flex: 1 1 240px; max-width: 310px;">
             ${pronosticoHtml}
           </div>
         </div>
 
-        <div style="background: rgba(0,0,0,0.16); border-radius: 10px; padding: 0.6rem 0.9rem; font-size: 0.84rem; display: flex; align-items: center; gap: 0.5rem;">
+        <div style="background: rgba(0,0,0,0.16); border-radius: 10px; padding: 0.5rem 0.8rem; font-size: 0.8rem; display: flex; align-items: center; gap: 0.45rem;">
           <span>🥾</span>
-          <span><strong>Recomendación de ruta:</strong> ${estado.consejo}</span>
+          <span><strong>Recomendación:</strong> ${estado.consejo}</span>
         </div>
       </div>
     `;
 
-    contenedor.querySelectorAll(".btn-destino-clima").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const nuevoIdx = Number(btn.dataset.idx || "0");
+    const selectDestino = document.getElementById("select-destino-clima");
+    if (selectDestino) {
+      selectDestino.addEventListener("change", (e) => {
+        const nuevoIdx = Number(e.target.value || "0");
         cargarClimaDestino(contenedor, nuevoIdx);
       });
-    });
+    }
   } catch (error) {
     console.warn("Error al obtener clima en vivo:", error);
     contenedor.innerHTML = `
-      <div style="background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 100%); color: #fff; border-radius: 16px; padding: 1.25rem 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-        <div style="display: flex; align-items: center; gap: 0.9rem;">
-          <span style="font-size: 2.3rem;">⛅</span>
+      <div style="background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 100%); color: #fff; border-radius: 16px; padding: 1.15rem 1.35rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.85rem;">
+        <div style="display: flex; align-items: center; gap: 0.8rem;">
+          <span style="font-size: 2.1rem;">⛅</span>
           <div>
-            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.85;">Clima en ${destino.nombre} • Referencial</div>
-            <div style="font-size: 1.4rem; font-weight: 800;">16°C · Parcialmente nublado</div>
+            <div style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.85;">Clima en ${destino.nombre} • Referencial</div>
+            <div style="font-size: 1.3rem; font-weight: 800;">16°C · Parcialmente nublado</div>
           </div>
         </div>
-        <button type="button" id="btn-reintentar-clima" style="padding: 0.45rem 0.95rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.4); background: rgba(255,255,255,0.15); color: #fff; font-weight: 700; cursor: pointer;">
+        <button type="button" id="btn-reintentar-clima" style="padding: 0.4rem 0.9rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.4); background: rgba(255,255,255,0.15); color: #fff; font-weight: 700; cursor: pointer;">
           Actualizar clima
         </button>
       </div>
