@@ -1,4 +1,5 @@
 "use strict";
+
 const detalleBackup = {
     "1": {
         id: "1",
@@ -733,16 +734,504 @@ const detalleBackup = {
         ]
     }
 };
+
+const traduccionesFichaEn = {
+    "1": {
+        nombre: "Ñielol Trail",
+        ubicacion: "Cerro Ñielol National Monument, Temuco",
+        descripcion: "Beautiful natural trail surrounded by native flora and fauna of La Araucanía Region. Ideal for family walks and birdwatching.",
+        detalles: {
+            duracion: "1 hr 30 min",
+            dificultad: "Moderate",
+            accesibilidad: "Suitable for people with reduced mobility in initial sections.",
+            horarios: "Tuesday to Sunday: 08:30 - 17:30 hrs"
+        },
+        itinerario: [
+            { hora: "08:30", actividad: "Check-in at entrance gate and start of walk." },
+            { hora: "09:15", actividad: "Arrival at Agua Santa Viewpoint." },
+            { hora: "10:00", actividad: "Return along Los Pataguas trail." }
+        ]
+    },
+    "2": {
+        nombre: "Araucanía Regional Museum",
+        ubicacion: "Av. Alemania 0842, Temuco",
+        descripcion: "Cultural space preserving the history, archaeology, and ethnography of Indigenous peoples and settlement in La Araucanía.",
+        detalles: {
+            accesibilidad: "Ramps and elevators fully enabled.",
+            horarios: "Tuesday to Friday 09:30 - 17:30 hrs. Saturdays and Sundays 10:00 - 17:00 hrs.",
+            tipoTerreno: "Ceramic tile, parquet, and stone-paved paths",
+            tipoRuta: "Guided tour / Exhibition hall and urban park"
+        },
+        sectores: [
+            "Main Regional History Gallery",
+            "Archaeology and Mapuche Worldview Room",
+            "Palacio Thiers Botanical Garden"
+        ],
+        tarifas: [
+            { tipo: "General Public", precio: "Free admission" },
+            { tipo: "School Groups", precio: "Free with prior reservation" }
+        ]
+    },
+    "3": {
+        nombre: "Agroecological Fair",
+        ubicacion: "Feria Pinto, Av. Balmaceda, Temuco",
+        descripcion: "Discover a space full of flavors, colors, and traditions from La Araucanía. Find fresh local produce, organic foods, and regional crafts offered directly by small producers and local entrepreneurs.",
+        detalles: {
+            accesibilidad: "Street-level access fully accessible.",
+            horarios: "Monday to Sunday 08:00 - 19:00 hrs.",
+            tipoTerreno: "Civic tiles, cobblestones, and covered walkways",
+            tipoRuta: "Urban pedestrian walk"
+        },
+        sectores: [
+            "Agroecological Producers Walk",
+            "Wood and Llama Craft Showcase",
+            "Traditional Food Court"
+        ],
+        tarifas: [
+            { tipo: "Admission", precio: "Free access for all visitors" }
+        ]
+    },
+    "4": {
+        nombre: "Isla Cautín Park",
+        ubicacion: "Av. Los Poetas, Temuco",
+        descripcion: "Large urban green lung along the Cautín River featuring bike paths, playgrounds, picnic areas, and native vegetation conservation zones.",
+        detalles: {
+            duracion: "1-2 hrs",
+            dificultad: "Easy",
+            accesibilidad: "Paved paths and accessible restrooms.",
+            horarios: "Monday to Sunday: 08:30 - 20:00 hrs"
+        }
+    },
+    "5": {
+        nombre: "Conguillío National Park",
+        ubicacion: "Melipeuco / Curacautín, La Araucanía Region",
+        descripcion: "World-renowned for its ancient araucaria forests, Andean lagoons, and the imposing presence of Llaima Volcano. A must-visit for sustainable tourism in La Araucanía.",
+        detalles: {
+            duracion: "Full day",
+            dificultad: "Moderate",
+            accesibilidad: "Adapted inclusive trail in Laguna Captrén sector.",
+            horarios: "Entry: 08:30 to 14:00 hrs. Exit: until 18:00 hrs."
+        },
+        tarifas: [
+            { tipo: "Children (-11 yrs) and Seniors (+60 yrs)", precio: "Free" },
+            { tipo: "Chilean Youth (12 to 17 yrs)", precio: "$2.700" },
+            { tipo: "Chilean Adult (18 to 59 yrs)", precio: "$4.700" },
+            { tipo: "Foreigners", precio: "$9.300" }
+        ],
+        itinerario: [
+            { hora: "08:30", actividad: "Entry through CONAF control booth." },
+            { hora: "09:30", actividad: "Walk along Sierra Nevada Trail among araucarias." },
+            { hora: "12:30", actividad: "Laguna Conguillío and Llaima Volcano viewpoint." },
+            { hora: "14:00", actividad: "Lunch in designated area." },
+            { hora: "17:30", actividad: "Return and park exit." }
+        ]
+    },
+    "6": {
+        nombre: "Villarrica National Park",
+        ubicacion: "Pucón / Villarrica, La Araucanía Region",
+        descripcion: "Dominated by the imposing Villarrica Volcano (Rukapillán), offering trails through volcanic scoria, lenga and araucaria forests, volcanic caves, and panoramic views of Andean lakes.",
+        detalles: {
+            duracion: "4-5 hrs",
+            dificultad: "Moderate",
+            accesibilidad: "Vehicle access up to Rucapillán sector; mountain trails with slopes.",
+            horarios: "Monday to Sunday: 08:30 - 18:00 hrs"
+        },
+        tarifas: [
+            { tipo: "Children (-11 yrs) and Seniors (+60 yrs)", precio: "Free" },
+            { tipo: "Chilean Youth (12 to 17 yrs)", precio: "$2.700" },
+            { tipo: "Chilean Adult (18 to 59 yrs)", precio: "$4.700" },
+            { tipo: "Foreigners", precio: "$9.300" }
+        ],
+        itinerario: [
+            { hora: "08:30", actividad: "Check-in at Rucapillán sector ranger station." },
+            { hora: "09:30", actividad: "Start hike along Los Cráteres Viewpoint Trail." },
+            { hora: "11:30", actividad: "Panoramic views of Lanín, Quetrupillán, and Llaima volcanoes." },
+            { hora: "13:30", actividad: "Descent and return to base." }
+        ]
+    },
+    "7": {
+        nombre: "Huerquehue National Park",
+        ubicacion: "Paillaco Sector, Pucón, La Araucanía Region",
+        descripcion: "Famous for its circuit of crystal-clear high-altitude lagoons (Chico, Toro, and Verde) surrounded by ancient araucaria and coihue forests and hidden waterfalls in the Andean foothills.",
+        detalles: {
+            duracion: "5-6 hrs",
+            dificultad: "Moderate",
+            accesibilidad: "Mountain trail with wooden steps and steep inclines.",
+            horarios: "Monday to Sunday: 08:30 - 17:30 hrs (Entry until 14:00 hrs)"
+        },
+        tarifas: [
+            { tipo: "Children (-11 yrs) and Seniors (+60 yrs)", precio: "Free" },
+            { tipo: "Chilean Youth (12 to 17 yrs)", precio: "$2.700" },
+            { tipo: "Chilean Adult (18 to 59 yrs)", precio: "$4.700" },
+            { tipo: "Foreigners", precio: "$9.300" }
+        ],
+        itinerario: [
+            { hora: "08:30", actividad: "Entry and registration at Lago Tinquilco administration." },
+            { hora: "10:00", actividad: "Lago Tinquilco Viewpoint and Nido de Águila Waterfall." },
+            { hora: "11:30", actividad: "Tour of Lago Chico, Lago Toro, and Lago Verde." },
+            { hora: "14:30", actividad: "Return toward entrance gate." }
+        ]
+    },
+    "8": {
+        nombre: "Malalcahuello National Reserve",
+        ubicacion: "Curacautín, La Araucanía Region",
+        descripcion: "Located on the slopes of Lonquimay Volcano and within the Kütralkura Geopark, combining recent volcanic scoria, craters such as Navidad, and extensive araucaria forests.",
+        detalles: {
+            duracion: "3-4 hrs",
+            dificultad: "Moderate",
+            accesibilidad: "Vehicle access to Corralco base; volcanic sand and rock trail.",
+            horarios: "Monday to Sunday: 08:30 - 18:00 hrs"
+        },
+        tarifas: [
+            { tipo: "Children (-11 yrs) and Seniors (+60 yrs)", precio: "Free" },
+            { tipo: "Chilean Adult (18 to 59 yrs)", precio: "$3.700" },
+            { tipo: "Foreigners", precio: "$7.300" }
+        ],
+        itinerario: [
+            { hora: "09:00", actividad: "Entry through Piedra Santa sector." },
+            { hora: "10:00", actividad: "Ascent along volcanic trail toward Navidad Crater." },
+            { hora: "11:30", actividad: "Panoramic view of Malalcahuello valley and Sierra Nevada." },
+            { hora: "13:00", actividad: "Return to picnic area." }
+        ]
+    },
+    "9": {
+        nombre: "Nahuelbuta National Park",
+        ubicacion: "Nahuelbuta Range, Angol, Malleco",
+        descripcion: "The highest point of the Coastal Range in La Araucanía, home to ancient coastal araucarias and the iconic Piedra del Águila viewpoint overlooking everything from the Pacific Ocean to the Andean volcanoes.",
+        detalles: {
+            duracion: "2-3 hrs",
+            dificultad: "Easy",
+            accesibilidad: "Wide trail through lenga, coihue, and araucaria forests.",
+            horarios: "Monday to Sunday: 08:30 - 18:00 hrs"
+        },
+        tarifas: [
+            { tipo: "Children (-11 yrs) and Seniors (+60 yrs)", precio: "Free" },
+            { tipo: "Chilean Adult (18 to 59 yrs)", precio: "$3.700" },
+            { tipo: "Foreigners", precio: "$7.300" }
+        ],
+        itinerario: [
+            { hora: "09:30", actividad: "Check-in at Pehuenco sector ranger station." },
+            { hora: "10:15", actividad: "Interpretive walk among coastal araucarias." },
+            { hora: "11:30", actividad: "Arrival at Piedra del Águila rocky viewpoint (1,379 m asl)." },
+            { hora: "12:30", actividad: "Return via circular circuit." }
+        ]
+    },
+    "10": {
+        nombre: "Tolhuaca National Park",
+        ubicacion: "Victoria / Curacautín, La Araucanía Region",
+        descripcion: "Foothill sanctuary characterized by calm Malleco Lagoon, the imposing Salto de la Culebra waterfall, and virgin forests of roble, raulí, and araucaria with minimal human intervention.",
+        detalles: {
+            duracion: "3 hrs",
+            dificultad: "Easy",
+            accesibilidad: "Flat stretches bordering Malleco Lagoon suitable for the whole family.",
+            horarios: "Monday to Sunday: 08:30 - 17:30 hrs"
+        },
+        tarifas: [
+            { tipo: "Children (-11 yrs) and Seniors (+60 yrs)", precio: "Free" },
+            { tipo: "Chilean Adult (18 to 59 yrs)", precio: "$3.700" },
+            { tipo: "Foreigners", precio: "$7.300" }
+        ],
+        itinerario: [
+            { hora: "09:00", actividad: "Entry and walk along Malleco Lagoon shore." },
+            { hora: "10:15", actividad: "Walk toward Salto de la Culebra viewpoint." },
+            { hora: "11:30", actividad: "Waterbird and Magellanic woodpecker spotting." },
+            { hora: "12:30", actividad: "Return to snack area." }
+        ]
+    },
+    "11": {
+        nombre: "Valley of the Moon",
+        ubicacion: "Los Flamencos National Reserve, San Pedro de Atacama, Antofagasta",
+        descripcion: "Unique desert landscape shaped over millennia by wind and water in the Cordillera de la Sal, featuring giant dunes, natural amphitheaters, and lunar-like salt formations.",
+        detalles: {
+            duracion: "3-4 hrs",
+            dificultad: "Easy",
+            accesibilidad: "Vehicle access along marked interior route; signposted pedestrian trails.",
+            horarios: "Monday to Sunday: 08:00 - 18:00 hrs"
+        },
+        tarifas: [
+            { tipo: "General National Public", precio: "$5.400" },
+            { tipo: "National Students / Seniors", precio: "$2.700" },
+            { tipo: "Foreigners", precio: "$10.800" }
+        ],
+        itinerario: [
+            { hora: "15:00", actividad: "Entry through Cordillera de la Sal sector checkpoint." },
+            { hora: "15:45", actividad: "Walk along Duna Mayor trail and Amphitheater." },
+            { hora: "17:00", actividad: "Visit to Tres Marías formation and salt mine." },
+            { hora: "18:00", actividad: "Sunset viewing over Licancabur and Lascar volcanoes." }
+        ]
+    },
+    "12": {
+        nombre: "La Campana National Park",
+        ubicacion: "Granizo / Cajón Grande, Olmué, Valparaíso Region",
+        descripcion: "Biosphere Reserve protecting one of the last natural groves of Chilean wine palm (Jubaea chilensis) and the historic trail walked by Charles Darwin to the summit of Cerro La Campana.",
+        detalles: {
+            duracion: "4-5 hrs",
+            dificultad: "Moderate",
+            accesibilidad: "Short inclusive trail in Granizo sector; summit route requires good footwear.",
+            horarios: "Tuesday to Sunday: 08:30 - 17:30 hrs"
+        },
+        tarifas: [
+            { tipo: "Children (-11 yrs) and Seniors (+60 yrs)", precio: "Free" },
+            { tipo: "Chilean Adult (18 to 59 yrs)", precio: "$3.700" },
+            { tipo: "Foreigners", precio: "$7.300" }
+        ],
+        itinerario: [
+            { hora: "08:30", actividad: "Entry through Granizo or Palmar de Ocoa sector." },
+            { hora: "10:00", actividad: "Walk among century-old Chilean palms and sclerophyllous forest." },
+            { hora: "11:45", actividad: "Rest at La Mina sector / Valley Viewpoint." },
+            { hora: "13:30", actividad: "Descent toward entrance gate." }
+        ]
+    },
+    "13": {
+        nombre: "Radal Siete Tazas National Park",
+        ubicacion: "Parque Inglés, Molina, Maule Region",
+        descripcion: "Spectacular sequence of seven turquoise pools and waterfalls carved into basalt rock by the Claro River, accompanied by La Leona and Velo de la Novia falls.",
+        detalles: {
+            duracion: "2-3 hrs",
+            dificultad: "Easy",
+            accesibilidad: "Universal wooden walkways up to the main Siete Tazas viewpoint.",
+            horarios: "Monday to Sunday: 08:30 - 18:00 hrs"
+        },
+        tarifas: [
+            { tipo: "Children (-11 yrs) and Seniors (+60 yrs)", precio: "Free" },
+            { tipo: "Chilean Adult (18 to 59 yrs)", precio: "$4.700" },
+            { tipo: "Foreigners", precio: "$9.300" }
+        ],
+        itinerario: [
+            { hora: "09:30", actividad: "Velo de la Novia Waterfall viewpoint." },
+            { hora: "10:15", actividad: "Walk along Siete Tazas walkways." },
+            { hora: "11:15", actividad: "Trail toward Salto La Leona." },
+            { hora: "12:30", actividad: "Return to Parque Inglés sector." }
+        ]
+    },
+    "14": {
+        nombre: "Petrohué Waterfalls",
+        ubicacion: "Vicente Pérez Rosales National Park, Puerto Varas, Los Lagos",
+        descripcion: "Impressive emerald-colored waterfalls flowing over ancient volcanic lava channels, set against the snow-capped cone of Osorno Volcano.",
+        detalles: {
+            duracion: "1 hr 30 min",
+            dificultad: "Easy",
+            accesibilidad: "Walkways fully accessible for wheelchairs and strollers.",
+            horarios: "Monday to Sunday: 09:00 - 18:30 hrs"
+        },
+        tarifas: [
+            { tipo: "Children (-11 yrs) and Seniors (+60 yrs)", precio: "Free" },
+            { tipo: "Chilean Adult (18 to 59 yrs)", precio: "$4.700" },
+            { tipo: "Foreigners", precio: "$9.300" }
+        ],
+        itinerario: [
+            { hora: "10:00", actividad: "Entry and walk along walkways over Petrohué River rapids." },
+            { hora: "10:40", actividad: "Main viewpoint overlooking Osorno Volcano." },
+            { hora: "11:10", actividad: "Gentle walk along Los Enamorados Trail through evergreen forest." }
+        ]
+    },
+    "15": {
+        nombre: "Chiloé National Park",
+        ubicacion: "Chanquín Sector, Cucao, Chonchi, Los Lagos Region",
+        descripcion: "Temperate evergreen rainforest meeting the open beaches of the Pacific Ocean, highlighting the mystical El Tepual Trail on wooden boardwalks among tepú trees and ferns.",
+        detalles: {
+            duracion: "2 hrs",
+            dificultad: "Easy",
+            distancia: "2.4 km (El Tepual Trail + Cucao Dunes)",
+            accesibilidad: "Elevated wooden boardwalks over the humid forest.",
+            horarios: "Monday to Sunday: 09:00 - 17:30 hrs"
+        },
+        tarifas: [
+            { tipo: "Children (-11 yrs) and Seniors (+60 yrs)", precio: "Free" },
+            { tipo: "Chilean Adult (18 to 59 yrs)", precio: "$3.700" },
+            { tipo: "Foreigners", precio: "$7.300" }
+        ],
+        itinerario: [
+            { hora: "10:00", actividad: "Environmental Information Center in Chanquín." },
+            { hora: "10:30", actividad: "Walk along El Tepual Trail boardwalks." },
+            { hora: "11:30", actividad: "Walk toward the dunes viewpoint and Cucao beach." }
+        ]
+    },
+    "16": {
+        nombre: "Queulat National Park",
+        ubicacion: "Carretera Austral, Puyuhuapi, Aysén Region",
+        descripcion: "Gem of the Carretera Austral famous for its Hanging Glacier (Ventisquero Colgante), whose meltwater cascades hundreds of meters into a glacial lagoon surrounded by cold Patagonian rainforest.",
+        detalles: {
+            duracion: "3-4 hrs",
+            dificultad: "Moderate",
+            accesibilidad: "Short accessible trail to Laguna Témpanos viewpoint; upper viewpoint has a slope.",
+            horarios: "Tuesday to Sunday: 09:00 - 17:00 hrs"
+        },
+        tarifas: [
+            { tipo: "Children (-11 yrs) and Seniors (+60 yrs)", precio: "Free" },
+            { tipo: "Chilean Adult (18 to 59 yrs)", precio: "$5.400" },
+            { tipo: "Foreigners", precio: "$10.800" }
+        ],
+        itinerario: [
+            { hora: "09:30", actividad: "Crossing the suspension bridge over Ventisquero River." },
+            { hora: "10:30", actividad: "Ascent through Patagonian evergreen forest." },
+            { hora: "11:45", actividad: "Arrival at Panoramic Viewpoint facing the Hanging Glacier." },
+            { hora: "13:00", actividad: "Return toward Laguna Témpanos." }
+        ]
+    },
+    "17": {
+        nombre: "Torres del Paine National Park",
+        ubicacion: "Última Esperanza Province, Magallanes Region",
+        descripcion: "Eighth natural wonder of the world and Biosphere Reserve, renowned for its granite spires, ancient glaciers, turquoise lakes, and Patagonian wildlife such as guanacos and condors.",
+        detalles: {
+            duracion: "Full day",
+            dificultad: "High",
+            accesibilidad: "Accessible vehicle viewpoints at Laguna Amarga and Salto Grande; high-mountain trekking.",
+            horarios: "Monday to Sunday: 08:00 - 20:00 hrs"
+        },
+        tarifas: [
+            { tipo: "Children (-11 yrs) and Seniors (+60 yrs)", precio: "Free" },
+            { tipo: "Chilean Adult (up to 3 days)", precio: "$11.400" },
+            { tipo: "Foreigners (up to 3 days)", precio: "$32.400" }
+        ],
+        itinerario: [
+            { hora: "08:00", actividad: "Start hike from Central Sector toward Ascencio Valley." },
+            { hora: "10:00", actividad: "Pass through El Chileno Camp among lenga forest." },
+            { hora: "12:00", actividad: "Ascent up the glacial moraine to Base Las Torres Viewpoint." },
+            { hora: "16:30", actividad: "Return to base." }
+        ]
+    },
+    "18": {
+        nombre: "Niebla Fort (Niebla Castle)",
+        ubicacion: "Camino a Niebla s/n, Corral Bay, Valdivia, Los Ríos Region",
+        descripcion: "National Historic Monument built in the 17th century on the coastal cliff of Niebla. Part of the most important Spanish defensive system in the South Pacific, with panoramic views of the Valdivia River mouth.",
+        detalles: {
+            duracion: "1 hr 30 min",
+            dificultad: "Easy",
+            accesibilidad: "Wooden walkways and viewpoints enabled across most of the site.",
+            horarios: "Tuesday to Sunday: 10:00 - 17:30 hrs"
+        },
+        sectores: [
+            "Cannon Battery and Defensive Moat",
+            "Powder Magazine and Site Museum Rooms",
+            "Panoramic Viewpoint over Corral Bay and Mancera Island"
+        ],
+        tarifas: [
+            { tipo: "General Public", precio: "Free admission" }
+        ],
+        itinerario: [
+            { hora: "10:30", actividad: "Entry to Niebla Castle Site Museum." },
+            { hora: "11:00", actividad: "Walk along the cannon battery overlooking Corral Bay." },
+            { hora: "11:45", actividad: "Visit historical rooms and wrap up at the coastal viewpoint." }
+        ]
+    }
+};
+
+function obtenerIdiomaActual() {
+    const selector = document.getElementById("language-selector");
+    return localStorage.getItem("selectedLang") || (selector ? selector.value : "es") || "es";
+}
+
+function traducirDificultad(valor, lang) {
+    if (lang !== "en" || !valor) return valor;
+    const mapa = {
+        "Fácil": "Easy",
+        "Moderada": "Moderate",
+        "Alta": "High",
+        "Difícil": "Hard"
+    };
+    return mapa[valor] || valor;
+}
+
+function traducirDuracion(valor, lang) {
+    if (lang !== "en" || !valor) return valor;
+    if (valor.toLowerCase().includes("día completo")) return "Full day";
+    return valor;
+}
+
+function traducirDistancia(valor, lang) {
+    if (lang !== "en" || !valor) return valor;
+    return valor
+        .replace(/\bSendero\b/gi, "Trail")
+        .replace(/\bDunas\b/gi, "Dunes")
+        .replace(/\bCircuito\b/gi, "Circuit")
+        .replace(/\bMiradores\b/gi, "Viewpoints")
+        .replace(/\bMirador\b/gi, "Viewpoint")
+        .replace(/\bida y vuelta\b/gi, "round trip");
+}
+
+function traducirTarifas(tarifas, lang) {
+    if (lang !== "en" || !Array.isArray(tarifas)) return tarifas;
+    const mapaTipo = {
+        "Niños/as (-11 años) y Adulto Mayor (+60 años)": "Children (-11 yrs) and Seniors (+60 yrs)",
+        "Jóvenes chilenos (12 a 17 años)": "Chilean Youth (12 to 17 yrs)",
+        "Adulto chileno (18 a 59 años)": "Chilean Adult (18 to 59 yrs)",
+        "Adulto chileno (hasta 3 días)": "Chilean Adult (up to 3 days)",
+        "Extranjeros": "Foreigners",
+        "Extranjeros (hasta 3 días)": "Foreigners (up to 3 days)",
+        "Público General": "General Public",
+        "Público General Nacional": "General National Public",
+        "Estudiantes / Adulto Mayor Nacional": "National Students / Seniors",
+        "Delegaciones Escolares": "School Groups",
+        "Acceso": "Admission"
+    };
+    const mapaPrecio = {
+        "Gratis": "Free",
+        "Entrada liberada / Gratuita": "Free admission",
+        "Gratuito previa reserva previa": "Free with prior reservation",
+        "Acceso libre y gratuito para todo espectador": "Free access for all visitors"
+    };
+    return tarifas.map((t) => ({
+        tipo: mapaTipo[t.tipo] || t.tipo,
+        precio: mapaPrecio[t.precio] || t.precio
+    }));
+}
+
+function aplicarTraduccionActividad(actividad, lang) {
+    if (lang !== "en") {
+        return {
+            ...actividad,
+            detalles: {
+                ...actividad.detalles
+            }
+        };
+    }
+
+    const extra = traduccionesFichaEn[actividad.id] || {};
+    const detallesExtra = extra.detalles || {};
+    const difRaw = detallesExtra.dificultad || actividad.detalles.dificultad;
+    const durRaw = detallesExtra.duracion || actividad.detalles.duracion;
+    const distRaw = detallesExtra.distancia || actividad.detalles.distancia;
+
+    return {
+        ...actividad,
+        nombre: extra.nombre || actividad.nombre,
+        categoria: extra.categoria || (
+            actividad.categoria === "Naturaleza" ? "Nature" :
+            actividad.categoria === "Cultura" ? "Culture" :
+            actividad.categoria === "Gastronomía" ? "Gastronomy" : actividad.categoria
+        ),
+        tipo: extra.tipo || (
+            actividad.tipo === "RUTA" ? "ROUTE" :
+            actividad.tipo === "ACTIVIDAD" ? "ACTIVITY" : actividad.tipo
+        ),
+        ubicacion: extra.ubicacion || actividad.ubicacion,
+        descripcion: extra.descripcion || actividad.descripcion,
+        sectores: extra.sectores || actividad.sectores,
+        tarifas: extra.tarifas || traducirTarifas(actividad.tarifas, lang),
+        itinerario: extra.itinerario || actividad.itinerario,
+        detalles: {
+            ...actividad.detalles,
+            ...detallesExtra,
+            dificultad: traducirDificultad(difRaw, lang),
+            duracion: traducirDuracion(durRaw, lang),
+            distancia: traducirDistancia(distRaw, lang)
+        }
+    };
+}
+
 function obtenerParametroUrl(nombre) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(nombre);
 }
+
 function cambiarImagen(src) {
     const imgPrincipal = document.getElementById("imagen-principal");
     if (imgPrincipal) {
         imgPrincipal.src = src;
     }
 }
+
 function cargarLibreriaLeaflet() {
     return new Promise((resolve, reject) => {
         if (window.L) {
@@ -763,6 +1252,7 @@ function cargarLibreriaLeaflet() {
         document.head.appendChild(script);
     });
 }
+
 async function inicializarMapaSatelite(actividad) {
     const contenedorMapa = document.getElementById("mapa-satelite-ruta");
     if (!contenedorMapa || !actividad.rutaGps)
@@ -818,7 +1308,9 @@ async function inicializarMapaSatelite(actividad) {
         console.error("Error al cargar el mapa satélite:", error);
     }
 }
+
 const STORAGE_FAVORITOS = "ecoruta_favoritos";
+
 function obtenerFavoritos() {
     try {
         const raw = localStorage.getItem(STORAGE_FAVORITOS);
@@ -831,6 +1323,7 @@ function obtenerFavoritos() {
         return [];
     }
 }
+
 function alternarFavorito(id) {
     const favoritos = obtenerFavoritos();
     const existe = favoritos.includes(id);
@@ -838,6 +1331,7 @@ function alternarFavorito(id) {
     localStorage.setItem(STORAGE_FAVORITOS, JSON.stringify(actualizados));
     return !existe;
 }
+
 async function obtenerActividadSincronizada(id) {
     const base = detalleBackup[id] || detalleBackup["1"];
     try {
@@ -870,14 +1364,36 @@ async function obtenerActividadSincronizada(id) {
         return base;
     }
 }
+
+function textoClave(lang, clave, fallback) {
+    if (typeof translations !== "undefined" && translations[lang] && translations[lang][clave]) {
+        return translations[lang][clave];
+    }
+    return fallback;
+}
+
 async function cargarFicha() {
     const id = obtenerParametroUrl("id") || "1";
     const idNumerico = Number(id) || 1;
     const contenedor = document.getElementById("detalle-actividad");
     if (!contenedor)
         return;
-    const actividad = await obtenerActividadSincronizada(id);
+
+    const lang = obtenerIdiomaActual();
+    const actividadBase = await obtenerActividadSincronizada(id);
+    const actividad = aplicarTraduccionActividad(actividadBase, lang);
     const esFavInicial = obtenerFavoritos().includes(idNumerico);
+
+    const textoFav = esFavInicial
+        ? (lang === "en" ? "❤️ Saved in Favorites" : "❤️ Guardado en Favoritos")
+        : (lang === "en" ? "🤍 Save to Favorites" : "🤍 Guardar en Favoritos");
+
+    const leyendaMapa = textoClave(
+        lang,
+        "mapa.leyenda",
+        "🟢 <strong>A:</strong> Inicio del recorrido &nbsp;·&nbsp; 🔵 <strong>Puntos:</strong> Miradores e hitos &nbsp;·&nbsp; 🔴 <strong>B:</strong> Destino / Retorno (haz clic en cada marcador para ver su nombre)"
+    );
+
     contenedor.innerHTML = `
     <section style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
       <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; flex-wrap:wrap; margin-bottom:0.5rem;">
@@ -888,7 +1404,7 @@ async function cargarFicha() {
           aria-pressed="${esFavInicial}"
           style="padding: 0.55rem 1.1rem; border-radius: 8px; border: 1px solid ${esFavInicial ? "#e53e3e" : "#cbd5e0"}; background: ${esFavInicial ? "#fff5f5" : "#ffffff"}; color: ${esFavInicial ? "#c53030" : "#2d3748"}; font-weight: 600; cursor: pointer; font-size: 0.95rem;"
         >
-          ${esFavInicial ? "❤️ Guardado en Favoritos" : "🤍 Guardar en Favoritos"}
+          ${textoFav}
         </button>
       </div>
       <div class="ficha-badges" style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-bottom:1rem;">
@@ -912,44 +1428,44 @@ async function cargarFicha() {
 
       <!-- Cuadro de métricas -->
       <div class="ficha-metricas" style="background: #f4f9f4; padding: 1.25rem; border-radius: 8px; margin: 1.5rem 0; border-left: 5px solid #2e7d32; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem;">
-        ${actividad.detalles.dificultad ? `<p style="margin: 0;"><strong>Dificultad:</strong> <span style="color: #2e7d32;">${actividad.detalles.dificultad}</span></p>` : ""}
-        ${actividad.detalles.duracion ? `<p style="margin: 0;"><strong>Duración:</strong> ${actividad.detalles.duracion}</p>` : ""}
-        ${actividad.detalles.distancia ? `<p style="margin: 0;"><strong>Distancia:</strong> ${actividad.detalles.distancia}</p>` : ""}
-        ${actividad.detalles.desnivel ? `<p style="margin: 0;"><strong>Desnivel:</strong> ${actividad.detalles.desnivel}</p>` : ""}
-        <p style="margin: 0; grid-column: 1 / -1;"><strong>Ubicación:</strong> 📍 ${actividad.ubicacion}</p>
+        ${actividad.detalles.dificultad ? `<p style="margin: 0;"><strong data-i18n="etiqueta.dificultad">${textoClave(lang, "etiqueta.dificultad", "Dificultad:")}</strong> <span style="color: #2e7d32;">${actividad.detalles.dificultad}</span></p>` : ""}
+        ${actividad.detalles.duracion ? `<p style="margin: 0;"><strong data-i18n="etiqueta.duracion">${textoClave(lang, "etiqueta.duracion", "Duración:")}</strong> ${actividad.detalles.duracion}</p>` : ""}
+        ${actividad.detalles.distancia ? `<p style="margin: 0;"><strong data-i18n="etiqueta.distancia">${textoClave(lang, "etiqueta.distancia", "Distancia:")}</strong> ${actividad.detalles.distancia}</p>` : ""}
+        ${actividad.detalles.desnivel ? `<p style="margin: 0;"><strong data-i18n="etiqueta.desnivel">${textoClave(lang, "etiqueta.desnivel", "Desnivel:")}</strong> ${actividad.detalles.desnivel}</p>` : ""}
+        <p style="margin: 0; grid-column: 1 / -1;"><strong data-i18n="etiqueta.ubicacion">${textoClave(lang, "etiqueta.ubicacion", "Ubicación:")}</strong> 📍 ${actividad.ubicacion}</p>
       </div>
 
       <!-- Información y detalles -->
       <div style="line-height: 1.6; font-size: 1.05rem; margin-top: 1.5rem;">
         <p style="margin-bottom: 1.5rem; color: #444;">${actividad.descripcion}</p>
 
-        <h3 style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: #111;">Horarios de atención</h3>
+        <h3 data-i18n="titulo.horarios" style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: #111;">${textoClave(lang, "titulo.horarios", "Horarios de atención")}</h3>
         <p style="margin-bottom: 1.5rem; color: #333;">${actividad.detalles.horarios}</p>
 
         ${actividad.sectores ? `
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: #111;">Sectores y recorridos</h3>
+          <h3 data-i18n="titulo.sectores" style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: #111;">${textoClave(lang, "titulo.sectores", "Sectores y recorridos")}</h3>
           <ul style="margin-top: 0.4rem; margin-bottom: 1.5rem; padding-left: 1.5rem; color: #333;">
             ${actividad.sectores.map((s) => `<li style="margin-bottom: 0.4rem;">${s}</li>`).join("")}
           </ul>
         ` : ""}
 
         ${actividad.tarifas ? `
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: #111;">Tarifas de acceso</h3>
+          <h3 data-i18n="titulo.tarifas" style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: #111;">${textoClave(lang, "titulo.tarifas", "Tarifas de acceso")}</h3>
           <ul style="margin-top: 0.4rem; margin-bottom: 1.5rem; padding-left: 1.5rem; color: #333;">
             ${actividad.tarifas.map((t) => `<li style="margin-bottom: 0.4rem;"><strong>${t.tipo}:</strong> ${t.precio}</li>`).join("")}
           </ul>
         ` : ""}
 
-        ${actividad.detalles.tipoTerreno ? `<p style="margin-bottom: 0.8rem; color: #333;"><strong>Tipo de terreno:</strong> ${actividad.detalles.tipoTerreno}</p>` : ""}
-        ${actividad.detalles.tipoRuta ? `<p style="margin-bottom: 0.8rem; color: #333;"><strong>Tipo de ruta:</strong> ${actividad.detalles.tipoRuta}</p>` : ""}
-        ${actividad.detalles.desnivelExtra ? `<p style="margin-bottom: 0.8rem; color: #333;"><strong>Desnivel:</strong> ${actividad.detalles.desnivelExtra}</p>` : ""}
-        ${actividad.detalles.altitudMaxima ? `<p style="margin-bottom: 1.5rem; color: #333;"><strong>Altitud máxima:</strong> ${actividad.detalles.altitudMaxima}</p>` : ""}
+        ${actividad.detalles.tipoTerreno ? `<p style="margin-bottom: 0.8rem; color: #333;"><strong>${lang === "en" ? "Terrain type:" : "Tipo de terreno:"}</strong> ${actividad.detalles.tipoTerreno}</p>` : ""}
+        ${actividad.detalles.tipoRuta ? `<p style="margin-bottom: 0.8rem; color: #333;"><strong>${lang === "en" ? "Route type:" : "Tipo de ruta:"}</strong> ${actividad.detalles.tipoRuta}</p>` : ""}
+        ${actividad.detalles.desnivelExtra ? `<p style="margin-bottom: 0.8rem; color: #333;"><strong data-i18n="etiqueta.desnivel">${textoClave(lang, "etiqueta.desnivel", "Desnivel:")}</strong> ${actividad.detalles.desnivelExtra}</p>` : ""}
+        ${actividad.detalles.altitudMaxima ? `<p style="margin-bottom: 1.5rem; color: #333;"><strong>${lang === "en" ? "Max altitude:" : "Altitud máxima:"}</strong> ${actividad.detalles.altitudMaxima}</p>` : ""}
 
-        <h3 style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: #111;">Accesibilidad</h3>
+        <h3 data-i18n="titulo.accesibilidad" style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: #111;">${textoClave(lang, "titulo.accesibilidad", "Accesibilidad")}</h3>
         <p style="margin-bottom: 1.5rem; color: #333;">${actividad.detalles.accesibilidad}</p>
 
         ${actividad.itinerario ? `
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: #111;">Itinerario sugerido</h3>
+          <h3 data-i18n="titulo.itinerario" style="font-size: 1.25rem; font-weight: 700; margin-top: 1.8rem; margin-bottom: 0.6rem; color: #111;">${textoClave(lang, "titulo.itinerario", "Itinerario sugerido")}</h3>
           <ul style="margin-top: 0.4rem; margin-bottom: 1.5rem; padding-left: 1.5rem; color: #333;">
             ${actividad.itinerario.map((it) => `<li style="margin-bottom: 0.4rem;"><strong>${it.hora}:</strong> ${it.actividad}</li>`).join("")}
           </ul>
@@ -958,28 +1474,46 @@ async function cargarFicha() {
 
       <!-- Mapa GPS Satelital Interactivo -->
       ${actividad.rutaGps ? `
-        <h3 style="color: #2e7d32; margin-top: 2rem; font-size: 1.25rem; border-bottom: 2px solid #e8f5e9; padding-bottom: 0.5rem;">Ruta y Mapa GPS Satelital</h3>
-        <p style="font-size: 0.9rem; color: #555; margin: 0.5rem 0 0.8rem 0;">🟢 <strong>A:</strong> Inicio del recorrido &nbsp;·&nbsp; 🔵 <strong>Puntos:</strong> Miradores e hitos &nbsp;·&nbsp; 🔴 <strong>B:</strong> Destino / Retorno (haz clic en cada marcador para ver su nombre)</p>
+        <h3 data-i18n="titulo.mapa" style="color: #2e7d32; margin-top: 2rem; font-size: 1.25rem; border-bottom: 2px solid #e8f5e9; padding-bottom: 0.5rem;">${textoClave(lang, "titulo.mapa", "Ruta y Mapa GPS Satelital")}</h3>
+        <p style="font-size: 0.9rem; color: #555; margin: 0.5rem 0 0.8rem 0;">${leyendaMapa}</p>
         <div id="mapa-satelite-ruta" style="width: 100%; height: 450px; border-radius: 10px; overflow: hidden; border: 1px solid #e0e0e0; z-index: 1;"></div>
       ` : ""}
     </section>
   `;
+
+    if (typeof changeLanguage === "function") {
+        changeLanguage(lang);
+    }
+
     const btnFavFicha = document.getElementById("btn-favorito-ficha");
     if (btnFavFicha) {
         btnFavFicha.addEventListener("click", () => {
             const esFavAhora = alternarFavorito(idNumerico);
-            btnFavFicha.textContent = esFavAhora ? "❤️ Guardado en Favoritos" : "🤍 Guardar en Favoritos";
+            const currentLang = obtenerIdiomaActual();
+            btnFavFicha.textContent = esFavAhora
+                ? (currentLang === "en" ? "❤️ Saved in Favorites" : "❤️ Guardado en Favoritos")
+                : (currentLang === "en" ? "🤍 Save to Favorites" : "🤍 Guardar en Favoritos");
             btnFavFicha.setAttribute("aria-pressed", String(esFavAhora));
             btnFavFicha.style.borderColor = esFavAhora ? "#e53e3e" : "#cbd5e0";
             btnFavFicha.style.background = esFavAhora ? "#fff5f5" : "#ffffff";
             btnFavFicha.style.color = esFavAhora ? "#c53030" : "#2d3748";
         });
     }
+
     if (actividad.rutaGps) {
         inicializarMapaSatelite(actividad);
     }
 }
+
+document.addEventListener("change", (event) => {
+    if (event.target && event.target.id === "language-selector") {
+        localStorage.setItem("selectedLang", event.target.value);
+        cargarFicha();
+    }
+});
+
 window.cambiarImagen = cambiarImagen;
+
 if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", cargarFicha);
 }
