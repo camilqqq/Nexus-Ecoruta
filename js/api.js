@@ -86,7 +86,7 @@ async function cargarClimaDestino(contenedor, idxDestino) {
   const destino = listaDestinos[indiceSeguro];
 
   contenedor.innerHTML = `
-    <div style="background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 100%); color: #fff; border-radius: 16px; padding: 1.25rem; box-shadow: 0 10px 25px rgba(27, 67, 50, 0.16); text-align: center;">
+    <div style="width: 100%; box-sizing: border-box; background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 100%); color: #fff; border-radius: 16px; padding: 1.5rem; box-shadow: 0 10px 25px rgba(27, 67, 50, 0.16); text-align: center;">
       <p style="margin: 0; font-weight: 600; opacity: 0.9;">Consultando estación meteorológica en ${destino.nombre}...</p>
     </div>
   `;
@@ -124,10 +124,10 @@ async function cargarClimaDestino(contenedor, idxDestino) {
           const min = Math.round(diario.temperature_2m_min[i]);
 
           return `
-            <div style="flex: 1 1 78px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.16); border-radius: 10px; padding: 0.5rem 0.65rem; text-align: center;">
-              <div style="font-size: 0.74rem; font-weight: 700; opacity: 0.9;">${formatearDiaCorto(fecha)}</div>
-              <div style="font-size: 1.2rem; margin: 0.15rem 0;">${infoDia.icono}</div>
-              <div style="font-size: 0.8rem; font-weight: 700;">${max}° <span style="opacity: 0.72; font-weight: 500;">/ ${min}°</span></div>
+            <div style="flex: 1 1 95px; background: rgba(255,255,255,0.13); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 0.75rem 0.9rem; text-align: center;">
+              <div style="font-size: 0.8rem; font-weight: 700; opacity: 0.9;">${formatearDiaCorto(fecha)}</div>
+              <div style="font-size: 1.5rem; margin: 0.25rem 0;">${infoDia.icono}</div>
+              <div style="font-size: 0.88rem; font-weight: 700;">${max}° <span style="opacity: 0.75; font-weight: 500;">/ ${min}°</span></div>
             </div>
           `;
         })
@@ -135,29 +135,30 @@ async function cargarClimaDestino(contenedor, idxDestino) {
     }
 
     contenedor.innerHTML = `
-      <div style="background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 60%, #40916c 100%); color: #ffffff; border-radius: 16px; padding: 1.25rem 1.4rem; box-shadow: 0 10px 24px rgba(27, 67, 50, 0.16); display: flex; flex-direction: column; gap: 1rem;">
-        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.75rem;">
+      <div style="width: 100%; box-sizing: border-box; text-align: left; background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 58%, #40916c 100%); color: #ffffff; border-radius: 18px; padding: 1.5rem 2rem; box-shadow: 0 12px 28px rgba(27, 67, 50, 0.16); display: flex; flex-direction: column; gap: 1.15rem;">
+        
+        <div style="width: 100%; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
           <div>
-            <span style="display: inline-block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; background: rgba(255,255,255,0.18); padding: 0.2rem 0.6rem; border-radius: 999px; margin-bottom: 0.35rem;">
+            <span style="display: inline-block; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; background: rgba(255,255,255,0.18); padding: 0.22rem 0.65rem; border-radius: 999px; margin-bottom: 0.4rem;">
               ● Clima en vivo • Destinos EcoRuta
             </span>
-            <h3 style="margin: 0; font-size: 1.2rem; font-weight: 800; color: #ffffff;">${destino.nombre}</h3>
-            <p style="margin: 0.15rem 0 0 0; font-size: 0.82rem; opacity: 0.85;">${destino.subtitulo}</p>
+            <h3 style="margin: 0; font-size: 1.35rem; font-weight: 800; color: #ffffff;">${destino.nombre}</h3>
+            <p style="margin: 0.15rem 0 0 0; font-size: 0.86rem; opacity: 0.88;">${destino.subtitulo}</p>
           </div>
 
-          <div style="display: inline-flex; align-items: center; gap: 0.35rem; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.28); border-radius: 999px; padding: 0.25rem 0.4rem;">
+          <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.28); border-radius: 999px; padding: 0.3rem 0.5rem;">
             <button
               type="button"
               id="btn-clima-anterior"
               aria-label="Destino anterior"
-              style="width: 30px; height: 30px; border-radius: 50%; border: none; background: rgba(255,255,255,0.16); color: #ffffff; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center;"
+              style="width: 32px; height: 32px; border-radius: 50%; border: none; background: rgba(255,255,255,0.18); color: #ffffff; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center;"
             >
               ‹
             </button>
             <select
               id="select-destino-clima"
               aria-label="Seleccionar destino para ver el clima"
-              style="background: transparent; border: none; color: #ffffff; font-size: 0.85rem; font-weight: 700; padding: 0.25rem 0.4rem; cursor: pointer; outline: none; max-width: 170px;"
+              style="background: transparent; border: none; color: #ffffff; font-size: 0.9rem; font-weight: 700; padding: 0.25rem 0.5rem; cursor: pointer; outline: none;"
             >
               ${opcionesDestinos}
             </select>
@@ -165,33 +166,33 @@ async function cargarClimaDestino(contenedor, idxDestino) {
               type="button"
               id="btn-clima-siguiente"
               aria-label="Destino siguiente"
-              style="width: 30px; height: 30px; border-radius: 50%; border: none; background: rgba(255,255,255,0.16); color: #ffffff; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center;"
+              style="width: 32px; height: 32px; border-radius: 50%; border: none; background: rgba(255,255,255,0.18); color: #ffffff; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center;"
             >
               ›
             </button>
           </div>
         </div>
 
-        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; border-top: 1px solid rgba(255,255,255,0.16); padding-top: 0.9rem;">
-          <div style="display: flex; align-items: center; gap: 0.85rem;">
-            <span style="font-size: 2.6rem; line-height: 1; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));">${estado.icono}</span>
+        <div style="width: 100%; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; border-top: 1px solid rgba(255,255,255,0.18); padding-top: 1.1rem;">
+          <div style="display: flex; align-items: center; gap: 1.1rem; flex: 1 1 260px;">
+            <span style="font-size: 3.4rem; line-height: 1; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.22));">${estado.icono}</span>
             <div>
-              <div style="font-size: 2rem; font-weight: 800; line-height: 1;">${temp}°C</div>
-              <div style="font-size: 0.92rem; font-weight: 600; margin-top: 0.15rem;">${estado.texto}</div>
-              <div style="font-size: 0.78rem; opacity: 0.85; margin-top: 0.1rem;">
+              <div style="font-size: 2.5rem; font-weight: 800; line-height: 1;">${temp}°C</div>
+              <div style="font-size: 1rem; font-weight: 600; margin-top: 0.2rem;">${estado.texto}</div>
+              <div style="font-size: 0.84rem; opacity: 0.88; margin-top: 0.15rem;">
                 Sensación ${sensacion}°C · 💧 ${humedad}% · 💨 ${viento} km/h
               </div>
             </div>
           </div>
 
-          <div style="display: flex; gap: 0.5rem; flex: 1 1 240px; max-width: 310px;">
+          <div style="display: flex; gap: 0.75rem; flex: 1 1 320px; justify-content: flex-end;">
             ${pronosticoHtml}
           </div>
         </div>
 
-        <div style="background: rgba(0,0,0,0.16); border-radius: 10px; padding: 0.55rem 0.85rem; font-size: 0.82rem; display: flex; align-items: center; gap: 0.45rem;">
+        <div style="width: 100%; box-sizing: border-box; background: rgba(0,0,0,0.18); border-radius: 12px; padding: 0.7rem 1rem; font-size: 0.86rem; display: flex; align-items: center; gap: 0.5rem;">
           <span>🥾</span>
-          <span><strong>Recomendación:</strong> ${estado.consejo}</span>
+          <span><strong>Recomendación de ruta:</strong> ${estado.consejo}</span>
         </div>
       </div>
     `;
@@ -213,15 +214,15 @@ async function cargarClimaDestino(contenedor, idxDestino) {
   } catch (error) {
     console.warn("Error al obtener clima en vivo:", error);
     contenedor.innerHTML = `
-      <div style="background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 100%); color: #fff; border-radius: 16px; padding: 1.15rem 1.35rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.85rem;">
-        <div style="display: flex; align-items: center; gap: 0.8rem;">
-          <span style="font-size: 2.1rem;">⛅</span>
+      <div style="width: 100%; box-sizing: border-box; text-align: left; background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 100%); color: #fff; border-radius: 16px; padding: 1.25rem 1.75rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.85rem;">
+        <div style="display: flex; align-items: center; gap: 0.85rem;">
+          <span style="font-size: 2.2rem;">⛅</span>
           <div>
             <div style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.85;">Clima en ${destino.nombre} • Referencial</div>
-            <div style="font-size: 1.3rem; font-weight: 800;">16°C · Parcialmente nublado</div>
+            <div style="font-size: 1.35rem; font-weight: 800;">16°C · Parcialmente nublado</div>
           </div>
         </div>
-        <button type="button" id="btn-reintentar-clima" style="padding: 0.4rem 0.9rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.4); background: rgba(255,255,255,0.15); color: #fff; font-weight: 700; cursor: pointer;">
+        <button type="button" id="btn-reintentar-clima" style="padding: 0.45rem 1rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.4); background: rgba(255,255,255,0.15); color: #fff; font-weight: 700; cursor: pointer;">
           Actualizar clima
         </button>
       </div>
