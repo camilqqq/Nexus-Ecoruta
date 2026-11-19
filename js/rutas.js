@@ -11,7 +11,7 @@ let categoriaSeleccionada = sessionStorage.getItem(STORAGE_FILTRO_CAT) || "Todas
 
 const GALERIAS_ACTIVIDADES = {
   1: [
-    "assets/imagenes/Sendero/Sendero_Nielol.jpg",
+    "assets/imagenes/Sendero/sendero.jpg",
     "assets/imagenes/Sendero/sendero2.jpg",
     "assets/imagenes/Sendero/sendero3.jpg",
     "assets/imagenes/Sendero/sendero4.jpg"
@@ -38,7 +38,7 @@ function normalizarTexto(texto) {
 }
 
 function normalizarImagen(rutaImg) {
-  if (!rutaImg) return "assets/imagenes/Sendero/Sendero_Nielol.jpg";
+  if (!rutaImg) return "assets/imagenes/Sendero/sendero";
   if (rutaImg.startsWith("../assets/")) return rutaImg.replace("../", "");
   return rutaImg;
 }
@@ -282,7 +282,7 @@ function renderizarCatalogo(rutas, alCambiarFavorito) {
           width="400"
           height="250"
           ${index === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}
-          onerror="this.onerror=null;this.src='assets/imagenes/Sendero/Sendero_Nielol.jpg';"
+          onerror="this.onerror=null;this.src='assets/imagenes/Sendero/sendero.jpg';"
         />
       </div>
       <div class="info">
