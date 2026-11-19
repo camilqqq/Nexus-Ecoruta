@@ -31,7 +31,7 @@ let categoriaSeleccionada: string = sessionStorage.getItem(STORAGE_FILTRO_CAT) |
 
 const GALERIAS_ACTIVIDADES: Record<number, string[]> = {
   1: [
-    "assets/imagenes/Sendero/Sendero_Nielol.jpg",
+    "assets/imagenes/Sendero/sendero.jpg",
     "assets/imagenes/Sendero/sendero2.jpg",
     "assets/imagenes/Sendero/sendero3.jpg",
     "assets/imagenes/Sendero/sendero4.jpg"
@@ -58,7 +58,7 @@ function normalizarTexto(texto: string): string {
 }
 
 function normalizarImagen(rutaImg: string): string {
-  if (!rutaImg) return "assets/imagenes/Sendero/Sendero_Nielol.jpg";
+  if (!rutaImg) return "assets/imagenes/Sendero/sendero.jpg";
   if (rutaImg.startsWith("../assets/")) return rutaImg.replace("../", "");
   return rutaImg;
 }
@@ -323,7 +323,7 @@ function renderizarCatalogo(
           width="400"
           height="250"
           ${index < 3 ? 'fetchpriority="high"' : 'loading="lazy"'}
-          onerror="this.onerror=null;this.src='assets/imagenes/Sendero/Sendero_Nielol.jpg';"
+          onerror="this.onerror=null;this.src='assets/imagenes/Sendero/sendero.jpg';"
         />
       </div>
       <div class="info">
