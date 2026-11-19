@@ -891,7 +891,7 @@ async function cargarFicha() {
           ${esFavInicial ? "❤️ Guardado en Favoritos" : "🤍 Guardar en Favoritos"}
         </button>
       </div>
-      <div style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-bottom:1rem;">
+      <div class="ficha-badges" style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-bottom:1rem;">
         <span style="background:#e8f5e9; color:#1b5e20; padding:0.4rem 1rem; border-radius:20px; font-size:0.9rem; font-weight:bold;">
           ${actividad.tipo}
         </span>
@@ -911,7 +911,7 @@ async function cargarFicha() {
       </div>
 
       <!-- Cuadro de métricas -->
-      <div style="background: #f4f9f4; padding: 1.25rem; border-radius: 8px; margin: 1.5rem 0; border-left: 5px solid #2e7d32; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem;">
+      <div class="ficha-metricas" style="background: #f4f9f4; padding: 1.25rem; border-radius: 8px; margin: 1.5rem 0; border-left: 5px solid #2e7d32; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem;">
         ${actividad.detalles.dificultad ? `<p style="margin: 0;"><strong>Dificultad:</strong> <span style="color: #2e7d32;">${actividad.detalles.dificultad}</span></p>` : ""}
         ${actividad.detalles.duracion ? `<p style="margin: 0;"><strong>Duración:</strong> ${actividad.detalles.duracion}</p>` : ""}
         ${actividad.detalles.distancia ? `<p style="margin: 0;"><strong>Distancia:</strong> ${actividad.detalles.distancia}</p>` : ""}

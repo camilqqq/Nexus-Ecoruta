@@ -11,6 +11,26 @@
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
+[data-theme="dark"] {
+  --bg-main: #121814;
+  --surface: #1e2620;
+  --text-dark: #e0e6e2;
+  --text-muted: #a0aab0;
+  --primary: #52b788;
+  --primary-hover: #74c69d;
+  --border-color: #334238;
+}
+
+[data-theme="colorblind"] {
+  --bg-main: #ffffff;
+  --surface: #ffffff;
+  --text-dark: #000000;
+  --text-muted: #222222;
+  --primary: #004b23;
+  --primary-hover: #006432;
+  --border-color: #000000;
+}
+
 ::selection {
   background-color: var(--primary);
   color: var(--surface);
@@ -36,6 +56,7 @@ body {
   margin: 0 auto;
   opacity: 0;
   animation: fadeIn 0.4s ease-out forwards;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 @keyframes fadeIn {
@@ -113,7 +134,6 @@ nav a:hover {
   color: var(--primary);
 }
 
-/* --- Corrección del desplegable en el Header --- */
 nav select {
   padding: 0.35rem 0.75rem;
   border-radius: 6px;
@@ -322,10 +342,10 @@ nav select option {
 .buttons button {
   flex: 1;
   text-align: center;
-  padding: 0.65rem 0.5rem; 
+  padding: 0.65rem 0.5rem;
   border-radius: 8px;
   font-weight: 600;
-  font-size: 0.95rem;      
+  font-size: 0.95rem;
   text-decoration: none;
   background-color: var(--bg-main);
   color: var(--text-dark);
@@ -353,7 +373,6 @@ nav select option {
   background-color: var(--primary-hover);
 }
 
-/* --- Corrección del botón de Favoritos en las tarjetas para modo oscuro --- */
 .buttons button[aria-pressed="true"],
 .buttons button.favorito-activo {
   background-color: var(--surface) !important;
@@ -404,45 +423,8 @@ textarea:focus-visible {
   outline-offset: 2px;
 }
 
-/* --- Variables de Temas y Accesibilidad --- */
-:root {
-  --bg-main: #f4f6f5;
-  --surface: #ffffff;
-  --text-dark: #1d2d24;
-  --text-muted: #5e6d64;
-  --primary: #1b4332;
-  --primary-hover: #2d6a4f;
-  --border-color: #e2e8e4;
-}
-
-[data-theme="dark"] {
-  --bg-main: #121814;
-  --surface: #1e2620;
-  --text-dark: #e0e6e2;
-  --text-muted: #a0aab0;
-  --primary: #52b788;
-  --primary-hover: #74c69d;
-  --border-color: #334238;
-}
-
-[data-theme="colorblind"] {
-  --bg-main: #ffffff;
-  --surface: #ffffff;
-  --text-dark: #000000;
-  --text-muted: #222222;
-  --primary: #004b23;
-  --primary-hover: #006432;
-  --border-color: #000000;
-}
-
-body {
-  background-color: var(--bg-main);
-  color: var(--text-dark);
-  transition: background-color 0.3s, color 0.3s;
-}
-
-#clima-info, 
-#clima-info > div, 
+#clima-info,
+#clima-info > div,
 .clima-container {
   width: 100% !important;
   max-width: 100% !important;
@@ -451,4 +433,76 @@ body {
   justify-content: center !important;
   align-items: center !important;
   gap: 1rem !important;
+}
+
+/* ==========================================================
+   MODO OSCURO — DETALLE DE ACTIVIDAD
+   ========================================================== */
+[data-theme="dark"] .activity,
+[data-theme="dark"] #detalle-actividad section {
+  background-color: var(--surface) !important;
+  color: var(--text-dark) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: none !important;
+}
+
+/* Textos de la ficha en modo oscuro */
+[data-theme="dark"] #detalle-actividad h1 {
+  color: var(--primary) !important;
+}
+
+[data-theme="dark"] #detalle-actividad h2,
+[data-theme="dark"] #detalle-actividad h3,
+[data-theme="dark"] #detalle-actividad p,
+[data-theme="dark"] #detalle-actividad strong,
+[data-theme="dark"] #detalle-actividad small,
+[data-theme="dark"] #detalle-actividad li {
+  color: var(--text-dark) !important;
+}
+
+/* Indicadores superiores (RUTA / Naturaleza) en rectángulo de puntas redondeadas y verde distinto */
+[data-theme="dark"] #detalle-actividad .ficha-badges span {
+  display: inline-flex !important;
+  align-items: center !important;
+  background-color: #214432 !important;
+  color: #a7f3d0 !important;
+  border: 1px solid #3f7d5b !important;
+  border-radius: 10px !important;
+  padding: 0.3rem 0.8rem !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+}
+
+/* Recuadro de Dificultad, Duración, Distancia, Desnivel y Ubicación en otra tonalidad de verde oscuro */
+[data-theme="dark"] #detalle-actividad .ficha-metricas {
+  background-color: #183226 !important;
+  border: 1px solid #35694e !important;
+  border-left: 5px solid #52b788 !important;
+  border-radius: 10px !important;
+  padding: 1.25rem !important;
+  margin: 1.5rem 0 !important;
+  color: var(--text-dark) !important;
+}
+
+[data-theme="dark"] #detalle-actividad .ficha-metricas span {
+  color: #8ce0b3 !important;
+}
+
+/* Botón Favorito dentro de la ficha */
+[data-theme="dark"] #detalle-actividad #btn-favorito-ficha {
+  background-color: #243028 !important;
+  color: var(--text-dark) !important;
+  border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] #detalle-actividad #btn-favorito-ficha[aria-pressed="true"] {
+  background-color: #3a1d22 !important;
+  color: #feb2b2 !important;
+  border-color: #e53e3e !important;
+}
+
+[data-theme="colorblind"] #detalle-actividad,
+[data-theme="colorblind"] #detalle-actividad div {
+  color: #0f172a !important;
 }
