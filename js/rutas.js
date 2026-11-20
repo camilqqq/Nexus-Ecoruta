@@ -181,19 +181,17 @@ function renderizarRutas(lista) {
       const nombre = obtenerTextoTraducido(ruta, "nombre", lang);
       const ubicacion = obtenerTextoTraducido(ruta, "ubicacion", lang);
       const categoria = obtenerTextoTraducido(ruta, "categoria", lang);
-      const detalles = obtenerTextoTraducido(ruta, "detalles", lang);
+      const descripcion =
+        obtenerTextoTraducido(ruta, "descripcion", lang) ||
+        obtenerTextoTraducido(ruta, "detalles", lang) ||
+        [ruta.duracion ? `Duración: ${ruta.duracion}` : "", ruta.dificultad ? `Dificultad: ${ruta.dificultad}` : ""]
+          .filter(Boolean)
+          .join(" · ");
       const alt = obtenerTextoTraducido(ruta, "alt", lang) || nombre;
       const actualizado = ruta.actualizado || "";
 
       const txtVerFicha = lang === "en" ? "View details" : "Ver ficha";
       const txtContactar = lang === "en" ? "Contact" : "Contactar";
-      const txtFavorito = esFavorita
-        ? lang === "en"
-          ? "❤️ Saved"
-          : "❤️ Favorito"
-        : lang === "en"
-        ? "🤍 Favorite"
-        : "🤍 Favorito";
       const txtActualizado = lang === "en" ? "Updated:" : "Actualizado:";
 
       return `
@@ -206,16 +204,25 @@ function renderizarRutas(lista) {
               decoding="async"
               ${index === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}
             />
+            <button
+              type="button"
+              class="btn-fav"
+              data-fav-id="${ruta.id}"
+              aria-pressed="${esFavorita}"
+              aria-label="${esFavorita ? "Quitar de favoritas" : "Agregar a favoritas"}"
+              style="position:absolute;top:10px;right:10px;z-index:3;width:36px;height:36px;border-radius:50%;border:none;background:rgba(255,255,255,0.9);cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.2);"
+            >${esFavorita ? "❤️" : "🤍"}</button>
           </div>
           <div class="info">
-            <h2>${nombre}</h2>
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:0.5rem;">
+              <h2 style="margin:0;">${nombre}</h2>
+              ${actualizado ? `<span class="updated" style="font-size:0.75rem;color:#666;white-space:nowrap;">${txtActualizado} ${actualizado}</span>` : ""}
+            </div>
             <p class="meta">${categoria} • ${ubicacion}</p>
-            ${actualizado ? `<p class="updated">${txtActualizado} ${actualizado}</p>` : ""}
-            <p class="details">${detalles}</p>
-            <div class="buttons">
-              <a href="paginas/actividad.html?id=${ruta.id}">${txtVerFicha}</a>
-              <a href="paginas/contacto.html?actividad=${encodeURIComponent(nombre)}">${txtContactar}</a>
-              <button type="button" class="btn-fav" data-fav-id="${ruta.id}" aria-pressed="${esFavorita}">${txtFavorito}</button>
+            ${descripcion ? `<p class="details" style="margin:0.5rem 0 1rem 0;">${descripcion}</p>` : ""}
+            <div class="buttons" style="display:grid;grid-template-columns:1fr 1fr;gap:0.65rem;margin-top:auto;">
+              <a href="paginas/actividad.html?id=${ruta.id}" style="background:#2d5a3c;color:#ffffff;font-weight:600;text-align:center;padding:0.65rem 1rem;border-radius:10px;text-decoration:none;">${txtVerFicha}</a>
+              <a href="paginas/contacto.html?actividad=${encodeURIComponent(nombre)}" style="background:#ffffff;color:#1b3b26;font-weight:600;text-align:center;padding:0.65rem 1rem;border-radius:10px;border:1px solid #cfd8d3;text-decoration:none;">${txtContactar}</a>
             </div>
           </div>
         </article>
@@ -224,7 +231,8 @@ function renderizarRutas(lista) {
     .join("");
 
   contenedor.querySelectorAll(".btn-fav").forEach((btn) => {
-    btn.addEventListener("click", () => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
       const id = Number(btn.getAttribute("data-fav-id"));
       alternarFavorito(id);
     });
@@ -256,6 +264,8 @@ function filtrarYRenderizar() {
       ruta.ubicacion_en,
       ruta.categoria,
       ruta.categoria_en,
+      ruta.descripcion,
+      ruta.descripcion_en,
       ruta.detalles,
       ruta.detalles_en
     ]
