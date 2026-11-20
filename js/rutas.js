@@ -222,6 +222,9 @@ function renderizarCatalogo(rutas, alCambiarFavorito) {
         article.innerHTML = `
       <div class="image">
         <img src="${imgSrc}" alt="${ruta.alt || ruta.nombre}" width="400" height="250" ${index === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} onerror="this.onerror=null;this.src='assets/imagenes/Sendero/sendero.jpg';" />
+        <button type="button" class="btn-favorito ${esFavorito ? "activo" : ""}" data-id="${ruta.id}" aria-pressed="${esFavorito}" aria-label="${esFavorito ? "Quitar de favoritos" : "Guardar en favoritos"}: ${ruta.nombre}" style="position: absolute; top: 10px; left: 10px; z-index: 3; width: 36px; height: 36px; border-radius: 50%; border: 1px solid ${esFavorito ? "#feb2b2" : "rgba(0,0,0,0.12)"}; background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; font-size: 1.05rem; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.18);">
+          ${esFavorito ? "❤️" : "🤍"}
+        </button>
       </div>
       <div class="info">
         <div class="activity-header">
@@ -235,16 +238,14 @@ function renderizarCatalogo(rutas, alCambiarFavorito) {
         <div class="buttons">
           <a href="${fichaHref}" class="primary" aria-label="Ver ficha detallada de ${ruta.nombre}">Ver ficha</a>
           <a href="${waHref}" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp sobre ${ruta.nombre}">Contactar</a>
-          <button type="button" class="btn-favorito ${esFavorito ? "activo" : ""}" data-id="${ruta.id}" aria-pressed="${esFavorito}" aria-label="${esFavorito ? "Quitar de favoritos" : "Guardar en favoritos"}: ${ruta.nombre}" style="padding: 0.5rem 0.85rem; border-radius: 8px; border: 1px solid ${esFavorito ? "#e53e3e" : "#cbd5e0"}; background: ${esFavorito ? "#fff5f5" : "#fff"}; color: ${esFavorito ? "#c53030" : "#2d3748"}; font-weight: 600; cursor: pointer;">
-            ${esFavorito ? "❤ Guardado" : "🤍 Favorito"}
-          </button>
         </div>
       </div>
     `;
         contenedorLista.appendChild(article);
         const btnFav = article.querySelector(".btn-favorito");
         if (btnFav) {
-            btnFav.addEventListener("click", () => {
+            btnFav.addEventListener("click", (e) => {
+                e.stopPropagation();
                 rutasAlternarFav(ruta.id);
                 if (alCambiarFavorito)
                     alCambiarFavorito();
