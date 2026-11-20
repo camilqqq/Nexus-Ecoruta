@@ -6,15 +6,37 @@ const STORAGE_FILTRO_CAT = "ecoruta_filtro_categoria";
 const STORAGE_FILTRO_BUSQ = "ecoruta_filtro_busqueda";
 let rutasCargadas = [];
 let categoriaSeleccionada = sessionStorage.getItem(STORAGE_FILTRO_CAT) || "Todas";
+
+const GALERIAS_ACTIVIDADES = {
+    1: [
+        "assets/imagenes/Sendero/sendero.jpg",
+        "assets/imagenes/Sendero/sendero2.jpg",
+        "assets/imagenes/Sendero/sendero3.jpg",
+        "assets/imagenes/Sendero/sendero4.jpg"
+    ],
+    2: [
+        "assets/imagenes/Museo/museo.jpg",
+        "assets/imagenes/Museo/museo2.jpg",
+        "assets/imagenes/Museo/museo3.jpg",
+        "assets/imagenes/Museo/museo4.jpg"
+    ],
+    3: [
+        "assets/imagenes/Feria/feria.jpg",
+        "assets/imagenes/Feria/feria2.jpg",
+        "assets/imagenes/Feria/feria3.jpg",
+        "assets/imagenes/Feria/feria4.jpg"
+    ]
+};
+
 function normalizarTexto(texto) {
-    return texto
+    return String(texto || "")
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
 }
 function normalizarImagen(rutaImg) {
     if (!rutaImg)
-        return "assets/imagenes/Sendero/Sendero_Nielol.jpg";
+        return "assets/imagenes/Sendero/sendero.jpg";
     if (rutaImg.startsWith("../assets/"))
         return rutaImg.replace("../", "");
     return rutaImg;
@@ -101,30 +123,38 @@ function filtrarRutas(rutas, categoria, terminoBusqueda) {
     return rutas.filter((ruta) => {
         const coincideCat = categoria === "Todas" ||
             (categoria === "Favoritas" ? favoritos.includes(ruta.id) : ruta.categoria === categoria);
-        const textoCompleto = normalizarTexto(`${ruta.nombre} ${ruta.categoria} ${ruta.ubicacion} ${ruta.detalle} ${ruta.dificultad} ${ruta.emprendimiento_nombre || ""}`);
+        const textoCompleto = normalizarTexto(`${ruta.nombre} ${ruta.categoria} ${ruta.ubicacion} ${ruta.detalle || ""} ${ruta.dificultad || ""} ${ruta.emprendimiento_nombre || ""}`);
         const coincideTexto = !termino || textoCompleto.includes(termino);
         return coincideCat && coincideTexto;
     });
 }
-function iniciarCarruselTarjeta(contenedor, cardIdx) {
+function iniciarCarruselTarjeta(contenedor, cardIdx, rutaId) {
     const imgPrincipal = contenedor.querySelector("img");
     if (!imgPrincipal)
         return;
     const srcOriginal = imgPrincipal.getAttribute("src") || "";
-    const rutas = [srcOriginal];
-    for (let i = 2; i <= 4; i++) {
-        rutas.push(srcOriginal.replace(/1?(\.[a-zA-Z]+)$/, `${i}$1`));
+    const tieneGaleriaReal = Array.isArray(GALERIAS_ACTIVIDADES[rutaId]);
+    const rutas = tieneGaleriaReal
+        ? [...GALERIAS_ACTIVIDADES[rutaId]]
+        : [srcOriginal, srcOriginal, srcOriginal, srcOriginal];
+    if (rutas[0] !== srcOriginal) {
+        rutas[0] = srcOriginal;
     }
     imgPrincipal.classList.add("activa");
     const imagenes = [imgPrincipal];
     const dotsBox = document.createElement("div");
     dotsBox.className = "carrusel-dots";
+    const encuadres = ["left center", "right center", "center top"];
     rutas.forEach((ruta, idx) => {
         if (idx > 0) {
             const img = document.createElement("img");
             img.src = ruta;
             img.alt = `${imgPrincipal.alt} (${idx + 1})`;
             img.loading = "lazy";
+            img.decoding = "async";
+            if (!tieneGaleriaReal) {
+                img.style.objectPosition = encuadres[idx - 1] || "center center";
+            }
             img.onerror = function () {
                 this.onerror = null;
                 this.src = srcOriginal;
@@ -186,14 +216,12 @@ function renderizarCatalogo(rutas, alCambiarFavorito) {
         const imgSrc = normalizarImagen(ruta.imagen);
         const empTag = ruta.emprendimiento_nombre ? ` • ${ruta.emprendimiento_nombre}` : "";
         const actualizadoTxt = ruta.actualizado ? `Actualizado: ${ruta.actualizado}` : `Dificultad: ${ruta.dificultad}`;
-        const fichaHref = ruta.emprendimiento_id
-            ? `paginas/Actividad.html?id=${ruta.id}`
-            : `paginas/Actividad.html?id=${ruta.id}`;
+        const fichaHref = `paginas/Actividad.html?id=${ruta.id}`;
         const waHref = ruta.whatsapp_url ||
             `https://wa.me/${ruta.whatsapp || "56912345678"}?text=${encodeURIComponent(`Hola, vengo desde EcoRuta Temuco y me interesa consultar por "${ruta.nombre}".`)}`;
         article.innerHTML = `
       <div class="image">
-        <img src="${imgSrc}" alt="${ruta.alt || ruta.nombre}" width="400" height="250" ${index === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} onerror="this.onerror=null;this.src='assets/imagenes/Sendero/Sendero_Nielol.jpg';" />
+        <img src="${imgSrc}" alt="${ruta.alt || ruta.nombre}" width="400" height="250" ${index === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} onerror="this.onerror=null;this.src='assets/imagenes/Sendero/sendero.jpg';" />
       </div>
       <div class="info">
         <div class="activity-header">
@@ -203,7 +231,7 @@ function renderizarCatalogo(rutas, alCambiarFavorito) {
           </div>
           <small>${actualizadoTxt}</small>
         </div>
-        <p>${ruta.detalle}</p>
+        <p>${ruta.detalle || ""}</p>
         <div class="buttons">
           <a href="${fichaHref}" class="primary" aria-label="Ver ficha detallada de ${ruta.nombre}">Ver ficha</a>
           <a href="${waHref}" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp sobre ${ruta.nombre}">Contactar</a>
@@ -224,7 +252,7 @@ function renderizarCatalogo(rutas, alCambiarFavorito) {
         }
         const boxImg = article.querySelector(".image");
         if (boxImg)
-            iniciarCarruselTarjeta(boxImg, index);
+            iniciarCarruselTarjeta(boxImg, index, ruta.id);
     });
 }
 document.addEventListener("DOMContentLoaded", async () => {
