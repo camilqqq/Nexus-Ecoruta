@@ -221,7 +221,7 @@ function renderizarRutas(lista) {
             <p class="meta">${categoria} • ${ubicacion}</p>
             ${descripcion ? `<p class="details" style="margin:0.5rem 0 1rem 0;">${descripcion}</p>` : ""}
             <div class="buttons" style="display:grid;grid-template-columns:1fr 1fr;gap:0.65rem;margin-top:auto;">
-              <a href="paginas/actividad.html?id=${ruta.id}" style="background:#2d5a3c;color:#ffffff;font-weight:600;text-align:center;padding:0.65rem 1rem;border-radius:10px;text-decoration:none;">${txtVerFicha}</a>
+             <a href="paginas/Actividad.html?id=${ruta.id}"
               <a href="paginas/contacto.html?actividad=${encodeURIComponent(nombre)}" style="background:#ffffff;color:#1b3b26;font-weight:600;text-align:center;padding:0.65rem 1rem;border-radius:10px;border:1px solid #cfd8d3;text-decoration:none;">${txtContactar}</a>
             </div>
           </div>
