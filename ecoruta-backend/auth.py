@@ -5,7 +5,7 @@ from datetime import datetime, timedelta, timezone
 import bcrypt
 import jwt
 
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, status, Request
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
 
@@ -23,8 +23,9 @@ if not SECRET_KEY or len(SECRET_KEY) < 32:
 
 ALGORITHM = "HS256"
 TOKEN_HOURS = 12
+COOKIE_NAME = "nexus_session"
 
-security = HTTPBearer()
+security = HTTPBearer(auto_error=False)
 
 
 
@@ -82,10 +83,30 @@ def crear_token_turista(turista_id: int) -> str:
 
 
 
-def _obtener_payload(creds: HTTPAuthorizationCredentials):
+def _obtener_payload(
+    request: Request,
+    creds: HTTPAuthorizationCredentials = None
+):
+    token = None
+
+    
+    if creds:
+        token = creds.credentials
+
+    
+    if not token:
+        token = request.cookies.get(COOKIE_NAME)
+
+    if not token:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="No hay una sesión activa",
+            headers={"WWW-Authenticate": "Bearer"}
+        )
+
     try:
         return jwt.decode(
-            creds.credentials,
+            token,
             SECRET_KEY,
             algorithms=[ALGORITHM]
         )
@@ -99,11 +120,12 @@ def _obtener_payload(creds: HTTPAuthorizationCredentials):
 
 
 def obtener_emprendimiento_actual(
+    request: Request,
     creds: HTTPAuthorizationCredentials = Depends(security),
     db: Session = Depends(get_db)
 ) -> Emprendimiento:
 
-    payload = _obtener_payload(creds)
+    payload = _obtener_payload(request, creds)
 
     if payload.get("tipo", "emprendimiento") != "emprendimiento":
         raise HTTPException(
@@ -134,11 +156,12 @@ def obtener_emprendimiento_actual(
 
 
 def obtener_turista_actual(
+    request: Request,
     creds: HTTPAuthorizationCredentials = Depends(security),
     db: Session = Depends(get_db)
 ) -> Turista:
 
-    payload = _obtener_payload(creds)
+    payload = _obtener_payload(request, creds)
 
     if payload.get("tipo") != "turista":
         raise HTTPException(
