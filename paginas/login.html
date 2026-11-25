@@ -385,6 +385,10 @@
 
   const SESSION_COOKIE_NAME = "ecoruta_session_meta";
   const SESSION_MAX_AGE_SECONDS = 60 * 60 * 12; // 12 horas
+  const USER_STORAGE_KEY = "ecoruta_turista_sesion";
+  const REDIRECT_DELAY_MS = 650;
+
+  let temporizadorRedireccion = null;
 
   function sanitizarTexto(valor, maxLength = 150) {
     if (typeof valor !== "string") return "";
@@ -395,19 +399,40 @@
       .slice(0, maxLength);
   }
 
-  function establecerCookieSesion(valor) {
+  function guardarSesionLocal(nombre, correo) {
+    const nombreLimpio = sanitizarTexto(nombre, 100) || correo.split("@")[0] || "Viajero";
+    const correoLimpio = sanitizarTexto(correo, 150).toLowerCase();
     const seguro = window.location.protocol === "https:" ? "; Secure" : "";
-    document.cookie = `${SESSION_COOKIE_NAME}=${encodeURIComponent(valor)}; max-age=${SESSION_MAX_AGE_SECONDS}; SameSite=Lax; path=/${seguro}`;
+
+    const perfil = {
+      id: correoLimpio || nombreLimpio.toLowerCase().replace(/\s+/g, "_"),
+      nombre: nombreLimpio,
+      correo: correoLimpio,
+      iniciadoEn: Date.now()
+    };
+
+    try {
+      localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(perfil));
+    } catch (_) {
+      // Ignorar si localStorage no está disponible
+    }
+
+    document.cookie = `${SESSION_COOKIE_NAME}=${encodeURIComponent(perfil.id)}; max-age=${SESSION_MAX_AGE_SECONDS}; SameSite=Lax; path=/${seguro}`;
   }
 
   function limpiarSesionYCookies() {
+    if (temporizadorRedireccion) {
+      clearTimeout(temporizadorRedireccion);
+      temporizadorRedireccion = null;
+    }
     const seguro = window.location.protocol === "https:" ? "; Secure" : "";
     document.cookie = `${SESSION_COOKIE_NAME}=; max-age=0; SameSite=Lax; path=/${seguro}`;
     document.cookie = `nexus_session=; max-age=0; SameSite=Lax; path=/${seguro}`;
     try {
+      localStorage.removeItem(USER_STORAGE_KEY);
       sessionStorage.removeItem("ecoruta_user");
     } catch (_) {
-      // Ignorar si sessionStorage no está disponible
+      // Ignorar si el almacenamiento no está disponible
     }
   }
 
@@ -416,7 +441,20 @@
     mensaje.className = "message " + tipo;
   }
 
+  function redirigirAlCatalogo() {
+    if (temporizadorRedireccion) {
+      clearTimeout(temporizadorRedireccion);
+    }
+    temporizadorRedireccion = setTimeout(() => {
+      window.location.href = "../index.html";
+    }, REDIRECT_DELAY_MS);
+  }
+
   function cambiarVista(registro) {
+    if (temporizadorRedireccion) {
+      clearTimeout(temporizadorRedireccion);
+      temporizadorRedireccion = null;
+    }
     formLogin.classList.toggle("hidden", registro);
     formRegistro.classList.toggle("hidden", !registro);
 
@@ -461,11 +499,12 @@
       return;
     }
 
-    establecerCookieSesion("pending_auth");
+    guardarSesionLocal("", correo);
     mostrarMensaje(
-      "Entradas validadas y sanitizadas. La conexión con el servidor de autenticación está pendiente de configuración.",
+      "Sesión iniciada. Redirigiendo al catálogo...",
       "success"
     );
+    redirigirAlCatalogo();
   });
 
   formRegistro.addEventListener("submit", function(event) {
@@ -500,11 +539,12 @@
       return;
     }
 
-    establecerCookieSesion("pending_register");
+    guardarSesionLocal(nombre, correo);
     mostrarMensaje(
-      "Datos validados y sanitizados correctamente. Falta conectar el registro con el servidor para crear tu cuenta.",
+      "Cuenta creada. Redirigiendo al catálogo...",
       "success"
     );
+    redirigirAlCatalogo();
   });
 
   authCard.addEventListener("keydown", function(event) {

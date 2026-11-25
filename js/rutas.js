@@ -41,8 +41,11 @@ function normalizarImagen(rutaImg) {
         return rutaImg.replace("../", "");
     return rutaImg;
 }
-// --- Gestión de Favoritos (LocalStorage) ---
+// --- Gestión de Favoritos por usuario / visitante ---
 function rutasObtenerFav() {
+    if (window.EcoRutaSesion && typeof window.EcoRutaSesion.obtenerFavoritosUsuario === "function") {
+        return window.EcoRutaSesion.obtenerFavoritosUsuario();
+    }
     try {
         const raw = localStorage.getItem(RUTAS_STORAGE_FAV);
         if (!raw)
@@ -55,6 +58,9 @@ function rutasObtenerFav() {
     }
 }
 function rutasAlternarFav(id) {
+    if (window.EcoRutaSesion && typeof window.EcoRutaSesion.alternarFavoritoUsuario === "function") {
+        return window.EcoRutaSesion.alternarFavoritoUsuario(id);
+    }
     const favoritos = rutasObtenerFav();
     const existe = favoritos.includes(id);
     const actualizados = existe ? favoritos.filter((item) => item !== id) : [...favoritos, id];
@@ -281,6 +287,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         const filtradas = filtrarRutas(rutasCargadas, categoriaSeleccionada, texto);
         renderizarCatalogo(filtradas, actualizarVista);
     };
+    window.addEventListener("ecoruta:sesion-cambiada", () => {
+        if (rutasCargadas.length > 0) {
+            actualizarVista();
+        }
+    });
     const iniciarCargaRutas = async () => {
         mostrarEstadoCarga(contenedorLista, contador);
         const resultado = await obtenerRutasDesdeAPI();
