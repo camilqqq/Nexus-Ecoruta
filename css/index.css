@@ -436,6 +436,154 @@ textarea:focus-visible {
 }
 
 /* ==========================================================
+   AVISO DE COOKIES INTEGRADO ARRIBA (NO TAPA CONTENIDO)
+   ========================================================== */
+.cookie-banner {
+  background: var(--surface);
+  color: var(--text-dark);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 0.85rem 1.25rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.cookie-banner[hidden] {
+  display: none;
+}
+
+.cookie-banner__copy {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.cookie-banner__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0 0 0.15rem 0;
+}
+
+.cookie-banner__text {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.cookie-banner__link {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-left: 0.35rem;
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+footer .cookie-banner__link {
+  margin-left: 1rem;
+}
+
+.cookie-banner__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.cookie-btn {
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-main);
+  color: var(--text-dark);
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.cookie-btn:hover {
+  background-color: var(--border-color);
+}
+
+.cookie-btn--primary {
+  background-color: var(--primary);
+  color: var(--surface);
+  border-color: var(--primary);
+}
+
+.cookie-btn--primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.cookie-detalle-box {
+  background: var(--surface);
+  color: var(--text-dark);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.15rem 1.35rem;
+  margin-bottom: 1.25rem;
+}
+
+.cookie-detalle-box[hidden] {
+  display: none;
+}
+
+.cookie-detalle-box h2 {
+  color: var(--primary);
+  font-size: 1.1rem;
+  margin-bottom: 0.35rem;
+}
+
+.cookie-detalle-box p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 0.65rem;
+}
+
+.cookie-detalle-box ul {
+  padding-left: 1.25rem;
+  margin-bottom: 0.9rem;
+  font-size: 0.86rem;
+  color: var(--text-dark);
+}
+
+.cookie-detalle-box li {
+  margin-bottom: 0.35rem;
+}
+
+@media (max-width: 760px) {
+  .cookie-banner {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.75rem 1rem;
+    gap: 0.65rem;
+  }
+
+  .cookie-banner__actions {
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .cookie-btn {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+}
+
+/* ==========================================================
    MODO OSCURO — DETALLE DE ACTIVIDAD
    ========================================================== */
 [data-theme="dark"] .activity,
@@ -446,7 +594,6 @@ textarea:focus-visible {
   box-shadow: none !important;
 }
 
-/* Textos de la ficha en modo oscuro */
 [data-theme="dark"] #detalle-actividad h1 {
   color: var(--primary) !important;
 }
@@ -460,7 +607,6 @@ textarea:focus-visible {
   color: var(--text-dark) !important;
 }
 
-/* Indicadores superiores (RUTA / Naturaleza) en rectángulo de puntas redondeadas y verde distinto */
 [data-theme="dark"] #detalle-actividad .ficha-badges span {
   display: inline-flex !important;
   align-items: center !important;
@@ -474,7 +620,6 @@ textarea:focus-visible {
   letter-spacing: 0.04em !important;
 }
 
-/* Recuadro de Dificultad, Duración, Distancia, Desnivel y Ubicación en otra tonalidad de verde oscuro */
 [data-theme="dark"] #detalle-actividad .ficha-metricas {
   background-color: #183226 !important;
   border: 1px solid #35694e !important;
@@ -489,7 +634,6 @@ textarea:focus-visible {
   color: #8ce0b3 !important;
 }
 
-/* Botón Favorito dentro de la ficha */
 [data-theme="dark"] #detalle-actividad #btn-favorito-ficha {
   background-color: #243028 !important;
   color: var(--text-dark) !important;

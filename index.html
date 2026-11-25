@@ -91,6 +91,34 @@
   </style>
 </head>
 <body>
+  <!-- Aviso de Cookies arriba en flujo normal (no tapa botones ni tarjetas) -->
+  <aside id="cookie-banner" class="cookie-banner" role="region" aria-labelledby="cookie-banner-title" hidden>
+    <div class="cookie-banner__copy">
+      <p id="cookie-banner-title" class="cookie-banner__title" data-i18n="cookies.titulo">Aviso de cookies y almacenamiento local</p>
+      <p class="cookie-banner__text">
+        <span data-i18n="cookies.texto">Usamos cookies y almacenamiento local para recordar tus preferencias de idioma, tema visual y rutas favoritas.</span>
+        <button type="button" id="btn-detalle-cookies" class="cookie-banner__link" data-i18n="cookies.detalleLink">Política y detalle de cookies</button>
+      </p>
+    </div>
+    <div class="cookie-banner__actions">
+      <button type="button" id="btn-cookies-esenciales" class="cookie-btn" data-i18n="cookies.soloEsenciales">Solo esenciales</button>
+      <button type="button" id="btn-cookies-todas" class="cookie-btn cookie-btn--primary" data-i18n="cookies.aceptarTodas">Aceptar todas</button>
+    </div>
+  </aside>
+
+  <!-- Detalle de cookies desplegable arriba (lleva arriba y muestra info limpia) -->
+  <section id="cookie-detalle-box" class="cookie-detalle-box" aria-labelledby="cookie-modal-title" hidden>
+    <h2 id="cookie-modal-title" data-i18n="cookies.modalTitulo">Política y detalle de uso de cookies</h2>
+    <p data-i18n="cookies.modalDesc">En Nexus Ecoruta utilizamos almacenamiento funcional para mejorar tu navegación:</p>
+    <ul>
+      <li data-i18n="cookies.modalItem1">Cookie de consentimiento (ecoruta_cookies): guarda tu elección por 30 días (SameSite=Lax; path=/).</li>
+      <li data-i18n="cookies.modalItem2">Almacenamiento local (localStorage): guarda tu idioma (es/en), tema visual y rutas favoritas.</li>
+    </ul>
+    <div class="cookie-banner__actions">
+      <button type="button" id="btn-cerrar-detalle-cookies" class="cookie-btn cookie-btn--primary" data-i18n="cookies.cerrar">Cerrar</button>
+    </div>
+  </section>
+
   <header>
     <div class="header">
       <div class="brand">
@@ -105,12 +133,10 @@
         <a href="index.html" class="active" data-i18n="nav.inicio">Inicio</a>
         <a href="paginas/emprendimientos.html" data-i18n="nav.emprendimientos">Emprendimientos</a>
         <a href="paginas/contacto.html" data-i18n="nav.contacto">Contacto</a>
-        <!-- Selector de idioma nativo con banderas -->
         <select id="language-selector" aria-label="Seleccionar idioma">
           <option value="es">🇪🇸 Español</option>
           <option value="en">🇬🇧 English</option>
         </select>
-        <!-- Selector de Temas y Accesibilidad -->
         <select id="theme-selector" aria-label="Seleccionar modo de visualización">
           <option value="normal">☀️ Normal</option>
           <option value="dark">🌙 Oscuro</option>
@@ -166,6 +192,7 @@
     <div>
       <a href="documentos/reportes/reporte-bug-bounty.pdf" target="_blank" rel="noopener">Bug Bounty</a>
       <a href="paginas/contacto.html" data-i18n="footer.contacto">Contacto</a>
+      <button type="button" id="btn-abrir-cookies" class="cookie-banner__link" data-i18n="cookies.detalleLink">Política y detalle de cookies</button>
     </div>
   </footer>
 
@@ -205,6 +232,70 @@
           document.documentElement.setAttribute("data-theme", theme);
         }
       }
+
+      // --- Gestión de consentimiento de Cookies (30 días, SameSite=Lax; path=/) ---
+      const COOKIE_NAME = "ecoruta_cookies";
+      const COOKIE_MAX_AGE = 60 * 60 * 24 * 30; // 30 días
+
+      function leerCookieConsentimiento() {
+        const match = document.cookie
+          .split("; ")
+          .find((row) => row.startsWith(`${COOKIE_NAME}=`));
+        return match ? decodeURIComponent(match.split("=")[1]) : null;
+      }
+
+      function guardarCookieConsentimiento(valor) {
+        document.cookie = `${COOKIE_NAME}=${encodeURIComponent(valor)}; max-age=${COOKIE_MAX_AGE}; SameSite=Lax; path=/`;
+      }
+
+      const banner = document.getElementById("cookie-banner");
+      const btnTodas = document.getElementById("btn-cookies-todas");
+      const btnEsenciales = document.getElementById("btn-cookies-esenciales");
+      const btnDetalle = document.getElementById("btn-detalle-cookies");
+      const btnAbrirFooter = document.getElementById("btn-abrir-cookies");
+      const detalleBox = document.getElementById("cookie-detalle-box");
+      const btnCerrarDetalle = document.getElementById("btn-cerrar-detalle-cookies");
+
+      if (banner && !leerCookieConsentimiento()) {
+        banner.hidden = false;
+      }
+
+      function resolverConsentimiento(tipo) {
+        guardarCookieConsentimiento(tipo);
+        if (banner) {
+          banner.hidden = true;
+        }
+        if (detalleBox) {
+          detalleBox.hidden = true;
+        }
+      }
+
+      if (btnTodas) {
+        btnTodas.addEventListener("click", () => resolverConsentimiento("all"));
+      }
+      if (btnEsenciales) {
+        btnEsenciales.addEventListener("click", () => resolverConsentimiento("essential"));
+      }
+
+      function mostrarDetalleCookies() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        if (detalleBox) {
+          detalleBox.hidden = false;
+        }
+        if (btnCerrarDetalle) {
+          btnCerrarDetalle.focus();
+        }
+      }
+
+      function ocultarDetalleCookies() {
+        if (detalleBox) {
+          detalleBox.hidden = true;
+        }
+      }
+
+      if (btnDetalle) btnDetalle.addEventListener("click", mostrarDetalleCookies);
+      if (btnAbrirFooter) btnAbrirFooter.addEventListener("click", mostrarDetalleCookies);
+      if (btnCerrarDetalle) btnCerrarDetalle.addEventListener("click", ocultarDetalleCookies);
 
       // --- Sincronizar aria-pressed en filtros activos ---
       const filterButtons = document.querySelectorAll(".filters button");

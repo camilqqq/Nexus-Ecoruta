@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const selector = document.getElementById("language-selector");
     if (!selector) return;
-    
-    // Obtener idioma guardado o usar español por defecto
+
     const savedLang = localStorage.getItem("selectedLang") || "es";
     selector.value = savedLang;
     changeLanguage(savedLang);
@@ -15,9 +14,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function changeLanguage(lang) {
-    document.querySelectorAll("[data-i18n]").forEach(element => {
+    if (typeof translations === "undefined" || !translations[lang]) return;
+
+    document.querySelectorAll("[data-i18n]").forEach((element) => {
         const key = element.getAttribute("data-i18n");
-        if (translations[lang] && translations[lang][key]) {
+        if (translations[lang][key]) {
             if (element.tagName === "INPUT" && element.hasAttribute("placeholder")) {
                 element.placeholder = translations[lang][key];
             } else {
@@ -25,4 +26,13 @@ function changeLanguage(lang) {
             }
         }
     });
+
+    document.querySelectorAll("[data-i18n-html]").forEach((element) => {
+        const key = element.getAttribute("data-i18n-html");
+        if (translations[lang][key]) {
+            element.innerHTML = translations[lang][key];
+        }
+    });
+
+    document.dispatchEvent(new CustomEvent("ecoruta:langChanged", { detail: { lang } }));
 }

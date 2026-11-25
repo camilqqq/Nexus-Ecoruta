@@ -81,6 +81,18 @@ const translations = {
         "footer.admin": "Administración",
         "msg.sinResultados": "No se encontraron actividades con esos criterios.",
 
+        // Banner y gestión de Cookies
+        "cookies.titulo": "Aviso de cookies y almacenamiento local",
+        "cookies.texto": "Usamos cookies y almacenamiento local para recordar tus preferencias de idioma, tema visual y rutas favoritas.",
+        "cookies.detalleLink": "Política y detalle de cookies",
+        "cookies.aceptarTodas": "Aceptar todas",
+        "cookies.soloEsenciales": "Solo esenciales",
+        "cookies.modalTitulo": "Política y detalle de uso de cookies",
+        "cookies.modalDesc": "En Nexus Ecoruta utilizamos almacenamiento funcional para mejorar tu navegación:",
+        "cookies.modalItem1": "Cookie de consentimiento (ecoruta_cookies): guarda tu elección por 30 días (SameSite=Lax; path=/).",
+        "cookies.modalItem2": "Almacenamiento local (localStorage): guarda tu idioma (es/en), tema visual y rutas favoritas.",
+        "cookies.cerrar": "Cerrar",
+
         // Vista Detalle de Actividad
         "detalle.volver": "← Volver al catálogo",
         "detalle.cargando": "Cargando información de la actividad...",
@@ -295,6 +307,18 @@ const translations = {
         "footer.contacto": "Contact",
         "footer.admin": "Administration",
         "msg.sinResultados": "No activities found matching those criteria.",
+
+        // Cookie Banner & Preferences
+        "cookies.titulo": "Cookies & Local Storage Notice",
+        "cookies.texto": "We use cookies and local storage to save your language preferences, visual theme, and favorite routes.",
+        "cookies.detalleLink": "Cookie policy & details",
+        "cookies.aceptarTodas": "Accept all",
+        "cookies.soloEsenciales": "Essential only",
+        "cookies.modalTitulo": "Cookie Policy & Usage Details",
+        "cookies.modalDesc": "At Nexus Ecoruta we use functional storage to improve your browsing experience:",
+        "cookies.modalItem1": "Consent cookie (ecoruta_cookies): stores your choice for 30 days (SameSite=Lax; path=/).",
+        "cookies.modalItem2": "Local storage (localStorage): saves your language (es/en), visual theme, and favorite routes.",
+        "cookies.cerrar": "Close",
 
         // Activity Detail View
         "detalle.volver": "← Back to catalog",
