@@ -1372,122 +1372,72 @@ function renderizarRutaNoEncontrada(contenedor, lang, idSolicitado) {
 
 
 async function obtenerActividadSincronizada(idLimpio) {
-    if (!idLimpio) return null;
+    if (!idLimpio) {
+        return null;
+    }
 
-    const base = detalleBackup[idLimpio] || null;
-    let ruta = null;
-
-    
+    let listaJson = null;
     try {
-        const resp = await fetch(
-            "https://nexus-ecoruta.onrender.com/api/rutas",
-            { cache: "no-store" }
-        );
-
+        const resp = await fetch("../data/rutas.json");
         if (resp.ok) {
-            const lista = await resp.json();
-            if (Array.isArray(lista)) {
-                ruta = lista.find(
-                    item => String(item.id).trim() === idLimpio
-                ) || null;
-            }
-        }
-    } catch (error) {
-        console.warn("Render no disponible:", error);
-    }
-
-    
-    if (!ruta) {
-        try {
-            const resp = await fetch("../data/rutas.json");
-            if (resp.ok) {
-                const lista = await resp.json();
-                ruta = Array.isArray(lista)
-                    ? lista.find(
-                        item => String(item.id).trim() === idLimpio
-                    ) || null
-                    : null;
-            }
-        } catch (error) {
-            console.warn("Respaldo local no disponible:", error);
+            listaJson = await resp.json();
         }
     }
-
-    if (!ruta && !base) return null;
-    if (!ruta) return base;
-
-    
-    let imagenes = [...(base?.imagenes || [])];
-
-    if (ruta.imagen) {
-        const imagen = /^https?:\/\//i.test(ruta.imagen)
-            ? ruta.imagen
-            : ruta.imagen.startsWith("../")
-                ? ruta.imagen
-                : "../" + ruta.imagen.replace(/^\.\//, "");
-
-        imagenes = [
-            imagen,
-            ...imagenes.filter(img => img !== imagen)
-        ];
+    catch {
+        listaJson = null;
     }
 
-    if (!imagenes.length) {
-        imagenes.push("../assets/imagenes/Logo.png");
+    const rutaJson = Array.isArray(listaJson)
+        ? listaJson.find((item) => String(item.id).trim() === idLimpio)
+        : null;
+
+    const base = Object.prototype.hasOwnProperty.call(detalleBackup, idLimpio)
+        ? detalleBackup[idLimpio]
+        : null;
+
+    if (!rutaJson && !base) {
+        return null;
     }
 
-    
-    const tieneCoordenadas =
-        ruta.latitud !== null &&
-        ruta.latitud !== undefined &&
-        ruta.latitud !== "" &&
-        ruta.longitud !== null &&
-        ruta.longitud !== undefined &&
-        ruta.longitud !== "" &&
-        Number.isFinite(Number(ruta.latitud)) &&
-        Number.isFinite(Number(ruta.longitud));
-
-    const rutaGps = base?.rutaGps || (
-        tieneCoordenadas
-            ? {
-                puntos: [{
-                    nombre: ruta.nombre || "Ubicación",
-                    coords: [
-                        Number(ruta.latitud),
-                        Number(ruta.longitud)
-                    ]
-                }]
+    if (!base && rutaJson) {
+        const imgPrincipalJson = rutaJson.imagen ? `../${rutaJson.imagen}` : "../assets/imagenes/Logo.png";
+        return {
+            id: String(rutaJson.id),
+            nombre: rutaJson.nombre,
+            categoria: rutaJson.categoria || "Naturaleza",
+            tipo: "RUTA",
+            ubicacion: rutaJson.ubicacion || "La Araucanía, Chile",
+            descripcion: rutaJson.detalle || "",
+            imagenes: [imgPrincipalJson],
+            detalles: {
+                dificultad: rutaJson.dificultad || "",
+                accesibilidad: "",
+                horarios: rutaJson.detalle || ""
             }
-            : null
-    );
+        };
+    }
 
-    
+    if (!rutaJson) {
+        return base;
+    }
+
+    const imgPrincipalJson = `../${rutaJson.imagen}`;
+    const imagenesSincronizadas = [
+        imgPrincipalJson,
+        ...base.imagenes.filter((img) => img !== imgPrincipalJson)
+    ];
+
     return {
-        ...(base || {}),
-        id: String(ruta.id ?? idLimpio),
-        nombre: ruta.nombre || base?.nombre || "Actividad turística",
-        categoria: ruta.categoria || base?.categoria || "Naturaleza",
-        tipo: ruta.tipo || base?.tipo || "RUTA",
-        ubicacion: ruta.ubicacion || base?.ubicacion || "La Araucanía, Chile",
-        descripcion:
-            ruta.descripcion ||
-            ruta.detalle ||
-            base?.descripcion ||
-            "",
-        imagenes,
+        ...base,
+        id: String(rutaJson.id),
+        nombre: rutaJson.nombre,
+        categoria: rutaJson.categoria,
+        ubicacion: rutaJson.ubicacion,
+        imagenes: imagenesSincronizadas,
         detalles: {
-            ...(base?.detalles || {}),
-            dificultad:
-                ruta.dificultad ||
-                base?.detalles?.dificultad ||
-                "",
-            horarios:
-                ruta.horarios ||
-                base?.detalles?.horarios ||
-                ruta.detalle ||
-                ""
-        },
-        ...(rutaGps ? { rutaGps } : {})
+            ...base.detalles,
+            dificultad: rutaJson.dificultad || base.detalles.dificultad
+        }
     };
 }
 
