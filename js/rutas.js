@@ -1,6 +1,6 @@
 "use strict";
 const API_LOCAL_URL = "data/rutas.json";
-const API_BACKEND_URL = "https://nexus-ecoruta.onrender.com/api/rutas";
+const API_BACKEND_URL = "data/rutas.json";
 const RUTAS_STORAGE_FAV = "ecoruta_favoritos";
 const STORAGE_FILTRO_CAT = "ecoruta_filtro_categoria";
 const STORAGE_FILTRO_BUSQ = "ecoruta_filtro_busqueda";
