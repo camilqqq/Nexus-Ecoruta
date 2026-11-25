@@ -1,6 +1,6 @@
 ﻿from datetime import date
 from typing import Literal, Optional
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field, field_validator
 
 class EmprendimientoRegistro(BaseModel):
     nombre: str
@@ -38,3 +38,24 @@ class ContactoWhatsApp(BaseModel):
     ruta_id: int
     nombre_turista: Optional[str] = "Un visitante"
     fecha_preferida: Optional[str] = None
+
+
+class TuristaCredenciales(BaseModel):
+    correo: EmailStr
+    password: str = Field(min_length=8)
+
+    @field_validator("password")
+    @classmethod
+    def validar_longitud_password(cls, valor):
+        if len(valor.encode("utf-8")) > 72:
+            raise ValueError("La contraseña no puede superar 72 bytes")
+        return valor
+
+
+class TuristaRegistro(TuristaCredenciales):
+    nombre: str = Field(min_length=2, max_length=100)
+
+
+class TuristaLogin(TuristaCredenciales):
+    pass
+
