@@ -1,4 +1,3 @@
-
 import os
 from urllib.parse import quote
 
@@ -59,9 +58,10 @@ def establecer_sesion(response: Response, token: str):
         key=COOKIE_NAME,
         value=token,
         max_age=COOKIE_MAX_AGE,
+        expires=COOKIE_MAX_AGE,
         httponly=True,
         secure=True,
-        samesite="none",
+        samesite="lax",
         path="/",
     )
 
@@ -72,7 +72,17 @@ def cerrar_sesion(response: Response):
         path="/",
         httponly=True,
         secure=True,
-        samesite="none",
+        samesite="lax",
+    )
+    response.set_cookie(
+        key=COOKIE_NAME,
+        value="",
+        max_age=0,
+        expires=0,
+        httponly=True,
+        secure=True,
+        samesite="lax",
+        path="/",
     )
 
 
